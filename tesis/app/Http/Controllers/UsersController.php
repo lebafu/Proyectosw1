@@ -97,8 +97,8 @@ class UsersController extends Controller
         {
             //$user = DB::table('users')->where('id', $id)->first();
             //return view('users.edit',compact('user'));
-            $user = User::findOrFail($id);  
-            return view("users.edit", ["user"=>$user]); 
+        $user = DB::table('users')->where('id', $id)->first();
+        return view('users.edit',compact('user'));
             //return $user; 
         }
 
@@ -111,7 +111,7 @@ class UsersController extends Controller
         $user->email=$request->get('email');
         $user->password=Hash::make($request->get('password'));
         $user->update();
-        return Redirect::to('usuarios');
+        return view('welcome');
     }
 
 

@@ -15,14 +15,12 @@
           <th>ID</th>
           <th>Nombre</th>
           <th>Email</th>
-          <th>Rol</th>
         </tr>
         @foreach ($users as $user)
         <tr>
           <td>{{$user->id}}</td>
           <td>{{$user->name}}</td>
           <td>{{$user->email}}</td>
-          <td>{{$user->tipo_usuario}}</td>
           <td>
             <a href="{{URL::action('UsersController@edit', $user->id)}}" class="btn btn-primary">Editar</a>
             
