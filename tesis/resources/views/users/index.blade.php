@@ -13,7 +13,6 @@
     <table class="table table-bordered">
         <tr>
           <th>ID</th>
-          <th>Rut</th>
           <th>Nombre</th>
           <th>Email</th>
           <th>Rol</th>
@@ -21,10 +20,9 @@
         @foreach ($users as $user)
         <tr>
           <td>{{$user->id}}</td>
-          <td>{{$user->rut}}</td>
           <td>{{$user->name}}</td>
           <td>{{$user->email}}</td>
-          <td>{{$user->rol}}</td>
+          <td>{{$user->tipo_usuario}}</td>
           <td>
             <a href="{{URL::action('UsersController@edit', $user->id)}}" class="btn btn-primary">Editar</a>
             
