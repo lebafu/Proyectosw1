@@ -78,7 +78,7 @@ class RegisterController extends Controller
             'id' => $id,
             'nombre_completo' => '',
             'rut' => '',
-            'profesor_guia' => ''
+            'profesor_guia' => '',
             'carrera' => '',
             'tipo' => '',
             'descripcion' =>'',

@@ -29,7 +29,6 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        $id=$this->auth->user()->id;
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|string',
@@ -51,25 +50,6 @@ class UsersController extends Controller
             'password' => Hash::make($request->password),
             'tipo_usuario' =>$request->tipo_usuario
         ]);
-
-       if(($request->tipo_usuario)==1){
-
-             DB::table('tesis')->insert([
-            'id' => $id,
-            'nombre_completo' => '',
-            'rut' => '',
-            'profesor_guia' => ''
-            'carrera' => '',
-            'tipo' => '',
-            'descripcion' =>'',
-            'objetivos' =>'',
-            'tipo_vinculacion' => '',
-            'nombre_vinculacion' => '',
-            'estado1' => 1,
-            'estado2' => null,
-        ]);
-
-       }
         
         /*if($request->get('tipo_usuario')=='Alumno'){
             $info_alumno = new Info_alumno;
@@ -121,15 +101,14 @@ class UsersController extends Controller
    
     public function update(Request $request,$id)
     {
-        
-        $user = User::findOrFail($id);
+        $user=User::findorfail($id);
         $user->name=$request->get('name');
         $user->email=$request->get('email');
         $user->password=Hash::make($request->get('password'));
+        $user->tipo_usuario=$request->get('tipo_usuario');
         $user->update();
         return view('welcome');
     }
-
 
 
 
