@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers;
 use App\User;
-use App\Info_alumno;
-use App\Info_proExt;
-use App\Tesis_alumno;
+use App\Tesis;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -31,7 +29,7 @@ class UsersController extends Controller
 
     public function store(Request $request)
     {
-        
+        $id=$this->auth->user()->id;
         $request->validate([
             'name' => 'required|string',
             'email' => 'required|string',
@@ -54,6 +52,24 @@ class UsersController extends Controller
             'tipo_usuario' =>$request->tipo_usuario
         ]);
 
+       if(($request->tipo_usuario)==1){
+
+             DB::table('tesis')->insert([
+            'id' => $id,
+            'nombre_completo' => '',
+            'rut' => '',
+            'profesor_guia' => ''
+            'carrera' => '',
+            'tipo' => '',
+            'descripcion' =>'',
+            'objetivos' =>'',
+            'tipo_vinculacion' => '',
+            'nombre_vinculacion' => '',
+            'estado1' => 1,
+            'estado2' => null,
+        ]);
+
+       }
         
         /*if($request->get('tipo_usuario')=='Alumno'){
             $info_alumno = new Info_alumno;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-07-2019 a las 00:14:13
+-- Tiempo de generación: 15-07-2019 a las 02:13:58
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.6
 
@@ -30,16 +30,16 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `comision` (
   `id` bigint(20) UNSIGNED NOT NULL,
-  `id_profesor_guia` int(11) NOT NULL,
+  `id_profesor_guia` int(11) DEFAULT NULL,
   `nombre_alumno` varchar(255) NOT NULL,
-  `profesor_comision1` varchar(255) NOT NULL,
-  `profesor_comision2` varchar(255) NOT NULL,
-  `profesor_comision3` varchar(255) DEFAULT NULL,
-  `profesor_externo1` varchar(255) DEFAULT NULL,
-  `correo_profe_externo1` varchar(255) DEFAULT NULL,
+  `profesor1_comision` varchar(255) NOT NULL,
+  `profesor2_comision` varchar(255) NOT NULL,
+  `profesor3_comision` varchar(255) DEFAULT NULL,
+  `profesor1_externo` varchar(255) DEFAULT NULL,
+  `correo_profe1_externo` varchar(255) DEFAULT NULL,
   `institucion1` varchar(255) DEFAULT NULL,
-  `profe_externo2` varchar(255) DEFAULT NULL,
-  `correo_profe_externo2` varchar(255) DEFAULT NULL,
+  `profe2_externo` varchar(255) DEFAULT NULL,
+  `correo_profe2_externo` varchar(255) DEFAULT NULL,
   `institucion2` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -84,6 +84,7 @@ CREATE TABLE `password_resets` (
 CREATE TABLE `tesis` (
   `id` bigint(20) UNSIGNED NOT NULL,
   `nombre_completo` varchar(255) NOT NULL,
+  `rut` varchar(255) NOT NULL,
   `nombre_tesis` varchar(255) NOT NULL,
   `area_tesis` varchar(255) NOT NULL,
   `profesor_guia` varchar(255) NOT NULL,
@@ -123,10 +124,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `tipo_usuario`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'Admin@admin.com', NULL, '$2y$10$P7Por1l.Ep3mdBZyEvq5OOaTOCePQZw.T0S4Zkj9qF5LFJADxsrue', 0, NULL, NULL, NULL),
-(2, 'Marco Toranzo', 'mtoranzo@gmail.com', NULL, '$2y$10$cDO7FmP/DByIJOOXnE3A0erApwHtRVCaLipU6xKv43bX63CNGvJHm', 2, NULL, NULL, NULL),
-(3, 'Ivan Merino', 'IvanMerino@gmail.com', NULL, '$2y$10$L.hX2TqJArzPGdOZtpOrMeZD0l.7IGs3gNJYDJWIHJdeQnv.qDd16', 3, NULL, NULL, NULL),
-(4, 'Leonardo Ignacio Bascuñan Fuentealba', 'leonardob94@hotmail.com', NULL, '$2y$10$6490PIadS/2p/RGUcq2j0eZ/Up/adnCsGAqoO3.7f7f2Wb/UZeMlS', 1, NULL, '2019-07-14 23:56:55', '2019-07-14 23:56:55'),
-(5, 'Daniel Gonzalez', 'DanielG@gmail.com', NULL, '$2y$10$/4vu2hHMHXBt0JDq0qObzO.UkE3UowDaC1RHFbeU.RTjS.wg2PDI6', 1, NULL, '2019-07-14 23:59:24', '2019-07-14 23:59:24');
+(3, 'Ivan Merino', 'IvanMer@gmail.com', NULL, '$2y$10$6OxxlFG/rEU5HYaT9LfPk.u1uQhCt7y8m4os3my/29Q91cBXZdKwG', 3, NULL, NULL, '2019-07-15 02:37:56'),
+(4, 'Leonardo Ignacio Bascuñan Fuentealba', 'leonardob94@hotmail.com', NULL, '$2y$10$6490PIadS/2p/RGUcq2j0eZ/Up/adnCsGAqoO3.7f7f2Wb/UZeMlS', 1, NULL, '2019-07-14 23:56:55', '2019-07-14 23:56:55');
 
 --
 -- Índices para tablas volcadas
@@ -155,7 +154,8 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `tesis`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `nombre_tesis` (`nombre_tesis`);
+  ADD UNIQUE KEY `nombre_tesis` (`nombre_tesis`),
+  ADD UNIQUE KEY `rut` (`rut`);
 
 --
 -- Indices de la tabla `users`

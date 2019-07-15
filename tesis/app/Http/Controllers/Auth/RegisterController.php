@@ -70,5 +70,39 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'tipo_usuario' => $data['tipo_usuario'],
         ]);
+
+        if(($request->tipo_usuario)==1)
+        {
+             $id=$this->auth->user()->id;
+             DB::table('tesis')->insert([
+            'id' => $id,
+            'nombre_completo' => '',
+            'rut' => '',
+            'profesor_guia' => ''
+            'carrera' => '',
+            'tipo' => '',
+            'descripcion' =>'',
+            'objetivos' =>'',
+            'tipo_vinculacion' => '',
+            'nombre_vinculacion' => '',
+            'estado1' => 1,
+            'estado2' => null,
+        ]);
+
+            DB::table('comision')->insert([
+            'id' => $id,
+            'id_profesor_guia' => null,
+            'nombre_alumno' => $data['name'],
+            'profesor1_comision' => ''
+            'profesor2_comision' => '',
+            'profesor3_comision' => '',
+            'descripcion' =>'',
+            'objetivos' =>'',
+            'tipo_vinculacion' => '',
+            'nombre_vinculacion' => '',
+            'estado1' => 1,
+            'estado2' => null,
+        ]);
+
     }
 }
