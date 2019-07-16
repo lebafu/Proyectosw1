@@ -89,6 +89,12 @@ class UsersController extends Controller
         return view('welcome');
     }
         
+
+        public function show($id)
+        {
+            $user=DB::table('users')->where('id', $id)->first();;
+            return view('users.show',compact('user'));
+        }
         public function edit($id)
         {
             //$user = DB::table('users')->where('id', $id)->first();

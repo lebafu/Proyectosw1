@@ -79,7 +79,7 @@
                                     {{ __('Guardar') }}
                                 </button>
 
-                                <a href="/usuarios" class="btn">{{ __('Cancelar') }}</a>
+                                <a href="/users" class="btn">{{ __('Cancelar') }}</a>
                                     
                             </div>
 

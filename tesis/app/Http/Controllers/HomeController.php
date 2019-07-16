@@ -37,10 +37,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        /*$id=$this->auth()->user()->id;
-        /*
-        $users=DB::table('users')->paginate(7);
-        $tipo = $this->auth()->user()->tipo_usuario;
+        
+        /*$tipo = $this->auth()->user()->tipo_usuario;
         
         switch ($tipo) {
             case 0://administrador
@@ -48,12 +46,12 @@ class HomeController extends Controller
                 break;
 
             case 1://alumno
-                /*$tesis_alumno = Tesis::findOrFail($id);
+                $tesis_alumno = Tesis::findOrFail($id);
 
                 if($info_alumno->condicion==1){
                     return view('informacion_alumno.edit',["info_alumno"=>$info_alumno,"tesis_alumno"=>$tesis_alumno]);
                 }
-                break;*/
+                break;
 
             //case 2: //profesor
                 /*$pro_ext=Info_proExt::findOrFail($id);
@@ -84,3 +82,4 @@ class HomeController extends Controller
                 return view('home');
     }
 }
+

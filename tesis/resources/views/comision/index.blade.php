@@ -7,26 +7,26 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Lista de usuarios') }}</div>
+        <div class="card-header">{{ __('Lista de Comisiones') }}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
         <tr>
           <th>ID</th>
-          <th>Nombre</th>
-          <th>Email</th>
+          <th>Nombre Estudiante</th>
+          <th>Profesor Guia</th>
         </tr>
-        @foreach ($users as $user)
+        @foreach ($comision as $com)
         <tr>
-          <td>{{$user->id}}</td>
-          <td>{{$user->name}}</td>
-          <td>{{$user->email}}</td>
+          <td>{{$com->id}}</td>
+          <td>{{$com->nombre_completo}}</td>
+          <td>{{$com->profesor_guia}}</td>
           <td>
 
-            <a href="{{url('/usersmostrar/'.$user->id)}}">Ver detalles</a> 
-            <a href="{{URL::action('UsersController@edit', $user->id)}}" class="btn btn-primary">Editar</a>
+            <a href="{{url('/comisionmostrar/'.$com->id)}}">Ver detalles</a> 
+            <a href="{{URL::action('ComisionController@edit', $com->id)}}" class="btn btn-primary">Editar</a>
             
-           <form action="{{ route('users.destroy', $user->id)}}" method="POST">
+           <form action="{{ route('tesis.destroy', $user->id)}}" method="POST">
           <input type="submit" value="Eliminar" class="btn btn-danger">
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
@@ -42,6 +42,6 @@
      </div>
 </div>
 
-   {!! $users->render() !!}
+  
 
 @endsection

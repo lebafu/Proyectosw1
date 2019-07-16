@@ -13,17 +13,19 @@ class Tesis extends Model
     public $timestamps = false;
     //
     protected $fillable = [
-    'nombre_completo',
+    'nombre_completo',,
     'rut',
     'profesor_guia',
+    'ano_ingreso'
     'carrera',
     'tipo',
+    'nombre_vinculacion',
     'tipo_vinculacion',
     'nombre_tesis',
+    'area_tesis',
     'descripcion',
     'objetivos',
     'contribucion',
-    'area_tesis',
     'observacion',
     'estado1', //para decir si esta con el alumno, profesor o director de tesis
     'estado2', //Para decir si esta aprobado o desaprobado segun el director de tesis.

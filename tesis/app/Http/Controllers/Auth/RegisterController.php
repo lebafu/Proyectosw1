@@ -71,7 +71,7 @@ class RegisterController extends Controller
             'tipo_usuario' => $data['tipo_usuario'],
         ]);
 
-        if(($request->tipo_usuario)==1)
+        /*if(($request->tipo_usuario)==1)
         {
              $id=$this->auth->user()->id;
              DB::table('tesis')->insert([
@@ -102,7 +102,7 @@ class RegisterController extends Controller
             'nombre_vinculacion' => '',
             'estado1' => 1,
             'estado2' => null,
-        ]);
+        ]);*/
 
     }
 }

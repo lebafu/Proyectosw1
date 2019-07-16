@@ -21,5 +21,6 @@ class Comision extends Model
     'institucion1',
     'profesor2_externo',
    	'correo_profe2_externo',
+   	'institucion2',
     ];
 }
