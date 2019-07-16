@@ -10,6 +10,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use DB;
+use Auth;
+use Closure;
+use Session;
+
 class ComisionController extends Controller
 {
     //
@@ -17,7 +21,8 @@ class ComisionController extends Controller
     public function index()
     {
         
-        $comision=DB::table('comision')->join('tesis','comision.id','=','tesis.id')->select('comision.id','tesis.profesor_guia','comision.nombre_alumno','comision.profesor1_comision','comision.profesor2_comision,comision.profesor3_comision','comision.profesor1_externo','comision.correo_profe1_externo','comision.institucion1','comision.profesor2_externo','comision.correo_profe2_externo','comision.institucion2')->get();
+        $comision=DB::table('comision')->join('tesis','comision.id','=','tesis.id')->select('comision.id','tesis.profesor_guia','comision.nombre_alumno','comision.profesor1_comision','comision.profesor2_comision','comision.profesor3_comision','comision.profesor1_externo','comision.correo_profe1_externo','comision.institucion1','comision.profe2_externo',
+            'comision.correo_profe2_externo','comision.institucion2')->get();
         return view('comision.index',compact('comision'));
 
     }
@@ -25,7 +30,10 @@ class ComisionController extends Controller
      public function create()
     {
         //
-        return view('comision.create');
+        //$id=Auth::id();
+        //$profesor_guia=User::findorfail($id);
+        //$alumnos=DB::table('tesis')->where('profesor_guia','=',$profesor_guia)->select('nombre_completo');
+        return view('comision.create',/*compact('profesor_guia','alumnos')*/);
     }
 
     public function store(Request $request)

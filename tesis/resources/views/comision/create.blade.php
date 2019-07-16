@@ -14,7 +14,11 @@
                          <div class="form-group row">
                             <label for="id_profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Profesor Guia') }}</label>
                             <div class="col-md-6">
-                                <input id="id_profesor_guia" type="text" placeholder="profesor guia" class="form-control" name="profesor_guia" required="required">
+                                 <select name="id_profesor_guia" id="id_profesor_guia" class="form-control" required>
+                                    @foreach($profesor_guia as $profe)
+                                    <option value="{{$profe->id}}">{{$profe->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

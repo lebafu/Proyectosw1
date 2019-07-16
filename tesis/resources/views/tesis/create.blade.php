@@ -15,7 +15,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre completo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nombre_completo" type="text" class="form-control @error('nombre_completo') is-invalid @enderror" name="nombre_completo" value="{{ old('nombre_completo') }}" required autocomplete="nombre_completo" autofocus>
+                                <input id="nombre_completo" type="text" class="form-control @error('nombre_completo') is-invalid @enderror" name="nombre_completo" value="{{ $alumno->name }}" required="required" autocomplete="nombre_completo" autofocus>
 
                                 @error('nombre_completo')
                                     <span class="invalid-feedback" role="alert">
@@ -36,14 +36,18 @@
                          <div class="form-group row">
                             <label for="ano_ingreso" class="col-md-4 col-form-label text-md-right">{{ __('Ano Ingreso') }}</label>
                             <div class="col-md-6">
-                                <input id="ano_ingreso" type="text" placeholder="ano_ingreso" class="form-control" name="ano_ingreso" required="required">
+                                <input id="ano_ingreso" type="text" placeholder="Año ingreso" class="form-control" name="ano_ingreso" required="required">
                             </div>
                         </div>
 
                          <div class="form-group row">
                             <label for="profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Profesor guia') }}</label>
                             <div class="col-md-6">
-                                <input id="profesor_guia" type="text" placeholder="profesor guia" class="form-control" name="profesor_guia" required="required">
+                                 <select name="profesor_guia" id="profesor_guia" class="form-control" required>
+                                    @foreach($profes as $profe)
+                                    <option value="{{$profe->name}}">{{$profe->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 

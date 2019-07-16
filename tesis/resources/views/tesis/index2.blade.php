@@ -20,6 +20,7 @@
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
+          @if($tesis->profesor_guia==$user->name)
           <td>{{$tesis->id}}</td>
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
@@ -37,6 +38,7 @@
            </form>
       </td>
         </tr>
+        @endif
         @endforeach
      </table>
      </div>

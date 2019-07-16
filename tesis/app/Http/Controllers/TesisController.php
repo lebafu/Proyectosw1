@@ -7,11 +7,26 @@ use App\Tesis;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Contracts\Auth\Guard;
 use DB;
+use Auth;
+use Closure;
+use Session;
+
 
 class TesisController extends Controller
 {
-    
+        public function index2()
+    {
+        $id=Auth::id();
+        if($id==null){
+            return('welcome');
+        }
+        $user=User::findorfail($id);
+        $tesistas=DB::table('tesis')->paginate(7);
+        return view('tesis.index2',compact('tesistas',$user));
+
+    }
 	public function index()
     {
         
@@ -23,15 +38,18 @@ class TesisController extends Controller
      public function create()
     {
         //
-        return view('tesis.create');
+        $id=Auth::id();
+        $alumno=User::findorfail($id);
+        $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+        return view('tesis.create',compact('alumno','profes'));
     }
 
     public function store(Request $request)
     {
         $request->validate([
             'nombre_completo' => 'required|string',
-            'rut' => 'required|string|unique:tesis',
-            'ano_ingreso' => 'required|integer|min:4|max:4',
+            'rut' => 'required|string|unique:tesis|min:7|max:8',
+            'ano_ingreso' => 'required|integer',
             'profesor_guia' => 'required|string',
             'nombre_tesis' => 'required|string',
             'area_tesis' => 'required|string',
@@ -44,6 +62,8 @@ class TesisController extends Controller
             'contribucion' => 'required|string'
         ]);
 
+
+
         /*DB::table('users')->insert([
             'name' => $request->name,
             'email' =>$request->email,
@@ -51,23 +71,36 @@ class TesisController extends Controller
             'tipo_usuario' => $request->tipo_usuario,
             'rut' =>$request->rut,
         ]);*/
+            //dd($request->nombre_completo);
+        $id=Auth::id();
+        $user=User::findorfail($id);
+        //si usuario es de tipo alumno entonces se actualizara el nombre usuario en user
+        if($id==null){
+            return view('welcome');
+        }
+        if($user->tipo_usuario==1){ 
 
-       DB::table('users')->insert([
-            'nombre_completo' => $request->nombre_completo,
-            'rut' =>$request->rut,
-            'ano_ingreso' => Hash::make($request->ano_ingreso),
-            'profesor_guia' =>$request->profesor_guia,
-            'nombre_tesis' => $request->nombre_tesis,
-            'area_tesis' => $request->area_tesis,
-            'carrera' => $request->carrera,
-            'tipo_vinculacion' => $request->tipo_vinculacion,
-            'nombre_vinculacion' =>$request->nombre_vinculacion,
-            'tipo'=> $request->tipo,
-            'descripcion' =>$request->descripcion,
-            'objetivos' => $request->objetivos,
-            'contribucion'=> $request->contribucion,
+            $user->name=$request->get('nombre_completo');
+            $user->update();
+            DB::table('tesis')->insert([
+                'id' => $id,
+                'nombre_completo' => $request->nombre_completo,
+                'rut' =>$request->rut,
+                'ano_ingreso' => $request->ano_ingreso,
+                'profesor_guia' =>$request->profesor_guia,
+                'nombre_tesis' => $request->nombre_tesis,
+                'area_tesis' => $request->area_tesis,
+                'carrera' => $request->carrera,
+                'tipo_vinculacion' => $request->tipo_vinculacion,
+                'nombre_vinculacion' =>$request->nombre_vinculacion,
+                'tipo'=> $request->tipo,
+                'descripcion' =>$request->descripcion,
+                'objetivos' => $request->objetivos,
+                'contribucion'=> $request->contribucion,
+            ]);
+    }
 
-        ]);
+    return  view('welcome');
         
         /*if($request->get('tipo_usuario')=='Alumno'){
             $info_alumno = new Info_alumno;
@@ -104,7 +137,7 @@ class TesisController extends Controller
 
         }*/
 
-        return view('welcome');
+        
     }
         
 
