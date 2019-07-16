@@ -13,10 +13,10 @@ class Tesis extends Model
     public $timestamps = false;
     //
     protected $fillable = [
-    'nombre_completo',,
+    'nombre_completo',
     'rut',
     'profesor_guia',
-    'ano_ingreso'
+    'ano_ingreso',
     'carrera',
     'tipo',
     'nombre_vinculacion',

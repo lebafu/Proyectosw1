@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Editar tesis') }}</div>
+                <div class="card-header">{{ __('Editar2 tesis') }}</div>
 
                 <div class="card-body">
-                    <form action="{{route('tesis.update', $tes->id)}}" method="POST">
+                    <form action="{{route('tesis.update2', $tes->id)}}" method="POST">
                         @csrf
 
                         <div class="form-group row">
@@ -42,8 +42,12 @@
 
                          <div class="form-group row">
                             <label for="profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Profesor guia') }}</label>
-                            <div class="col-md-6">
-                                <input id="profesor_guia" type="text" placeholder="profesor guia" class="form-control" name="profesor_guia" value="{{$tes->profesor_guia}}" required="required">
+                             <div class="col-md-6">
+                                 <select name="profesor_guia" id="profesor_guia" class="form-control" required>
+                                    @foreach($profes as $profe)
+                                    <option value="{{$profe->id}}">{{$profe->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -58,7 +62,7 @@
                             <label for="area_tesis" class="col-md-4 col-form-label text-md-right">{{ __('Area Tesis') }}</label>
                             <div class="col-md-6">
                                 <select name="area_tesis" id="area_tesis" type="text" class="form-control" required="required">
-                                <option value="Desarrollo Web">Desarrollo Web </option>
+                                <option value="Ingenieria de Software">Ingenieria de Software</option>
                                  <option value="IA">Inteligencia Artificial </option>
                                  <option value="BI">Inteligencia de negocios</option>
                                  <option value="Imagenes">Imagenes</option>
@@ -134,15 +138,23 @@
                         
                          <div class="form-group row">
                             <label for="profesor1_comision" class="col-md-4 col-form-label text-md-right">{{ __('Primer profesor comision') }}</label>
-                            <div class="col-md-6">
-                                <input id="profesor1_comision" type="text" placeholder="profesor1 comision" class="form-control" name="profesor1_comision" required="required">
+                           <div class="col-md-6">
+                                 <select name="profesor1_comision" id="profesor1_comision" class="form-control" required>
+                                    @foreach($profes as $profe)
+                                    <option value="{{$profe->name}}">{{$profe->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="profesor2_comision" class="col-md-4 col-form-label text-md-right">{{ __('Segundo Profesor comision') }}</label>
                             <div class="col-md-6">
-                                <input id="profesor2_comision" type="text" placeholder="profesor2 comision" class="form-control" name="profesor2_comision" required="required">
+                                 <select name="profesor2_comision" id="profesor2_comision" class="form-control" required>
+                                    @foreach($profes as $profe)
+                                    <option value="{{$profe->name}}">{{$profe->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -150,7 +162,12 @@
                         <div class="form-group row">
                             <label for="profesor3_comision" class="col-md-4 col-form-label text-md-right">{{ __('Tercer Profesor comision') }}</label>
                             <div class="col-md-6">
-                                <input id="profesor3_comision" type="text" placeholder="profesor3 comision" class="form-control" name="profesor3_comision" required="required">
+                                 <select name="profesor2_comision" id="profesor2_comision" class="form-control">
+                                    <option value=""></option>
+                                    @foreach($profes as $profe)
+                                    <option value="{{$profe->name}}">{{$profe->name}}</option>
+                                    @endforeach
+                                </select>
                             </div>
                         </div>
 
@@ -158,7 +175,7 @@
                         <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Primer profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="profesor1_externo" type="text" placeholder="Primer profesor externo" class="form-control" name="profesor1_externo" required="required">
+                              <input id="profesor1_externo" type="text" placeholder="Primer profesor externo" class="form-control" name="profesor1_externo">
                             </div>
                         </div>
 
@@ -167,7 +184,7 @@
                             <label for="correo_profe1_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
                             <div class="col-md-6">
-                                <input id="correo_profe1_externo" type="email" class="form-control @error('correo_profe1_externo') is-invalid @enderror" name="correo_profe1_externo" value="{{ old('correo_profe1_externo') }}" required autocomplete="email">
+                                <input id="correo_profe1_externo" type="email" class="form-control @error('email') is-invalid @enderror" name="correo_profe1_externo" value="{{ old('correo_profe1_externo') }}" autocomplete="email">
 
                                 @error('correo_profe1_externo')
                                     <span class="invalid-feedback" role="alert">
@@ -180,14 +197,14 @@
                         <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Primer Profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="institicion1" type="text" placeholder="Institucion profesor externo" class="form-control" name="institicion1" required="required">
+                              <input id="institicion1" type="text" placeholder="Institucion profesor externo" class="form-control" name="institicion1">
                             </div>
                         </div>
 
                          <div class="form-group row">
                             <label for="profesor2_externo" class="col-md-4 col-form-label text-md-right">{{ __('Segundo profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="profesor2_externo" type="text" placeholder="Segundo profesor externo" class="form-control" name="profesor2_externo" required="required">
+                              <input id="profesor2_externo" type="text" placeholder="Segundo profesor externo" class="form-control" name="profesor2_externo">
                             </div>
                         </div>
 
@@ -195,7 +212,7 @@
                         <div class="form-group row">
                             <label for="correo_profe2_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-mail') }}</label>
                             <div class="col-md-6">
-                                <input id="correo_profe2_externo" type="email" class="form-control @error('email') is-invalid @enderror" name="correo_profe2_externo" value="{{ old('correo_profe2_externo') }}" required autocomplete="email">
+                                <input id="correo_profe2_externo" type="email" class="form-control @error('email') is-invalid @enderror" name="correo_profe2_externo" value="{{ old('correo_profe2_externo') }}" autocomplete="email">
 
                                 @error('correo_profe2_externo')
                                     <span class="invalid-feedback" role="alert">
@@ -209,7 +226,7 @@
                         <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Segundo Profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="institicion2" type="text" placeholder="Institucion profesor externo" class="form-control" name="institicion2" required="required">
+                              <input id="institicion2" type="text" placeholder="Institucion profesor externo" class="form-control" name="institicion2">
                             </div>
                         </div>
 
@@ -219,7 +236,7 @@
                                     {{ __('Guardar') }}
                                 </button>
 
-                                <a href="/users" class="btn">{{ __('Cancelar') }}</a>
+                                <a href="/tesis" class="btn">{{ __('Cancelar') }}</a>
                                     
                             </div>
 

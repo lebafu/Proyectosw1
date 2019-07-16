@@ -29,11 +29,14 @@ Route::delete('/eliminarusers{users}','UsersController@destroy')->name('users.de
 
 
 Route::get('/tesis', 'TesisController@index')->name('tesis.index');
+Route::get('/tesis_profesor', 'TesisController@index2')->name('tesis.index2');
 Route::get('/tesis{tesis}', 'TesisController@edit')->name('tesis.edit');
+Route::get('/tesis_profesor/{tesis}', 'TesisController@edit2')->name('tesis.edit2');
 Route::get('/tesis/create', 'TesisController@create')->name('tesis.create');
 Route::get('/tesismostrar/{id}', 'TesisController@show')->name('tesis.show');
 Route::post('/tesis','TesisController@store')->name('tesis.store');
 Route::put('/actualizartesis{tesis}','TesisController@update')->name('tesis.update');
+Route::put('/actualizartesis_profesor{tesis}','TesisController@update2')->name('tesis.update2');
 Route::delete('/eliminartesis{tesis}','TesisController@destroy')->name('tesis.destroy');
 
 

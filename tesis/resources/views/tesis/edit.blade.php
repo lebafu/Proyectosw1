@@ -42,15 +42,18 @@
 
                          <div class="form-group row">
                             <label for="profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Profesor guia') }}</label>
-                            <div class="col-md-6">
-                                <input id="profesor_guia" type="text" placeholder="profesor guia" class="form-control" name="profesor_guia" value="{{$tes->profesor_guia}}" required="required">
-                            </div>
+                             <select name="profesor_guia" id="profesor_guia" class="form-control" required>
+                                    @foreach($profes as $profe)
+                                    <option value="{{$profe->name}}">{{$profe->name}}</option>
+                                    @endforeach
+                                </select>
                         </div>
 
                         <div class="form-group row">
                             <label for="nombre_tesis" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Tesis') }}</label>
-                            <div class="col-md-6">
-                                <input id="nombre_tesis" type="text" placeholder="nombre_tesis" class="form-control" name="nombre_tesis" value="{{$tes->nombre_tesis}}" required="required">
+                           <div class="col-md-6">
+                                 <input id="nombre_tesis" type="text" placeholder="nombre_tesis" class="form-control" name="nombre_tesis" value="{{$tes->nombre_tesis}}" required="required">
+                               </div>
                             </div>
                         </div>
 
@@ -137,7 +140,7 @@
                                     {{ __('Guardar') }}
                                 </button>
 
-                                <a href="/users" class="btn">{{ __('Cancelar') }}</a>
+                                <a href="/tesis" class="btn">{{ __('Cancelar') }}</a>
                                     
                             </div>
 
