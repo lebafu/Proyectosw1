@@ -155,26 +155,40 @@ class TesisController extends Controller
         {
             //$user = DB::table('users')->where('id', $id)->first();
             //return view('users.edit',compact('user'));
-        $idlogin=Auth::id();
-        $user=User::findorfail($idlogin);
-        if($idlogin==null){
+            
+            
+
+            if(!Auth::id()){
+                return view('welcome');
+            }else{
+                $idlogin=Auth::id();
+                $user=User::findorfail($idlogin);
+                $tes = Tesis::findorfail($id);
+                $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+                //$tes->estado1=2;
+                return view('tesis.edit',compact('tes','profes'));
+                //return $user; 
+            }
+        }
+
+    public function edit2($id)
+    {
+        if(!Auth::id()){
             return view('welcome');
-        }elseif($user->tipo_usuario==2)
-        {
-        $tes = Tesis::findorfail($id);
-        $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
-        //$tes->estado1=2;
-        //$tes->update();
-        return view('tesis.edit2',compact('tes','profes'));
-        }elseif($user->tipo_usuario==1 and $tes->estado1==1)
-        {
-        $tes = Tesis::findorfail($id);
-        $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
-        //$tes->estado1=2;
-        return view('tesis.edit',compact('tes','profes'));
-            //return $user; 
-        }
-        }
+        }else{
+
+            $idlogin=Auth::id();
+            $user=User::findorfail($idlogin);
+            if($user->tipo_usuario==2){           
+                $tes = Tesis::findorfail($id);
+                $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+                //$tes->estado1=2;
+                //$tes->update();
+                return view('tesis.edit2',compact('tes','profes'));
+            }
+
+        } 
+    }
 
    //Me manda los datos a este controlador
     public function update(Request $request,$id)
@@ -211,8 +225,27 @@ class TesisController extends Controller
 
     public function update2(Request $request,$id)
     {
-         dd($request);
-        /*$idlogin=Auth::id();
+
+        //dd($request);
+        $request->validate([
+            'profesor_guia' => 'required|string',
+            'nombre_completo' => 'required|string',
+            'rut' => 'required|string|min:7|max:8',
+            'ano_ingreso' => 'required|integer',
+            'profesor1_comision' => 'required|string',
+            'profesor2_comision' => 'required|string',
+            'profesor3_comision' =>'string',
+            'profesor1_externo'=> 'string',
+            'correo_profe1_externo' => 'string',
+            'institucion1' => 'string',
+            'profesor2_externo' => 'string',
+            'correo_profe2_externo' => 'string',
+            'institucion2' => 'string',
+        ]);
+
+        //return 'tamos';
+        //dd($request);
+        $idlogin=Auth::id();
         $profe=User::findorfail($idlogin);
         $tes=Tesis::findorfail($id);
         $tes->nombre_completo=$request->get('nombre_completo');
@@ -234,27 +267,13 @@ class TesisController extends Controller
         $user->update();
 
         //$comision=new Comision;
-
-        dd($profe->id);
         //$alumno=DB::table('users')->join('tesis','users.name','=',$tes->nombre_completo)->get();
         //dd($alumno);
         //$comision =new Comision;;
         //$comision->id_profesor_guia=$profe->id;
-        $request->validate([
-            'id_profesor_guia' => 'required|integer',
-            'nombre_alumno' => 'required|string',
-            'profesor1_comision' => 'required|string',
-            'profesor2_comision' => 'required|string',
-            'profesor3_comision' =>'string',
-            'profesor1_externo'=> 'string',
-            'correo_profe1_externo' => 'string',
-            'institucion1' => 'string',
-            'profesor2_externo' => 'string',
-            'correo_profe2_externo' => 'string',
-            'institucion2' => 'string',
-        ]);
-
-       
+        
+        DB::table('comision')->where('id','=', $id)->delete();
+      
        DB::table('comision')->insert([
             'id' => $id,
             'id_profesor_guia' => $profe->id,
@@ -264,11 +283,11 @@ class TesisController extends Controller
             'profesor3_comision' => $request->profesor3_comision,
             'profesor1_externo' => $request->profesor1_externo,
             'correo_profe1_externo' => $request->correo_profe1_externo,
-            'profesor2_externo' => $request->profesor2_externo,
+            'profe2_externo' => $request->profesor2_externo,
             'institucion1' => $request->institucion1,
             'correo_profe2_externo' => $request->correo_profe2_externo,
-            'institucion1' => $request->institucion1,
-        ]);*/
+            'institucion2' => $request->institucion2,
+        ]);
 
         return view('welcome');
     }

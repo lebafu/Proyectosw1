@@ -44,7 +44,7 @@
                             <label for="profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Profesor guia') }}</label>
                              <select name="profesor_guia" id="profesor_guia" class="form-control" required>
                                     @foreach($profes as $profe)
-                                    <option value="{{$profe->name}}">{{$profe->name}}</option>
+                                    <option value="{{$profe->id}}">{{$profe->name}}</option>
                                     @endforeach
                                 </select>
                         </div>

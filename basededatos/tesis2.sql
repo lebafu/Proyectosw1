@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-07-2019 a las 21:21:13
+-- Tiempo de generación: 17-07-2019 a las 02:33:48
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.6
 
@@ -42,6 +42,13 @@ CREATE TABLE `comision` (
   `correo_profe2_externo` varchar(255) DEFAULT NULL,
   `institucion2` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `comision`
+--
+
+INSERT INTO `comision` (`id`, `id_profesor_guia`, `nombre_alumno`, `profesor1_comision`, `profesor2_comision`, `profesor3_comision`, `profesor1_externo`, `correo_profe1_externo`, `institucion1`, `profe2_externo`, `correo_profe2_externo`, `institucion2`) VALUES
+(18, 17, 'Camilo Cavieres', 'Angelica Urrutia', 'Xaviera Lopez', 'Angelica Urrutia', 'Jose Torres', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'GabrielP@gmail.com', 'Universidad campo feo ctmmmmm!!!!!');
 
 -- --------------------------------------------------------
 
@@ -110,7 +117,7 @@ INSERT INTO `tesis` (`id`, `nombre_completo`, `rut`, `nombre_tesis`, `area_tesis
 (8, 'Carlos Andres Cancino Duran', '18670608', 'Reconocimiento de patrones con redes neuronalesen imagenes', 'IA', 2013, 'Sergio Hernandez', 'Ingenieria Civil Informatica', 'Tesis', 'Promover y potenciar el concepto de ciudades inteligentes', 'Descripcion1 Descripcion2 Descripcion3', 'Aplicación de IA, en camaras de seguridad', 'Proyecto', 'Ciudades inteligentes XX', NULL, 1, NULL, '2019-07-16 04:02:26'),
 (10, 'Oscar Raul Perez Fernandez', '16788324', 'Sistema de evidencias UCM', 'Desarrollo Web', 2013, 'Hugo Araya', 'Ingenieria Civil Informatica', 'Tesis', 'Automatizar y agilizar el proceso', 'Descripcion1 Descripcion2', 'Sistema de evidencias para la Universidad', 'Empresa', 'UCM', NULL, 1, NULL, '2019-07-16 04:12:04'),
 (16, 'Rodrigo Chavez', '18063911', 'Aplicacion movil', 'Ingenieria de Software', 2014, 'Paulo Gonzalez', 'Ingenieria Civil Informatica', 'Memoria', 'Contribucion1,Contribucion2', 'Descripcion1Descripcion2', 'Ayudar a la comunidad', 'Empresa', 'Tutelkan', NULL, 1, NULL, '2019-07-16 03:56:45'),
-(18, 'Camilo Cavieres', '18928324', 'Desarrollo de aplicacion movil ed. fisica', 'Ingenieria de Software', 2013, 'Marco Toranzo', 'Ingenieria en Ejecucion e Informatica', 'Tesis', 'Cooperación interna de la universidad', 'Descripcion1 Descripcion2 Descripcion3', 'Objetivo1, Objetivo2', 'Proyecto', 'Desarrollo de aplicacion movil ed. fisica', NULL, 1, NULL, '2019-07-16 04:32:23');
+(18, 'Camilo Cavieres', '18928324', 'Desarrollo de aplicacion movil ed. fisica', 'Ingenieria de Software', 2013, 'Hugo Araya', 'Ingenieria Civil Informatica', 'Tesis', 'Cooperación interna de la universidad', 'Descripcion1 Descripcion2 Descripcion3', 'Objetivo1, Objetivo2', 'Empresa', 'Desarrollo de aplicacion movil ed. fisica', NULL, 1, NULL, '2019-07-16 04:32:23');
 
 -- --------------------------------------------------------
 

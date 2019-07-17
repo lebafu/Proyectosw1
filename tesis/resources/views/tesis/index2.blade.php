@@ -29,7 +29,7 @@
           <td>
 
             <a href="{{url('/tesismostrar/'.$tesis->id)}}">Ver detalles</a> 
-            <a href="{{url('/tesis_profesor'./$tesis->id)}}" class="btn btn-primary">Editar</a>
+            <a href="{{url('/tesis_profesor/'.$tesis->id)}}" class="btn btn-primary">Editar</a>
             
            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
           <input type="submit" value="Eliminar" class="btn btn-danger">

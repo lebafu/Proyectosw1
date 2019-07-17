@@ -45,7 +45,7 @@
                              <div class="col-md-6">
                                  <select name="profesor_guia" id="profesor_guia" class="form-control" required>
                                     @foreach($profes as $profe)
-                                    <option value="{{$profe->id}}">{{$profe->name}}</option>
+                                    <option value="{{$profe->name}}">{{$profe->name}}</option>
                                     @endforeach
                                 </select>
                             </div>
@@ -162,7 +162,7 @@
                         <div class="form-group row">
                             <label for="profesor3_comision" class="col-md-4 col-form-label text-md-right">{{ __('Tercer Profesor comision') }}</label>
                             <div class="col-md-6">
-                                 <select name="profesor2_comision" id="profesor2_comision" class="form-control">
+                                 <select name="profesor3_comision" id="profesor3_comision" class="form-control">
                                     <option value=""></option>
                                     @foreach($profes as $profe)
                                     <option value="{{$profe->name}}">{{$profe->name}}</option>
@@ -173,7 +173,7 @@
 
 
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Primer profesor externo') }}</label>
+                            <label for="profesor1_externo" class="col-md-4 col-form-label text-md-right">{{ __('Primer profesor externo') }}</label>
                             <div class="col-md-6">
                               <input id="profesor1_externo" type="text" placeholder="Primer profesor externo" class="form-control" name="profesor1_externo">
                             </div>
@@ -195,9 +195,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Primer Profesor externo') }}</label>
+                            <label for="institucion1" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Primer Profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="institicion1" type="text" placeholder="Institucion profesor externo" class="form-control" name="institicion1">
+                              <input id="institucion1" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion1">
                             </div>
                         </div>
 
@@ -224,9 +224,9 @@
 
                         
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Segundo Profesor externo') }}</label>
+                            <label for="institucion2" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Segundo Profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="institicion2" type="text" placeholder="Institucion profesor externo" class="form-control" name="institicion2">
+                              <input id="institucion2" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion2">
                             </div>
                         </div>
 

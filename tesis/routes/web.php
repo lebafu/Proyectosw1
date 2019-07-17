@@ -36,7 +36,7 @@ Route::get('/tesis/create', 'TesisController@create')->name('tesis.create');
 Route::get('/tesismostrar/{id}', 'TesisController@show')->name('tesis.show');
 Route::post('/tesis','TesisController@store')->name('tesis.store');
 Route::put('/actualizartesis{tesis}','TesisController@update')->name('tesis.update');
-Route::put('/actualizartesis_profesor{tesis}','TesisController@update2')->name('tesis.update2');
+Route::put('/actualizartesis_profesor/{tesis}','TesisController@update2')->name('tesis.update2');
 Route::delete('/eliminartesis{tesis}','TesisController@destroy')->name('tesis.destroy');
 
 
