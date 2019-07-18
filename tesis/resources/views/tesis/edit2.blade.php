@@ -43,7 +43,7 @@
                          <div class="form-group row">
                             <label for="profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Profesor guia') }}</label>
                              <div class="col-md-6">
-                                 <select name="profesor_guia" id="profesor_guia" class="form-control" required>
+                                 <select name="profesor_guia" id="profesor_guia" class="form-control" value="{{$tes->profesor_guia}}" required>
                                     @foreach($profes as $profe)
                                     <option value="{{$profe->name}}">{{$profe->name}}</option>
                                     @endforeach
@@ -61,7 +61,7 @@
                          <div class="form-group row">
                             <label for="area_tesis" class="col-md-4 col-form-label text-md-right">{{ __('Area Tesis') }}</label>
                             <div class="col-md-6">
-                                <select name="area_tesis" id="area_tesis" type="text" class="form-control" required="required">
+                                <select name="area_tesis" id="area_tesis" type="text" class="form-control" value="{{ $tes->area_tesis}}"required="required">
                                 <option value="Ingenieria de Software">Ingenieria de Software</option>
                                  <option value="IA">Inteligencia Artificial </option>
                                  <option value="BI">Inteligencia de negocios</option>
@@ -73,7 +73,7 @@
                           <div class="form-group row">
                             <label for="carrera" class="col-md-4 col-form-label text-md-right">{{ __('Carrera') }}</label>
                             <div class="col-md-6">
-                                <select name="carrera" id="carrera" type="text" class="form-control" required="required">
+                                <select name="carrera" id="carrera" type="text" class="form-control" value="{{ $tes->carrera}}" required="required">
                                 <option value="Ingenieria Civil Informatica">Ingenieria Civil Informatica</option>
                                  <option value="Ingenieria en Informatica">Ingenieria en Informatica </option>
                                  <option value="Ingenieria en Ejecucion e Informatica">Ingenieria en Ejecucion e Informatica</option>
@@ -86,7 +86,7 @@
                         <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Vinculacion') }}</label>
                             <div class="col-md-6">
-                                <select name="tipo_vinculacion" id="tipo_vinculacion" type="text" class="form-control" required="required">
+                                <select name="tipo_vinculacion" id="tipo_vinculacion" type="text" class="form-control" value="{{ $tes->tipo_vinculacion}}" required="required">
                                 <option value="Empresa"> Empresa </option>
                                  <option value="Proyecto">Proyecto </option>
                                  <option value="Fondo concusable"> Fondo concursable</option>
@@ -105,7 +105,7 @@
                          <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de trabajo') }}</label>
                             <div class="col-md-6">
-                                <select name="tipo" id="tipo" type="text" class="form-control" required="required">
+                                <select name="tipo" id="tipo" type="text" class="form-control"value="{{ $tes->tipo}}" required="required">
                                 <option value="Tesis"> Tesis </option>
                                  <option value="Memoria">Memoria </option>
                                  </select>
@@ -139,7 +139,7 @@
                          <div class="form-group row">
                             <label for="profesor1_comision" class="col-md-4 col-form-label text-md-right">{{ __('Primer profesor comision') }}</label>
                            <div class="col-md-6">
-                                 <select name="profesor1_comision" id="profesor1_comision" class="form-control" required>
+                                 <select name="profesor1_comision" id="profesor1_comision" class="form-control"  required>
                                     @foreach($profes as $profe)
                                     <option value="{{$profe->name}}">{{$profe->name}}</option>
                                     @endforeach
@@ -163,7 +163,7 @@
                             <label for="profesor3_comision" class="col-md-4 col-form-label text-md-right">{{ __('Tercer Profesor comision') }}</label>
                             <div class="col-md-6">
                                  <select name="profesor3_comision" id="profesor3_comision" class="form-control">
-                                    <option value=""></option>
+                                    <option value="Ninguno">Ninguno</option>
                                     @foreach($profes as $profe)
                                     <option value="{{$profe->name}}">{{$profe->name}}</option>
                                     @endforeach

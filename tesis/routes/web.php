@@ -34,12 +34,16 @@ Route::get('/tesis{tesis}', 'TesisController@edit')->name('tesis.edit');
 Route::get('/tesis_profesor/{tesis}', 'TesisController@edit2')->name('tesis.edit2');
 Route::get('/tesis/create', 'TesisController@create')->name('tesis.create');
 Route::get('/tesismostrar/{id}', 'TesisController@show')->name('tesis.show');
+//Route::get('/tesismostrar2/{id}', 'TesisController@show2')->name('tesis.show2');
 Route::post('/tesis','TesisController@store')->name('tesis.store');
 Route::put('/actualizartesis{tesis}','TesisController@update')->name('tesis.update');
 Route::put('/actualizartesis_profesor/{tesis}','TesisController@update2')->name('tesis.update2');
 Route::delete('/eliminartesis{tesis}','TesisController@destroy')->name('tesis.destroy');
 
-
+Route::get('/noeditartesis', 'TesisController@noeditartesis')->name('tesis.noeditartesis');
+Route::get('/sinpermiso', 'TesisController@sinpermiso')->name('tesis.sinpermiso');
+Route::get('/tesis_profesor_evaluar/{tesis}', 'TesisController@evaluar')->name('tesis.evaluar');
+Route::put('/tesis_profesor_a_dt/{tesis}','TesisController@update3')->name('tesis.update3');
 
 Route::get('/comision', 'ComisionController@index')->name('comision.index');
 Route::get('/comision{comision}', 'ComisionController@edit')->name('comision.edit');
