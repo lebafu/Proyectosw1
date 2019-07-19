@@ -21,6 +21,67 @@ class TesisController extends Controller
     {
         $id=Auth::id();
         if($id==null){
+            return('tesis.sinpermiso');
+        }
+        $user=User::findorfail($id);
+        //dd($user->name);
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->paginate(7);
+        return view('tesis.index2',compact('tesistas','user'));
+
+    }
+
+        public function index2_ins_pro()
+    {
+        $id=Auth::id();
+        if($id==null){
+            return('tesis.sinpermiso');
+        }
+        $user=User::findorfail($id);
+        //dd($user->name);
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->paginate(7);
+        return view('tesis.index2_ins_pro',compact('tesistas','user'));
+
+    }
+
+
+  
+
+      public function index3_solicitudes()
+    {
+        $id=Auth::id();
+        if($id==null){
+            return view ('sinpermiso');
+        }
+        $user=User::findorfail($id);
+        if($user->tipo_usuario==3){
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->paginate(7);
+        return view('tesis.index3_sol',compact('tesistas','user'));
+       }else{
+       	return view('sinpermiso');
+       }
+
+    }
+
+    public function index3_inscritas()
+    {
+        $id=Auth::id();
+        if($id==null){
+            return view ('sinpermiso');
+        }
+        $user=User::findorfail($id);
+        if($user->tipo_usuario==3){
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->paginate(7);
+        return view('tesis.index3_ins',compact('tesistas','user'));
+       }else{
+       	return view('sinpermiso');
+       }
+
+    }
+
+   /*      public function index2()
+    {
+        $id=Auth::id();
+        if($id==null){
             return('welcome');
         }
         $user=User::findorfail($id);
@@ -28,7 +89,7 @@ class TesisController extends Controller
         $tesistas=DB::table('tesis')->paginate(7);
         return view('tesis.index2',compact('tesistas','user'));
 
-    }
+    }*/
 	public function index()
     {
         
@@ -165,8 +226,8 @@ class TesisController extends Controller
             
 
             if(!Auth::id()){
-                return view('welcome');
-            }elseif(Auth::id() and $user->tipo_usuario==1 and $tes->estado1==1){
+                return view('sinpermiso');
+            }elseif($user->tipo_usuario==1 and $tes->estado1==1 and $tes->estado2==null){
                
                 //$tes->estado1=2;
                 //$tes->update();
@@ -190,24 +251,69 @@ class TesisController extends Controller
 
             $idlogin=Auth::id();
             $user=User::findorfail($idlogin);
-            if($user->tipo_usuario==2){           
-                $tes = Tesis::findorfail($id);
+            $tes = Tesis::findorfail($id);
+            if($user->tipo_usuario==2 and(($tes->estado1==1 and $tes->estado2==null))){           
                 $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
                 $tes->estado1=2;
                 $tes->update();
                 return view('tesis.edit2',compact('tes','profes'));
             }
+            if($user->tipo_usuario==2 and $tes->estado1==2 and $tes->estado2==null)
+            {           
+            $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+            //$tes->estado1=3;
+            //$tes->update();
+           return view('tesis.edit2',compact('tes','profes'));
+           }
+                if($user->tipo_usuario==2 and $tes->estado1==2 and $tes->estado2==1){           
+                $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+                //$tes->estado1=3;
+                //$tes->update();
+                return view('tesis.edit2',compact('tes','profes'));
+            	}else{
+            		return view('tesis.noeditartesis_profe');
+            	}
+            }
 
-        } 
-    }
+      }
+   
+
+    public function edit3($id){
+        //dd($id);
+        if(!Auth::id()){
+            return view('tesis.sinpermiso');
+        }else{
+
+        	$idlogin=Auth::id();
+	        $user=User::findorfail($idlogin);
+	        $tes = Tesis::findorfail($id);
+	        $com=Comision::findorfail($id);
+
+            if($user->tipo_usuario==3 && $tes->estado1==2 && $tes->estado2==1 ){           
+                $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+                $tes->estado1=3;
+                $tes->update();
+                //dd($tes->tipo_vinculacion);
+                return view('tesis.edit3',compact('tes','profes','com'));
+            }else{
+            	if($user->tipo_usuario==3 && $tes->estado1==3 && $tes->estado2==1 ){           
+                $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+                //dd($tes->tipo_vinculacion);
+                return view('tesis.edit3',compact('tes','profes','com'));
+            }else{
+            	return view('tesis.sinpermiso');
+            }
+        }
+
+	} 
+}
 
     function sinpermiso(){
 
     return view('tesis.sinpermiso');
         }
 
-
-    public function evaluar($id)
+       public function evaluar_director($id)
     {
         if(!Auth::id()){
             return view('sinpermiso');
@@ -215,10 +321,32 @@ class TesisController extends Controller
 
             $idlogin=Auth::id();
             $user=User::findorfail($idlogin);
-            if($user->tipo_usuario==2){           
-        $tes=DB::table('tesis')->where('id',$id)->first();
+            if($user->tipo_usuario==3){           
+        $tes=Tesis::findorfail($id);
         $comision=DB::table('comision')->where('id',$id)->first();
+        $tes->estado1=3;
+        $tes->update();
+                return view('tesis.evaluar_director',compact('tes','comision'));
+            }
+
+        } 
+    }
+    public function evaluar($id)
+    {
+        if(!Auth::id()){
+            return view('tesis.sinpermiso');
+        }else{
+
+            $idlogin=Auth::id();
+            $user=User::findorfail($idlogin);
+            $tes=Tesis::findorfail($id);
+        	$comision=DB::table('comision')->where('id',$id)->first();
+            if($user->tipo_usuario==2 and (($tes->estado1==1) or ($tes->estado1==2))){         
+        $tes->estado1=2;
+        $tes->update();
                 return view('tesis.evaluar',compact('tes','comision'));
+            }else{
+            	return view('tesis.noeditartesis_profe');
             }
 
         } 
@@ -261,7 +389,7 @@ class TesisController extends Controller
     {
 
         //dd($request);
-        /*$request->validate([
+        $request->validate([
             'profesor_guia' => 'required|string',
             'nombre_completo' => 'required|string',
             'rut' => 'required|string|min:7|max:8',
@@ -269,7 +397,7 @@ class TesisController extends Controller
             'profesor1_comision' => 'required|string',
             'profesor2_comision' => 'required|string',
             'profesor3_comision' =>'string',
-        ]);*/
+        ]);
 
         //return 'tamos';
         //dd($request);
@@ -320,12 +448,11 @@ class TesisController extends Controller
         return view('welcome');
     }
 
-
-    public function update3(Request $request,$id)
+     public function update5(Request $request,$id)
     {
 
         //dd($request);
-        /*$request->validate([
+        $request->validate([
             'profesor_guia' => 'required|string',
             'nombre_completo' => 'required|string',
             'rut' => 'required|string|min:7|max:8',
@@ -333,10 +460,10 @@ class TesisController extends Controller
             'profesor1_comision' => 'required|string',
             'profesor2_comision' => 'required|string',
             'profesor3_comision' =>'string',
-        ]);*/
+        ]);
 
         //return 'tamos';
-        dd($request->nombre_completo);
+        //dd($request);
         $idlogin=Auth::id();
         $profe=User::findorfail($idlogin);
         $tes=Tesis::findorfail($id);
@@ -353,6 +480,7 @@ class TesisController extends Controller
         $tes->descripcion=$request->get('descripcion');
         $tes->objetivos=$request->get('objetivos');
         $tes->contribucion=$request->get('contribucion');
+        $tes->observacion=$request->get('observacion');
         $tes->update();
         $user=User::findorfail($id);
         $user->name=$tes->nombre_completo;
@@ -381,10 +509,153 @@ class TesisController extends Controller
             'institucion2' => $request->institucion2,
         ]);
 
-        return view('home');
+        return view('welcome');
     }
 
 
+
+    public function update3(Request $request,$id)
+    {
+
+        //dd($request);
+        /*$request->validate([
+            'profesor_guia' => 'required|string',
+            'nombre_completo' => 'required|string',
+            'rut' => 'required|string|min:7|max:8',
+            'ano_ingreso' => 'required|integer',
+            'profesor1_comision' => 'required|string',
+            'profesor2_comision' => 'required|string',
+            'profesor3_comision' =>'string',
+        ]);*/
+
+        //return 'tamos';
+        //dd($request);
+        $idlogin=Auth::id();
+        //$profe=User::findorfail($idlogin);
+        //DB::table('tesis')->where('id','=', $id)->delete();
+        $tes=Tesis::findorfail($id);
+        /*$tes->nombre_completo=$request->get('nombre_completo');
+        $tes->rut=$request->get('rut');
+        $tes->ano_ingreso=$request->get('ano_ingreso');
+        $tes->profesor_guia=$request->get('profesor_guia');
+        $tes->nombre_tesis=$request->get('nombre_tesis');
+        $tes->area_tesis=$request->get('area_tesis');
+        $tes->carrera=$request->get('carrera');
+        $tes->tipo_vinculacion=$request->get('tipo_vinculacion');
+        $tes->nombre_vinculacion=$request->get('nombre_vinculacion');
+        $tes->tipo=$request->get('tipo');
+        $tes->descripcion=$request->get('descripcion');
+        $tes->objetivos=$request->get('objetivos');
+        $tes->contribucion=$request->get('contribucion');*/
+        if(($request->get('estado'))=='Enviar a Director'){
+        $tes->estado1=2;
+        $tes->estado2=1;
+       $tes->update();
+   		}elseif(($request->get('estado'))=='Rechazar'){
+   		$tes->estado1=1;
+        $tes->estado2=null;
+        $tes->update();
+   		}
+        //$user=User::findorfail($id);
+        //$user->name=$tes->nombre_completo;
+        //$user->update();
+
+        //$comision=new Comision;
+        //$alumno=DB::table('users')->join('tesis','users.name','=',$tes->nombre_completo)->get();
+        //dd($alumno);
+        //$comision =new Comision;;
+        //$comision->id_profesor_guia=$profe->id;
+        
+        /*DB::table('comision')->where('id','=', $id)->delete();
+      
+       DB::table('comision')->insert([
+            'id' => $id,
+            'id_profesor_guia' => $profe->id,
+            'nombre_alumno' =>$request->nombre_completo,
+            'profesor1_comision' => $request->profesor1_comision,
+            'profesor2_comision' => $request->profesor2_comision,
+            'profesor3_comision' => $request->profesor3_comision,
+            'profesor1_externo' => $request->profesor1_externo,
+            'correo_profe1_externo' => $request->correo_profe1_externo,
+            'profe2_externo' => $request->profesor2_externo,
+            'institucion1' => $request->institucion1,
+            'correo_profe2_externo' => $request->correo_profe2_externo,
+            'institucion2' => $request->institucion2,
+        ]);*/
+        return view('welcome');
+    }
+
+
+    	public function update4(Request $request,$id)
+    {
+
+        //dd($request);
+        /*$request->validate([
+            'profesor_guia' => 'required|string',
+            'nombre_completo' => 'required|string',
+            'rut' => 'required|string|min:7|max:8',
+            'ano_ingreso' => 'required|integer',
+            'profesor1_comision' => 'required|string',
+            'profesor2_comision' => 'required|string',
+            'profesor3_comision' =>'string',
+        ]);*/
+
+        //return 'tamos';
+        //dd($request);
+        $idlogin=Auth::id();
+        //$profe=User::findorfail($idlogin);
+        //DB::table('tesis')->where('id','=', $id)->delete();
+        $tes=Tesis::findorfail($id);
+        /*$tes->nombre_completo=$request->get('nombre_completo');
+        $tes->rut=$request->get('rut');
+        $tes->ano_ingreso=$request->get('ano_ingreso');
+        $tes->profesor_guia=$request->get('profesor_guia');
+        $tes->nombre_tesis=$request->get('nombre_tesis');
+        $tes->area_tesis=$request->get('area_tesis');
+        $tes->carrera=$request->get('carrera');
+        $tes->tipo_vinculacion=$request->get('tipo_vinculacion');
+        $tes->nombre_vinculacion=$request->get('nombre_vinculacion');
+        $tes->tipo=$request->get('tipo');
+        $tes->descripcion=$request->get('descripcion');
+        $tes->objetivos=$request->get('objetivos');
+        $tes->contribucion=$request->get('contribucion');*/
+        if(($request->get('estado'))=='Inscribir'){
+        $tes->estado1=4;
+        $tes->estado2=1;
+       $tes->update();
+   		}elseif(($request->get('estado'))=='Rechazar inscripcion'){
+   		$tes->estado1=2;
+        $tes->estado2=null;
+        $tes->update();
+   		}
+        //$user=User::findorfail($id);
+        //$user->name=$tes->nombre_completo;
+        //$user->update();
+
+        //$comision=new Comision;
+        //$alumno=DB::table('users')->join('tesis','users.name','=',$tes->nombre_completo)->get();
+        //dd($alumno);
+        //$comision =new Comision;;
+        //$comision->id_profesor_guia=$profe->id;
+        
+        /*DB::table('comision')->where('id','=', $id)->delete();
+      
+       DB::table('comision')->insert([
+            'id' => $id,
+            'id_profesor_guia' => $profe->id,
+            'nombre_alumno' =>$request->nombre_completo,
+            'profesor1_comision' => $request->profesor1_comision,
+            'profesor2_comision' => $request->profesor2_comision,
+            'profesor3_comision' => $request->profesor3_comision,
+            'profesor1_externo' => $request->profesor1_externo,
+            'correo_profe1_externo' => $request->correo_profe1_externo,
+            'profe2_externo' => $request->profesor2_externo,
+            'institucion1' => $request->institucion1,
+            'correo_profe2_externo' => $request->correo_profe2_externo,
+            'institucion2' => $request->institucion2,
+        ]);*/
+        return view('welcome');
+    }
 
 
 

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-07-2019 a las 02:33:48
+-- Tiempo de generación: 19-07-2019 a las 23:51:49
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.6
 
@@ -48,7 +48,11 @@ CREATE TABLE `comision` (
 --
 
 INSERT INTO `comision` (`id`, `id_profesor_guia`, `nombre_alumno`, `profesor1_comision`, `profesor2_comision`, `profesor3_comision`, `profesor1_externo`, `correo_profe1_externo`, `institucion1`, `profe2_externo`, `correo_profe2_externo`, `institucion2`) VALUES
-(18, 17, 'Camilo Cavieres', 'Angelica Urrutia', 'Xaviera Lopez', 'Angelica Urrutia', 'Jose Torres', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'GabrielP@gmail.com', 'Universidad campo feo ctmmmmm!!!!!');
+(8, 3, 'Carlos Andres Cancino Duran', 'Xaviera Lopez', 'Paulo Gonzalez', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 7, 'Oscar Raul Perez Fernandez', 'Marco Toranzo', 'Angelica Urrutia', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL),
+(16, 12, 'Rodrigo Chavez', 'Hugo Araya', 'Marco Toranzo', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 3, 'Camilo Cavieres', 'Paulo Gonzalez', 'Hugo Araya', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 17, 'Gonzalo Ignacio Paredes Valenzuela', 'Hugo Araya', 'Paulo Gonzalez', 'Wladimir Soto', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -114,10 +118,11 @@ CREATE TABLE `tesis` (
 --
 
 INSERT INTO `tesis` (`id`, `nombre_completo`, `rut`, `nombre_tesis`, `area_tesis`, `ano_ingreso`, `profesor_guia`, `carrera`, `tipo`, `contribucion`, `descripcion`, `objetivos`, `tipo_vinculacion`, `nombre_vinculacion`, `observacion`, `estado1`, `estado2`, `fecha_peticion`) VALUES
-(8, 'Carlos Andres Cancino Duran', '18670608', 'Reconocimiento de patrones con redes neuronalesen imagenes', 'IA', 2013, 'Sergio Hernandez', 'Ingenieria Civil Informatica', 'Tesis', 'Promover y potenciar el concepto de ciudades inteligentes', 'Descripcion1 Descripcion2 Descripcion3', 'Aplicación de IA, en camaras de seguridad', 'Proyecto', 'Ciudades inteligentes XX', NULL, 1, NULL, '2019-07-16 04:02:26'),
-(10, 'Oscar Raul Perez Fernandez', '16788324', 'Sistema de evidencias UCM', 'Desarrollo Web', 2013, 'Hugo Araya', 'Ingenieria Civil Informatica', 'Tesis', 'Automatizar y agilizar el proceso', 'Descripcion1 Descripcion2', 'Sistema de evidencias para la Universidad', 'Empresa', 'UCM', NULL, 1, NULL, '2019-07-16 04:12:04'),
-(16, 'Rodrigo Chavez', '18063911', 'Aplicacion movil', 'Ingenieria de Software', 2014, 'Paulo Gonzalez', 'Ingenieria Civil Informatica', 'Memoria', 'Contribucion1,Contribucion2', 'Descripcion1Descripcion2', 'Ayudar a la comunidad', 'Empresa', 'Tutelkan', NULL, 1, NULL, '2019-07-16 03:56:45'),
-(18, 'Camilo Cavieres', '18928324', 'Desarrollo de aplicacion movil ed. fisica', 'Ingenieria de Software', 2013, 'Hugo Araya', 'Ingenieria Civil Informatica', 'Tesis', 'Cooperación interna de la universidad', 'Descripcion1 Descripcion2 Descripcion3', 'Objetivo1, Objetivo2', 'Empresa', 'Desarrollo de aplicacion movil ed. fisica', NULL, 1, NULL, '2019-07-16 04:32:23');
+(8, 'Carlos Andres Cancino Duran', '18670608', 'Reconocimiento de patrones con redes neuronalesen imagenes', 'Ingenieria de Software', 2013, 'Sergio Hernandez', 'Ingenieria Civil Informatica', 'Tesis', 'Promover y potenciar el concepto de ciudades inteligentes', 'Descripcion1 Descripcion2 Descripcion3', 'Aplicación de IA, en camaras de seguridad', 'Empresa', 'Ciudades inteligentes XX', 'Tesis interesante', 3, 1, '2019-07-16 04:02:26'),
+(10, 'Oscar Raul Perez Fernandez', '16788324', 'Sistema de evidencias UCM', 'Ingenieria de Software', 2013, 'Hugo Araya', 'Ingenieria Civil Informatica', 'Tesis', 'Automatizar y agilizar el proceso', 'Descripcion1 Descripcion2', 'Sistema de evidencias para la Universidad', 'Empresa', 'UCM', NULL, 1, NULL, '2019-07-16 04:12:04'),
+(16, 'Rodrigo Chavez', '18063911', 'Aplicacion movil', 'Ingenieria de Software', 2014, 'Paulo Gonzalez', 'Ingenieria en Ejecucion e Informatica', 'Tesis', 'Contribucion1,Contribucion2', 'Descripcion1Descripcion2', 'Ayudar a la comunidad', 'Empresa', 'Tutelkan', NULL, 1, NULL, '2019-07-16 03:56:45'),
+(18, 'Camilo Cavieres', '18738562', 'Aplicacion en Ionix para ed fisica', 'Ingenieria de Software', 2013, 'Marco Toranzo', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'Se espera ser un apoyo para la carrera de de ed. fisica en la Universidad.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'Ed fisica.', 'Nombre incompleto', 4, 1, '2019-07-18 06:43:00'),
+(19, 'Gonzalo Ignacio Paredes Valenzuela', '17345456', 'Sistema de inventario UCM', 'Ingenieria de Software', 2012, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Se espera apoyar la automatizacion de un sistema de la universidad, y agilizar procesos.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'Departamento de informatica UCM', NULL, 2, 1, '2019-07-19 19:11:32');
 
 -- --------------------------------------------------------
 
@@ -154,9 +159,10 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ti
 (13, 'Wladimir Soto', 'wsoto@gmail.com', NULL, '$2y$10$LMZ77GNVx.JyErYX/hKYEuXbTQw/LDof/cSTSNcvS5XMRKnjHWaHG', 2, NULL, NULL, NULL),
 (14, 'Xaviera Lopez', 'XavieraL@gmail.com', NULL, '$2y$10$cqRhXlsEoLaQm1K0pIWojuip9L7.5ImOUabzoKP8X3T.0yj.SQnDW', 2, NULL, NULL, NULL),
 (15, 'Angelica Urrutia', 'AngelicaU@gmail.com', NULL, '$2y$10$iGcbzkHlxSIaeohbifLgp.X2xLtBfJPSIWQ/7Sqxcyr/q06SEw/zW', 2, NULL, NULL, NULL),
-(16, '18063911', 'RodrigoC@gmail.com', NULL, '$2y$10$IIMkIRIefVWEIR6u5Saby.szXbs5GmJ6cdumfFnmtgVArUi81R1c6', 1, NULL, '2019-07-16 07:55:40', '2019-07-16 07:56:45'),
+(16, 'Rodrigo Chavez', 'RodrigoC@gmail.com', NULL, '$2y$10$IIMkIRIefVWEIR6u5Saby.szXbs5GmJ6cdumfFnmtgVArUi81R1c6', 1, NULL, '2019-07-16 07:55:40', '2019-07-17 22:44:22'),
 (17, 'Marco Toranzo', 'mtoranzo@gmail.com', NULL, '$2y$10$/tGoCVb4KMYJvxU5/zTsTug0hnoqshVEAVuVkvqiChPqRSJS0hNcG', 2, NULL, NULL, NULL),
-(18, 'Camilo Cavieres', 'CamiloC@gmail.com', NULL, '$2y$10$U9YUF0dsIGH.mtoDiuaOJuho1QeRg/kZCpK9GjiL7h0J24GbsqH/S', 1, NULL, '2019-07-16 08:27:48', '2019-07-16 08:27:48');
+(18, 'Camilo Cavieres', 'CamiloC@gmail.com', NULL, '$2y$10$U9YUF0dsIGH.mtoDiuaOJuho1QeRg/kZCpK9GjiL7h0J24GbsqH/S', 1, NULL, '2019-07-16 08:27:48', '2019-07-16 08:27:48'),
+(19, 'Gonzalo Ignacio Paredes Valenzuela', 'GonzaloParedes@gmail.com', NULL, '$2y$10$cqV6yLeBy8YZUIj6i13mFuye2MWyDwAHwa1KnGHFiaATaWVy.EGsu', 1, NULL, '2019-07-19 23:08:31', '2019-07-19 23:08:31');
 
 --
 -- Índices para tablas volcadas
@@ -209,7 +215,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- Restricciones para tablas volcadas

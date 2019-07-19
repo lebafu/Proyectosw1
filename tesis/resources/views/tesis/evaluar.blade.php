@@ -51,7 +51,7 @@
                          <div class="form-group row">
                             <label for="area_tesis" class="col-md-4 col-form-label text-md-right">{{ __('Area Tesis') }}</label>
                             <div class="col-md-6">
-                                <input id="area_tesis" type="text" class="form-control" name="area_tesis" value="{{$tes->area_tesis}}" required="required"disabled>
+                                <input id="area_tesis" type="text" class="form-control" name="area_tesis" value="{{$tes->area_tesis}}" required="required" disabled>
                             </div>
                         </div>
  
@@ -65,16 +65,16 @@
                        
 
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Vinculacion') }}</label>
+                            <label for="tipo_vinculacion" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Vinculacion') }}</label>
                             <div class="col-md-6">
                                <input id="tipo_vinculacion" type="text" class="form-control" name="tipo_vinculacion" value="{{$tes->tipo_vinculacion}}" required="required" disabled>
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de Vinculacion') }}</label>
+                            <label for="nombre_vinculacion" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de Vinculacion') }}</label>
                             <div class="col-md-6">
-                              <input id="tipo_vinculacion" type="text" placeholder="tipo_vinculacion" class="form-control" name="tipo_vinculacion" value="{{$tes->tipo_vinculacion}}" required="required" disabled>
+                              <input id="nombre_vinculacion" type="text" placeholder="nombre_vinculacion" class="form-control" name="nombre_vinculacion" value="{{$tes->nombre_vinculacion}}" required="required" disabled>
                                </div>
                         </div>
 
@@ -127,7 +127,7 @@
                         <div class="form-group row">
                             <label for="profesor3_comision" class="col-md-4 col-form-label text-md-right">{{ __('Tercer Profesor comision') }}</label>
                             <div class="col-md-6">
-                                 <input id="profesor3_comision" type="text" class="form-control" name="profesor3_comision" value="{{$comision->profesor3_comision}}"  disabled>
+                                 <input id="profesor3_comision" type="text" class="form-control" name="profesor3_comision" value="{{$comision->profesor3_comision}}" disabled>
                             </div>
                         </div>
 
@@ -143,7 +143,7 @@
                          <div class="form-group row">
                             <label for="correo_profe1_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
                             <div class="col-md-6">
-                                 <input id="correo_profe1_externo" type="email" class="form-control" name="correo_profe1_externo" value="{{$comision->correo_profe1_externo}}"   disabled>
+                                 <input id="correo_profe1_externo" type="email" class="form-control" name="correo_profe1_externo" value="{{$comision->correo_profe1_externo}}"  disabled >
                             </div>
                         </div>  
 
@@ -158,7 +158,7 @@
                          <div class="form-group row">
                             <label for="profesor2_externo" class="col-md-4 col-form-label text-md-right">{{ __('Segundo profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="profesor2_externo" type="text" class="form-control" value="{{$comision->profe2_externo}}" name="profesor2_externo">
+                              <input id="profesor2_externo" type="text" class="form-control" value="{{$comision->profe2_externo}}" name="profesor2_externo" disabled>
                             </div>
                         </div>
 
@@ -166,27 +166,34 @@
                         <div class="form-group row">
                             <label for="correo_profe2_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-mail') }}</label>
                             <div class="col-md-6">
-                                 <input id="correo_profe1_externo" type="email" class="form-control" name="correo_profe1_externo" value="{{$comision->correo_profe1_externo}}"   disabled>
+                                 <input id="correo_profe1_externo" type="email" class="form-control" name="correo_profe1_externo" value="{{$comision->correo_profe1_externo}}"  disabled >
                             </div>
                         </div>
                         
                         <div class="form-group row">
                                <label for="institucion2" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Segundo Profesor externo') }}</label>
                              <div class="col-md-6">
-                              <input id="institucion2" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion2" value="{{$comision->institucion2}}"  disabled>
+                              <input id="institucion2" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion2" value="{{$comision->institucion2}}" disabled >
+                            </div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="estado" class="col-md-4 col-form-label text-md-right">{{ __('Accion a realizar') }}</label>
+                            <div class="col-md-6">
+                                <select name="estado" id="estado" type="text" class="form-control" required="required">
+                                <option value="Enviar a Director">Enviar a Director</option>
+                                 <option value="Rechazar">Rechazar</option>
+                                 </select>
                             </div>
                         </div>
 
                          <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Enviar a Directorio') }}
+                                    {{ __('Guardar') }}
                                 </button>
-
-                                <a href="/tesis_profesor" class="btn">{{ __('Rechazar') }}</a>
-                                    
-                            </div>
-
+                                  
+                             <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a> 
                                 
                 {{ csrf_field() }}
                 {{ method_field('PUT')}}

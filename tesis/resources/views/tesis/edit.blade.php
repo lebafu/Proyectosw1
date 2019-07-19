@@ -86,6 +86,7 @@
                             <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Vinculacion') }}</label>
                             <div class="col-md-6">
                                 <select name="tipo_vinculacion" id="tipo_vinculacion" type="text" class="form-control" required="required">
+                                <option value=""> Empresa </option>
                                 <option value="Empresa"> Empresa </option>
                                  <option value="Proyecto">Proyecto </option>
                                  <option value="Fondo concusable"> Fondo concursable</option>

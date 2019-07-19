@@ -43,9 +43,12 @@
                          <div class="form-group row">
                             <label for="profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Profesor guia') }}</label>
                              <div class="col-md-6">
-                                 <select name="profesor_guia" id="profesor_guia" class="form-control" value="{{$tes->profesor_guia}}" required>
+                                 <select name="profesor_guia" id="profesor_guia" class="form-control"  required>
+                                    <option value="{{$tes->profesor_guia}}">{{$tes->profesor_guia}}</option>
                                     @foreach($profes as $profe)
+                                    @if($profe->name != $tes->profesor_guia)
                                     <option value="{{$profe->name}}">{{$profe->name}}</option>
+                                    @endif
                                     @endforeach
                                 </select>
                             </div>
@@ -61,7 +64,8 @@
                          <div class="form-group row">
                             <label for="area_tesis" class="col-md-4 col-form-label text-md-right">{{ __('Area Tesis') }}</label>
                             <div class="col-md-6">
-                                <select name="area_tesis" id="area_tesis" type="text" class="form-control" value="{{ $tes->area_tesis}}"required="required">
+                                <select name="area_tesis" id="area_tesis" type="text" class="form-control" required="required">
+                                <option value="{{ $tes->area_tesis}}">{{ $tes->area_tesis}}</option>
                                 <option value="Ingenieria de Software">Ingenieria de Software</option>
                                  <option value="IA">Inteligencia Artificial </option>
                                  <option value="BI">Inteligencia de negocios</option>
@@ -73,7 +77,8 @@
                           <div class="form-group row">
                             <label for="carrera" class="col-md-4 col-form-label text-md-right">{{ __('Carrera') }}</label>
                             <div class="col-md-6">
-                                <select name="carrera" id="carrera" type="text" class="form-control" value="{{ $tes->carrera}}" required="required">
+                                <select name="carrera" id="carrera" type="text" class="form-control"  required="required">
+                                <option value="{{ $tes->carrera}}">{{$tes->carrera}}</option>
                                 <option value="Ingenieria Civil Informatica">Ingenieria Civil Informatica</option>
                                  <option value="Ingenieria en Informatica">Ingenieria en Informatica </option>
                                  <option value="Ingenieria en Ejecucion e Informatica">Ingenieria en Ejecucion e Informatica</option>
@@ -86,10 +91,11 @@
                         <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de Vinculacion') }}</label>
                             <div class="col-md-6">
-                                <select name="tipo_vinculacion" id="tipo_vinculacion" type="text" class="form-control" value="{{ $tes->tipo_vinculacion}}" required="required">
+                                <select name="tipo_vinculacion" id="tipo_vinculacion" type="text" class="form-control" required="required">
+                                <option value="{{$tes->tipo_vinculacion}}">{{$tes->tipo_vinculacion}}</option>
                                 <option value="Empresa"> Empresa </option>
                                  <option value="Proyecto">Proyecto </option>
-                                 <option value="Fondo concusable"> Fondo concursable</option>
+                                 <option value="Fondo concusable">Fondo concursable</option>
                                  <option value="Comunidad">Comunidad</option>
                                  </select>
                             </div>
@@ -105,7 +111,8 @@
                          <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de trabajo') }}</label>
                             <div class="col-md-6">
-                                <select name="tipo" id="tipo" type="text" class="form-control"value="{{ $tes->tipo}}" required="required">
+                                <select name="tipo" id="tipo" type="text" class="form-control" required="required">
+                                <option value="{{$tes->tipo}}">{{$tes->tipo}}</option>
                                 <option value="Tesis"> Tesis </option>
                                  <option value="Memoria">Memoria </option>
                                  </select>
@@ -175,7 +182,7 @@
                         <div class="form-group row">
                             <label for="profesor1_externo" class="col-md-4 col-form-label text-md-right">{{ __('Primer profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="profesor1_externo" type="text" placeholder="Primer profesor externo" class="form-control" name="profesor1_externo">
+                              <input id="profesor1_externo" type="text" placeholder="Primer profesor externo" class="form-control" name="profesor1_externo" value="{{ old('profesor1_externo') }}">
                             </div>
                         </div>
 
@@ -197,14 +204,14 @@
                         <div class="form-group row">
                             <label for="institucion1" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Primer Profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="institucion1" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion1">
+                              <input id="institucion1" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion1" value="{{ old('institucion1') }}">
                             </div>
                         </div>
 
                          <div class="form-group row">
                             <label for="profesor2_externo" class="col-md-4 col-form-label text-md-right">{{ __('Segundo profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="profesor2_externo" type="text" placeholder="Segundo profesor externo" class="form-control" name="profesor2_externo">
+                              <input id="profesor2_externo" type="text" placeholder="Segundo profesor externo" class="form-control" name="profesor2_externo" value="{{ old('profesor2_externo') }}">
                             </div>
                         </div>
 
@@ -226,7 +233,7 @@
                         <div class="form-group row">
                             <label for="institucion2" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Segundo Profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="institucion2" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion2">
+                              <input id="institucion2" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion2" value="{{ old('institucion2') }}">
                             </div>
                         </div>
 
@@ -240,7 +247,7 @@
                                     
                             </div>
 
-                                
+                            <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>    
                 {{ csrf_field() }}
                 {{ method_field('PUT')}}
                             
