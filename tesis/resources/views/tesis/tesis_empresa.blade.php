@@ -7,7 +7,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Tesis relacionadas a empresas')}}</div>
+        <div class="card-header">{{ __('Tesis relacionadas a empresa')}}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
@@ -34,10 +34,10 @@
      </div>
      </div>
      </div>
+     <a href="{{route('descargar_te')}}">Descargar PDF</a>
      </div>
      </div>
 </div>
 
-  
-{!! $tes_empresas->render() !!}
+  {!! $tes_empresas->render() !!}
 @endsection

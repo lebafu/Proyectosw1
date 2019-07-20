@@ -170,6 +170,7 @@
                             <label for="profesor3_comision" class="col-md-4 col-form-label text-md-right">{{ __('Tercer Profesor comision') }}</label>
                             <div class="col-md-6">
                                  <select name="profesor3_comision" id="profesor3_comision" class="form-control">
+                                    <option value="{{$tes->profesor_guia}}">{{$tes->profesor_guia}}</option>
                                     <option value="Ninguno">Ninguno</option>
                                     @foreach($profes as $profe)
                                     <option value="{{$profe->name}}">{{$profe->name}}</option>

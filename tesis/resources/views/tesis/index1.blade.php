@@ -18,6 +18,8 @@
           <th>Tipo Trabajo</th>
           <th>Fecha Peticion</th>
           <th>Estado</th>
+          <th>Nota Pendiente</th>
+          <th>Nota Prorroga</th>
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
@@ -27,15 +29,30 @@
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}}</td>
-          <td>
+           <td>
           @if($tesis->estado1!=4)
-          
-             En espera
+              En espera
           @endif
           @if($tesis->estado1==4)
-              Tesis Inscrita
+              Inscrita
            @endif  
-         </td>
+           @if($tesis->nota_pendiente!=null)
+           <td>{{$tesis->nota_pendiente}}</td>
+           <td>
+            <a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nota Prorroga</a>
+          </td>
+
+           @endif
+           @if($tesis->nota_pendiente!=null)
+          
+          @endif
+          @if($tesis->nota_pendiente==null and $tesis->estado1==4)
+          <td>
+            <a href="{{url('/pedir_nota_pendiente/'.$tesis->id)}}">Pedir nota Pendiente</a>
+          </td>
+          @endif
+          
+         
       <td>
             <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info">Ver detalles</a> 
             <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary">Editar</a>

@@ -40,6 +40,10 @@ Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.t
 Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.comunidad');
 Route::get('/tesis_inscritas_profesor', 'TesisController@index2_ins_pro')->name('tesis.index2_ins_pro');
 Route::get('/tesis{tesis}', 'TesisController@edit')->name('tesis.edit');
+Route::get('/pedir_nota_pendiente/{tesis}', 'TesisController@pedir_nota_pendiente')->name('tesis.pedir_nota_pendiente');
+Route::put('/nota_pendiente_ingresada/{tesis}','TesisController@save_nota_pendiente')->name('tesis.save_nota_pendiente');
+Route::get('/pedir_nota_prorroga/{tesis}', 'TesisController@pedir_nota_prorroga')->name('tesis.pedir_nota_prorroga');
+Route::put('/nota_prorroga_ingresada/{tesis}','TesisController@save_nota_prorroga')->name('tesis.save_nota_prorroga');
 Route::get('/tesis_profesor/{tesis}', 'TesisController@edit2')->name('tesis.edit2');
 Route::get('/tesis_director/{tesis}', 'TesisController@edit3')->name('tesis.edit3');
 Route::get('/tesis/create', 'TesisController@create')->name('tesis.create');
@@ -68,8 +72,8 @@ Route::post('/comision','ComisionController@store')->name('comision.store');
 Route::put('/actualizarcomision{comision}','ComisionController@update')->name('comision.update');
 Route::delete('/eliminarcomision{comision}','ComisionController@destroy')->name('comision.destroy');
 
-
-Route::get('pdf',function(){
-	$pdf= PDF::loadview('tesis_empresa');
-	return $pdf->download('tesis_empresas.pdf');
-});
+Route::get('descargar_te', function(){
+	$tes_empresas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Empresa')->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
+	$pdf=PDF::loadView('tesis.tesis_empresa',compact('tes_empresas'));
+	return $pdf->download();
+})->name('descargar_te');

@@ -43,6 +43,7 @@
                          <div class="form-group row">
                             <label for="profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Profesor guia') }}</label>
                              <select name="profesor_guia" id="profesor_guia" class="form-control" required>
+                                    <option value="{{$tes->profesor_guia}}">{{$tes->profesor_guia}}</option>
                                     @foreach($profes as $profe)
                                     <option value="{{$profe->id}}">{{$profe->name}}</option>
                                     @endforeach
@@ -61,7 +62,7 @@
                             <label for="area_tesis" class="col-md-4 col-form-label text-md-right">{{ __('Area Tesis') }}</label>
                             <div class="col-md-6">
                                 <select name="area_tesis" id="area_tesis" type="text" class="form-control" required="required">
-                                <option value="Desarrollo Web">Desarrollo Web </option>
+                                <option value="Ingenieria de Software">Ingenieria de Software</option>
                                  <option value="IA">Inteligencia Artificial </option>
                                  <option value="BI">Inteligencia de negocios</option>
                                  <option value="Imagenes">Imagenes</option>

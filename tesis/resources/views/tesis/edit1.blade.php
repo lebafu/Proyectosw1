@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Editar2 tesis') }}</div>
+                <div class="card-header">{{ __('Editar1 tesis') }}</div>
 
                 <div class="card-body">
                     <form action="{{route('tesis.update2', $tes->id)}}" method="POST">
@@ -44,6 +44,7 @@
                             <label for="profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Profesor guia') }}</label>
                              <div class="col-md-6">
                                  <select name="profesor_guia" id="profesor_guia" class="form-control" value="{{$tes->profesor_guia}}" required>
+                                    <option value="{{$tes->profesor_guia}}">{{$tes->profesor_guia}}</option>
                                     @foreach($profes as $profe)
                                     <option value="{{$profe->name}}">{{$profe->name}}</option>
                                     @endforeach

@@ -8,6 +8,7 @@ use App\Comision;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Contracts\Auth\Guard;
 use DB;
 use Auth;
@@ -31,6 +32,8 @@ class TesisController extends Controller
         	}
         }
     }
+
+    
 
         public function tesis_proyecto(){
 
@@ -296,6 +299,79 @@ class TesisController extends Controller
             }
         }
 
+
+
+
+        public function pedir_nota_pendiente($id)
+        {
+            //$user = DB::table('users')->where('id', $id)->first();
+            //return view('users.edit',compact('user'));
+                $idlogin=Auth::id();
+                $user=User::findorfail($idlogin);
+                $tes = Tesis::findorfail($id);
+                //$profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+            
+
+            if(!Auth::id()){
+                return view('tesis.sinpermiso');
+            }elseif($user->tipo_usuario==1 and $tes->estado1==4 and $tes->estado2==1){
+               
+                //$tes->estado1=2;
+                //$tes->update();
+                return view('tesis.pedir_nota_pendiente',compact('tes'));
+                //return $user; 
+            }else{
+                return view('tesis.noeditartesis');
+            }
+        }
+
+        public function save_nota_pendiente(Request $request, $id)
+        {
+
+        		$tes=Tesis::findorfail($id);
+        		$tes->nota_pendiente=$request->get('nota_pendiente');
+        		$tes->update();
+
+        		return view('welcome');
+        }
+
+           public function pedir_nota_prorroga($id)
+        {
+            //$user = DB::table('users')->where('id', $id)->first();
+            //return view('users.edit',compact('user'));
+                $idlogin=Auth::id();
+                $user=User::findorfail($idlogin);
+                $tes = Tesis::findorfail($id);
+                //$profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+            $user=User::findorfail($id);
+        	//dd($user->name);
+        	$tesistas=DB::table('tesis');
+
+            if(!Auth::id()){
+                return view('tesis.sinpermiso');
+            }elseif($user->tipo_usuario==1 and $tes->estado1==4 and $tes->estado2==1){
+               
+                //$tes->estado1=2;
+                //$tes->update();
+                return view('tesis.pedir_nota_prorroga',compact('tes'));
+                //return $user; 
+            }else{
+                return view('tesis.sinpermiso');
+            }
+        }
+
+          public function save_nota_prorroga(Request $request, $id)
+        {
+
+        		$tes=Tesis::findorfail($id);
+        		$tes->nota_prorroga=$request->get('nota_prorroga');
+        		$tes->update();
+        	$user=User::findorfail($id);
+        	//dd($user->name);
+        	$tesistas=DB::table('tesis');
+        		return view('welcome');
+        }
+
     function noeditartesis(){
 
     return view('tesis.noeditartesis');
@@ -435,7 +511,7 @@ class TesisController extends Controller
         $user=User::findorfail($id);
         $user->name=$tes->nombre_completo;
         $user->update();
-        return view('tesis.index');
+        return view('welcome');
         }else{
              return back()->with('status','El registro de tesis ha fallado');
         }

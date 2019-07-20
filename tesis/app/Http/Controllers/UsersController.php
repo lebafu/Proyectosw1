@@ -1,17 +1,21 @@
 <?php
 
 namespace App\Http\Controllers;
+use Barryvdh\DomPDF\Facade as PDF;
 use App\User;
 use App\Tesis;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+
 use DB;
 
 class UsersController extends Controller
 {
     //
+
+
 
     public function index()
     {
