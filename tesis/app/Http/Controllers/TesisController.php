@@ -17,6 +17,64 @@ use Session;
 
 class TesisController extends Controller
 {
+	public function tesis_empresa()
+	{
+
+		$id=Auth::id();
+		$user=User::findorfail($id);
+        if($id==null or $user->tipo_usuario!=3){
+            return('tesis.sinpermiso');
+        }else{
+        	if($user->tipo_usuario==3){
+        	$tes_empresas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Empresa')->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
+        	return view('tesis.tesis_empresa',compact('tes_empresas'));
+        	}
+        }
+    }
+
+        public function tesis_proyecto(){
+
+		$id=Auth::id();
+		$user=User::findorfail($id);
+        if($id==null or $user->tipo_usuario!=3){
+            return('tesis.sinpermiso');
+        }else{
+        	if($user->tipo_usuario==3){
+        	$tes_proyectos=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Proyecto')->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
+        	return view('tesis.tesis_proyecto',compact('tes_proyectos'));
+        	}
+        }
+    }
+
+        public function tesis_fondoconcursable(){
+
+		$id=Auth::id();
+		$user=User::findorfail($id);
+        if($id==null or $user->tipo_usuario!=3){
+            return('tesis.sinpermiso');
+        }else{
+        	if($user->tipo_usuario==3){
+        	$tes_fondoconcursable=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Fondo concusable')->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
+        	return view('tesis.tesis_fondoconcursable',compact('tes_fondoconcursable'));
+        	}
+        }
+       }
+
+        public function tesis_comunidad(){
+
+		$id=Auth::id();
+		$user=User::findorfail($id);
+        if($id==null or $user->tipo_usuario!=3){
+            return('tesis.sinpermiso');
+        }else{
+        	if($user->tipo_usuario==3){
+        	$tes_comunidad=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Comunidad')->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
+        	return view('tesis.tesis_comunidad',compact('tes_comunidad'));
+        	}
+        }
+
+
+	}
         public function index2()
     {
         $id=Auth::id();
@@ -78,7 +136,7 @@ class TesisController extends Controller
 
     }
 
-   /*      public function index2()
+        public function index1()
     {
         $id=Auth::id();
         if($id==null){
@@ -87,9 +145,9 @@ class TesisController extends Controller
         $user=User::findorfail($id);
         //dd($user->name);
         $tesistas=DB::table('tesis')->paginate(7);
-        return view('tesis.index2',compact('tesistas','user'));
+        return view('tesis.index1',compact('tesistas','user'));
 
-    }*/
+    }
 	public function index()
     {
         

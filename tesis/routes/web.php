@@ -33,6 +33,11 @@ Route::get('/tesis_dir_sol', 'TesisController@index3_solicitudes')->name('tesis.
 Route::get('/tesis_dir_ins', 'TesisController@index3_inscritas')->name('tesis.index3_ins');
 Route::get('/tesis_alumno_solicitud', 'TesisController@index1')->name('tesis.index1');
 Route::get('/tesis_profesor', 'TesisController@index2')->name('tesis.index2');
+Route::get('/tesis_empresa', 'TesisController@tesis_empresa')->name('tesis.tesis_empresa');
+Route::get('/tesis_proyecto', 'TesisController@tesis_proyecto')->name('tesis.tesis_proyecto');
+Route::get('/tesis_fondoconcursable', 'TesisController@tesis_fondoconcursable')->name('tesis.tesis_fondoconcursable');
+Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.tesis_comunidad');
+Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.comunidad');
 Route::get('/tesis_inscritas_profesor', 'TesisController@index2_ins_pro')->name('tesis.index2_ins_pro');
 Route::get('/tesis{tesis}', 'TesisController@edit')->name('tesis.edit');
 Route::get('/tesis_profesor/{tesis}', 'TesisController@edit2')->name('tesis.edit2');
@@ -62,3 +67,9 @@ Route::get('/comisionmostrar{id}', 'ComisionController@show');
 Route::post('/comision','ComisionController@store')->name('comision.store');
 Route::put('/actualizarcomision{comision}','ComisionController@update')->name('comision.update');
 Route::delete('/eliminarcomision{comision}','ComisionController@destroy')->name('comision.destroy');
+
+
+Route::get('pdf',function(){
+	$pdf= PDF::loadview('tesis_empresa');
+	return $pdf->download('tesis_empresas.pdf');
+});

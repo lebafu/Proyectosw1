@@ -7,7 +7,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Solicitudes de tesis') }}</div>
+        <div class="card-header">{{ __('Tesis del alumno') }}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
@@ -39,7 +39,6 @@
       <td>
             <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info">Ver detalles</a> 
             <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary">Editar</a>
-            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id)}}">Evaluar</a> 
             
            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
           <input type="submit" value="Eliminar" class="btn btn-danger">
