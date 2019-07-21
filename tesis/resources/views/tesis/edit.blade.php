@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Editar tesis') }}</div>
+                <div class="card-header">{{ __('Editar tesis alumno') }}</div>
 
                 <div class="card-body">
                     <form action="{{route('tesis.update', $tes->id)}}" method="POST">
@@ -135,6 +135,14 @@
                                 <input id="contribucion" type="text" placeholder="contribucion" class="form-control" name="contribucion" value="{{$tes->contribucion}}" required="required">
                             </div>
                         </div>
+
+                        @if($tes->estado1==1 and $tes->estado2==null and $tes->estado3==1)
+                        <div class="form-group row">
+                            <div class="col-md-6">
+                                <textarea name="observacion" type="text" rows="10" cols="40" class="form-control", value="{{ old('observacion')}}" disabled>{{$tes->observacion}}</textarea>
+                             </div>
+                        </div>
+                        @endif
 
                          <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

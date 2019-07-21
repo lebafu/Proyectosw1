@@ -30,29 +30,29 @@
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}}</td>
            <td>
-          @if($tesis->estado1!=4)
+          @if($tesis->estado1!=4 and $tesis->estado1!=5)
               En espera
           @endif
           @if($tesis->estado1==4)
               Inscrita
            @endif  
-           @if($tesis->nota_pendiente!=null)
-           <td>{{$tesis->nota_pendiente}}</td>
-           <td>
-            <a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nota Prorroga</a>
-          </td>
-
+           @if($tesis->estado1==5)
+                Rechazada
            @endif
-           @if($tesis->nota_pendiente!=null)
-          
-          @endif
-          @if($tesis->nota_pendiente==null and $tesis->estado1==4)
+           @if($tesis->nota_pendiente!=null and $tesis->nota_prorroga==null)
+           <td>{{$tesis->nota_pendiente}}</td>
+           <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nota Prorroga</a></td>
+         @endif
+          @if($tesis->nota_pendiente==null and $tesis->estado1==4 and $tesis->nota_prorroga==null)
           <td>
             <a href="{{url('/pedir_nota_pendiente/'.$tesis->id)}}">Pedir nota Pendiente</a>
           </td>
           @endif
-          
-         
+          @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null)
+         <td>{{$tesis->nota_pendiente}}</td>
+          <td>{{$tesis->nota_prorroga}}</td>
+          <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nueva nota de Prorroga</a></td>
+         @endif
       <td>
             <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info">Ver detalles</a> 
             <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary">Editar</a>
@@ -61,6 +61,8 @@
           <input type="submit" value="Eliminar" class="btn btn-danger">
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
+
+
            </form>
       </td>
         </tr>

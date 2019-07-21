@@ -293,7 +293,13 @@ class TesisController extends Controller
                 //$tes->estado1=2;
                 //$tes->update();
                 return view('tesis.edit',compact('tes','profes'));
-                //return $user; 
+                //return $user;
+            }elseif($user->tipo_usuario==1 and$tes->estado1==5 and $tes->estado2==null){
+            $tes->estado1=1;
+            $tes->estado2=null;
+            $tes->estado3=1;
+            $tes->update();
+            return view('tesis.edit',compact('tes','profes')); 
             }else{
                 return view('tesis.noeditartesis');
             }
@@ -404,12 +410,19 @@ class TesisController extends Controller
                 //$tes->estado1=3;
                 //$tes->update();
                 return view('tesis.edit2',compact('tes','profes'));
-            	}else{
+            	}elseif($user->tipo_usuario==2 and $tes->estado1==5 and $tes->estado2==null){
+            		$tes->estado1=2;
+            		$tes->estado2=null;
+            		$tes->estado3=1;
+            	 	$tes->update();
+            		$profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+                return view('tesis.edit2',compact('tes','profes'));
+                }else{
             		return view('tesis.noeditartesis_profe');
+                }
             	}
             }
 
-      }
    
 
     public function edit3($id){
@@ -480,11 +493,55 @@ class TesisController extends Controller
         $tes->update();
                 return view('tesis.evaluar',compact('tes','comision'));
             }else{
+            	if($user->tipo_usuario==2 and $tes->estado1==5 and $tes->estado2==null){
+            		$tes->estado1=2;
+            		$tes->estado2=null;
+            		 $tes->estado3=1;
+            		$profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+            	}else{
             	return view('tesis.noeditartesis_profe');
             }
+           }
 
         } 
     }
+
+
+
+    public function llamar_filtro_pendiente_vencida()
+    {
+    	return view('tesis.filtro_pendiente_vencida');
+    }	
+
+
+    public function llamar_filtro_prorroga_vencida()
+    {
+    	return view('tesis.filtro_prorroga_vencida');
+    }	
+
+
+     public function filtro_nota_pendiente(Request $request)
+    {
+        //Suponiendo que se desea saber las notas pendientes vencidas dentro de un determinado intervalo de tiempo
+       //$notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','>=',$request->fecha_inicio)->where('nota_pendiente','<=',$request->fecha_final);
+
+       //Consulta en caso de que se desee conocer todas las notas pendientes vencidas inclusive anterior al intervalo definido por la consulta//
+        $notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<=',$request->fecha_final);
+
+       return view('tesis.filtro_pendiente',compact('notas_pendientes_vencidas'));
+    }
+
+      public function filtro_nota_prorroga(Request $request)
+    {
+        //Suponiendo que se desea saber las notas pendientes vencidas dentro de un determinado intervalo de tiempo
+       //$notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','>=',$request->fecha_inicio)->where('nota_pendiente','<=',$request->fecha_final);
+
+       //Consulta en caso de que se desee conocer todas las notas pendientes vencidas inclusive anterior al intervalo definido por la consulta//
+        $notas_prorrogas_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<=',$request->fecha_final);
+
+       return view('tesis.filtro_prorroga',compact('notas_prorrogas_vencidas'));
+    }
+
 
    //Me manda los datos a este controlador
     public function update(Request $request,$id)
@@ -758,7 +815,7 @@ class TesisController extends Controller
         $tes->estado2=1;
        $tes->update();
    		}elseif(($request->get('estado'))=='Rechazar inscripcion'){
-   		$tes->estado1=2;
+   		$tes->estado1=5;
         $tes->estado2=null;
         $tes->update();
    		}

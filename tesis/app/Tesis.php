@@ -29,6 +29,7 @@ class Tesis extends Model
     'observacion',
     'estado1', //para decir si esta con el alumno, profesor o director de tesis
     'estado2', //Para decir si esta aprobado o desaprobado segun el director de tesis.
+    'estado3',
     'fecha_peticion',
     'nota_pendiente',
     'nota_prorroga'
