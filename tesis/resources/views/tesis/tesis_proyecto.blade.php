@@ -32,12 +32,31 @@
         @endforeach
      </table>
      </div>
+      <div class="col-md-3">
+                  <div class="form-group" align="center">
+                    <a class="btn btn-primary" href="#" id="descargaPDF"> <span class="fa fa-print"> </span> Descargar PDF</a>
+                  </div>
+              </div>
      </div>
      </div>
      </div>
      </div>
 </div>
-
+<script>
+  $(function(){
+    $('#descargaPDF').on('click', function(){
+      $.ajax({
+        url:'{{route('descargar_tp')}}',
+        type:'get',
+        success: function(data){
+          var ventana=window.open("", "_blank");
+          ventana.document.write(data);
+          ventana.document.close();
+        }
+      })
+    });
+  });
+</script>
   
 {!! $tes_proyectos->render() !!}
 @endsection

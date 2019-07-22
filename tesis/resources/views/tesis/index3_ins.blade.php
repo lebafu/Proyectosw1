@@ -17,7 +17,8 @@
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
-          <th>Fecha Peticion</th>
+          <th>Nombre tesis</th>
+          <th>Vinculacion</th>
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
@@ -26,7 +27,8 @@
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->fecha_peticion}}}</td>
+          <td>{{$tesis->nombre_tesis}}}</td>
+          <td>{{$tesis->tipo_vinculacion}}</td>
           <td>
 
             <a href="{{url('/tesismostrar/'.$tesis->id)}}">Ver detalles</a> 
@@ -48,4 +50,21 @@
      </div>
      </div>
 </div>
+
+   <script>
+  $(function(){
+    $('#descargaPDF').on('click', function(){
+      $.ajax({
+        url:'{{route('descargar_te')}}',
+        type:'get',
+        success: function(data){
+          var ventana=window.open("", "_blank");
+          ventana.document.write(data);
+          ventana.document.close();
+        }
+      })
+    });
+  });
+</script>
+
 @endsection

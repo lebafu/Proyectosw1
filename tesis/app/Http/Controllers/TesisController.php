@@ -522,24 +522,28 @@ class TesisController extends Controller
 
      public function filtro_nota_pendiente(Request $request)
     {
+    	$fecha_inicio=$request->fecha_inicio;
+    	$fecha_final=$request->fecha_final;
         //Suponiendo que se desea saber las notas pendientes vencidas dentro de un determinado intervalo de tiempo
-       //$notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','>=',$request->fecha_inicio)->where('nota_pendiente','<=',$request->fecha_final);
+       $notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','>=',$fecha_inicio)->where('nota_pendiente','<=',$fecha_final)->get();
+       dd($notas_pendientes_vencidas);
 
        //Consulta en caso de que se desee conocer todas las notas pendientes vencidas inclusive anterior al intervalo definido por la consulta//
-        $notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<=',$request->fecha_final);
+    	//dd($request);
+        //$notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<=',$request->fecha_final)->get();
 
-       return view('tesis.filtro_pendiente',compact('notas_pendientes_vencidas'));
+       return view('tesis.filtro_nota_pendiente',compact('notas_pendientes_vencidas'));
     }
 
       public function filtro_nota_prorroga(Request $request)
     {
         //Suponiendo que se desea saber las notas pendientes vencidas dentro de un determinado intervalo de tiempo
-       //$notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','>=',$request->fecha_inicio)->where('nota_pendiente','<=',$request->fecha_final);
+       //$notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','>=',$request->fecha_inicio)->where('nota_prorroga','<=',$request->fecha_final);
 
        //Consulta en caso de que se desee conocer todas las notas pendientes vencidas inclusive anterior al intervalo definido por la consulta//
-        $notas_prorrogas_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<=',$request->fecha_final);
+        $notas_prorrogas_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<=',$request->fecha_final)->get();
 
-       return view('tesis.filtro_prorroga',compact('notas_prorrogas_vencidas'));
+       return view('tesis.filtro_nota_prorroga',compact('notas_prorrogas_vencidas'));
     }
 
 
@@ -856,4 +860,62 @@ class TesisController extends Controller
         DB::table('tesis')->where('id', $id)->delete();
         return back()->with('status','La tesis ha sido eliminada con exito');
     }
+
+    public function printTesis(){
+
+    	$tes_empresas=DB::table('tesis')
+    		->orderby('fecha_peticion','desc')
+    		->where('estado1','=',4)
+    		->where('estado2','=',1)
+    		->where('tipo_vinculacion','=','Empresa')
+    		->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();
+
+		$html = view('tesis.print', ['tes_empresas' => $tes_empresas])->render();
+
+		return $html;
+   }
+
+
+    public function printTesisp(){
+
+    	$tes_proyectos=DB::table('tesis')
+    		->orderby('fecha_peticion','desc')
+    		->where('estado1','=',4)
+    		->where('estado2','=',1)
+    		->where('tipo_vinculacion','=','Proyecto')
+    		->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();
+
+		$html = view('tesis.printTesisp', ['tes_proyectos' => $tes_proyectos])->render();
+
+		return $html;
+   }
+
+   public function printTesisc(){
+
+    	$tes_comunidad=DB::table('tesis')
+    		->orderby('fecha_peticion','desc')
+    		->where('estado1','=',4)
+    		->where('estado2','=',1)
+    		->where('tipo_vinculacion','=','Comunidad')
+    		->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();
+
+		$html = view('tesis.printTesisc', ['tes_comunidad' => $tes_comunidad])->render();
+
+		return $html;
+   }
+
+   public function printTesisfc(){
+
+    	$tes_fondoconcursable=DB::table('tesis')
+    		->orderby('fecha_peticion','desc')
+    		->where('estado1','=',4)
+    		->where('estado2','=',1)
+    		->where('tipo_vinculacion','=','Fondo concusable')
+    		->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();
+
+		$html = view('tesis.printTesisfc', ['tes_fondoconcursable' => $tes_fondoconcursable])->render();
+
+		return $html;
+   }
+
 }

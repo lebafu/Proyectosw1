@@ -33,7 +33,7 @@ Route::get('/tesis_dir_sol', 'TesisController@index3_solicitudes')->name('tesis.
 Route::get('/tesis_dir_ins', 'TesisController@index3_inscritas')->name('tesis.index3_ins');
 Route::get('/tesis_alumno_solicitud', 'TesisController@index1')->name('tesis.index1');
 Route::get('/tesis_profesor', 'TesisController@index2')->name('tesis.index2');
-Route::get('/tesis_empresa', 'TesisController@tesis_empresa')->name('tesis.tesis_empresa');
+Route::get('/', 'TesisController@tesis_empresa')->name('tesis.tesis_empresa');
 Route::get('/tesis_proyecto', 'TesisController@tesis_proyecto')->name('tesis.tesis_proyecto');
 Route::get('/tesis_fondoconcursable', 'TesisController@tesis_fondoconcursable')->name('tesis.tesis_fondoconcursable');
 Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.tesis_comunidad');
@@ -52,8 +52,8 @@ Route::get('/filtro_nota_pendiente', 'TesisController@llamar_filtro_pendiente_ve
 
 Route::get('/filtro_nota_prorroga', 'TesisController@llamar_filtro_prorroga_vencida')->name('tesis.filtro_prorroga_vencida');
 
-Route::get('/filtro_pendiente', 'TesisController@filtro_nota_pendiente')->name('tesis.filtro_nota_pendiente');
-Route::get('/filtro_prorroga', 'TesisController@filtro_nota_prorroga')->name('tesis.filtro_nota_prorroga');
+Route::put('/filtro_pendiente', 'TesisController@filtro_nota_pendiente')->name('tesis.filtro_nota_pendiente');
+Route::put('/filtro_prorroga', 'TesisController@filtro_nota_prorroga')->name('tesis.filtro_nota_prorroga');
 
 Route::get('/tesis_profesor/{tesis}', 'TesisController@edit2')->name('tesis.edit2');
 Route::get('/tesis_director/{tesis}', 'TesisController@edit3')->name('tesis.edit3');
@@ -83,8 +83,7 @@ Route::post('/comision','ComisionController@store')->name('comision.store');
 Route::put('/actualizarcomision{comision}','ComisionController@update')->name('comision.update');
 Route::delete('/eliminarcomision{comision}','ComisionController@destroy')->name('comision.destroy');
 
-Route::get('descargar_te', function(){
-	$tes_empresas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Empresa')->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
-	$pdf=PDF::loadView('tesis.tesis_empresa',compact('tes_empresas'));
-	return $pdf->download();
-})->name('descargar_te');
+Route::get('/descargar_te', 'TesisController@printTesis')->name('descargar_te');
+Route::get('/descargar_tp', 'TesisController@printTesisp')->name('descargar_tp');
+Route::get('/descargar_tc', 'TesisController@printTesisc')->name('descargar_tc');
+Route::get('/descargar_tfc', 'TesisController@printTesisfc')->name('descargar_tfc');
