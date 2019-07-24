@@ -7,7 +7,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Solicitudes de tesis en espera') }}</div>
+        <div class="card-header">{{ __('Solicitudes de tesis')}}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
@@ -20,7 +20,7 @@
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
-          @if($tesis->profesor_guia==$user->name and ($tesis->estado1==4 and $tesis->estado2==1)))
+          @if($tesis->profesor_guia==$user->name and ($tesis->estado1==4 and $tesis->estado2==1))
           <td>{{$tesis->id}}</td>
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>

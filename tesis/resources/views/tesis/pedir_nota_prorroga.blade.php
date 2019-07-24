@@ -40,3 +40,16 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    
+    $('#fecha_inicio,#fecha_fin').datepicker({
+        language: 'es',
+        format: 'yyyy-mm-dd'
+    });
+
+</script>
+
+
+@endsection

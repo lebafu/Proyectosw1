@@ -1,6 +1,13 @@
 @extends('layouts.app')
 
 @section('content')
+
+<link href="{{asset('css/bootstrap-datepicker.standalone.css')}}" rel="stylesheet">
+<script
+  src="{{asset('js/jquery-3.4.1.min.js')}}" ></script>
+<script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+<script src="{{asset('js/bootstrap-datepicker.es.min.js')}}"></script>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -15,14 +22,14 @@
                         <div class="form-group row">
                             <label for="fecha_inicio" class="col-md-4 col-form-label text-md-right">{{ __('Fecha inicio') }}</label>
                             <div class="col-md-6">
-                                <input id="fecha_inicio" type="text" placeholder="Fecha inicio" class="form-control" name="fecha inicio" required="required">
+                                <input id="fecha_inicio" type="text" placeholder="Fecha inicio" class="form-control" name="fecha_inicio" readonly style="background-color: white" value="<?= date('Y-m-d') ?>">
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label for="fecha_fin" class="col-md-4 col-form-label text-md-right">{{ __('Fecha fin') }}</label>
                             <div class="col-md-6">
-                                <input id="fecha_fin" type="text" placeholder="Fecha fin" class="form-control" name="fecha fin" required="required">
+                                <input id="fecha_fin" type="text" placeholder="Fecha fin" class="form-control" name="fecha_fin" readonly style="background-color: white" value="<?= date('Y-m-d') ?>">
                             </div>
                         </div>
 
@@ -48,3 +55,14 @@
     </div>
 </div>
 </div>
+
+<script>
+    
+    $('#fecha_inicio,#fecha_fin').datepicker({
+        language: 'es',
+        format: 'yyyy-mm-dd'
+    });
+
+</script>
+
+@endsection

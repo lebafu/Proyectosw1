@@ -8,22 +8,28 @@
 <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('js/bootstrap-datepicker.es.min.js')}}"></script>
 
-
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Ingrese fecha para nota Pendiente') }}</div>
+                <div class="card-header">{{ __('Ingrese rango de fechas para obtener notas pendientes y de prorrogas vencidas en ese periodo') }}</div>
 
                 <div class="card-body">
-                    <form action="{{route('tesis.save_nota_pendiente',$tes->id)}}" method="POST">
+                    <form action="{{route('tesis.filtro_nota_pendiente_prorroga')}}" method="POST">
                         @csrf
 
 
-                            <div class="form-group row">
-                            <label for="nota_pendiente" class="col-md-4 col-form-label text-md-right">{{ __('Nota_pendiente') }}</label>
+                        <div class="form-group row">
+                            <label for="fecha_inicio" class="col-md-4 col-form-label text-md-right">{{ __('Fecha inicio') }}</label>
                             <div class="col-md-6">
-                                <input id="nota_pendiente" type="text" placeholder="Nota Pendiente" class="form-control" name="nota_pendiente" required="required">
+                                <input id="fecha_inicio" type="text" placeholder="Fecha inicio" class="form-control" name="fecha inicio" required="required">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="fecha_fin" class="col-md-4 col-form-label text-md-right">{{ __('Fecha fin') }}</label>
+                            <div class="col-md-6">
+                                <input id="fecha_fin" type="text" placeholder="Fecha fin" class="form-control" name="fecha fin" required="required">
                             </div>
                         </div>
 
@@ -31,7 +37,7 @@
                           <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
-                                    {{ __('Guardar') }}
+                                    {{ __('Realizar consulta') }}
                                 </button>
 
                                 <a href="/tesis_alumno_solicitud" class="btn">{{ __('Cancelar') }}</a>
@@ -48,6 +54,7 @@
         </div>
     </div>
 </div>
+</div>
 
 <script>
     
@@ -57,6 +64,5 @@
     });
 
 </script>
-
 
 @endsection

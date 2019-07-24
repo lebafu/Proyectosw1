@@ -1,17 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\DB;
-
 use App\User;
-use App\Tesis;
-use App\Comision;
+//use DB;
 use Closure;
 use Session;
-
 class HomeController extends Controller
 {
     /**
@@ -19,70 +14,79 @@ class HomeController extends Controller
      *
      * @return void
      */
-
-
-    //protected $auth;
-
-
-    public function __construct()
+    protected $auth;
+    
+    public function __construct(Guard $auth)
     {
+        //le diremos que gestione el acceso por usuario 
         $this->middleware('auth');
-        //$this->auth =$auth;
+        $this->auth =$auth;
     }
-
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Contracts\Support\Renderable
      */
-
     public function index()
     {
-        
-        /*$tipo = $this->auth()->user()->tipo_usuario;
-        
-        switch ($tipo) {
-            case 0://administrador
-                return view('users.index',compact('users'));
-                break;
-
-            case 1://alumno
-                $tesis_alumno = Tesis::findOrFail($id);
-
-                if($info_alumno->condicion==1){
-                    return view('informacion_alumno.edit',["info_alumno"=>$info_alumno,"tesis_alumno"=>$tesis_alumno]);
-                }
-                break;
-
-            //case 2: //profesor
-                /*$pro_ext=Info_proExt::findOrFail($id);
-
-                if($pro_ext->condicion==0){
-                    return view('profesor_externo.edit',["pro_ext"=>$pro_ext]);
-                                 
-                }else{
-                    return view('profesor_externo.index');
-                }
-                break;*/
-
-            //case 3://director_tesis
-                /*$data=[
-                    'tesis' => DB::table('tesis_alumnos')->select(['nombre_tesis','id'])->get(),
-                    'profes_guias' => DB::table('users')->where('tipo_usuario','=','Profesor')->get(),
-                    'profes_comision' => DB::table('users')->where('tipo_usuario','=','Profesor')->orwhere('tipo_usuario','=','Prof_ext')->get()
-                ];               
-                
-                return view('comision_tesis.create',$data);
-                break;*/
-            
-            //default:
-                //echo "Tipo usuario no válido";
-                //break;
-        //}
-    //}
-                return view('home');
+       
+        $users=DB::table('users')->paginate(7);
+        $tipo = $this->auth->user()->tipo_usuario;
+         $id=$this->auth->user()->id;
+        switch($tipo)
+        {
+            case 0:
+            return view('adminhome');
+            case 1:
+            return view('alumnohome');
+            case 2:
+            return view('profesorhome');
+            case 3:
+            return view('directorhome');
+            default: return view ('tesis.sinpermiso');
+        }
+        return view('home');
     }
 
-   
-}
+    /*public function admin(){
+        $id=$this->auth->user()->id;
+        $users=DB::table('users')->paginate(7);
+        $tipo = $this->auth->user()->tipo_usuario;
+        if($tipo==0){
+            return view('adminhome');
+        }
 
+    }
+
+
+     public function alumno(){
+        $id=$this->auth->user()->id;
+        $users=DB::table('users')->paginate(7);
+        $tipo = $this->auth->user()->tipo_usuario;
+        if($tipo==1){
+            return view('alumnohome');
+        }
+
+    }
+
+    public function profesor(){
+        $id=$this->auth->user()->id;
+        $users=DB::table('users')->paginate(7);
+        $tipo = $this->auth->user()->tipo_usuario;
+        if($tipo==2){
+            return view('profesorhome');
+        }
+
+    }
+
+
+    public function director(){
+        $id=$this->auth->user()->id;
+        $users=DB::table('users')->paginate(7);
+        $tipo = $this->auth->user()->tipo_usuario;
+        if($tipo==3){
+            return view('directorhome');
+        }
+
+    }*/
+}

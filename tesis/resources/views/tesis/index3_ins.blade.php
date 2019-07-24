@@ -17,6 +17,7 @@
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
+           <th>Area Tesis</th>
           <th>Nombre tesis</th>
           <th>Vinculacion</th>
         </tr>
@@ -27,6 +28,7 @@
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
+          <td>{{$tesis->area_tesis}}</td>
           <td>{{$tesis->nombre_tesis}}}</td>
           <td>{{$tesis->tipo_vinculacion}}</td>
           <td>
@@ -51,11 +53,17 @@
      </div>
 </div>
 
+
+<div class="col-md-3">
+                  <div class="form-group" align="center">
+                    <a class="btn btn-primary" href="#" id="descargaPDF"> <span class="fa fa-print"> </span> Descargar PDF</a>
+              </div>
+        </div>
    <script>
   $(function(){
     $('#descargaPDF').on('click', function(){
       $.ajax({
-        url:'{{route('descargar_te')}}',
+        url:'{{route('descargar_tesis_ins')}}',
         type:'get',
         success: function(data){
           var ventana=window.open("", "_blank");

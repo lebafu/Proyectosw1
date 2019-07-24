@@ -7,7 +7,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Solicitudes de tesis en espera')}}</div>
+        <div class="card-header">{{ __('Solicitudes de tesis')}}</div>
           <div class="card-body">
 
     <table class="table table-bordered">

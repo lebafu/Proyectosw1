@@ -1,10 +1,11 @@
+
 <!DOCTYPE html>
 <html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
     <head>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Sistema de Tesis</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -63,6 +64,19 @@
             }
         </style>
     </head>
+    <div class="flex-center position">
+      <div class="top-left links">
+            <a href="{{url('/tesis_dir_sol')}}">Solicitudes de tesis</a>
+            <a href="{{url('/tesis_dir_ins')}}">Tesis Inscritas</a>
+            <a href="{{url('/tesis_empresa')}}">Tesis relacionadas a empresas</a>
+            <a href="{{url('/tesis_proyecto')}}">Tesis relacionadas a proyectos</a>
+            <a href="{{url('/tesis_fondoconcursable')}}">Tesis relacionadas a fondos concursables</a>
+            <a href="{{url('/tesis_comunidad')}}">Tesis relacionadas a la comunidad</a>
+            <a href="{{url('/filtro_nota_pendiente_prorroga')}}">Conocer notas pendientes y de prorroga a vencer</a>
+            <a href="{{url('/filtro_nota_prorroga')}}">Conocer notas de prorroga a vencer</a>
+            <a href="{{url('/filtro_nota_pendiente')}}">Conocer notas de prorroga a vencer</a>
+    </div>
+        </div>
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
@@ -85,13 +99,6 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
         
             </div>

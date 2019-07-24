@@ -4,7 +4,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
-        <title>Laravel</title>
+        <title>Sistema de Tesis</title>
 
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
@@ -63,6 +63,12 @@
             }
         </style>
     </head>
+    <div class="flex-center position">
+      <div class="top-left links">
+            <a href="{{url('/tesis_profesor') }}">Tesis En espera</a>
+            <a href="{{url('/tesis_inscritas_profesor')}}">Tesis inscritas</a>
+    </div>
+        </div>
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
@@ -85,13 +91,6 @@
                 </div>
 
                 <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
                 </div>
         
             </div>

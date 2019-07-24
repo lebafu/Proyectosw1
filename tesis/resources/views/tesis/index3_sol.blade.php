@@ -13,18 +13,20 @@
     <table class="table table-bordered">
         <tr>
          
-          <th>ID</th>
+          <th>Rut</th>
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
+          <th>Area Tesis</th>
           <th>Tipo Trabajo</th>
           <th>Fecha Peticion</th>
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
            @if(($tesis->estado1==2 and $tesis->estado2==1)or($tesis->estado1==3 and $tesis->estado2==1))
-          <td>{{$tesis->id}}</td>
+          <td>{{$tesis->rut}}</td>
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
+          <td>{{$tesis->area_tesis}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}}</td>
           <td>

@@ -111,14 +111,14 @@ class TesisController extends Controller
     {
         $id=Auth::id();
         if($id==null){
-            return view ('sinpermiso');
+            return view ('tesis.sinpermiso');
         }
         $user=User::findorfail($id);
         if($user->tipo_usuario==3){
         $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->paginate(7);
         return view('tesis.index3_sol',compact('tesistas','user'));
        }else{
-       	return view('sinpermiso');
+       	return view('tesis.sinpermiso');
        }
 
     }
@@ -127,14 +127,33 @@ class TesisController extends Controller
     {
         $id=Auth::id();
         if($id==null){
-            return view ('sinpermiso');
+            return view ('tesis.sinpermiso');
         }
         $user=User::findorfail($id);
         if($user->tipo_usuario==3){
-        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->paginate(7);
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->paginate(7);
+        //dd($tesistas);
         return view('tesis.index3_ins',compact('tesistas','user'));
        }else{
-       	return view('sinpermiso');
+       	return view('tesis.sinpermiso');
+       }
+
+    }
+
+
+
+    public function imprimir_tesis_inscritas()
+    {
+        $id=Auth::id();
+        if($id==null){
+            return view ('tesis.sinpermiso');
+        }
+        $user=User::findorfail($id);
+        if($user->tipo_usuario==3){
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->paginate(7);
+        return view('tesis.imprimir_tesis_inscritas',compact('tesistas','user'));
+       }else{
+        return view('tesis.sinpermiso');
        }
 
     }
@@ -520,30 +539,126 @@ class TesisController extends Controller
     }	
 
 
-     public function filtro_nota_pendiente(Request $request)
+    public function llamar_filtro_pendiente_prorroga_vencida()
     {
-    	$fecha_inicio=$request->fecha_inicio;
-    	$fecha_final=$request->fecha_final;
+        return view('tesis.filtro_pendiente_prorroga_vencida');
+    }   
+
+
+
+    public function filtro_nota_pendiente_prorroga(Request $request){
+
+        //dd($request);
+        $fecha_inicio=$request->fecha_inicio;
+        $fecha_final=$request->fecha_fin;
         //Suponiendo que se desea saber las notas pendientes vencidas dentro de un determinado intervalo de tiempo
-       $notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','>=',$fecha_inicio)->where('nota_pendiente','<=',$fecha_final)->get();
-       dd($notas_pendientes_vencidas);
+        
+        /*$data=[
+        'data1'=> DB::table('tesis')->whereNotNull('nota_prorroga')->whereBetween('nota_prorroga',[$fecha_inicio,$fecha_final])->get(),
+      
+        'data2' => DB::table('tesis')->whereNull('nota_prorroga')->whereBetween('nota_pendiente', [$fecha_inicio,$fecha_final])->get()];*/
+       
+
+       $data= DB::table('tesis')->whereNotNull('nota_prorroga')->whereBetween('nota_prorroga',[$fecha_inicio,$fecha_final])->orwhereNull('nota_prorroga')->whereBetween('nota_pendiente', [$fecha_inicio,$fecha_final])->get();
+       //dd($notas_pendientes_vencidas);
+
+       //Consulta en caso de que se desee conocer todas las notas pendientes vencidas inclusive anterior al intervalo definido por la consulta//
+        //dd($request);
+        //$notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<=',$request->fecha_final)->get();
+        //dd($data);
+          return view('tesis.filtro_pend_pro',[
+             'notas_pend_pro_vencidas' => $data,
+            'fecha_inicio' => $fecha_inicio,
+            'fecha_final' => $fecha_final]);
+
+       
+    }
+
+
+
+    public function imprimir_nota_pendpro_venc(Request $request){
+
+        $fecha_inicio=$request->fecha_inicio;
+        $fecha_final=$request->fecha_final;
+          $data= DB::table('tesis')->whereNotNull('nota_prorroga')->whereBetween('nota_prorroga',[$fecha_inicio,$fecha_final])->orwhereNull('nota_prorroga')->whereBetween('nota_pendiente', [$fecha_inicio,$fecha_final])->get();
+        //Suponiendo que se desea saber las notas pendientes que venceran dentro de un determinado intervalo de tiempo
+        
+       //dd($notas_pendientes_vencidas);
+
+       //Consulta en caso de que se desee conocer todas las notas pendientes vencidas inclusive anterior al intervalo definido por la consulta//
+        //dd($request);
+        //$notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<=',$request->fecha_final)->get();
+
+       return view('tesis.imprimir_notas_pend_pro_venc',[
+        'notas_pend_pro_vencidas' => $data,
+            'fecha_inicio' => $fecha_inicio,
+            'fecha_final' => $fecha_final]);
+    }
+
+
+     public function filtro_nota_pendiente(Request $request){
+
+    	$fecha_inicio=$request->fecha_inicio;
+    	$fecha_final=$request->fecha_fin;
+        //Suponiendo que se desea saber las notas pendientes vencidas dentro de un determinado intervalo de tiempo
+       	$data=DB::table('tesis')->whereNull('nota_prorroga')->whereBetween('nota_pendiente', [$fecha_inicio,$fecha_final])->get();
+       //dd($notas_pendientes_vencidas);
 
        //Consulta en caso de que se desee conocer todas las notas pendientes vencidas inclusive anterior al intervalo definido por la consulta//
     	//dd($request);
         //$notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<=',$request->fecha_final)->get();
 
-       return view('tesis.filtro_nota_pendiente',compact('notas_pendientes_vencidas'));
+       return view('tesis.filtro_pendiente',[
+        'notas_pendientes_vencidas' => $data,
+            'fecha_inicio' => $fecha_inicio,
+            'fecha_final' => $fecha_final]);
     }
+
+    public function imprimir_nota_pend_venc(Request $request){
+
+        $fecha_inicio=$request->fecha_inicio;
+        $fecha_final=$request->fecha_final;
+        //Suponiendo que se desea saber las notas pendientes vencidas dentro de un determinado intervalo de tiempo
+        $data=DB::table('tesis')->whereNull('nota_prorroga')->whereBetween('nota_pendiente', [$fecha_inicio,$fecha_final])->get();
+
+        return view('tesis.imprimir_notas_pend_venc',[
+            'notas_pendientes_vencidas' => $data,
+            'fecha_inicio' => $fecha_inicio,
+            'fecha_final' => $fecha_final
+        ]);
+    }
+
 
       public function filtro_nota_prorroga(Request $request)
     {
+    	$fecha_inicio=$request->fecha_inicio;
+    	$fecha_final=$request->fecha_fin;
         //Suponiendo que se desea saber las notas pendientes vencidas dentro de un determinado intervalo de tiempo
        //$notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','>=',$request->fecha_inicio)->where('nota_prorroga','<=',$request->fecha_final);
 
        //Consulta en caso de que se desee conocer todas las notas pendientes vencidas inclusive anterior al intervalo definido por la consulta//
-        $notas_prorrogas_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<=',$request->fecha_final)->get();
+        $data=DB::table('tesis')->whereNotNull('nota_prorroga')->whereBetween('nota_prorroga',[$fecha_inicio,$fecha_final])->get();
+       return view('tesis.filtro_prorroga',[
+            'notas_prorrogas_vencidas' => $data,
+            'fecha_inicio' => $fecha_inicio,
+            'fecha_final' => $fecha_final
+        ]);
+    }
 
-       return view('tesis.filtro_nota_prorroga',compact('notas_prorrogas_vencidas'));
+
+     public function imprimir_nota_pro_venc(Request $request){
+
+        
+        $fecha_inicio=$request->fecha_inicio;
+        $fecha_final=$request->fecha_final;
+        //Suponiendo que se desea saber las notas pendientes vencidas dentro de un determinado intervalo de tiempo
+        $data=DB::table('tesis')->whereNotNull('nota_prorroga')->whereBetween('nota_prorroga', [$fecha_inicio,$fecha_final])->get();
+
+        return view('tesis.imprimir_notas_pro_venc',[
+            'notas_pendientes_vencidas' => $data,
+            'fecha_inicio' => $fecha_inicio,
+            'fecha_final' => $fecha_final
+        ]);
     }
 
 

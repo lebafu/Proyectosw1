@@ -3,14 +3,11 @@
 
 
 @section('content')
-
-
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Filtro de notas pendientes vencidas') }}</div>
+        <div class="card-header">{{ __('Filtro de notas pendientes y prorrogas vencidas') }}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
@@ -21,7 +18,7 @@
           <th>Tipo Trabajo</th>
           <th>Fecha Peticion</th>
         </tr>
-        @foreach ($notas_pendientes_vencidas as $tesis)
+        @foreach ($notas_pend_pro_vencidas as $tesis)
         <tr>
           <td>{{$tesis->id}}</td>
           <td>{{$tesis->nombre_completo}}</td>
@@ -30,9 +27,6 @@
           <td>{{$tesis->fecha_peticion}}}</td>
           <td>
 
-          
-              </div>
-           </form>
       </td>
         </tr>
         @endforeach
@@ -40,13 +34,12 @@
      </div>
      </div>
      </div>
-    
      </div>
      </div>
 </div>
 
 
-  <div class="col-md-3">
+<div class="col-md-3">
                   <div class="form-group" align="center">
                     <a class="btn btn-primary" href="#" id="descargaPDF"> <span class="fa fa-print"> </span> Descargar PDF</a>
               </div>
@@ -54,10 +47,10 @@
   <script>
   $(function(){
     $('#descargaPDF').on('click', function(){
-      $.ajax({        
-        url:'{{route('descargar_notapendiente')}}',
+      $.ajax({
+        url:'{{route('descargar_notapendpro')}}',
         type:'get',
-        data:{
+         data:{
           fecha_inicio:'{{$fecha_inicio}}',
           fecha_final:'{{$fecha_final}}'
         },

@@ -47,6 +47,11 @@
           <td>
             <a href="{{url('/pedir_nota_pendiente/'.$tesis->id)}}">Pedir nota Pendiente</a>
           </td>
+          <td> </td>
+          @endif
+          @if($tesis->nota_pendiente==null and $tesis->estado1!=4 and $tesis->nota_prorroga==null)
+          <td>  </td>
+          <td>  </td>
           @endif
           @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null)
          <td>{{$tesis->nota_pendiente}}</td>

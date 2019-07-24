@@ -18,6 +18,10 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/adminhome', 'HomeController@index')->name('adminhome');
+Route::get('/alumnohome', 'HomeController@index')->name('alumnohome');
+Route::get('/profesorhome', 'HomeController@index')->name('profesorhome');
+Route::get('/directorhome', 'HomeController@index')->name('directorhome');
 
 Route::get('/users', 'UsersController@index')->name('users.index');
 Route::get('/users{users}', 'UsersController@edit')->name('users.edit');
@@ -33,11 +37,11 @@ Route::get('/tesis_dir_sol', 'TesisController@index3_solicitudes')->name('tesis.
 Route::get('/tesis_dir_ins', 'TesisController@index3_inscritas')->name('tesis.index3_ins');
 Route::get('/tesis_alumno_solicitud', 'TesisController@index1')->name('tesis.index1');
 Route::get('/tesis_profesor', 'TesisController@index2')->name('tesis.index2');
-Route::get('/', 'TesisController@tesis_empresa')->name('tesis.tesis_empresa');
+Route::get('/tesis_empresa', 'TesisController@tesis_empresa')->name('tesis.tesis_empresa');
 Route::get('/tesis_proyecto', 'TesisController@tesis_proyecto')->name('tesis.tesis_proyecto');
 Route::get('/tesis_fondoconcursable', 'TesisController@tesis_fondoconcursable')->name('tesis.tesis_fondoconcursable');
 Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.tesis_comunidad');
-Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.comunidad');
+//Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.comunidad');
 Route::get('/tesis_inscritas_profesor', 'TesisController@index2_ins_pro')->name('tesis.index2_ins_pro');
 Route::get('/tesis{tesis}', 'TesisController@edit')->name('tesis.edit');
 
@@ -48,12 +52,15 @@ Route::put('/nota_prorroga_ingresada/{tesis}','TesisController@save_nota_prorrog
 
 
 //RUTAS PARA FILTROS POR FECHA:
+Route::get('/filtro_nota_pendiente_prorroga','TesisController@llamar_filtro_pendiente_prorroga_vencida')->name('tesis.filtro_nota_pendiente_prorroga');
 Route::get('/filtro_nota_pendiente', 'TesisController@llamar_filtro_pendiente_vencida')->name('tesis.filtro_pendiente_vencida');
 
 Route::get('/filtro_nota_prorroga', 'TesisController@llamar_filtro_prorroga_vencida')->name('tesis.filtro_prorroga_vencida');
 
 Route::put('/filtro_pendiente', 'TesisController@filtro_nota_pendiente')->name('tesis.filtro_nota_pendiente');
 Route::put('/filtro_prorroga', 'TesisController@filtro_nota_prorroga')->name('tesis.filtro_nota_prorroga');
+Route::put('/filtro_pendiente_prorroga','TesisController@filtro_nota_pendiente_prorroga')->name('tesis.filtro_nota_pendiente_prorroga');
+
 
 Route::get('/tesis_profesor/{tesis}', 'TesisController@edit2')->name('tesis.edit2');
 Route::get('/tesis_director/{tesis}', 'TesisController@edit3')->name('tesis.edit3');
@@ -87,3 +94,7 @@ Route::get('/descargar_te', 'TesisController@printTesis')->name('descargar_te');
 Route::get('/descargar_tp', 'TesisController@printTesisp')->name('descargar_tp');
 Route::get('/descargar_tc', 'TesisController@printTesisc')->name('descargar_tc');
 Route::get('/descargar_tfc', 'TesisController@printTesisfc')->name('descargar_tfc');
+Route::get('/descargar_notapendiente', 'TesisController@imprimir_nota_pend_venc')->name('descargar_notapendiente');
+Route::get('/descargar_notaprorroga', 'TesisController@imprimir_nota_pro_venc')->name('descargar_notaprorroga');
+Route::get('/descargar_notapendpro', 'TesisController@imprimir_nota_pendpro_venc')->name('descargar_notapendpro');
+Route::get('/descargar_tesis_ins', 'TesisController@imprimir_tesis_inscritas')->name('descargar_tesis_ins');
