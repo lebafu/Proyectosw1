@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 19-07-2019 a las 23:51:49
+-- Tiempo de generación: 24-07-2019 a las 05:48:16
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.6
 
@@ -49,10 +49,12 @@ CREATE TABLE `comision` (
 
 INSERT INTO `comision` (`id`, `id_profesor_guia`, `nombre_alumno`, `profesor1_comision`, `profesor2_comision`, `profesor3_comision`, `profesor1_externo`, `correo_profe1_externo`, `institucion1`, `profe2_externo`, `correo_profe2_externo`, `institucion2`) VALUES
 (8, 3, 'Carlos Andres Cancino Duran', 'Xaviera Lopez', 'Paulo Gonzalez', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 7, 'Oscar Raul Perez Fernandez', 'Marco Toranzo', 'Angelica Urrutia', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 17, 'Oscar Raul Perez Fernandez', 'Hugo Araya', 'Paulo Gonzalez', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL),
 (16, 12, 'Rodrigo Chavez', 'Hugo Araya', 'Marco Toranzo', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL),
 (18, 3, 'Camilo Cavieres', 'Paulo Gonzalez', 'Hugo Araya', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 17, 'Gonzalo Ignacio Paredes Valenzuela', 'Hugo Araya', 'Paulo Gonzalez', 'Wladimir Soto', NULL, NULL, NULL, NULL, NULL, NULL);
+(19, 17, 'Gonzalo Ignacio Paredes Valenzuela', 'Hugo Araya', 'Paulo Gonzalez', 'Wladimir Soto', NULL, NULL, NULL, NULL, NULL, NULL),
+(22, 21, 'Felipe Nicolas Tapia Nuñez', 'Sergio Hernandez', 'Paulo Gonzalez', 'Xaviera Lopez', NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 3, 'Rosa Karina Gonzalez Gutierrez', 'Paulo Gonzalez', 'Hugo Araya', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -110,19 +112,24 @@ CREATE TABLE `tesis` (
   `observacion` varchar(255) DEFAULT NULL,
   `estado1` int(11) NOT NULL DEFAULT 1,
   `estado2` int(11) DEFAULT NULL,
-  `fecha_peticion` timestamp NOT NULL DEFAULT current_timestamp()
+  `estado3` int(11) DEFAULT NULL,
+  `fecha_peticion` timestamp NOT NULL DEFAULT current_timestamp(),
+  `nota_pendiente` date DEFAULT NULL,
+  `nota_prorroga` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `tesis`
 --
 
-INSERT INTO `tesis` (`id`, `nombre_completo`, `rut`, `nombre_tesis`, `area_tesis`, `ano_ingreso`, `profesor_guia`, `carrera`, `tipo`, `contribucion`, `descripcion`, `objetivos`, `tipo_vinculacion`, `nombre_vinculacion`, `observacion`, `estado1`, `estado2`, `fecha_peticion`) VALUES
-(8, 'Carlos Andres Cancino Duran', '18670608', 'Reconocimiento de patrones con redes neuronalesen imagenes', 'Ingenieria de Software', 2013, 'Sergio Hernandez', 'Ingenieria Civil Informatica', 'Tesis', 'Promover y potenciar el concepto de ciudades inteligentes', 'Descripcion1 Descripcion2 Descripcion3', 'Aplicación de IA, en camaras de seguridad', 'Empresa', 'Ciudades inteligentes XX', 'Tesis interesante', 3, 1, '2019-07-16 04:02:26'),
-(10, 'Oscar Raul Perez Fernandez', '16788324', 'Sistema de evidencias UCM', 'Ingenieria de Software', 2013, 'Hugo Araya', 'Ingenieria Civil Informatica', 'Tesis', 'Automatizar y agilizar el proceso', 'Descripcion1 Descripcion2', 'Sistema de evidencias para la Universidad', 'Empresa', 'UCM', NULL, 1, NULL, '2019-07-16 04:12:04'),
-(16, 'Rodrigo Chavez', '18063911', 'Aplicacion movil', 'Ingenieria de Software', 2014, 'Paulo Gonzalez', 'Ingenieria en Ejecucion e Informatica', 'Tesis', 'Contribucion1,Contribucion2', 'Descripcion1Descripcion2', 'Ayudar a la comunidad', 'Empresa', 'Tutelkan', NULL, 1, NULL, '2019-07-16 03:56:45'),
-(18, 'Camilo Cavieres', '18738562', 'Aplicacion en Ionix para ed fisica', 'Ingenieria de Software', 2013, 'Marco Toranzo', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'Se espera ser un apoyo para la carrera de de ed. fisica en la Universidad.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'Ed fisica.', 'Nombre incompleto', 4, 1, '2019-07-18 06:43:00'),
-(19, 'Gonzalo Ignacio Paredes Valenzuela', '17345456', 'Sistema de inventario UCM', 'Ingenieria de Software', 2012, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Se espera apoyar la automatizacion de un sistema de la universidad, y agilizar procesos.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'Departamento de informatica UCM', NULL, 2, 1, '2019-07-19 19:11:32');
+INSERT INTO `tesis` (`id`, `nombre_completo`, `rut`, `nombre_tesis`, `area_tesis`, `ano_ingreso`, `profesor_guia`, `carrera`, `tipo`, `contribucion`, `descripcion`, `objetivos`, `tipo_vinculacion`, `nombre_vinculacion`, `observacion`, `estado1`, `estado2`, `estado3`, `fecha_peticion`, `nota_pendiente`, `nota_prorroga`) VALUES
+(8, 'Carlos Andres Cancino Duran', '18670608', 'Reconocimiento de patrones con redes neuronalesen imagenes', 'Ingenieria de Software', 2013, 'Sergio Hernandez', 'Ingenieria Civil Informatica', 'Tesis', 'Promover y potenciar el concepto de ciudades inteligentes', 'Descripcion1 Descripcion2 Descripcion3', 'Aplicación de IA, en camaras de seguridad', 'Proyecto', 'Ciudades inteligentes XX', 'Tesis interesante', 4, 1, NULL, '2019-07-16 04:02:26', '2019-07-01', '2019-07-30'),
+(10, 'Oscar Raul Perez Fernandez', '16788324', 'Sistema de control', 'Ingenieria de Software', 2013, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Automatizar y agilizar el proceso', 'Descripcion1 Descripcion2', 'Sistema de evidencias para la Universidad', 'Comunidad', 'Municiaplidad de San Clemente', NULL, 4, 1, NULL, '2019-07-16 04:12:04', NULL, NULL),
+(16, 'Rodrigo Chavez', '18063911', 'Aplicacion movil', 'Ingenieria de Software', 2014, 'Paulo Gonzalez', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'Contribucion1,Contribucion2', 'Descripcion1Descripcion2', 'Ayudar a la comunidad', 'Empresa', 'Tutelkan', NULL, 1, NULL, NULL, '2019-07-16 03:56:45', NULL, NULL),
+(18, 'Camilo Cavieres', '18738562', 'Aplicacion en Ionix para ed fisica', 'Ingenieria de Software', 2013, 'Marco Toranzo', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'Se espera ser un apoyo para la carrera de de ed. fisica en la Universidad.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Empresa', 'Ed fisica.', 'Nombre incompleto', 4, 1, NULL, '2019-07-18 06:43:00', '2019-10-25', NULL),
+(19, 'Gonzalo Ignacio Paredes Valenzuela', '17345456', 'Sistema de inventario UCM', 'Ingenieria de Software', 2012, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Se espera apoyar la automatizacion de un sistema de la universidad, y agilizar procesos.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'Departamento de informatica UCM', NULL, 2, 1, NULL, '2019-07-19 19:11:32', NULL, NULL),
+(22, 'Felipe Nicolas Tapia Nuñez', '18732564', 'Estudio de Patrones de venas de la mano', 'IA', 2013, 'Ricardo Barrientos', 'Ingenieria Civil Informatica', 'Tesis', 'Permitir ahorrar recursos en el reconocimiento unico de la poblacion, que actualmente se hace por huella dactilar.', 'El alumno deberá ayudar a generar en el reconocimiento de patrones de las venas de la mano.', 'Generar un modelo que permite el reconocimiento de las venas de la mano.', 'Fondo concusable', 'Conicyt', NULL, 4, 1, NULL, '2019-07-19 23:14:28', NULL, NULL),
+(23, 'Rosa Karina Gonzalez Gutierrez', '18923457', 'Analisis de sentimientos aplicando una taxonomia de encuestas', 'BI', 2013, 'Angelica Urrutia', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2 Descripcion3', 'Objetivo1, Objetivo2', 'Comunidad', 'Jardin Infantil', 'Escribe aquí su observacion', 4, 1, 1, '2019-07-20 23:38:34', '2019-07-19', '2019-08-20');
 
 -- --------------------------------------------------------
 
@@ -162,7 +169,11 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ti
 (16, 'Rodrigo Chavez', 'RodrigoC@gmail.com', NULL, '$2y$10$IIMkIRIefVWEIR6u5Saby.szXbs5GmJ6cdumfFnmtgVArUi81R1c6', 1, NULL, '2019-07-16 07:55:40', '2019-07-17 22:44:22'),
 (17, 'Marco Toranzo', 'mtoranzo@gmail.com', NULL, '$2y$10$/tGoCVb4KMYJvxU5/zTsTug0hnoqshVEAVuVkvqiChPqRSJS0hNcG', 2, NULL, NULL, NULL),
 (18, 'Camilo Cavieres', 'CamiloC@gmail.com', NULL, '$2y$10$U9YUF0dsIGH.mtoDiuaOJuho1QeRg/kZCpK9GjiL7h0J24GbsqH/S', 1, NULL, '2019-07-16 08:27:48', '2019-07-16 08:27:48'),
-(19, 'Gonzalo Ignacio Paredes Valenzuela', 'GonzaloParedes@gmail.com', NULL, '$2y$10$cqV6yLeBy8YZUIj6i13mFuye2MWyDwAHwa1KnGHFiaATaWVy.EGsu', 1, NULL, '2019-07-19 23:08:31', '2019-07-19 23:08:31');
+(19, 'Gonzalo Ignacio Paredes Valenzuela', 'GonzaloParedes@gmail.com', NULL, '$2y$10$cqV6yLeBy8YZUIj6i13mFuye2MWyDwAHwa1KnGHFiaATaWVy.EGsu', 1, NULL, '2019-07-19 23:08:31', '2019-07-19 23:08:31'),
+(20, 'Marco Mora', 'MarcoM@gmail.com', NULL, '$2y$10$TqMJh2XVrNb/EkpZMpepaO0lI2BaTmNUTsx0eSRKBVaVfyBsnfT0.', 2, NULL, NULL, NULL),
+(21, 'Ricardo Barrientos', 'RicardoB@gmail.com', NULL, '$2y$10$YyLBVMuVK7mj47bwiWntP.srBH/yvye4RoHdSd3fckhI.skppMfYG', 2, NULL, NULL, NULL),
+(22, 'Felipe Nicolas Tapia Nuñez', 'FelipeTapia@gmail.com', NULL, '$2y$10$5GLPqQqZX7NP8TpC02U1Seb1gv.oBvlWyz1ZYYiGpz8ZWlG8UwSPe', 1, NULL, '2019-07-20 03:11:25', '2019-07-20 03:11:25'),
+(23, 'Rosa Karina Gonzalez Gutierrez', 'RosaGonzalez@gmail.com', NULL, '$2y$10$A706x5VrUJACCLTtvYc6FuVKhOuYzGTnRPcdVCRELNF2BzBgcvp1S', 1, NULL, '2019-07-21 03:32:43', '2019-07-21 03:59:35');
 
 --
 -- Índices para tablas volcadas
@@ -215,7 +226,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Restricciones para tablas volcadas
