@@ -3,6 +3,13 @@
 
 
 @section('content')
+
+<!--link para usar gliphycons de bootstrap-->
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
+  
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -23,11 +30,13 @@
           <td>{{$user->email}}</td>
           <td>
 
-            <a href="{{url('/usersmostrar/'.$user->id)}}">Ver detalles</a> 
-            <a href="{{URL::action('UsersController@edit', $user->id)}}" class="btn btn-primary">Editar</a>
-            
+            <a href="{{url('/usersmostrar/'.$user->id)}}" type= button class="btn-btn-info"><span class="glyphicon glyphicon-eye-open"></span>Ver detalles</a> 
+            <br>
+            <a href="{{URL::action('UsersController@edit', $user->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
+             <br>
            <form action="{{ route('users.destroy', $user->id)}}" method="POST">
-          <input type="submit" value="Eliminar" class="btn btn-danger">
+          <button type="submit" class="btn btn-danger"><span class="fas fa-trash">Eliminar</span>
+          <br>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>

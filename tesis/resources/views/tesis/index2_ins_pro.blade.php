@@ -1,5 +1,5 @@
 @extends('layouts.app')
-
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 
 @section('content')
@@ -29,11 +29,13 @@
           <td>
 
             <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info">Ver detalles</a> 
-            <a href="{{url('/tesis_profesor/'.$tesis->id)}}" class="btn btn-primary">Editar</a>
+            <br>
+            <a href="{{url('/tesis_profesor/'.$tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
             <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id)}}">Evaluar</a> 
-            
+            <br>
            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
-          <input type="submit" value="Eliminar" class="btn btn-danger">
+          <button type="submit" class="btn btn-danger"><span class="fas fa-trash">Eliminar</span>
+            <br>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>

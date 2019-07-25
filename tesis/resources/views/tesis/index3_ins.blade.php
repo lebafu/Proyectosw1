@@ -3,6 +3,9 @@
 
 
 @section('content')
+
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
@@ -33,11 +36,11 @@
           <td>{{$tesis->tipo_vinculacion}}</td>
           <td>
 
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}">Ver detalles</a> 
-            <!--<a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary">Editar</a>-->
+            <a href="{{url('/tesismostrar/'.$tesis->id)}}" type= button class="btn-btn-info"><span class="glyphicon glyphicon-eye-open"></span>Ver detalles</a> 
+            <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
             
            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
-          <input type="submit" value="Eliminar" class="btn btn-danger">
+          <button type="submit"  class="btn btn-danger"><span class="fas fa-trash">Eliminar</span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
