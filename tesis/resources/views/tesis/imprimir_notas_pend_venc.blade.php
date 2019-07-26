@@ -15,18 +15,20 @@
   	<th>ENTRE {{$fecha_inicio}} y {{$fecha_final}}</th>
     <table class="table table-bordered">
         <tr>
-          <th>ID</th>
+          <th>Rut</th>
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
+          <th>Nombre Tesis</th>
           <th>Fecha nota pendiente</th>
         </tr>
         @foreach ($notas_pendientes_vencidas as $tesis)
         <tr>
-          <td>{{$tesis->id}}</td>
+          <td>{{$tesis->rut}}</td>
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
+          <td>{{$tesis->nombre_tesis}}</td>
           <td>{{$tesis->nota_pendiente}}}</td>
         </tr>
         @endforeach

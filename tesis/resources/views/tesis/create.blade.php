@@ -63,6 +63,7 @@
                             <div class="col-md-6">
                                 <select name="area_tesis" id="area_tesis" type="text" class="form-control" required="required">
                                 <option value="Ingenieria de Software">Ingenieria de Software</option>
+                                <option value="Investigacion de operaciones">Investigacion de operaciones</option>
                                  <option value="IA">Inteligencia Artificial </option>
                                  <option value="BI">Inteligencia de negocios</option>
                                  <option value="Imagenes">Imagenes</option>
