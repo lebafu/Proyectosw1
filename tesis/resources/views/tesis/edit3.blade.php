@@ -185,7 +185,7 @@
                         <div class="form-group row">
                             <label for="profesor1_externo" class="col-md-4 col-form-label text-md-right">{{ __('Primer profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="profesor1_externo" type="text" placeholder="Primer profesor externo" class="form-control" name="profesor1_externo" value="{{ old('profesor1_externo') }}">
+                              <input id="profesor1_externo" type="text" placeholder="Primer profesor externo" class="form-control" name="profesor1_externo" value="{{$com->profesor1_externo}}">
                             </div>
                         </div>
 
@@ -194,7 +194,7 @@
                             <label for="correo_profe1_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
 
                             <div class="col-md-6">
-                                <input id="correo_profe1_externo" type="email" class="form-control @error('email') is-invalid @enderror" name="correo_profe1_externo" value="{{ old('correo_profe1_externo') }}" autocomplete="email">
+                                <input id="correo_profe1_externo" type="email" class="form-control @error('email') is-invalid @enderror" name="correo_profe1_externo" value="{{ $com->correo_profe1_externo}}" autocomplete="email">
 
                                 @error('correo_profe1_externo')
                                     <span class="invalid-feedback" role="alert">
@@ -207,14 +207,14 @@
                         <div class="form-group row">
                             <label for="institucion1" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Primer Profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="institucion1" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion1" value="{{ old('institucion1') }}">
+                              <input id="institucion1" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion1" value="{{$com->institucion1}}">
                             </div>
                         </div>
 
                          <div class="form-group row">
                             <label for="profesor2_externo" class="col-md-4 col-form-label text-md-right">{{ __('Segundo profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="profesor2_externo" type="text" placeholder="Segundo profesor externo" class="form-control" name="profesor2_externo" value="{{ old('profesor2_externo') }}">
+                              <input id="profesor2_externo" type="text" placeholder="Segundo profesor externo" class="form-control" name="profesor2_externo" value="{{$com->profe2_externo}}">
                             </div>
                         </div>
 
@@ -222,7 +222,7 @@
                         <div class="form-group row">
                             <label for="correo_profe2_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-mail') }}</label>
                             <div class="col-md-6">
-                                <input id="correo_profe2_externo" type="email" class="form-control @error('email') is-invalid @enderror" name="correo_profe2_externo" value="{{ old('correo_profe2_externo') }}" autocomplete="email">
+                                <input id="correo_profe2_externo" type="email" class="form-control @error('email') is-invalid @enderror" name="correo_profe2_externo" value="{{$com->correo_profe2_externo}}" autocomplete="email">
 
                                 @error('correo_profe2_externo')
                                     <span class="invalid-feedback" role="alert">
@@ -236,7 +236,7 @@
                         <div class="form-group row">
                             <label for="institucion2" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Segundo Profesor externo') }}</label>
                             <div class="col-md-6">
-                              <input id="institucion2" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion2" value="{{ old('institucion2') }}">
+                              <input id="institucion2" type="text" class="form-control" name="institucion2" value="{{ $com->institucion2 }}">
                             </div>
                         </div>
 
