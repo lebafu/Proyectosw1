@@ -158,6 +158,9 @@ class TesisController extends Controller
 
     }
 
+
+
+
         public function index1()
     {
         $id=Auth::id();
@@ -166,7 +169,7 @@ class TesisController extends Controller
         }
         $user=User::findorfail($id);
         //dd($user->name);
-        $tesistas=DB::table('tesis')->paginate(7);
+        $tesistas=DB::table('tesis')->where('id','=',$id)->paginate(7);
         return view('tesis.index1',compact('tesistas','user'));
 
     }
@@ -183,6 +186,11 @@ class TesisController extends Controller
         //
         $id=Auth::id();
         $alumno=User::findorfail($id);
+        $tesista=Tesis::findorfail($id);
+        if($alumno->id==$tesista->id)
+        {
+            return view('tesis.tesisregistrada');
+        }
         $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
         return view('tesis.create',compact('alumno','profes'));
     }
