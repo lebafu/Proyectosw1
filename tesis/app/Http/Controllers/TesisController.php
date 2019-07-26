@@ -184,6 +184,12 @@ class TesisController extends Controller
     {
         //
         $id=Auth::id();
+        $user=User::findorfail($id);
+        $tesista=Tesis::findorfail($id);
+        if($tesista->id==$id){
+            return view('tesis.tesisregistrada');
+        }
+        $id=Auth::id();
         $alumno=User::findorfail($id);
         $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
         return view('tesis.create',compact('alumno','profes'));

@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\User;
 use App\Tesis;
-
+use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
@@ -28,7 +28,14 @@ class UsersController extends Controller
      public function create()
     {
         //
+        $id=Auth::id();
+        $user=User::findorfail($id);
+        if($user->id==0){
         return view('users.create');
+        }
+        else{
+            return view('welcome');
+        }
     }
 
     public function store(Request $request)
