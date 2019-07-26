@@ -207,10 +207,16 @@ class TesisController extends Controller
      public function create()
     {
         //
+
         $id=Auth::id();
         $alumno=User::findorfail($id);
         $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+        $tesista=Tesis::find($id);
+        if($tesista==null){
         return view('tesis.create',compact('alumno','profes'));
+        }else{
+            return view('tesis.tesisregistrada');
+        }
     }
 
      public function store(Request $request)
