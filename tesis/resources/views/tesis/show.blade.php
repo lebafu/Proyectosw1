@@ -28,4 +28,6 @@
 	<p>{{$comision->profe2_externo}}</p>
 	<p>{{$comision->correo_profe2_externo}}</p>
 	<p>{{$comision->institucion2}}</p>
+
+	<a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
 @endsection

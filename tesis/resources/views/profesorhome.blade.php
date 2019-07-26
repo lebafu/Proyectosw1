@@ -1,11 +1,14 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>Sistema de Tesis</title>
-
+<html lang="en">
+<head>
+  <title>Sistema de Tesis</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
         <!-- Fonts -->
         <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
 
@@ -63,18 +66,26 @@
             }
         </style>
     </head>
-    <div class="flex-center position">
-      <div class="top-left links">
-            <a href="{{url('/tesis_profesor') }}">Tesis En espera</a>
-            <a href="{{url('/tesis_inscritas_profesor')}}">Tesis inscritas</a>
+
+    <nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">Sistema de Tesis</a>
     </div>
-        </div>
+    <ul class="nav navbar-nav">
+      <li class="active"><a href="{{ url('/home') }}">Home</a></li>
+      <li><a href="{{url('/tesis_profesor') }}">Tesis En espera</a></li>
+      <li><a href="{{url('/tesis_inscritas_profesor')}}">Tesis inscritas</a></li>
+    </ul>
+  </div>
+</nav>
+
     <body>
         <div class="flex-center position-ref full-height">
             @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
-                        <a href="{{ url('/home') }}">Home</a>
+                        
                     @else
                         <a href="{{ route('login') }}">Login</a>
 

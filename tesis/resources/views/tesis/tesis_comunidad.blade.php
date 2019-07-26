@@ -44,6 +44,7 @@
      </div>
      </div>
      </div>
+       <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
      </div>
 
 <script>
@@ -62,6 +63,5 @@
   });
 </script>
 
-  
 {!! $tes_comunidad->render() !!}
 @endsection

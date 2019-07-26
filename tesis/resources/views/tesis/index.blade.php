@@ -6,11 +6,13 @@
 
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous"> 
 
+
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Lista de tesistas') }}</div>
+        <div class="card-header">{{ __('Lista de alumnos tesistas') }}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
@@ -30,13 +32,13 @@
           <td>{{$tesis->fecha_peticion}}}</td>
           <td>
 
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}"  type= button class="btn-btn-info"><span class="glyphicon glyphicon-eye-open"></span>Ver detalles</a> 
+            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye">Ver detalles</span>
              <br>
             <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
              <br>
             
            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
-          <button type="submit" value="Eliminar" class="btn btn-danger"><span class="fas fa-trash"></span>
+          <button type="submit" class="btn btn-danger"><span class="fas fa-trash">Eliminar</span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
@@ -48,9 +50,11 @@
      </div>
      </div>
      </div>
+     <a href="{{url('/profesorhome')}}">Volver a home</a> 
      </div>
 </div>
-
   
+   
 
+{!! $tesistas->render() !!}
 @endsection

@@ -31,7 +31,7 @@
           <td>{{$tesis->fecha_peticion}}}</td>
           <td>
 
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}" type= button class="btn-btn-info"><span class="glyphicon glyphicon-eye-open"></span>Ver detalles</a> 
+            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye">Ver detalles</span>
             <br>
             <a href="{{url('/tesis_profesor/'.$tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
             <br>
@@ -52,9 +52,10 @@
      </div>
      </div>
      </div>
+     <a href="{{url('/profesorhome')}}">Volver a home</a> 
      </div>
 </div>
 
-  
+   
 {!! $tesistas->render() !!}
 @endsection

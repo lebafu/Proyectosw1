@@ -50,6 +50,6 @@
     });
 
 </script>
-
+<a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
 
 @endsection

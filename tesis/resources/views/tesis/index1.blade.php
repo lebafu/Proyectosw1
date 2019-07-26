@@ -64,7 +64,7 @@
           <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nueva nota de Prorroga</a></td>
          @endif
       <td>
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}"  type= button class="btn-btn-info"><span class="glyphicon glyphicon-eye-open"></span>Ver detalles</a> 
+            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye">Ver detalles</span>
             <br> 
             <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
             <br>
@@ -86,9 +86,10 @@
      </div>
      </div>
      </div>
+     <a href="{{url('/alumnohome')}}">Volver a home</a> 
      </div>
 </div>
 
-  
-
+   
+{!! $tesistas->render() !!}
 @endsection

@@ -39,7 +39,7 @@
 </div>
 
 
-<div class="col-md-3">
+            <div class="col-md-3">
                   <div class="form-group" align="center">
                     <a class="btn btn-primary" href="#" id="descargaPDF"> <span class="fa fa-print"> </span> Descargar PDF</a>
               </div>
@@ -63,6 +63,6 @@
     });
   });
 </script>
-
+  <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
 
 @endsection
