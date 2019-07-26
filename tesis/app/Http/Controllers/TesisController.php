@@ -180,23 +180,19 @@ class TesisController extends Controller
         return view('tesis.index',compact('tesistas'));
 
     }
-
-     public function create()
+ public function create()
     {
         //
         $id=Auth::id();
         $alumno=User::findorfail($id);
-        $tesista=Tesis::findorfail($id);
-        if($alumno->id==$tesista->id)
-        {
-            return view('tesis.tesisregistrada');
-        }
         $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
         return view('tesis.create',compact('alumno','profes'));
     }
 
     public function store(Request $request)
     {
+
+
         $request->validate([
             'nombre_completo' => 'required|string',
             'rut' => 'required|string|unique:tesis|min:7|max:8',
@@ -225,7 +221,10 @@ class TesisController extends Controller
             //dd($request->nombre_completo);
         $id=Auth::id();
         $user=User::findorfail($id);
-        //si usuario es de tipo alumno entonces se actualizara el nombre usuario en user
+        $tesista=Tesis::findorfail($id);
+        if($tesista->id==$id){
+            return view('tesis.tesisregistrada');
+        }
         if($id==null){
             return view('welcome');
         }
@@ -451,7 +450,7 @@ class TesisController extends Controller
             }
 
    
-
+//funcion editar con la condicion para que  cambie de estado y actualice los valores de estado de la tabla tesis
     public function edit3($id){
         //dd($id);
         if(!Auth::id()){
@@ -485,6 +484,12 @@ class TesisController extends Controller
     function sinpermiso(){
 
     return view('tesis.sinpermiso');
+        }
+
+
+         function tesisregistrada(){
+
+    return view('tesis.tesisregistrada');
         }
 
        public function evaluar_director($id)

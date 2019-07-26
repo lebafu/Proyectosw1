@@ -75,6 +75,7 @@ Route::delete('/eliminartesis{tesis}','TesisController@destroy')->name('tesis.de
 
 Route::get('/noeditartesis', 'TesisController@noeditartesis')->name('tesis.noeditartesis');
 Route::get('/noeditartesis_profe', 'TesisController@noeditartesis_profe')->name('tesis.noeditartesis_profe');
+Route::get('/tesisregistrada', 'TesisController@tesisregistrada')->name('tesis.tesisregistrada');
 Route::get('/sinpermiso', 'TesisController@sinpermiso')->name('tesis.sinpermiso');
 Route::get('/tesis_profesor_evaluar/{tesis}', 'TesisController@evaluar')->name('tesis.evaluar');
 Route::put('/tesis_profesor_a_dt/{tesis}','TesisController@update3')->name('tesis.update3');
