@@ -37,7 +37,7 @@
      </div>
       <div class="col-md-3">
                   <div class="form-group" align="center">
-                    <a class="btn btn-primary" href="#" id="descargaPDF"> <span class="fa fa-print"> </span> Descargar PDF</a>
+                    <a class="btn btn-primary" href="#" id="descargaPDF"> <span class="fa fa-print"></span> Descargar PDF</a>
                   </div>
               </div>
      </div>
