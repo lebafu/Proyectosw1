@@ -17,7 +17,10 @@
 	@if($user->tipo_usuario==2)
 	<p>Profesor</p>
 	@endif
-	@if($user->tipo_usuario==3)</div>
+	@if($user->tipo_usuario==3)
 	<p>Director de Tesis</p>
+	@endif
+	@if($user->tipo_usuario==4)
+	<p>Secretaria</p>
 	@endif
 @endsection

@@ -22,6 +22,9 @@ Route::get('/adminhome', 'HomeController@index')->name('adminhome');
 Route::get('/alumnohome', 'HomeController@index')->name('alumnohome');
 Route::get('/profesorhome', 'HomeController@index')->name('profesorhome');
 Route::get('/directorhome', 'HomeController@index')->name('directorhome');
+Route::get('/secretariahome','HomeController@index')->name('secretariahome');
+
+			 												
 
 Route::get('/users', 'UsersController@index')->name('users.index');
 Route::get('/users{users}', 'UsersController@edit')->name('users.edit');
@@ -31,7 +34,9 @@ Route::post('/users','UsersController@store')->name('users.store');
 Route::put('/actualizarusers{users}','UsersController@update')->name('users.update');
 Route::delete('/eliminarusers{users}','UsersController@destroy')->name('users.destroy');
 
+
 Route::get('/tesisregistrada', 'TesisController@tesisregistrada')->name('tesis.tesisregistrada');
+Route::get('/archivosubido', 'TesisController@archivosubido')->name('tesis.archivosubido');
 Route::get('/tesis', 'TesisController@index')->name('tesis.index');
 Route::get('/tesis_dir_sol', 'TesisController@index3_solicitudes')->name('tesis.index3_sol');
 Route::get('/tesis_dir_ins', 'TesisController@index3_inscritas')->name('tesis.index3_ins');
@@ -51,6 +56,9 @@ Route::get('/pedir_nota_prorroga/{tesis}', 'TesisController@pedir_nota_prorroga'
 Route::put('/nota_prorroga_ingresada/{tesis}','TesisController@save_nota_prorroga')->name('tesis.save_nota_prorroga');
 
 
+//Acta examen
+Route::get('/index_al_sec/','TesisController@index_al_sec')->name('tesis.index_al_sec');
+Route::get('/acta_examen/{tesis}','TesisController@acta_examen')->name('tesis.acta_examen');
 //RUTAS PARA FILTROS POR FECHA:
 Route::get('/filtro_nota_pendiente_prorroga','TesisController@llamar_filtro_pendiente_prorroga_vencida')->name('tesis.filtro_nota_pendiente_prorroga');
 Route::get('/filtro_nota_pendiente', 'TesisController@llamar_filtro_pendiente_vencida')->name('tesis.filtro_pendiente_vencida');

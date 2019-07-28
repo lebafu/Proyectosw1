@@ -43,6 +43,8 @@ class HomeController extends Controller
             return view('profesorhome');
             case 3:
             return view('directorhome');
+            case 4: 
+            return view('secretariahome');
             default: return view ('tesis.sinpermiso');
         }
         return view('home');

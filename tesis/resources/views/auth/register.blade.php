@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Register') }}</div>
+                <div class="card-header">{{ __('Registrar alumno') }}</div>
 
                 <div class="card-body">
                     <form method="POST" action="{{ route('register') }}">
@@ -61,14 +61,7 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="tipo_usuario" class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
-                            <div class="col-md-6">
-                            <select name="tipo_usuario" id="tipo_usuario" type="text" class="form-control" required="required">
-                                 <option value=1> Alumno </option>
-                            </select>
-                            </div>
-                        </div>
+                        <input type="hidden" id="tipo_usuario "name="tipo_usuario" value="1">
 
                         
                         <div class="form-group row mb-0">

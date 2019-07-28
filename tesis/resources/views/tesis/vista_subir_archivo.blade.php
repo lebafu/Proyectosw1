@@ -24,8 +24,8 @@
 
                      <div class="form-group row">
                             <label for="constancia_ex" class="col-md-4 col-form-label text-md-right">{{ __('Subir archivo de constancia de examen de titulo') }}</label>
-                            <div class="col-md-6">
-                                <input id="constancia_ex" type="file" class="form-control" name="constancia_ex" value="{{old('constancia_ex')}}">
+                            <div class="col-md-6"> 
+                                <input id="constancia_ex" type="file" class="form-control" name="constancia_ex" value="{{$tes->constancia_ex}}">
                             </div>
                         </div>
             @endif

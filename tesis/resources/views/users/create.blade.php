@@ -67,8 +67,8 @@
                                 <select name="tipo_usuario" id="tipo_usuario" type="text" class="form-control" required="required">
                                 <option value=2> Profesor </option>
                                  <option value=3>Director de Tesis </option>
-                                
-                                 </select>
+                                 <option value=4>Secretaria</option>
+                                </select>
                             </div>
                         </div>
                        

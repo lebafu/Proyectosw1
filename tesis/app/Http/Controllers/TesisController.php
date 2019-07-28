@@ -882,15 +882,16 @@ class TesisController extends Controller
         elseif($id!=null)
         {
             $tes=Tesis::find($id);
-            if($tes->estado1==4 and $tes->estado2==1){
+            if($tes->estado1==4 and $tes->estado2==1 and $tes->constancia_ex==null){
                     return view('tesis.vista_subir_archivo',compact('tes'));
             }
             else{
-                return view('tesis.sinpermiso');
+                return view('tesis.archivosubido');
             }
         }
 
     }
+
 
     public function update_archivo_ex($id, Request $request)
     {       
@@ -900,7 +901,7 @@ class TesisController extends Controller
         $tes->constancia_ex=$request->file('constancia_ex')->store('public');
         $tes->update();
         //dd($tes);
-        //dd($request->file('constancia_ex')->store('public'));
+        ($request->file('constancia_ex')->store('public'));
 
         return view('alumnohome');
     }
@@ -1113,5 +1114,37 @@ class TesisController extends Controller
 
 		return $html;
    }
+
+   public function acta_examen($id)
+   {
+    $tesis=DB::table('tesis')->join('comision','tesis.id','=','comision.id')->where('tesis.id',$id)->get();
+    //dd($tesis);
+    return view('tesis.acta_examen',compact('tesis'));
+   }
+
+     public function index_al_sec()
+   {
+    $tesistas=DB::table('tesis')->where('estado1','=',4)->where('estado2','=',1)->paginate(7);
+        //dd($tesistas);
+        return view('tesis.index_al_sec',compact('tesistas'));
+   }
+
+    /* public function imprimir_tesis_inscritas()
+    {
+        $id=Auth::id();
+        if($id==null){
+            return view ('tesis.sinpermiso');
+        }
+        $user=User::findorfail($id);
+        if($user->tipo_usuario==3){
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->paginate(7);
+        return view('tesis.imprimir_tesis_inscritas',compact('tesistas','user'));
+       }else{
+        return view('tesis.sinpermiso');
+       }
+
+    }*/
+
+
 
 }
