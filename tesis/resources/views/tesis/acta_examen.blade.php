@@ -12,15 +12,27 @@
 		<h2 align="center" style="margin-bottom: 40px; margin-top: 30px"> {{$tes->carrera}} </h2>
 
 
-		<h4>En Talca  el dia  , se constituyó la comision Evaluadora compuesta por los señores academicos:
+		<h4 style="margin-bottom: 40px; margin-top: 30px">En Talca  el dia  , se constituyó la comision Evaluadora compuesta por los señores academicos:</h4>
+		<h4></h4>
+		
 		<h4>{{$tes->profesor1_comision}}</h4>
-		<h4>{{$tes->profesor2_comision}}</h4>
-		@if($tes->profesor3_comision==Ninguno)
+		<h4 style="margin-bottom: 20px; margin-top: 10px">{{$tes->profesor2_comision}}</h4>
+		@if($tes->profesor3_comision=="Ninguno")
 
 		@else	
-			<h4>{{$tes->profesor3_comision}}</h4>
+			<h4 style="margin-bottom: 20px; margin-top: 10px">{{$tes->profesor3_comision}}</h4>
 		@endif
-		</h2>
+
+			
+			
+
+			<h4>Profesor Guia:</h4>
+			<h4>{{$tes->profesor_guia}}</h4>
+		<h4>Para evaluar la Exposición y Defensa del examen de titulo denominado:</h4>
+		
+		<h4>Tema:"{{$tes->nombre_tesis}}"</h4>
+
+
 		<table class="table table-bordered">
         <tr>
          
