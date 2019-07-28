@@ -57,7 +57,7 @@ Route::put('/nota_prorroga_ingresada/{tesis}','TesisController@save_nota_prorrog
 
 
 //Acta examen
-Route::get('/index_al_sec/','TesisController@index_al_sec')->name('tesis.index_al_sec');
+Route::get('/index_al_sec','TesisController@index_al_sec')->name('tesis.index_al_sec');
 Route::get('/acta_examen/{tesis}','TesisController@acta_examen')->name('tesis.acta_examen');
 //RUTAS PARA FILTROS POR FECHA:
 Route::get('/filtro_nota_pendiente_prorroga','TesisController@llamar_filtro_pendiente_prorroga_vencida')->name('tesis.filtro_nota_pendiente_prorroga');

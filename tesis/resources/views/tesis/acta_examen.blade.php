@@ -51,24 +51,32 @@
 		<h4>Realizada la exposición se concluye que la nota final de la exposicion es:</h4>
 
 
-		<h4>........................................</h4>
-		<h4 style="margin-bottom: 40px; margin-top: 30px">{{$tes->profesor_guia}}</h4>
+		<h4>......................................................................... Nota: </h4>
+		<h4>{{$tes->profesor_guia}}</h4>  
 
-		<h4>........................................</h4>
-		<h4 style="margin-bottom: 40px; margin-top: 30px">{{$tes->profesor1_comision}}</h4>
-		<h4>......................................</h4>
-		<h4 style="margin-bottom: 40px; margin-top: 30px">{{$tes->profesor2_comision}}</h4>
+		<h4  style="margin-bottom: 40px; margin-top: 30px"></h4>
+		<h4>..........................................................................Nota:</h4>
+		<h4>{{$tes->profesor1_comision}}</h4>
+
+		<h4  style="margin-bottom: 40px; margin-top: 30px"></h4>
+		<h4>..........................................................................Nota:</h4>
+		<h4>{{$tes->profesor2_comision}}</h4>
+
 		@if($tes->profesor3_comision!="Ninguno")
-		<h4>........................................</h4>
-		<h4 style="margin-bottom: 40px; margin-top: 30px">{{$tes->profesor3_comision}}</h4>
+		<h4  style="margin-bottom: 40px; margin-top: 30px"></h4>
+		<h4>..........................................................................Nota:</h4>
 		@endif
+
 		@if($tes->profesor1_externo!=null)
-		<h4>......................................</h4>
-		<h4 style="margin-bottom: 40px; margin-top: 30px">{{$tes->profesor1_externo}}</h4>
+		<h4  style="margin-bottom: 40px; margin-top: 30px"></h4>
+		<h4>..........................................................................Nota:</h4>
+		<h4>{{$tes->profesor1_externo}}</h4>
 		@endif
+		
 		@if($tes->profe2_externo!=null)
-		<h4>......................................</h4>
-		<h4 style="margin-bottom: 40px; margin-top: 30px">{{$tes->profesor1_externo}}</h4>
+		<h4  style="margin-bottom: 40px; margin-top: 30px"></h4>
+		<h4>..........................................................................Nota:</h4>
+		<h4>{{$tes->profe2_externo}}</h4>
 		@endif
 	@endforeach
 	<script>

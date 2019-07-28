@@ -1014,6 +1014,7 @@ class TesisController extends Controller
         if(($request->get('estado'))=='Inscribir'){
         $tes->estado1=4;
         $tes->estado2=1;
+        $tes->fecha_inscripcion=date('Y-m-d');
        $tes->update();
    		}elseif(($request->get('estado'))=='Rechazar inscripcion'){
    		$tes->estado1=5;

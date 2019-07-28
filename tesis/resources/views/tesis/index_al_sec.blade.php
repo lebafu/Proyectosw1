@@ -13,7 +13,7 @@
         <div class="card-header">{{ __('Tesis inscritas') }}</div>
           <div class="card-body">
 
-    <table class="table table-bordered">
+ <table class="table table-bordered">
         <tr>
          
           <th>ID</th>
@@ -28,48 +28,23 @@
           <td>{{$tesis->id}}</td>
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
-         <td>{{$tesis->tipo}}</td>
-          <td>@if($tesis->constancia_ex==null)
+           <td>{{$tesis->tipo}}</td>
+            <td>@if($tesis->constancia_ex==null)
              Debe subir informe
             @else
-              <a class="btn btn-primary" href="{{url('/acta_examen/'.$tesis->id)}}"><span class="fa fa-print"> </span>Generar Acta</a>
+              <a class="btn btn-primary" href="{{url('/acta_examen/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span>Generar Acta</a>
               @endif
-          </td>
-          <td>
-      </td>
-        </tr>
-        @endif
+           @endif
         @endforeach
      </table>
      </div>
      </div>
      </div>
      </div>
-                  <a href="{{ url('directorhome') }}" class="btn btn-default">Volver a home</a>
+            <a href="{{ url('secretariahome') }}" class="btn btn-default">Volver a home</a>
      </div>
 </div>
 
-
-<div class="col-md-3">
-                  <div class="form-group" align="center">
-                    <a class="btn btn-primary" href="#" id="descargaPDF"> <span class="fa fa-print"> </span> Descargar PDF</a>
-              </div>
-        </div>
-   <script>
-  $(function(){
-    $('#descargaPDF').on('click', function(){
-      $.ajax({
-        url:'{{route('tesis.acta_examen')}}',
-        type:'get',
-      success: function(data){
-          var ventana=window.open("", "_blank");
-          ventana.document.write(data);
-          ventana.document.close();
-        }
-      })
-    });
-  });
-</script>
 
 
 

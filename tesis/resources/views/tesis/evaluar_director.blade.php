@@ -194,7 +194,7 @@
                              </div>
                         </div>
 
-
+                        <input type="hidden" id="fecha_inscripcion" name="fecha_inscripcion" value="{{old('fecha_inscripcion',date('Y-m-d'))}}">
 
 
                          <div class="form-group row mb-0">
