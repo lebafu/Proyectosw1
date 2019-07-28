@@ -166,7 +166,7 @@
                         <div class="form-group row">
                             <label for="correo_profe2_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-mail') }}</label>
                             <div class="col-md-6">
-                                 <input id="correo_profe1_externo" type="email" class="form-control" name="correo_profe1_externo" value="{{$comision->correo_profe1_externo}}"  disabled >
+                                 <input id="correo_profe2_externo" type="email" class="form-control" name="correo_profe2_externo" value="{{$comision->correo_profe2_externo}}"  disabled >
                             </div>
                         </div>
                         
@@ -188,7 +188,8 @@
                         </div>
 
                          <div class="form-group row">
-                            <div class="col-md-6">
+                               <label for="estado" class="col-md-4 col-form-label text-md-right">{{ __('Accion a realizar') }}</label>
+                               <div class="col-md-6">
                                 <textarea name="observacion" type="text" rows="10" cols="40" class="form-control", value="{{ old('observacion')}}" disabled>{{$tes->observacion}}</textarea>
                              </div>
                         </div>

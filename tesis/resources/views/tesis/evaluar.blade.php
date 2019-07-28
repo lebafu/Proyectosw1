@@ -171,11 +171,12 @@
                         </div>
                         
                         <div class="form-group row">
-                               <label for="institucion2" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Segundo Profesor externo') }}</label>
+                               <label for="institucion2" class="col-md-4 col-form-label text-md-right">{{ __('Institucion') }}</label>
                              <div class="col-md-6">
-                              <input id="institucion2" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion2" value="{{$comision->institucion2}}" disabled >
+                              <input id="institucion2" type="text"  class="form-control" name="institucion2" value="{{$comision->institucion2}}" disabled >
                             </div>
                         </div>
+
 
                          <div class="form-group row">
                             <label for="estado" class="col-md-4 col-form-label text-md-right">{{ __('Accion a realizar') }}</label>

@@ -38,7 +38,7 @@
 
             <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye">Ver detalles</span></a>
             <br>
-            <a href="{{URL::action('TesisController@edit3', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
+            <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
             <br>
            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
           <button type="submit"  class="btn btn-danger"><span class="fas fa-trash">Eliminar</span>
@@ -55,7 +55,7 @@
      </div>
      </div>
      </div>
-     <a href="{{url('/directorhome')}}" class="btn btn-default">Volver a home</a>
+                  <a href="{{ url('directorhome') }}" class="btn btn-default">Volver a home</a>
      </div>
 </div>
 

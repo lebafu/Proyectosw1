@@ -53,6 +53,9 @@
             <a href="{{url('/pedir_nota_pendiente/'.$tesis->id)}}">Pedir nota Pendiente</a>
           </td>
           <td> </td>
+          <td>
+            <a href="{{url('/vista_subir_archivo', $tesis->id)}}">Subir archivo constancia</a>
+          </td>
           @endif
           @if($tesis->nota_pendiente==null and $tesis->estado1!=4 and $tesis->nota_prorroga==null)
           <td>  </td>
@@ -64,7 +67,7 @@
           <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nueva nota de Prorroga</a></td>
          @endif
       <td>
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye">Ver detalles</span>
+            <a href="{{url('/tesismostrar/'.$tesis->id)}}"  class="btn btn-info"><span class="far fa-eye">Ver detalles</span>
             <br> 
             <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
             <br>
@@ -86,7 +89,7 @@
      </div>
      </div>
      </div>
-     <a href="{{url('/alumnohome')}}">Volver a home</a> 
+     <a href="{{ url('/profesorhome')}}" class="btn btn-default">Volver a home</a>
      </div>
 </div>
 

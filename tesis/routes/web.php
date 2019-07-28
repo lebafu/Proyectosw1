@@ -31,7 +31,7 @@ Route::post('/users','UsersController@store')->name('users.store');
 Route::put('/actualizarusers{users}','UsersController@update')->name('users.update');
 Route::delete('/eliminarusers{users}','UsersController@destroy')->name('users.destroy');
 
-
+Route::get('/tesisregistrada', 'TesisController@tesisregistrada')->name('tesis.tesisregistrada');
 Route::get('/tesis', 'TesisController@index')->name('tesis.index');
 Route::get('/tesis_dir_sol', 'TesisController@index3_solicitudes')->name('tesis.index3_sol');
 Route::get('/tesis_dir_ins', 'TesisController@index3_inscritas')->name('tesis.index3_ins');
@@ -73,9 +73,10 @@ Route::put('/actualizartesis_profesor/{tesis}','TesisController@update2')->name(
 Route::put('/actualizartesis_director/{tesis}','TesisController@update5')->name('tesis.update5');
 Route::delete('/eliminartesis{tesis}','TesisController@destroy')->name('tesis.destroy');
 
+Route::get('/vista_subir_archivo/{tesis}','TesisController@vista_subir_archivo')->name('tesis.vista_subir_archivo');
+Route::put('/actualizar_archivo/{tesis}','TesisController@update_archivo_ex')->name('tesis.update_archivo_ex');
 Route::get('/noeditartesis', 'TesisController@noeditartesis')->name('tesis.noeditartesis');
 Route::get('/noeditartesis_profe', 'TesisController@noeditartesis_profe')->name('tesis.noeditartesis_profe');
-Route::get('/tesisregistrada', 'TesisController@tesisregistrada')->name('tesis.tesisregistrada');
 Route::get('/sinpermiso', 'TesisController@sinpermiso')->name('tesis.sinpermiso');
 Route::get('/tesis_profesor_evaluar/{tesis}', 'TesisController@evaluar')->name('tesis.evaluar');
 Route::put('/tesis_profesor_a_dt/{tesis}','TesisController@update3')->name('tesis.update3');
@@ -86,7 +87,7 @@ Route::get('/tesis_director_evaluar/{tesis}', 'TesisController@evaluar_director'
 Route::get('/comision','ComisionController@index')->name('comision.index');
 Route::get('/comision{comision}', 'ComisionController@edit')->name('comision.edit');
 Route::get('/comision/create', 'ComisionController@create')->name('comision.create');
-Route::get('/comisionmostrar{id}', 'ComisionController@show');
+Route::get('/comisionmostrar{id}','ComisionController@show');
 Route::post('/comision','ComisionController@store')->name('comision.store');
 Route::put('/actualizarcomision{comision}','ComisionController@update')->name('comision.update');
 Route::delete('/eliminarcomision{comision}','ComisionController@destroy')->name('comision.destroy');

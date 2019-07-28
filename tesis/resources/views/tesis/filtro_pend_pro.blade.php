@@ -43,8 +43,6 @@
                   <div class="form-group" align="center">
                     <a class="btn btn-primary" href="#" id="descargaPDF"> <span class="fa fa-print"> </span> Descargar PDF</a>
               </div>
-              <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
-              <a href="{{ url('/directorhome') }}">Volver a inicio</a>
         </div>
   <script>
   $(function(){
@@ -65,6 +63,6 @@
     });
   });
 </script>
-
-
+  <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
+  <a href="{{ url('/directorhome')}}" class="btn btn-default">Volver a home</a>
 @endsection

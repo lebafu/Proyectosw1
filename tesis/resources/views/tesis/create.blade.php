@@ -63,7 +63,6 @@
                             <div class="col-md-6">
                                 <select name="area_tesis" id="area_tesis" type="text" class="form-control" required="required">
                                 <option value="Ingenieria de Software">Ingenieria de Software</option>
-                                <option value="Investigacion de operaciones">Investigacion de operaciones</option>
                                  <option value="IA">Inteligencia Artificial </option>
                                  <option value="BI">Inteligencia de negocios</option>
                                  <option value="Imagenes">Imagenes</option>
@@ -115,25 +114,28 @@
 
                        
  
-                        <div class="form-group row">
-                            <label for="descripcion" class="col-md-4 col-form-label text-md-right">{{ __('Descripcion') }}</label>
+                      <div class="form-group row">
                             <div class="col-md-6">
-                                <input id="descripcion" type="text" placeholder="Breve descripcion del tema" class="form-control" name="descripcion" required="required">
-                            </div>
+                                <label for="descripcion" class="col-md-4 col-form-label text-md-right">{{ __('Descripcion') }}</label>
+                                <textarea name="descripcion" type="text" rows="10" cols="40" class="form-control",name="descripcion" required="required" >Descripcion</textarea>
+                             </div>
+                        </div>
+
+
+                         <div class="form-group row">
+                            <div class="col-md-6">
+                                <label for="objetivos" class="col-md-4 col-form-label text-md-right">{{ __('Objetivos') }}</label>
+                                <textarea name="objetivos" type="text" rows="10" cols="40" class="form-control",name="objetivos" required="required" >Escriba aqui los objetivos</textarea>
+                             </div>
                         </div>
  
-                       <div class="form-group row">
-                            <label for="objetivos" class="col-md-4 col-form-label text-md-right">{{ __('Objetivos') }}</label>
-                            <div class="col-md-6">
-                                <input id="objetivos" type="text" placeholder="Objetivos del tema" class="form-control" name="objetivos" required="required">
-                            </div>
-                        </div>
+
  
-                       <div class="form-group row">
-                            <label for="contribucion" class="col-md-4 col-form-label text-md-right">{{ __('Contribucion esperada') }}</label>
+                      <div class="form-group row">
                             <div class="col-md-6">
-                                <input id="contribucion" type="text" placeholder="Contribucion" class="form-control" name="contribucion" required="required">
-                            </div>
+                                <label for="contribucion" class="col-md-4 col-form-label text-md-right">{{ __('Contribucion') }}</label>
+                                <textarea name="contribucion" type="text" rows="10" cols="40" class="form-control",name="objetivos" required="required" >Escriba aqui los objetivos</textarea>
+                             </div>
                         </div>
 
 

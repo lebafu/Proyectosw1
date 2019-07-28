@@ -30,7 +30,7 @@
           <td>{{$user->email}}</td>
           <td>
 
-            <a href="{{url('/usersmostrar/'.$user->id)}}" class="btn btn-info"><span class="far fa-eye">Ver detalles</span>
+            <a href="{{url('/usersmostrar/'.$user->id)}}" type= button class="btn-btn-info"><span class="glyphicon glyphicon-eye-open"></span>Ver detalles</a> 
             <br>
             <a href="{{URL::action('UsersController@edit', $user->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
              <br>
@@ -46,13 +46,11 @@
      </table>
      </div>
      </div>
-     <a href="{{url('/adminhome')}}">Volver a home</a> 
      </div>
      </div>
      </div>
+</div>
 
    {!! $users->render() !!}
-
-</div>
 
 @endsection

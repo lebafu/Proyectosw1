@@ -28,7 +28,7 @@
           <td>{{$tesis->fecha_peticion}}}</td>
           <td>
 
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye">Ver detalles</span>
+            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye">Ver detalles</span></a>
             <br>
             <a href="{{url('/tesis_profesor/'.$tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
             <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id)}}">Evaluar</a> 
@@ -48,7 +48,7 @@
      </div>
      </div>
      </div>
-     <a href="{{url('/profesorhome')}}">Volver a home</a> 
+     <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
      </div>
 </div>
 

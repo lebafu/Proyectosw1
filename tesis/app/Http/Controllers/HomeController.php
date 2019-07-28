@@ -4,7 +4,6 @@ use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\DB;
 use App\User;
-use App\Tesis;
 //use DB;
 use Closure;
 use Session;

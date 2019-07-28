@@ -40,7 +40,8 @@
      </div>
      </div>
      </div>
-     
+     <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
+     <a href="{{ url('directorhome')}}" class="btn btn-default">Volver a home</a>
      </div>
      </div>
 </div>
@@ -70,7 +71,6 @@
     });
   });
 </script>
-<a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
-<a href="{{ url('/directorhome') }}">Volver a inicio</a>
+
 
 @endsection

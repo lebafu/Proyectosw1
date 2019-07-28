@@ -19,7 +19,7 @@
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
-          <th>Fecha Prorroga</th>
+          <th>Fecha Peticion</th>
         </tr>
         @foreach ($notas_pendientes_vencidas as $tesis)
         <tr>
@@ -27,7 +27,7 @@
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->nota_prorroga}}}</td>
+          <td>{{$tesis->fecha_peticion}}}</td>
         </tr>
         @endforeach
      </table>

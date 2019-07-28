@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Alumno Home Tesis</title>
+  <title>Bootstrap Example</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -73,7 +73,7 @@
       <a class="navbar-brand" href="#">Sistema de Tesis</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="{{url('/home') }}">Home</a></li>
+      <li class="active"><a href="{{ url('/home') }}">Home</a></li>
       <li><a href="{{url('/tesis_alumno_solicitud')}}">Ver tesis</a></li>
       <li><a href="{{url('/tesis/create')}}">Inscribir Tesis</a></li>
     </ul>

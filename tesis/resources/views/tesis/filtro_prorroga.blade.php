@@ -63,5 +63,6 @@
   });
 </script>
 
- <a href="{{ url('/directorhome') }}">Volver a home</a>
+ <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
+ <a href="{{ url('/directorhome')}}" class="btn btn-default">Volver a home</a>
 @endsection
