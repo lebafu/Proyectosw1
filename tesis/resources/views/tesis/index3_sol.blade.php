@@ -10,7 +10,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Solicitudes de tesis por aprobar o rechazar') }}</div>
+        <div class="card-header">{{ __('Solicitudes de tesis por aprobar o rechazarrr') }}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
@@ -25,7 +25,6 @@
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
-           @if(($tesis->estado1==2 and $tesis->estado2==1)or($tesis->estado1==3 and $tesis->estado2==1))
           <td>{{$tesis->rut}}</td>
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
@@ -46,7 +45,6 @@
            </form>
       </td>
         </tr>
-        @endif
         @endforeach
      </table>
      </div>

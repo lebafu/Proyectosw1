@@ -5,24 +5,22 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Subir archivo constancia examen de titulo') }}</div>
+                <div class="card-header">{{ __('Ingrese nota de tesis del alumno') }}</div>
 
                 <div class="card-body">
-                    <form action="{{route('tesis.update_archivo_ex', $tes->id)}}" method="POST">
-
-                    	enctype="multipart/form-data"
-                    	
+                    <form action="{{route('tesis.update_nota_tesis', $tesis->id)}}" method="POST">
                         @csrf
 
-                       <div class="form-group row">
-                            <label for="constancia_ex" class="col-md-4 col-form-label text-md-right">{{ __('Subir archivo de constancia de examen de titulo') }}</label>
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Nota Tesis') }}</label>
                             <div class="col-md-6">
-                                <input id="constancia_ex" type="file" class="form-control" name="constancia" value="{{$tes->constancia_ex}}">
-                            </div>
+                              <input id="nota_tesis" type="text" class="form-control" name="nota_tesis" required="required">
+                               </div>
                         </div>
 
 
-                         <div class="form-group row mb-0">
+
+                        <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">
                                 <button type="submit" class="btn btn-primary">
                                     {{ __('Guardar') }}
@@ -32,8 +30,10 @@
                                     
                             </div>
 
- 				{{ csrf_field() }}
+        	    
+        	    {{ csrf_field() }}
                 {{ method_field('PUT')}}
+                            
                             
                         </div>
                     </form>
@@ -43,3 +43,4 @@
     </div>
 </div>
 @endsection
+

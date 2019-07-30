@@ -115,7 +115,7 @@ class TesisController extends Controller
         }
         $user=User::findorfail($id);
         if($user->tipo_usuario==3){
-        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->paginate(7);
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1',2)->where('estado2',1)->orwhere('estado1',3)->where('estado2',1)->paginate(7);
         return view('tesis.index3_sol',compact('tesistas','user'));
        }else{
        	return view('tesis.sinpermiso');
@@ -897,16 +897,16 @@ class TesisController extends Controller
     {       
 
         //dd($request);
-        $tes=Tesis::find($id);
-        $tes->constancia_ex=$request->file('constancia_ex')->store('public');
-        $tes->update();
+        $tesis=Tesis::find($id);
+        $tesis->constancia_ex=$request->file('constancia_ex')->store('public');
+        $tesis->update();
         //dd($tes);
         ($request->file('constancia_ex')->store('public'));
 
-        return view('alumnohome');
+        return view('tesis.fecha_presentacion',compact('tesis'));
     }
 
-    public function update3($id)
+    public function update3($id, Request $request)
     {
 
         //dd($request);
@@ -1130,22 +1130,73 @@ class TesisController extends Controller
         return view('tesis.index_al_sec',compact('tesistas'));
    }
 
-    /* public function imprimir_tesis_inscritas()
+   public function ingresar_nota_tesis($id)
+   {
+     $tesis=Tesis::find($id);
+     return view('tesis.ingresar_nota_tesis',compact('tesis'));  
+
+   }
+
+   public function update_nota_tesis($id, Request $request)
+   {
+        $tes=Tesis::find($id);
+        $tes->nota_tesis=$request->nota_tesis;
+        $tes->update();
+        return view('secretariahome');
+   } 
+
+      public function fecha_presentacion($id)
+   {
+     //dd($id);
+     $tesis=Tesis::find($id);
+    // dd($tesis);
+     //dd($tesis->id);
+     return view('tesis.fecha_presentacion',compact('tesis'));  
+
+   }
+
+   public function update_fecha_presentacion($id, Request $request)
+   {
+        //dd($request);
+        $tes=Tesis::find($id);                   
+        $tes->fecha_presentacion_tesis=$request->fecha_presentacion_tesis;
+        //dd($tes);
+        $tes->update();
+        return view('alumnohome');
+   }
+
+
+   public function vista_subir_acta($id)
     {
-        $id=Auth::id();
         if($id==null){
-            return view ('tesis.sinpermiso');
+            return view('tesis.sinpermiso');
         }
-        $user=User::findorfail($id);
-        if($user->tipo_usuario==3){
-        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->paginate(7);
-        return view('tesis.imprimir_tesis_inscritas',compact('tesistas','user'));
-       }else{
-        return view('tesis.sinpermiso');
-       }
+        elseif($id!=null)
+        {
+            $tes=Tesis::find($id);
+            if($tes->estado1==4 and $tes->estado2==1 and $tes->acta_ex==null){
+                    return view('tesis.vista_subir_acta',compact('tes'));
+            }
+            else{
+                return view('tesis.archivosubido');
+            }
+        }
 
-    }*/
+    }
 
+
+    public function update_acta_ex($id, Request $request)
+    {       
+
+        //dd($request->acta_ex);
+        $tesis=Tesis::find($id);
+        $tesis->acta_ex=$request->file('acta_ex')->store('public');
+        $tesis->update();
+        //dd($tes);
+        ($request->file('acta_ex')->store('public'));
+
+        return view('secretariahome',compact('tesis'));
+    }
 
 
 }

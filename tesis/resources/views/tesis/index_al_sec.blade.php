@@ -21,6 +21,8 @@
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
           <th>Acta examen</th>
+          <th>Subir acta</th>
+          <th>Nota</th>
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
@@ -29,12 +31,25 @@
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
            <td>{{$tesis->tipo}}</td>
-            <td>@if($tesis->constancia_ex==null)
+            <td>
+            @if($tesis->constancia_ex==null)
              Debe subir informe
             @else
-              <a class="btn btn-primary" href="{{url('/acta_examen/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span>Generar Acta</a>
-              @endif
+              <a class="btn btn-primary" href="{{url('/acta_examen/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span>Generar Acta</a></td>
            @endif
+               @if($tesis->acta_ex==null and $tesis->fecha_inscripcion!=null)
+              <td><a class="btn btn-primary" href="{{url('/vista_subir_acta/'.$tesis->id)}}">Subir acta alumno</a></td>
+            @else
+                <td>Faltan pasos por completar.</td>
+            @endif
+           @if($tesis->constancia_ex!=null and $tesis->acta_ex!=null and $tesis->nota_tesis==null)
+                <td><a class="btn btn-primary" href="{{url('/ingresar_nota_tesis/'.$tesis->id)}}">Ingresar nota</a></td>
+            @elseif($tesis->nota_tesis!=null)
+            <td>{{$tesis->nota_tesis}}</td>
+            @else      
+              <td>Aun no expone</td>
+           @endif
+          @endif
         @endforeach
      </table>
      </div>
