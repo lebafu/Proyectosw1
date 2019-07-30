@@ -20,22 +20,26 @@
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
+          <th>Constancia_ex</th>
           <th>Acta examen</th>
           <th>Subir acta</th>
           <th>Nota</th>
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
-           @if(($tesis->estado1==4 and $tesis->estado2==1))
           <td>{{$tesis->id}}</td>
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
            <td>{{$tesis->tipo}}</td>
-            <td>
+            @if($tesis->constancia_ex!=null)
+           <td><a href="{{ route('verPDF', ['id' => $tesis->id]) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Ver constancia de examen</i></a></td>
+           @else
+             <td>Debe subir informe</td>
+            @endif
             @if($tesis->constancia_ex==null)
-             Debe subir informe
+            <td>Operacion no disponible</td>
             @else
-              <a class="btn btn-primary" href="{{url('/acta_examen/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span>Generar Acta</a></td>
+              <td><a class="btn btn-primary" href="{{url('/acta_examen/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span>Generar Acta</a></td>
            @endif
                @if($tesis->acta_ex==null and $tesis->fecha_inscripcion!=null)
               <td><a class="btn btn-primary" href="{{url('/vista_subir_acta/'.$tesis->id)}}">Subir acta alumno</a></td>
@@ -49,7 +53,6 @@
             @else      
               <td>Aun no expone</td>
            @endif
-          @endif
         @endforeach
      </table>
      </div>
@@ -62,7 +65,7 @@
 
 
 
-
+{!! $tesistas->render() !!}
 @endsection
 
   

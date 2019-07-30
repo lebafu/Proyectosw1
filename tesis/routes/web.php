@@ -118,3 +118,5 @@ Route::put('/update_fecha_presentacion/{tesis}','TesisController@update_fecha_pr
 
 Route::get('/vista_subir_acta/{tesis}','TesisController@vista_subir_acta')->name('tesis.vista_subir_acta');
 Route::put('/update_acta_ex/{tesis}','TesisController@update_acta_ex')->name('tesis.update_acta_ex');
+
+Route::get('/constancia_ex_ver/{tesis}', 'TesisController@verPDF')->name('verPDF');

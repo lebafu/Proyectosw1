@@ -10,6 +10,9 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Contracts\Auth\Guard;
+use iio\libmergepdf\Merger;
+use iio\libmergepdf\Pages;
+use PDFMerger;
 use DB;
 use Auth;
 use Closure;
@@ -898,12 +901,21 @@ class TesisController extends Controller
 
         //dd($request);
         $tesis=Tesis::find($id);
-        $tesis->constancia_ex=$request->file('constancia_ex')->store('public');
+        if($request->hasFile('constancia_ex')){
+         $file = $request->file('constancia_ex');
+        $name = time().$file->getClientOriginalName();
+        $file->move(public_path().'\constancia_ex/', $name);
+        $tesis->constancia_ex=$name;
         $tesis->update();
         //dd($tes);
-        ($request->file('constancia_ex')->store('public'));
+        //($request->file('constancia_ex')->store('public'));
+                   //almacenar el archivo pdf/doc subido al sistem
+           return view('tesis.fecha_presentacion',compact('tesis'));
+        }else{
+            return view('tesis.archivonosepudosubir');
+        }
 
-        return view('tesis.fecha_presentacion',compact('tesis'));
+        
     }
 
     public function update3($id, Request $request)
@@ -1189,14 +1201,38 @@ class TesisController extends Controller
     {       
 
         //dd($request->acta_ex);
-        $tesis=Tesis::find($id);
-        $tesis->acta_ex=$request->file('acta_ex')->store('public');
+        //dd($tes);
+        //($request->file('acta_ex')->store('public'));
+
+         $tesis=Tesis::find($id);
+        if($request->hasFile('acta_ex')){
+         $file = $request->file('acta_ex');
+        $name = time().$file->getClientOriginalName();
+        $file->move(public_path().'\acta_ex/', $name);
+        $tesis->acta_ex=$name;
         $tesis->update();
         //dd($tes);
-        ($request->file('acta_ex')->store('public'));
+        //($request->file('constancia_ex')->store('public'));
+                   //almacenar el archivo pdf/doc subido al sistem
+           return view('secretariahome');
+        }else{
+            return view('tesis.archivonosepudosubir');
+        }
 
+        if($request->hasFile('acta_ex')){           //almacenar el archivo pdf/doc subido al sistema
+            $file = $request->file('acta_ex');
+            $name = time().$file->getClientOriginalName();
+            $file->move('\acta_ex/', $name);
+        }
         return view('secretariahome',compact('tesis'));
     }
 
 
+        public function verPDF($id){
+
+        $tesis = Tesis::find($id);
+        $pathToFile =public_path().'\constancia_ex/'.$tesis->constancia_ex;
+        return response()->file($pathToFile);
+
+    }
 }

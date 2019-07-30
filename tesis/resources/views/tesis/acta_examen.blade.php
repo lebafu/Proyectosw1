@@ -53,30 +53,32 @@
 
 		<h4>......................................................................... Nota: </h4>
 		<h4>{{$tes->profesor_guia}}</h4>  
-
-		<h4  style="margin-bottom: 40px; margin-top: 30px"></h4>
+		<h6>Profesor Comision</h6>
+		<h4  style="margin-bottom: 30px; margin-top: 30px"></h4>
 		<h4>..........................................................................Nota:</h4>
 		<h4>{{$tes->profesor1_comision}}</h4>
-
-		<h4  style="margin-bottom: 40px; margin-top: 30px"></h4>
+		<h6>Profesor Comision</h6>
+		<h4  style="margin-bottom: 30px; margin-top: 30px"></h4>
 		<h4>..........................................................................Nota:</h4>
 		<h4>{{$tes->profesor2_comision}}</h4>
-
+		<h6>Profesor Comision</h6>
 		@if($tes->profesor3_comision!="Ninguno")
-		<h4  style="margin-bottom: 40px; margin-top: 30px"></h4>
+		<h4  style="margin-bottom: 30px; margin-top: 30px"></h4>
 		<h4>..........................................................................Nota:</h4>
+		<h4>{{$tes->profesor3_comision}}</h4>
+		<h6>Profesor Comision</h6>
 		@endif
-
 		@if($tes->profesor1_externo!=null)
-		<h4  style="margin-bottom: 40px; margin-top: 30px"></h4>
+		<h4  style="margin-bottom: 30px; margin-top: 30px"></h4>
 		<h4>..........................................................................Nota:</h4>
 		<h4>{{$tes->profesor1_externo}}</h4>
+		<h6>Profesor Comision</h6>
 		@endif
-		
 		@if($tes->profe2_externo!=null)
-		<h4  style="margin-bottom: 40px; margin-top: 30px"></h4>
+		<h4  style="margin-bottom: 30px; margin-top: 30px"></h4>
 		<h4>..........................................................................Nota:</h4>
 		<h4>{{$tes->profe2_externo}}</h4>
+		<h6>Profesor Comision</h6>
 		@endif
 	@endforeach
 	<script>
