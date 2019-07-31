@@ -37,8 +37,8 @@
      </div>
      </div>
 </div>
+<!--Con esto se hace que se habra una nueva pestaña en y permita guardar esta vista en formato pdf -->
 <script>
-    
     $(document).ready(function(){
       window.print();
     })
