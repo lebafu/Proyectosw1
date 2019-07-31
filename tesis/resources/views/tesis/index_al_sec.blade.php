@@ -43,7 +43,9 @@
            @endif
                @if($tesis->acta_ex==null and $tesis->fecha_inscripcion!=null)
               <td><a class="btn btn-primary" href="{{url('/vista_subir_acta/'.$tesis->id)}}">Subir acta alumno</a></td>
-            @else
+            @elseif($tesis->acta_ex!=null)
+                <td><a href="{{ route('verPDF_acta', ['id' => $tesis->id]) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Ver acta</i></a></td>
+                @else
                 <td>Faltan pasos por completar.</td>
             @endif
            @if($tesis->constancia_ex!=null and $tesis->acta_ex!=null and $tesis->nota_tesis==null)

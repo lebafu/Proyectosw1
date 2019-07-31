@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Tesis;
 use App\Comision;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
@@ -17,6 +16,7 @@ use DB;
 use Auth;
 use Closure;
 use Session;
+
 
 
 class TesisController extends Controller
@@ -108,7 +108,7 @@ class TesisController extends Controller
     }
 
 
-  
+    
 
       public function index3_solicitudes()
     {
@@ -145,8 +145,10 @@ class TesisController extends Controller
 
 
 
-    public function imprimir_tesis_inscritas()
+    public function imprimir_tesis_inscritas(Request $request)
     {
+        $fecha_inicio=$request->fecha_inicio;
+        $fecha_final=$request->fecha_final;
         $id=Auth::id();
         if($id==null){
             return view ('tesis.sinpermiso');
@@ -1071,14 +1073,11 @@ class TesisController extends Controller
         return back()->with('status','La tesis ha sido eliminada con exito');
     }
 
-    public function printTesis(){
+    public function printTesis(Request $request){
 
-    	$tes_empresas=DB::table('tesis')
-    		->orderby('fecha_peticion','desc')
-    		->where('estado1','=',4)
-    		->where('estado2','=',1)
-    		->where('tipo_vinculacion','=','Empresa')
-    		->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();
+       $fecha_inicio=$request->fecha_inicio;
+       $fecha_final=$request->fecha_final;
+       $tes_empresas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Empresa')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
 
 		$html = view('tesis.print', ['tes_empresas' => $tes_empresas])->render();
 
@@ -1086,42 +1085,33 @@ class TesisController extends Controller
    }
 
 
-    public function printTesisp(){
+    public function printTesisp(Request $request){
 
-    	$tes_proyectos=DB::table('tesis')
-    		->orderby('fecha_peticion','desc')
-    		->where('estado1','=',4)
-    		->where('estado2','=',1)
-    		->where('tipo_vinculacion','=','Proyecto')
-    		->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();
+        $fecha_inicio=$request->fecha_inicio;
+       $fecha_final=$request->fecha_final;
+        $tes_proyectos=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Proyecto')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
 
 		$html = view('tesis.printTesisp', ['tes_proyectos' => $tes_proyectos])->render();
 
 		return $html;
    }
 
-   public function printTesisc(){
+   public function printTesisc(Request $request){
 
-    	$tes_comunidad=DB::table('tesis')
-    		->orderby('fecha_peticion','desc')
-    		->where('estado1','=',4)
-    		->where('estado2','=',1)
-    		->where('tipo_vinculacion','=','Comunidad')
-    		->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();
+        $fecha_inicio=$request->fecha_inicio;
+       $fecha_final=$request->fecha_final;
+    	 $tes_comunidad=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Comunidad')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7); 
 
 		$html = view('tesis.printTesisc', ['tes_comunidad' => $tes_comunidad])->render();
 
 		return $html;
    }
 
-   public function printTesisfc(){
+   public function printTesisfc(Request $request){
 
-    	$tes_fondoconcursable=DB::table('tesis')
-    		->orderby('fecha_peticion','desc')
-    		->where('estado1','=',4)
-    		->where('estado2','=',1)
-    		->where('tipo_vinculacion','=','Fondo concusable')
-    		->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();
+        $fecha_inicio=$request->fecha_inicio;
+        $fecha_final=$request->fecha_final;
+    	$tes_fondoconcursable=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Fondo concusable')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);  
 
 		$html = view('tesis.printTesisfc', ['tes_fondoconcursable' => $tes_fondoconcursable])->render();
 
@@ -1235,4 +1225,78 @@ class TesisController extends Controller
         return response()->file($pathToFile);
 
     }
+
+    public function verPDF_acta($id){
+
+        $tesis = Tesis::find($id);
+        $pathToFile =public_path().'\acta_ex/'.$tesis->constancia_ex;
+        return response()->file($pathToFile);
+
+    }
+
+    public function rango_fechas()
+    {
+
+        /*$options = ['Empresas' => 'Tesis relacionadas a empresas', 
+                    'Proyecto' => 'Tesis relacionadas a proyectos',
+                    'Comunidad'=> 'Tesis relacionadas a comunidad',
+                    'Fondoconcursable'=> 'Tesis relacionadas a fondos concursables',
+                    'PendientesyProrrogas' =>'Notas Pendientes y de Prorrogas',
+                    'Pendientes' => 'Solo notas pendientes',
+                    'Prorrogas' => 'Solo notas de prorrogas'
+                ];*/
+        $id=Auth::id();
+        $user=User::find($id);
+        if($id==null){
+                return view('tesis.sinpermiso');
+        }else{
+            if($user->tipo_usuario!=3){
+                return view('tesis.sinpermiso');
+            }else{
+                if($user->tipo_usuario==3){
+                    return view('tesis.rango_fechas');
+
+                }
+            }
+        }
+
+    }
+
+    public function error_generar_pdf()
+    {
+         return view('tesis.error_generar_pdf');   
+
+    }
+    public function informes_rangos_fechas(Request $request)
+    {
+       
+       $fecha_inicio=$request->fecha_inicio;
+       $fecha_final=$request->fecha_fin;
+       //dd($fecha_inicio);
+       //dd($fecha_final);
+        $id=Auth::id();
+        $user=User::findorfail($id);
+        if($id==null or $user->tipo_usuario!=3){
+            return('tesis.sinpermiso');
+        }else{
+            if($user->tipo_usuario==3){
+            /*$tes_empresas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Empresa')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
+            $tes_proyectos=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Proyecto')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
+            $tes_fondoconcursable=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Fondo concusable')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);  
+            $tes_comunidad=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Comunidad')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);      
+            $notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->whereBetween('nota_pendiente', [$fecha_inicio,$fecha_final])->get();  
+            $notas_prorrogas_vencidas=DB::table('tesis')->whereNotNull('nota_prorroga')->whereBetween('nota_prorroga',[$fecha_inicio,$fecha_final])->get();
+             $notas_pend_pro_vencidas= DB::table('tesis')->whereNotNull('nota_prorroga')->whereBetween('nota_prorroga',[$fecha_inicio,$fecha_final])->orwhereNull('nota_prorroga')->whereBetween('nota_pendiente', [$fecha_inicio,$fecha_final])->get();
+
+            return view('tesis.informes_generar_pdf',compact('tes_empresas','tes_proyectos','tes_fondoconcursable','tes_comunidad','notas_pendientes_vencidas','notas_prorrogas_vencidas','notas_pend_pro_vencidas'));*/
+            return view('tesis.informes_generar_pdf',compact('fecha_inicio','fecha_final'));
+            }
+        }
+        return view('tesis.informes_generar_pdf');
+     
+    
+ 
+
+        }
+       
 }

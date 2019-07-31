@@ -108,6 +108,7 @@ Route::get('/descargar_notapendiente', 'TesisController@imprimir_nota_pend_venc'
 Route::get('/descargar_notaprorroga', 'TesisController@imprimir_nota_pro_venc')->name('descargar_notaprorroga');
 Route::get('/descargar_notapendpro', 'TesisController@imprimir_nota_pendpro_venc')->name('descargar_notapendpro');
 Route::get('/descargar_tesis_ins', 'TesisController@imprimir_tesis_inscritas')->name('descargar_tesis_ins');
+Route::get('/descargar_tesis_sol', 'TesisController@imprimir_sol')->name('descargar_tesis_sol');
 
 
 Route::get('/ingresar_nota_tesis/{tesis}', 'TesisController@ingresar_nota_tesis')->name('tesis.ingresar_nota_tesis');
@@ -120,3 +121,8 @@ Route::get('/vista_subir_acta/{tesis}','TesisController@vista_subir_acta')->name
 Route::put('/update_acta_ex/{tesis}','TesisController@update_acta_ex')->name('tesis.update_acta_ex');
 
 Route::get('/constancia_ex_ver/{tesis}', 'TesisController@verPDF')->name('verPDF');
+Route::get('/acta_ex_ver/{tesis}', 'TesisController@verPDF_acta')->name('verPDF_acta');
+
+Route::get('/rango_fechas', 'TesisController@rango_fechas')->name('tesis.rango_fechas');
+Route::put('/informes_rangos_fechas/','TesisController@informes_rangos_fechas')->name('tesis.informes_rangos_fechas');
+Route::get('/error_generar_pdf', 'TesisController@error_generar_pdf')->name('tesis.error_generar_pdf');

@@ -5,12 +5,12 @@
 @section('content')
 
 <head>
-  <title> TODAS LAS TESIS INSCRITAS</title>
+  <title> SOLICITUDES DE TESIS</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <div class="container">
-  <h4 align="center" style="margin-bottom: 40px; margin-top: 30px"> Todas las tesis inscritas</h4>
+  <h4 align="center" style="margin-bottom: 40px; margin-top: 30px"> SOLICITUDES DE TESIS</h4>
     <table class="table table-bordered">
         <tr>
           <th>ID</th>
@@ -19,7 +19,6 @@
           <th>Tipo Trabajo</th>
           <th>Nombre Tesis</th>
           <th>Fecha Peticion</th>
-          <th>Fecha Inscripcion</th>
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
@@ -30,7 +29,6 @@
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->nombre_tesis}}</td>
           <td>{{$tesis->fecha_peticion}}}</td>
-          <td>{{$tesis->fecha_inscripcion}}</td>
         </tr>
         @endforeach
      </table>
