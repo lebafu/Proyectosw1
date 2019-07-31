@@ -1321,24 +1321,24 @@ class TesisController extends Controller
 
         public function imprimir_pend_venc()
         {
-         $notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<',now())->where('fecha_presentacion_tesis','=',null)->get(); 
+         $notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<',now())->whereNull('fecha_presentacion_tesis')->get(); 
 
          return view('tesis.pendientes_vencidas',compact('notas_pendientes_vencidas'));
         }
 
         public function imprimir_pro_venc()
         {
-            $notas_prorrogas_vencidas=DB::table('tesis')->whereNotNull('nota_prorroga')->where('nota_prorroga','<',now())->where('fecha_presentacion_tesis','=',null)->get();
+            $notas_prorrogas_vencidas=DB::table('tesis')->whereNotNull('nota_prorroga')->where('nota_prorroga','<',now())->whereNull('fecha_presentacion_tesis')->get();
             return view('tesis.prorrogas_vencidas',compact('notas_prorrogas_vencidas'));
         }
 
-        public function imprimir_pend_pro_venc()
+        /*public function imprimir_pend_pro_venc()
         {
-            $notas_pend_pro_vencidas= DB::table('tesis')->where('fecha_presentacion_tesis','=',null)->whereNotNull('nota_prorroga')->where('nota_prorroga','<',now())->orwhereNull('nota_prorroga')->where('nota_pendiente','<',now())->where('fecha_presentacion_tesis','=',null)->get();
+            $notas_pend_pro_vencidas= DB::table('tesis')->whereNull('fecha_presentacion_tesis')->whereNotNull('nota_prorroga')->where('nota_prorroga','<',now())->orwhereNull('nota_prorroga')->where('nota_pendiente','<',now())->whereNull('fecha_presentacion_tesis')->get();
 
             return view('tesis.pend_pro_vencidas',compact('notas_pend_pro_vencidas'));
             
-        }
+        }*/
 
 
        

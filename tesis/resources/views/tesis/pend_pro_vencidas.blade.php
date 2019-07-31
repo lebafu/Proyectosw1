@@ -1,18 +1,18 @@
-
 @extends('layouts.app')
 
 
 
 @section('content')
 
-<head>
-  <title>TESIS CON NOTAS PENDIENTES Y DE PRORROGAS  ENTRE {{$fecha_inicio}} y {{$fecha_final}}</title>
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-</head>
+
+
 <div class="container">
-  <h4 align="center" style="margin-bottom: 40px; margin-top: 30px"> Tesis con notas prorrogas</h4>
-    <th>ENTRE {{$fecha_inicio}} y {{$fecha_final}}</th>
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="card">
+        <div class="card-header">{{ __('Filtro de notas prorrogas vencidas') }}</div>
+          <div class="card-body">
+
     <table class="table table-bordered">
         <tr>
           <th>ID</th>
@@ -20,6 +20,7 @@
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
           <th>Fecha Peticion</th>
+          <th>Nota prorroga</th>
         </tr>
         @foreach ($notas_pend_pro_vencidas as $tesis)
         <tr>
@@ -28,6 +29,13 @@
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}}</td>
+          <td>{{$tesis->nota_prorroga}}</td>
+          <td>
+
+          
+              </div>
+           </form>
+      </td>
         </tr>
         @endforeach
      </table>
@@ -37,11 +45,15 @@
      </div>
      </div>
 </div>
-<script>
+
+
+ 
+ <script>
     
     $(document).ready(function(){
       window.print();
     })
   </script>
+
 
 @endsection

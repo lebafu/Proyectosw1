@@ -27,7 +27,7 @@
         <td><a class="btn btn-primary" href="#" id="descargaPDF_empresas"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
       <tr>
-        <td>Proyectos/td>
+        <td>Proyectos</td>
         <td><a class="btn btn-primary" href="#" id="descargaPDF_proyectos"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
       <tr>
@@ -62,10 +62,10 @@
         <td>Notas Prorrogas vencidas</td>
         <td><a class="btn btn-primary" href="#" id="descargaPDF_prorrogas"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
-      <tr>
+      <!--<tr>
         <td>Notas Pendientes y de Prorroga vencidas</td>
         <td><a class="btn btn-primary" href="#" id="descargaPDF_pend_pro"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
-      </tr>
+      </tr>-->
      </table>
      </div>
      </div>
