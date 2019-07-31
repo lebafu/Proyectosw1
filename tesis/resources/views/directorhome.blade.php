@@ -103,6 +103,14 @@ body {
       <a href="{{url('/filtro_nota_prorroga')}}">Conocer notas de prorroga a vencer</a>
     </div>
   </div>
+  <div class="dropdown">
+    <button class="dropbtn">Obtener Informes
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="{{url('/rango_fechas')}}">Consulta por intervalo de fechas</a>
+    </div>
+  </div> 
 </div>
 
 

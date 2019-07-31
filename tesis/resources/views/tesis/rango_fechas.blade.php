@@ -12,7 +12,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Ingrese rango de  fechas para obtener notas prorrogas vencidas') }}</div>
+                <div class="card-header">{{ __('Ingrese rango de  fechas para obtener lista de informes') }}</div>
 
                 <div class="card-body">
                     <form action="{{route('tesis.informes_rangos_fechas')}}" method="POST">
@@ -33,14 +33,7 @@
                             </div>
                         </div>
 
-                 <!--
-                        <input type="checkbox" name="Empresas" value="Empresas">Tesis relacionadas a empresas<br>
-                        <input type="checkbox" name="Proyecto" value="Proyecto">Tesis relacionadas a proyectos<br>
-                        <input type="checkbox" name="Comunidad" value="Comunidad">Tesis relacionadas a comunidad<br>
-                        <input type="checkbox" name="Fondo concursable" value="Fondo concursable">Tesis relacionadas a fondo concursable<br>
-                        <input type="checkbox" name="Pendientes" value="Pendientes">Conocer notas pendientes<br>
-                        <input type="checkbox" name="Prorroga" value="Prorroga">Conocer notas de prorroga<br>
-                        <input type="checkbox" name="Pendientes y Prorroga" value="Pendientes y Prorroga">Conocer notas pendientes y de prorroga<br>-->
+                
 
 
 

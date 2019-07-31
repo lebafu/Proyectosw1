@@ -21,7 +21,8 @@ use Session;
 
 class TesisController extends Controller
 {
-	public function tesis_empresa()
+	
+    /*public function tesis_empresa()
 	{
 
 		$id=Auth::id();
@@ -80,7 +81,7 @@ class TesisController extends Controller
         }
 
 
-	}
+	}*/
         public function index2()
     {
         $id=Auth::id();
@@ -93,6 +94,8 @@ class TesisController extends Controller
         return view('tesis.index2',compact('tesistas','user'));
 
     }
+
+    //Index para los profesores con los alumnos que tienen tesis inscritas con ese profesor
 
         public function index2_ins_pro()
     {
@@ -108,7 +111,8 @@ class TesisController extends Controller
     }
 
 
-    
+    //Index de solicitudes para el director de tesis, pregunto si el usuario es director de tesis, de lo contrario
+    //se envia a la vista sinpermiso, si es director tesis entonces se hace la consulta con los casos de los respectivos valores  para estado1 y estado2, para que la tesis se encuentre en el estado de solicitud y sea vista por el director de tesis una vez eenviada por el profesor.    
 
       public function index3_solicitudes()
     {
@@ -125,6 +129,8 @@ class TesisController extends Controller
        }
 
     }
+
+    //En esta vista el director de tesis puede ver las tesis inscritas.
 
     public function index3_inscritas()
     {
@@ -143,7 +149,7 @@ class TesisController extends Controller
 
     }
 
-
+    //Vista para imprimir tesis inscritas en un intervalo de tiempo, recibo las fechas del formulario "rango_fechas", y 
 
     public function imprimir_tesis_inscritas(Request $request)
     {
@@ -155,14 +161,14 @@ class TesisController extends Controller
         }
         $user=User::findorfail($id);
         if($user->tipo_usuario==3){
-        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->paginate(7);
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->paginate(7);
         return view('tesis.imprimir_tesis_inscritas',compact('tesistas','user'));
        }else{
         return view('tesis.sinpermiso');
        }
 
     }
-
+        //Muestra tesis del alumno.
         public function index1()
     {
         $id=Auth::id();
@@ -199,6 +205,8 @@ class TesisController extends Controller
         }
     }
 
+
+    //Almacena los datos de la tabla tesis llenada preliminarmente por el alumno.
     public function store(Request $request)
     {
         $request->validate([
@@ -296,7 +304,7 @@ class TesisController extends Controller
     }
         
 
-    
+        //Muestra la informacion de la tesis    
         public function show($id)
         {
         //$tesis=DB::table('tesis')->where('id', $id)->first();
@@ -312,7 +320,7 @@ class TesisController extends Controller
             return view('tesis.show',compact('tesis','comision'));
         }
 
-
+        //Permite editar el formulario al alumno
         public function edit($id)
         {
             //$user = DB::table('users')->where('id', $id)->first();
@@ -421,6 +429,7 @@ class TesisController extends Controller
         }
 
    
+   //Aca el profesor editar el formulario solo si estado1=1, lo que quiere decir que el alumno a completado preliminarmente el formulario, luego si el mismo profesor a editado, entonces estado1=2 y estado2=null, entonces si lo ha enviado(estado1=2, estado2=1) al director de tesis aun puede editar. En caso de que el formulario sea rechazado por el director de tesis el profesor puede modificarlo.
     public function edit2($id)
     {
         if(!Auth::id()){
@@ -497,7 +506,7 @@ class TesisController extends Controller
                         }
     }
 
-   
+   //En caso de que el profesor quiera director entonces ocurre que estado1=3 y ya no podra editar el profesor.
 
     public function edit3($id){
         //dd($id);
@@ -529,11 +538,13 @@ class TesisController extends Controller
 	} 
 }
 
+    //vista en caso de que usuario no tenga permiso para acceder a esta.
     function sinpermiso(){
 
     return view('tesis.sinpermiso');
         }
 
+        //El director de tesis realiza al hacer click en evaluar se pasa a estado1=3 estado2=1
        public function evaluar_director(Request $request,$id)
     {
         if(!Auth::id()){
@@ -552,6 +563,8 @@ class TesisController extends Controller
 
         } 
     }
+
+    //Esta funcion recibe los datos de la evaluacion del profesor, en caso de que venga del alumno al ser evaluado pasará de estado1=1, a estado2=1, si el formulario de tesis fue rechazado esto es, estado1=5 y estado2=null,por el director y que el profesor sea quien lo modifique primero nuevamente, los valores de tesis volverán estado1=2, y estado2=1.
     public function evaluar($id)
     {
         if(!Auth::id()){
@@ -629,7 +642,7 @@ class TesisController extends Controller
        
     }
 
-
+    //Imprime notas pendientes y de prorroga en pdf
 
     public function imprimir_nota_pendpro_venc(Request $request){
 
@@ -669,6 +682,7 @@ class TesisController extends Controller
             'fecha_final' => $fecha_final]);
     }
 
+    //Esta vista permite imprimir las notas de pendientes vencidas en un intervalo de tiempo dado.
     public function imprimir_nota_pend_venc(Request $request){
 
         $fecha_inicio=$request->fecha_inicio;
@@ -688,10 +702,6 @@ class TesisController extends Controller
     {
     	$fecha_inicio=$request->fecha_inicio;
     	$fecha_final=$request->fecha_fin;
-        //Suponiendo que se desea saber las notas pendientes vencidas dentro de un determinado intervalo de tiempo
-       //$notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','>=',$request->fecha_inicio)->where('nota_prorroga','<=',$request->fecha_final);
-
-       //Consulta en caso de que se desee conocer todas las notas pendientes vencidas inclusive anterior al intervalo definido por la consulta//
         $data=DB::table('tesis')->whereNotNull('nota_prorroga')->whereBetween('nota_prorroga',[$fecha_inicio,$fecha_final])->get();
        return view('tesis.filtro_prorroga',[
             'notas_prorrogas_vencidas' => $data,
@@ -700,7 +710,7 @@ class TesisController extends Controller
         ]);
     }
 
-
+    //Esta vista permite imprimir las notas de prorroga vencidas en un intervalo de tiempo dado.
      public function imprimir_nota_pro_venc(Request $request){
 
         
@@ -717,7 +727,7 @@ class TesisController extends Controller
     }
 
 
-   //Me manda los datos a este controlador
+    //Recibe los datos de tesis insertados por el alumno en un inicio.
     public function update(Request $request,$id)
     {
         //estado2==0 es que ha sido rechazado por director de tesis
@@ -748,7 +758,7 @@ class TesisController extends Controller
         }
     }
 
-
+    //Se guardan los datos editados por profesor, del formulario de tesis.
 
     public function update2(Request $request,$id)
     {
@@ -813,6 +823,7 @@ class TesisController extends Controller
         return view('welcome');
     }
 
+     //Se guardan los datos de tesis y de comision insertados por el director de tesis
      public function update5(Request $request,$id)
     {
 
@@ -877,7 +888,7 @@ class TesisController extends Controller
         return view('welcome');
     }
 
-
+    //Vista que permite al alumno subir el archivo, en caso de que tenga la tesis inscrita estado1=4, estado2=1.
     public function vista_subir_archivo()
     {
         $id=Auth::id();
@@ -897,7 +908,7 @@ class TesisController extends Controller
 
     }
 
-
+    //Se guarda el archivo subido por el alumno de constancia de examen
     public function update_archivo_ex($id, Request $request)
     {       
 
@@ -919,6 +930,8 @@ class TesisController extends Controller
 
         
     }
+
+    //En este update es correspondiente a la evaluacion del profesor, el puede rechazar donde el formulario de tesis volveria al alumno(estado1=1, estado2=null, en caso de acepta se envia al director y se le mostrará a este en sus solicitudes de tesis, y estado1=2 y estado2=1.
 
     public function update3($id, Request $request)
     {
@@ -991,7 +1004,8 @@ class TesisController extends Controller
         return view('welcome');
     }
 
-
+        //Se almacena la evaluacion realizada por el director de tesis si acepta estado1 será =4 y estado2=1, ademas el campo fecha_inscripcion tomará el valor del dia actual,y en caso contrario tomará un estado1=5, y estado2=0.
+    
     	public function update4(Request $request,$id)
     {
 
@@ -1073,6 +1087,8 @@ class TesisController extends Controller
         return back()->with('status','La tesis ha sido eliminada con exito');
     }
 
+
+    //Vista para generar informe de tesis relacionadas a empresas, recordar que los valores estado1=4 y estado2=1, son para las tesis inscritas, y posteriormente se verifica que la fecha de inscripcion pertenezca a los rangos de fechas definidos en la vista rango_fechas
     public function printTesis(Request $request){
 
        $fecha_inicio=$request->fecha_inicio;
@@ -1083,7 +1099,7 @@ class TesisController extends Controller
 
 		return $html;
    }
-
+   //Vista para generar informe de tesis relacionadas a proyectos, recordar que los valores estado1=4 y estado2=1, son para las tesis inscritas, y posteriormente se verifica que la fecha de inscripcion pertenezca a los rangos de fechas definidos en la vista rango_fechas
 
     public function printTesisp(Request $request){
 
@@ -1095,7 +1111,7 @@ class TesisController extends Controller
 
 		return $html;
    }
-
+  // Vista para generar informe de tesis relacionadas a comunidad, recordar que los valores estado1=4 y estado2=1, son para las tesis inscritas, y posteriormente se verifica que la fecha de inscripcion pertenezca a los rangos de fechas definidos en la vista rango_fechas
    public function printTesisc(Request $request){
 
         $fecha_inicio=$request->fecha_inicio;
@@ -1106,7 +1122,7 @@ class TesisController extends Controller
 
 		return $html;
    }
-
+   //Vista para generar informe de tesis relacioandas a fondos concursables, recordar que los valores estado1=4 y estado2=1, son para las tesis inscritas, y posteriormente se verifica que la fecha de inscripcion pertenezca a los rangos de fechas definidos en la vista rango_fechas
    public function printTesisfc(Request $request){
 
         $fecha_inicio=$request->fecha_inicio;
@@ -1131,7 +1147,7 @@ class TesisController extends Controller
         //dd($tesistas);
         return view('tesis.index_al_sec',compact('tesistas'));
    }
-
+   //Una vez que el alumno haya presentado su tesis la secretaria podra insertar la nota de tesis en el sistema
    public function ingresar_nota_tesis($id)
    {
      $tesis=Tesis::find($id);
@@ -1146,7 +1162,8 @@ class TesisController extends Controller
         $tes->update();
         return view('secretariahome');
    } 
-
+        //Una vez que el alumno haya subido su constancia de examen se le redireccionará a la vista para definir su fecha de 
+        //inscripcion tesis 
       public function fecha_presentacion($id)
    {
      //dd($id);
@@ -1156,7 +1173,7 @@ class TesisController extends Controller
      return view('tesis.fecha_presentacion',compact('tesis'));  
 
    }
-
+   //Se guarda la fecha seleccionada//
    public function update_fecha_presentacion($id, Request $request)
    {
         //dd($request);
@@ -1167,7 +1184,7 @@ class TesisController extends Controller
         return view('alumnohome');
    }
 
-
+   //En esta vista la secretaria selecciona el acta ya compleetada la presentacion y lo sube.
    public function vista_subir_acta($id)
     {
         if($id==null){
@@ -1186,7 +1203,7 @@ class TesisController extends Controller
 
     }
 
-
+    //Aca se recibe el documento y se almacena en la ruta public/acta.
     public function update_acta_ex($id, Request $request)
     {       
 
@@ -1217,7 +1234,7 @@ class TesisController extends Controller
         return view('secretariahome',compact('tesis'));
     }
 
-
+    //Para poder visualizar el pdf de acta del alumno y pdf de constancia examen que sube el alumno se uso el paquete PDFMERGE, que permite habiendo creado una carpeta en este caso en public\acta_ex y public\constancia_ex donde se almacenaran estos documentos que se suban al sistema, y se visualizarán desde estas rutas mas tarde.
         public function verPDF($id){
 
         $tesis = Tesis::find($id);
@@ -1234,6 +1251,7 @@ class TesisController extends Controller
 
     }
 
+    //Vista para hacer consulta en intervalos de tiempo
     public function rango_fechas()
     {
 
@@ -1261,12 +1279,14 @@ class TesisController extends Controller
         }
 
     }
-
+    //en caso de error al generar pdf.
     public function error_generar_pdf()
     {
          return view('tesis.error_generar_pdf');   
 
     }
+
+    //Muestra vista con seleccion de informes recibe fecha_inicio y fecha_fin del formulario rango fechas
     public function informes_rangos_fechas(Request $request)
     {
        
@@ -1292,11 +1312,34 @@ class TesisController extends Controller
             return view('tesis.informes_generar_pdf',compact('fecha_inicio','fecha_final'));
             }
         }
-        return view('tesis.informes_generar_pdf');
-     
+        return view('tesis.sinpermiso');
+         //Pasa los datos de fecha_inicio y fecha_final a la vista que muestra una lista de informes posibles.
     
- 
+        
 
         }
+
+        public function imprimir_pend_venc()
+        {
+         $notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->where('nota_pendiente','<',now())->where('fecha_presentacion_tesis','=',null)->get(); 
+
+         return view('tesis.pendientes_vencidas',compact('notas_pendientes_vencidas'));
+        }
+
+        public function imprimir_pro_venc()
+        {
+            $notas_prorrogas_vencidas=DB::table('tesis')->whereNotNull('nota_prorroga')->where('nota_prorroga','<',now())->where('fecha_presentacion_tesis','=',null)->get();
+            return view('tesis.prorrogas_vencidas',compact('notas_prorrogas_vencidas'));
+        }
+
+        public function imprimir_pend_pro_venc()
+        {
+            $notas_pend_pro_vencidas= DB::table('tesis')->where('fecha_presentacion_tesis','=',null)->whereNotNull('nota_prorroga')->where('nota_prorroga','<',now())->orwhereNull('nota_prorroga')->where('nota_pendiente','<',now())->where('fecha_presentacion_tesis','=',null)->get();
+
+            return view('tesis.pend_pro_vencidas',compact('notas_pend_pro_vencidas'));
+            
+        }
+
+
        
 }

@@ -19,7 +19,7 @@
 
     <table class="table table-bordered">
         <tr>
-          <th>Nombre PDF</th>
+          <th>Nombre Tesis PDF</th>
           <th>Opcion</th>
         </tr>
         <tr>
@@ -27,7 +27,7 @@
         <td><a class="btn btn-primary" href="#" id="descargaPDF_empresas"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
       <tr>
-        <td>Proyectos</td>
+        <td>Proyectos/td>
         <td><a class="btn btn-primary" href="#" id="descargaPDF_proyectos"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
       <tr>
@@ -54,15 +54,28 @@
         <td>Tesis Inscritas</td>
         <td><a class="btn btn-primary" href="#" id="descargaPDF_inscritas"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
+      <tr>
+        <td>Notas Pendientes vencidas</td>
+        <td><a class="btn btn-primary" href="#" id="descargaPDF_pendientes"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
+      </tr>
+      <tr>
+        <td>Notas Prorrogas vencidas</td>
+        <td><a class="btn btn-primary" href="#" id="descargaPDF_prorrogas"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
+      </tr>
+      <tr>
+        <td>Notas Pendientes y de Prorroga vencidas</td>
+        <td><a class="btn btn-primary" href="#" id="descargaPDF_pend_pro"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
+      </tr>
      </table>
      </div>
      </div>
      </div>
      </div>
-     <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
+     <a href="{{ url('directorhome')}}" class="btn btn-default">Volver a home</a>
      </div>
 </div>
 
+<!-- Los script aca abajo detallados , son los que envian a los controladores de las respectivas rutas la fecha de inicio y la fecha final para abrir una nueva veentana en blanco y escribir sobre un documento los datos de la consulta realizada en aquel controlador. -->
 <script>
   $(function(){
     $('#descargaPDF_empresas').on('click', function(){
@@ -223,8 +236,54 @@
     });
   });
 </script>
+<!-- Vistas para ver notas pendientes y de prorrogas vencidas a dia de hoy-->
+
+<script>
+  $(function(){
+    $('#descargaPDF_pendientes').on('click', function(){
+      $.ajax({
+        url:'{{route('descargar_pendientes_vencidas')}}',
+        type:'get',
+               success: function(data){
+          var ventana=window.open("", "_blank");
+          ventana.document.write(data);
+          ventana.document.close();
+        }
+      })
+    });
+  });
+</script>
+
+<script>
+  $(function(){
+    $('#descargaPDF_prorrogas').on('click', function(){
+      $.ajax({
+        url:'{{route('descargar_prorrogas_vencidas')}}',
+        type:'get',
+               success: function(data){
+          var ventana=window.open("", "_blank");
+          ventana.document.write(data);
+          ventana.document.close();
+        }
+      })
+    });
+  });
+</script>
 
 
-
-
+<script>
+  $(function(){
+    $('#descargaPDF_pend_pro').on('click', function(){
+      $.ajax({
+        url:'{{route('descargar_pend_pro_vencidas')}}',
+        type:'get',
+               success: function(data){
+          var ventana=window.open("", "_blank");
+          ventana.document.write(data);
+          ventana.document.close();
+        }
+      })
+    });
+  });
+</script>
 @endsection
