@@ -24,6 +24,7 @@ Route::get('/profesorhome', 'HomeController@index')->name('profesorhome');
 Route::get('/directorhome', 'HomeController@index')->name('directorhome');
 Route::get('/secretariahome','HomeController@index')->name('secretariahome');
 
+
 			 												
 
 Route::get('/users', 'UsersController@index')->name('users.index');
@@ -49,6 +50,8 @@ Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.t
 //Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.comunidad');
 Route::get('/tesis_inscritas_profesor', 'TesisController@index2_ins_pro')->name('tesis.index2_ins_pro');
 Route::get('/tesis{tesis}', 'TesisController@edit')->name('tesis.edit');
+Route::get('/repositorio_tesis','TesisController@repositorio_tesis')->name('tesis.repositorio_tesis');
+Route::get('/mostrar_tesis/{id}', 'TesisController@mostrar_tesis')->name('tesis.show');
 
 Route::get('/pedir_nota_pendiente/{tesis}', 'TesisController@pedir_nota_pendiente')->name('tesis.pedir_nota_pendiente');
 Route::put('/nota_pendiente_ingresada/{tesis}','TesisController@save_nota_pendiente')->name('tesis.save_nota_pendiente');

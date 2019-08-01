@@ -7,6 +7,7 @@ use App\Comision;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+ use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Contracts\Auth\Guard;
 use iio\libmergepdf\Merger;
@@ -21,6 +22,26 @@ use Session;
 
 class TesisController extends Controller
 {
+
+    public function repositorio_tesis()
+    {
+        $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())->paginate(7);
+        foreach($tesis as $tes)
+        {
+        $var=$tes->abstract;
+        $tes->abstract_res=Str::limit($var,309);
+        }
+        return view('tesis.repositorio_tesis',compact('tesis'));
+    }
+
+    public function mostrar_tesis($id)
+        {
+        //$tesis=DB::table('tesis')->where('id', $id)->first();
+
+        $tes=DB::table('tesis')->where('id',$id)->first();
+        //dd($com);
+            return view('tesis.mostrar_tesis',compact('tes'));
+        }
 	
     /*public function tesis_empresa()
 	{
@@ -1246,7 +1267,7 @@ class TesisController extends Controller
     public function verPDF_acta($id){
 
         $tesis = Tesis::find($id);
-        $pathToFile =public_path().'\acta_ex/'.$tesis->constancia_ex;
+        $pathToFile =public_path().'\acta_ex/'.$tesis->acta_ex;
         return response()->file($pathToFile);
 
     }
