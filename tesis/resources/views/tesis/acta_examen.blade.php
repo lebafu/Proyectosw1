@@ -63,7 +63,7 @@
 
 		<h4>Realizada la exposición se concluye que la nota final de la exposicion es:</h4>
 
-		<div class="row" style="margin-top:200px" align="center">
+		<div class="row" style="margin-top:50px" align="center">
 			<div class="col-4">
 				<h4>....................................</h4>
 				<h4>{{$tes->profesor_guia}}</h4>  
@@ -84,7 +84,7 @@
 			</div>			
 		</div>
 
-		<div class="row" style="margin-top:100px" align="center">
+		<div class="row" style="margin-top:50px" align="center">
 			@if($tes->profesor3_comision!="Ninguno")
 			<div class="col-4">
 				<h4>....................................</h4>
@@ -112,9 +112,9 @@
 		</div>
 		@endforeach		
 
-			<div class="row">
+			<div class="row" style="margin-top:80px">
 				<div class="col-12">
-					<h4 align="right">Dr. Paulo Gonzalez Gutierrez<h4>
+					<h4 align="right">DR. PAULO GONZALEZ GUTIERREZ<h4>
 				</div>
 				<div class="col-11">
 					<h4 align="right">Director<h4>

@@ -30,12 +30,12 @@
           <td>{{$user->email}}</td>
           <td>
 
-            <a href="{{url('/usersmostrar/'.$user->id)}}" type= button class="btn-btn-info"><span class="glyphicon glyphicon-eye-open"></span>Ver detalles</a> 
+            <a href="{{url('/usersmostrar/'.$user->id)}}" type= button class="btn-btn-info"><span class="glyphicon glyphicon-eye-open"></span></a> 
             <br>
-            <a href="{{URL::action('UsersController@edit', $user->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
+            <a href="{{URL::action('UsersController@edit', $user->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
              <br>
            <form action="{{ route('users.destroy', $user->id)}}" method="POST">
-          <button type="submit" class="btn btn-danger"><span class="fas fa-trash">Eliminar</span>
+          <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
           <br>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}

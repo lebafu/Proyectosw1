@@ -73,6 +73,7 @@ body {
 
 <div class="navbar">
   <a href="#home">Home</a>
+   <!--Inicio de navbar-->
   <div class="dropdown">
     <button class="dropbtn">Tesis
       <i class="fa fa-caret-down"></i>
@@ -82,7 +83,8 @@ body {
       <a href="{{url('/tesis_dir_ins')}}">Tesis Inscritas</a>
     </div>
   </div> 
-  <div class="dropdown">
+  <!--Fin de navbar Todos los navbar tienen la misma estructura-->
+ <!-- <div class="dropdown">
     <button class="dropbtn">Filtrar tesis por tipo de vinculacion
       <i class="fa fa-caret-down"></i>
     </button>
@@ -102,7 +104,7 @@ body {
       <a href="{{url('/filtro_nota_pendiente')}}">Conocer notas de pendiente a vencer</a>
       <a href="{{url('/filtro_nota_prorroga')}}">Conocer notas de prorroga a vencer</a>
     </div>
-  </div>
+  </div> Estas vistas estos  dropdown list tenian utilidad cuando los informes no se obtenian por rango y se veian el listado de tesis completa asociado a proyecto, empresas, etc, pero se ha privilegiado el link que hace la consulta aqui abajo--> 
   <div class="dropdown">
     <button class="dropbtn">Obtener Informes
       <i class="fa fa-caret-down"></i>

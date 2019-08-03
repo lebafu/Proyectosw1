@@ -35,7 +35,9 @@ class Tesis extends Model
     'nota_prorroga',
     'constancia_ex',
     'acta_ex',
-    'fecha_presentacion_tesis'
+    'fecha_presentacion_tesis',
+    'publicar',
+    'abstract'
     ];
 
      public function scopeNombre_completo($query, $nombre_completo)

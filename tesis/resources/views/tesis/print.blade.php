@@ -38,5 +38,5 @@
 	</script>
 
 </body>
-<a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
+
 </html>

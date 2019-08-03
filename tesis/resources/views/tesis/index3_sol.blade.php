@@ -32,17 +32,19 @@
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}}</td>
           <td>
+          <div class="row">
+            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye"></span>
 
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye">Ver detalles</span>
-
-            <a href="{{URL::action('TesisController@edit3', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
-             <a href="{{url('/tesis_director_evaluar/'.$tesis->id)}}">Evaluar</a> 
+            <a href="{{URL::action('TesisController@edit3', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+             <a href="{{url('/tesis_director_evaluar/'.$tesis->id)}}" class="btn btn-info"><span class="fas fa-check"></span></a> 
             
            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
-          <button type="submit"  class="btn btn-danger"><span class="fas fa-trash">Eliminar</span>
+          <button type="submit"  class="btn btn-danger"><span class="fas fa-trash"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
+          </button>
+        </div>
       </td>
         </tr>
         @endforeach

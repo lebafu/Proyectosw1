@@ -10,7 +10,7 @@
     <div class="col-md-8">
       <div class="card">
         <div class="card-header">{{ __('Repositorio de Tesis') }}</div>
-          <div class="card-body">
+          <div class="card-body"> <!--Para hacer buscadores-->
           {{ Form::open(['route' => 'repositorio_tesis', 'method'=>'GET','class'=>'form-inline pull-right'])}}
           <div class="form-group">
             {{Form::text('nombre_completo',null,['class'=>'form-control','placeholder' => 'Autor'])}}
@@ -32,23 +32,25 @@
     <table class="table table-bordered">
         @foreach($tesis as $tes)
         <tr>
-           <p><a href="{{url('/mostrar_tesis/' .$tes->id)}}">{{$tes->nombre_tesis}}</a></p>
+           <p><a href="{{url('/mostrar_tesis/' .$tes->id)}}">{{$tes->titulo}}</a></p>
            <p>{{$tes->nombre_completo}}</p>
            <p>{{$tes->abstract_res}}</p>
-           <p><a href="{{ route('verPDF', ['id' => $tes->id]) }}" class="btn btn-simple btn-primary btn-icon edit">Ver PDF</a></p>
+           @if($tes->publicar==1)
+           <p><a href="{{ route('verPDF', ['id' => $tes->id]) }}" target="_blank" class="btn btn-primary"><span class="fa fa-print"></span>Descargar PDF</a></p>  <!--Al añadir target="_blank", permite que se habra una pestaña nueva con la ruta especificada -->
+           @endif
         </tr>
         @endforeach
      </table>
      </div>
      </div>
+     <a href="{{ url('') }}" class="btn btn-default">Volver a home</a> 
      </div>
      </div>
      </div>
 </div>
 
     
+    
  
-
-
-{!! $tesis->render() !!}
+{!! $tesis->render() !!}  <!-- Para paginacion -->
 @endsection

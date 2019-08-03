@@ -25,6 +25,7 @@ class TesisController extends Controller
 
     public function repositorio_tesis(Request $request)
     {
+        //Para usar la funcion now(), se modifico en app/config/app.php 'timezone' => 'UTC' a 'America/Santiago', para que tome la hora del pais. 
         //dd($request);
         //$palabra=$request->get('palabra');
         //dd($request);
@@ -52,8 +53,10 @@ class TesisController extends Controller
             ->paginate(7);
             foreach($tesis as $tes)
             {
+                $var_titulo=$tes->nombre_tesis;
+                $tes->titulo=Str::limit($var_titulo,100);
                 $var=$tes->abstract;
-                $tes->abstract_res=Str::limit($var,309);
+                $tes->abstract_res=Str::limit($var,309); //variable para cortar string y mostrarlo en la vista
             }
              return view('tesis.repositorio_tesis',compact('tesis'));
         }else{
@@ -61,6 +64,8 @@ class TesisController extends Controller
             {
                 foreach($tesis as $tes)
             {
+                $var_titulo=$tes->nombre_tesis;
+                $tes->titulo=Str::limit($var_titulo,100);
                 $var=$tes->abstract;
                 $tes->abstract_res=Str::limit($var,309);
             }
@@ -77,6 +82,8 @@ class TesisController extends Controller
                         
                         foreach($tesis as $tes)
                         {
+                             $var_titulo=$tes->nombre_tesis;
+                             $tes->titulo=Str::limit($var_titulo,100);
                              $var=$tes->abstract;
                              $tes->abstract_res=Str::limit($var,309);
                         }
@@ -85,11 +92,14 @@ class TesisController extends Controller
                             if($nombre_completo==null and $nombre_tesis!=null and $abstract!=null)
                             {
                                  $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())
+                                 
                                  ->where('nombre_tesis','like',"%$nombre_tesis%")
                                  ->where('abstract','like',"%$abstract%")
                                  ->paginate(7);
                                 foreach($tesis as $tes)
                                 {
+                                    $var_titulo=$tes->nombre_tesis;
+                                    $tes->titulo=Str::limit($var_titulo,100);
                                     $var=$tes->abstract;
                                     $tes->abstract_res=Str::limit($var,309);
                                 }
@@ -98,12 +108,15 @@ class TesisController extends Controller
                                 if($nombre_completo!=null and $nombre_tesis==null and $abstract==null)
                                 {
                                      $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())
+                                     
                                     ->where('nombre_completo','like',"%$nombre_completo%")
                                     ->paginate(7);
                                     //dd($request);
                                     //dd($tesis);
                                 foreach($tesis as $tes)
                                 {
+                                    $var_titulo=$tes->nombre_tesis;
+                                    $tes->titulo=Str::limit($var_titulo,100);
                                     $var=$tes->abstract;
                                    $tes->abstract_res=Str::limit($var,309);
                                 }
@@ -112,10 +125,13 @@ class TesisController extends Controller
                                     if($nombre_completo==null and $nombre_tesis!=null and $abstract==null)
                                     {
                                          $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())
+                                         
                                          ->where('nombre_tesis','like',"%$nombre_tesis%")->paginate(7);
                                          //dd($tesis);
                                              foreach($tesis as $tes)
                                             {
+                                             $var_titulo=$tes->nombre_tesis;
+                                             $tes->titulo=Str::limit($var_titulo,100);
                                              $var=$tes->abstract;
                                              $tes->abstract_res=Str::limit($var,309);
                                             }
@@ -124,11 +140,14 @@ class TesisController extends Controller
                                         if($nombre_completo!=null and $nombre_tesis!=null and $abstract==null)
                                         {
                                         $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())
+                                        
                                          ->where('nombre_completo','like',"%$nombre_completo%")
                                          ->where('nombre_tesis','like',"%$nombre_tesis%")->paginate(7);
                                         }
                                             foreach($tesis as $tes)
                                             {
+                                                $var_titulo=$tes->nombre_tesis;
+                                                $tes->titulo=Str::limit($var_titulo,100);
                                                 $var=$tes->abstract;
                                                 $tes->abstract_res=Str::limit($var,309);
                                             }
@@ -143,6 +162,7 @@ class TesisController extends Controller
                     }      
             }
         $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())
+        
         ->where('nombre_completo','like',"%$nombre_completo%")
         ->where('nombre_tesis','like',"%$nombre_tesis%")
         ->where('abstract','like',"%$abstract%")
@@ -152,6 +172,8 @@ class TesisController extends Controller
         ->paginate(7);
         foreach($tesis as $tes)
         {
+        $var_titulo=$tes->nombre_tesis;
+        $tes->titulo=Str::limit($var_titulo,100);
         $var=$tes->abstract;
         $tes->abstract_res=Str::limit($var,309);
         }
@@ -250,13 +272,20 @@ class TesisController extends Controller
         public function index2_ins_pro()
     {
         $id=Auth::id();
+        $user=User::findorfail($id);
         if($id==null){
             return('tesis.sinpermiso');
+        }else{
+            if($user->tipo_usuario==2){
+                $user=User::findorfail($id);
+                //dd($user->name);
+                $tesistas=DB::table('tesis')->where('profesor_guia','=',$user->name)->orderby('fecha_peticion','desc')->paginate(7);
+                return view('tesis.index2_ins_pro',compact('tesistas','user'));
+            }else{
+                return view('tesis.sinpermiso');
+            }
         }
-        $user=User::findorfail($id);
-        //dd($user->name);
-        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->paginate(7);
-        return view('tesis.index2_ins_pro',compact('tesistas','user'));
+        
 
     }
 
@@ -311,13 +340,32 @@ class TesisController extends Controller
         }
         $user=User::findorfail($id);
         if($user->tipo_usuario==3){
-        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->paginate(7);
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->get();
+        //dd($tesistas);
         return view('tesis.imprimir_tesis_inscritas',compact('tesistas','user'));
        }else{
         return view('tesis.sinpermiso');
        }
 
     }
+
+    public function imprimir_todas_tesis_ins()
+    {
+        $id=Auth::id();
+        if($id==null){
+            return view ('tesis.sinpermiso');
+        }
+        $user=User::findorfail($id);
+        if($user->tipo_usuario==3){
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->get();
+        //dd($tesistas);
+        return view('tesis.imprimir_todas_tesis_ins',compact('tesistas','user'));
+       }else{
+        return view('tesis.sinpermiso');
+       }
+
+    }
+
         //Muestra tesis del alumno.
         public function index1()
     {
@@ -461,13 +509,8 @@ class TesisController extends Controller
 
         $tesis=DB::table('tesis')->where('id',$id)->first();
         $comision=DB::table('comision')->where('id',$id)->first();
-        $tes=$tesis;
-        $com=DB::table('comision')->where('id',$id)->first();
         //dd($com);
-        if($com==null){
-            return view('tesis.edit2',compact('tes','com'));
-        }
-            return view('tesis.show',compact('tesis','comision'));
+        return view('tesis.show',compact('tesis','comision'));
         }
 
         //Permite editar el formulario al alumno
@@ -1052,7 +1095,7 @@ class TesisController extends Controller
                     return view('tesis.vista_subir_archivo',compact('tes'));
             }
             else{
-                return view('tesis.archivosubido');
+                return back()->with('msj','Usted ya ha subido archivo, pero puede actualizarlo');
             }
         }
 
@@ -1063,12 +1106,15 @@ class TesisController extends Controller
     {       
 
         //dd($request);
+        //dd($request->abstract);
         $tesis=Tesis::find($id);
         if($request->hasFile('constancia_ex')){
          $file = $request->file('constancia_ex');
         $name = time().$file->getClientOriginalName();
         $file->move(public_path().'\constancia_ex/', $name);
         $tesis->constancia_ex=$name;
+        $tesis->publicar=$request->publicar;
+        $tesis->abstract=$request->abstract;
         $tesis->update();
         //dd($tes);
         //($request->file('constancia_ex')->store('public'));
@@ -1243,7 +1289,7 @@ class TesisController extends Controller
 
        $fecha_inicio=$request->fecha_inicio;
        $fecha_final=$request->fecha_final;
-       $tes_empresas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Empresa')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
+       $tes_empresas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Empresa')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();
 
 		$html = view('tesis.print', ['tes_empresas' => $tes_empresas])->render();
 
@@ -1255,7 +1301,7 @@ class TesisController extends Controller
 
         $fecha_inicio=$request->fecha_inicio;
        $fecha_final=$request->fecha_final;
-        $tes_proyectos=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Proyecto')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
+        $tes_proyectos=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Proyecto')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();
 
 		$html = view('tesis.printTesisp', ['tes_proyectos' => $tes_proyectos])->render();
 
@@ -1266,7 +1312,7 @@ class TesisController extends Controller
 
         $fecha_inicio=$request->fecha_inicio;
        $fecha_final=$request->fecha_final;
-    	 $tes_comunidad=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Comunidad')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7); 
+    	 $tes_comunidad=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Comunidad')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get(); 
 
 		$html = view('tesis.printTesisc', ['tes_comunidad' => $tes_comunidad])->render();
 
@@ -1277,7 +1323,7 @@ class TesisController extends Controller
 
         $fecha_inicio=$request->fecha_inicio;
         $fecha_final=$request->fecha_final;
-    	$tes_fondoconcursable=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Fondo concusable')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);  
+    	$tes_fondoconcursable=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Fondo concusable')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();  
 
 		$html = view('tesis.printTesisfc', ['tes_fondoconcursable' => $tes_fondoconcursable])->render();
 

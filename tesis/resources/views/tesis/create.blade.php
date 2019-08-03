@@ -115,26 +115,25 @@
                        
  
                       <div class="form-group row">
-                            <div class="col-md-6">
                                 <label for="descripcion" class="col-md-4 col-form-label text-md-right">{{ __('Descripcion') }}</label>
-                                <textarea name="descripcion" type="text" rows="10" cols="40" class="form-control",name="descripcion" required="required" >Descripcion</textarea>
+                                 <div class="col-md-6">
+                                <textarea name="descripcion" type="text" rows="10" cols="40" class="form-control" required="required" >Descripcion</textarea>
                              </div>
                         </div>
 
 
                          <div class="form-group row">
-                            <div class="col-md-6">
-                                <label for="objetivos" class="col-md-4 col-form-label text-md-right">{{ __('Objetivos') }}</label>
-                                <textarea name="objetivos" type="text" rows="10" cols="40" class="form-control",name="objetivos" required="required" >Escriba aqui los objetivos</textarea>
+                                <label for="objetivos" class="col-md-4 col-form-label text-md-right">{{ __('Objetivos') }}</label><div class="col-md-6">
+                                <textarea name="objetivos" type="text" rows="10" cols="40" class="form-control"" required="required" >Escriba aqui los objetivos</textarea>
                              </div>
                         </div>
  
 
- 
+
                       <div class="form-group row">
-                            <div class="col-md-6">
                                 <label for="contribucion" class="col-md-4 col-form-label text-md-right">{{ __('Contribucion') }}</label>
-                                <textarea name="contribucion" type="text" rows="10" cols="40" class="form-control",name="objetivos" required="required" >Escriba aqui los objetivos</textarea>
+                                <div class="col-md-6">
+                                <textarea name="contribucion" type="text" rows="10" cols="40" class="form-control" required="required" >Escriba aqui los objetivos</textarea>
                              </div>
                         </div>
 

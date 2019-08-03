@@ -19,7 +19,7 @@
 
     <table class="table table-bordered">
         <tr>
-          <th>Nombre Tesis PDF</th>
+          <th>Nombre Tesis por intervalo PDF</th>
           <th>Opcion</th>
         </tr>
         <tr>
@@ -54,19 +54,21 @@
         <td>Tesis Inscritas</td>
         <td><a class="btn btn-primary" href="#" id="descargaPDF_inscritas"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
+     </table>
+      <table class="table table-bordered">
+        <tr>
+          <th>Nombre Tesis sin intervalos</th>
+          <th>Opcion</th>
+        </tr>
       <tr>
         <td>Notas Pendientes vencidas</td>
         <td><a class="btn btn-primary" href="#" id="descargaPDF_pendientes"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
       <tr>
         <td>Notas Prorrogas vencidas</td>
-        <td><a class="btn btn-primary" href="#" id="descargaPDF_prorrogas"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
+        <td><a class="btn btn-primary" href="#" id="descargaPDF_prorrogas"><span class="fa fa-print"></span> Descargar PDF</a></td>
       </tr>
-      <!--<tr>
-        <td>Notas Pendientes y de Prorroga vencidas</td>
-        <td><a class="btn btn-primary" href="#" id="descargaPDF_pend_pro"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
-      </tr>-->
-     </table>
+    </table>
      </div>
      </div>
      </div>

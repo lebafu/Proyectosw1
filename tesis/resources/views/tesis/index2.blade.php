@@ -28,21 +28,21 @@
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->fecha_peticion}}}</td>
+          <td>{{$tesis->fecha_peticion}}</td>
           <td>
 
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye">Ver detalles</span></a>
-            <br>
-            <a href="{{url('/tesis_profesor/'.$tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
-            <br>
-            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id)}}">Evaluar</a> 
-            <br>
+           <div class="row">
+            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
+            <a href="{{url('/tesis_profesor/'.$tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+    
+            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id)}}" class="btn btn-info"><span class="fas fa-check"></span></a> 
            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
-          <button type="submit" class="btn btn-danger">Eliminar<span class="fas fa-trash"></span>
-            <br>
+          <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
+          </button>
+        </div>
       </td>
         </tr>
         @endif

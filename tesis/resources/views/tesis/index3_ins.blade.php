@@ -32,20 +32,20 @@
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->area_tesis}}</td>
-          <td>{{$tesis->nombre_tesis}}}</td>
+          <td>{{$tesis->nombre_tesis}}</td>
           <td>{{$tesis->tipo_vinculacion}}</td>
           <td>
-
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye">Ver detalles</span></a>
-            <br>
-            <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
-            <br>
+          <div class="row">
+            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
+            
+               <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a> 
+        
            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
-          <button type="submit"  class="btn btn-danger"><span class="fas fa-trash">Eliminar</span>
-            <br>
+          <button type="submit"  class="btn btn-danger"><span class="fas fa-trash"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
+          </button>
       </td>
         </tr>
         @endif
@@ -69,7 +69,7 @@
   $(function(){
     $('#descargaPDF').on('click', function(){
       $.ajax({
-        url:'{{route('descargar_tesis_ins')}}',
+        url:'{{route('descargar_todas_tesis_ins')}}',
         type:'get',
         success: function(data){
           var ventana=window.open("", "_blank");
@@ -82,5 +82,6 @@
 </script>
 
 
-
+  
+{!! $tesistas->render() !!}
 @endsection

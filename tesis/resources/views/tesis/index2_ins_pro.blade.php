@@ -1,13 +1,14 @@
 @extends('layouts.app')
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 
 @section('content')
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Solicitudes de tesis')}}</div>
+        <div class="card-header">{{ __('Tesis inscritas a profesor')}}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
@@ -27,18 +28,19 @@
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}}</td>
           <td>
-
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye">Ver detalles</span></a>
-            <br>
-            <a href="{{url('/tesis_profesor/'.$tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span>Editar</a>
-            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id)}}">Evaluar</a> 
-            <br>
+          <div class="row">
+            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
+            <a href="{{url('/tesis_profesor/'.$tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+         <!-- </div>-->
+          <div class="row">
+            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id)}}" class="btn btn-info"><span class="fas fa-check"></span></a> 
            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
-          <button type="submit" class="btn btn-danger"><span class="fas fa-trash">Eliminar</span>
-            <br>
+          <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
+          </button>
+        </div>
       </td>
         </tr>
         @endif

@@ -120,25 +120,27 @@
                         </div>
 
                        
- 
-                        <div class="form-group row">
+                         <div class="form-group row">
                             <label for="descripcion" class="col-md-4 col-form-label text-md-right">{{ __('Descripcion') }}</label>
                             <div class="col-md-6">
-                                <input id="descripcion" type="text" placeholder="Breve descripcion del tema" class="form-control" name="descripcion" value="{{$tes->descripcion}}" required="required">
+                                <textarea id="descripcion" type="text" rows="10" cols="40" placeholder="Breve descripcion del tema" class="form-control" name="descripcion" value="{{$tes->descripcion}}" required="required">{{$tes->descripcion}}</textarea>
                             </div>
                         </div>
  
                        <div class="form-group row">
                             <label for="objetivos" class="col-md-4 col-form-label text-md-right">{{ __('Objetivos') }}</label>
                             <div class="col-md-6">
-                                <input id="objetivos" type="text" placeholder="Objetivos del tema" class="form-control" name="objetivos" value="{{$tes->objetivos}}" required="required">
+                                <textarea id="objetivos" type="text" rows="10" cols="40" placeholder="Objetivos del tema" class="form-control" name="objetivos" value="{{$tes->objetivos}}" required="required">{{$tes->objetivos}}</textarea>
                             </div>
                         </div>
+
+  
+
  
                        <div class="form-group row">
                             <label for="contribucion" class="col-md-4 col-form-label text-md-right">{{ __('Contribucion esperada') }}</label>
                             <div class="col-md-6">
-                                <input id="contribucion" type="text" placeholder="contribucion" class="form-control" name="contribucion" value="{{$tes->contribucion}}" required="required">
+                                <textarea id="contribucion" type="text" rows="10" cols="40" placeholder="contribucion" class="form-control" name="contribucion" value="{{$tes->contribucion}}" required="required">{{$tes->contribucion}}</textarea>
                             </div>
                         </div>
 
