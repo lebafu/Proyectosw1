@@ -17,10 +17,10 @@
            <b>Profesor Guia:</b>
            <p>{{$tes->profesor_guia}}</p>
            <b>Abstract:</b>
-           <p>{{$tes->abstract}}</p>
+           <p align="justify">{{$tes->abstract}}</p>
            @if($tes->publicar==1)
            <b>Documento PDF</b>
-           <p><a href="{{ route('verPDF', ['id' => $tes->id]) }}" class="btn btn-info"><span class="fa fa-print"></span>Ver PDF</a></p>
+           <p><a href="{{ route('verPDF', ['id' => $tes->id]) }}" class="btn btn-primary"><span class="fa fa-print"></span>Ver PDF</a></p>
            @else
             <b>Documento PDF sin permisos para descargar</b>
            @endif

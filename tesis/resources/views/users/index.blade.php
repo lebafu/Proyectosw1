@@ -30,7 +30,7 @@
           <td>{{$user->email}}</td>
           <td>
 
-            <a href="{{url('/usersmostrar/'.$user->id)}}" type= button class="btn-btn-info"><span class="glyphicon glyphicon-eye-open"></span></a> 
+            <a href="{{url('/usersmostrar/'.$user->id)}}" class="btn btn-info"><span class="far fa-eye"></span>
             <br>
             <a href="{{URL::action('UsersController@edit', $user->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
              <br>

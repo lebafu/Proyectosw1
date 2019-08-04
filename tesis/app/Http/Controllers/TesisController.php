@@ -409,7 +409,7 @@ class TesisController extends Controller
     {
         $request->validate([
             'nombre_completo' => 'required|string',
-            'rut' => 'required|string|unique:tesis|min:7|max:8',
+            'rut' => 'required|string|unique:tesis|min:11|max:12',
             'ano_ingreso' => 'required|integer',
             'profesor_guia' => 'required|string',
             'nombre_tesis' => 'required|string',
@@ -960,7 +960,7 @@ class TesisController extends Controller
         $request->validate([
             'profesor_guia' => 'required|string',
             'nombre_completo' => 'required|string',
-            'rut' => 'required|string|min:7|max:8',
+            'rut' => 'required|string|min:11|max:12',
             'ano_ingreso' => 'required|integer',
             'profesor1_comision' => 'required|string',
             'profesor2_comision' => 'required|string',
@@ -1024,7 +1024,7 @@ class TesisController extends Controller
         $request->validate([
             'profesor_guia' => 'required|string',
             'nombre_completo' => 'required|string',
-            'rut' => 'required|string|min:7|max:8',
+            'rut' => 'required|string|min:11|max:12',
             'ano_ingreso' => 'required|integer',
             'profesor1_comision' => 'required|string',
             'profesor2_comision' => 'required|string',

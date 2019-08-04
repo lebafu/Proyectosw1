@@ -34,7 +34,7 @@
         <tr>
            <p><a href="{{url('/mostrar_tesis/' .$tes->id)}}">{{$tes->titulo}}</a></p>
            <p>{{$tes->nombre_completo}}</p>
-           <p>{{$tes->abstract_res}}</p>
+           <p align="justify">{{$tes->abstract_res}}</p>
            @if($tes->publicar==1)
            <p><a href="{{ route('verPDF', ['id' => $tes->id]) }}" target="_blank" class="btn btn-primary"><span class="fa fa-print"></span>Descargar PDF</a></p>  <!--Al añadir target="_blank", permite que se habra una pestaña nueva con la ruta especificada -->
            @endif
