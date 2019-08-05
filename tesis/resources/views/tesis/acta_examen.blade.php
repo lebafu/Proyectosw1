@@ -4,10 +4,10 @@
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
-<body>
+<body> <!-- Rectangulo nota final-->
 	<style type="text/css"> 
 	.cuadrado{
-     width: 80px; 
+     width: 80px;      
      height: 40px; 
      border: 3px solid #555;
      background: #428bca;
@@ -16,19 +16,15 @@
 	<div class="container">
 		<div class="row">
 			<div>
-				<img align="left" src="{{asset('/images/logoucm.png')}}" width="300" height="175">
+				<img align="left" src="{{asset('/images/logoucm.png')}}" width="300" height="125">
 			</div>
 			<div>
 				<h5 align="center" style="margin-top:100px">FACULTAD DE CIENCIAS DE LA INGENIERÍA</h5>
 				<h5 align="center" style="">ESCUELA INGENIERÍA CIVIL INFORMÁTICA</h5>
 			</div>
 		</div>
-
-
-		<h2 align="center" style="margin-bottom: 30px; margin-top: 30px"> ACTA EXAMEN DE TÍTULO</h2>
-		<h2 align="center" style="margin-bottom: 30px; margin-top: 30px"> {{$tes->carrera}} </h2>
-
-
+		<h3 align="center" style="margin-bottom: 20px; margin-top: 30px"> ACTA EXÁMEN DE TÍTULO</h3>
+		<h3 align="center" style="margin-bottom: 20px; margin-top: 20px"> {{$tes->carrera}} </h3>
 		<h4 style="margin-bottom: 40px; margin-top: 30px">		En Talca  el dia  , se constituyó la comision Evaluadora compuesta por los señores academicos:</h4>
 		<h4></h4>
 		
@@ -196,15 +192,15 @@
 		</div>
 		@endforeach		
 
-			<div class="row" style="margin-top:80px">
+			<div class="row" style="margin-top:60px">
 				<div class="col-12">
-					<h4 align="right">DR. PAULO GONZALEZ GUTIERREZ<h4>
+					<h6 align="right">DR.PAULO GONZALEZ GUTIERREZ<h6>
 				</div>
 				<div class="col-11">
-					<h4 align="right">Director<h4>
+					<h6 align="right">Director<h6>
 				</div>
 				<div class="col-12">
-					<h4 align="right">Escuela Ingenieria Civil Informatica<h4>
+					<h6 align="right">Escuela Ingenieria Civil Informatica<h6>
 				</div>
 			</div>	
 	<script>

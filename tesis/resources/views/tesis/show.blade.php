@@ -52,6 +52,8 @@
 	@if($comision->profesor1_externo)
 	<b>Primer Profesor Externo</b>
 	<p>{{$comision->profesor1_externo}}</p>
+	<b>Grado Académico</b>
+	<p>{{$comision->profesor1_grado_academico}}</p>
 	<b>Correo electrónico Primer Profesor Externo</b>
 	<p>{{$comision->correo_profe1_externo}}</p>
 	<b>Institución Primer Profesor Externo</b>
@@ -60,6 +62,8 @@
 	@if($comision->profe2_externo)
 	<b>Segundo Profesor Externo</b>
 	<p>{{$comision->profe2_externo}}</p>
+	<b>Grado Academico</b>
+	<p>{{$comision->profe2_grado_academico}}</p>
 	<b>Correo electrónico Segundo Profesor Externo</b>
 	<p>{{$comision->correo_profe2_externo}}</p>
 	<b>Institución Segundo Profesor Externo</b>
