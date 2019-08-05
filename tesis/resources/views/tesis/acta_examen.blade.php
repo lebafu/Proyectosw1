@@ -14,9 +14,15 @@
 }</style>
   	 @foreach ($tesis as $tes)
 	<div class="container">
-		<img= align="left" src="{{asset('/images/logoucm.png')}}">
-		<h4 align="center" style="margin-botton:  30px">FACULTAD DE CIENCIAS DE LA INGENIERÍA</h4>
-		<h4 align="center" style="margin-botton:  30px">ESCUELA INGENIERÍA CIVIL INFORMÁTICA</h4>
+		<div class="row">
+			<div>
+				<img align="left" src="{{asset('/images/logoucm.png')}}" width="300" height="175">
+			</div>
+			<div>
+				<h5 align="center" style="margin-top:100px">FACULTAD DE CIENCIAS DE LA INGENIERÍA</h5>
+				<h5 align="center" style="">ESCUELA INGENIERÍA CIVIL INFORMÁTICA</h5>
+			</div>
+		</div>
 
 
 		<h2 align="center" style="margin-bottom: 30px; margin-top: 30px"> ACTA EXAMEN DE TÍTULO</h2>

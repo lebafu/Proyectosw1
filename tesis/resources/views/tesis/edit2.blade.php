@@ -194,6 +194,17 @@
                             </div>
                         </div>
 
+                         <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Grado Academico') }}</label>
+                            <div class="col-md-6">
+                                <select name="profesor1_grado_academico" id="profesor1_grado_academico" type="text" class="form-control">
+                                <option value="{{$com->profesor1_grado_academico}}">{{$com->profesor1_grado_academico}}</option>
+                                 <option value="Ing.">Ing.</option>
+                                 <option value="Mg.">Mg.</option>
+                                 <option value="Dr.">Dr.</option>
+                                 </select>
+                            </div>
+                        </div>
 
                          <div class="form-group row">
                             <label for="correo_profe1_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
@@ -223,6 +234,18 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Grado Academico') }}</label>
+                            <div class="col-md-6">
+                                <select name="profe2_grado_academico" id="profe2_grado_academico" type="text" class="form-control">
+                                <option value="{{$com->profe2_grado_academico}}">{{$com->profe2_grado_academico}}</option>
+                                <option value=""></option>
+                                 <option value="Ing.">Ing.</option>
+                                 <option value="Mg.">Mg.</option>
+                                 <option value="Dr.">Dr.</option>
+                                 </select>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="correo_profe2_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-mail') }}</label>
@@ -257,6 +280,7 @@
                             </div>
                         </div>
 
+
                         <div class="form-group row">
                             <label for="profesor2_comision" class="col-md-4 col-form-label text-md-right">{{ __('Segundo Profesor comision') }}</label>
                             <div class="col-md-6">
@@ -267,6 +291,7 @@
                                 </select>
                             </div>
                         </div>
+
 
 
                         <div class="form-group row">
@@ -289,6 +314,19 @@
                               <input id="profesor1_externo" type="text" placeholder="Primer profesor externo" class="form-control" name="profesor1_externo" value="{{ old('profesor1_externo') }}">
                             </div>
                         </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Grado Academico') }}</label>
+                            <div class="col-md-6">
+                                <select name="profesor1_grado_academico" id="profesor1_grado_academico" type="text" class="form-control" required>
+                                 <option value="Ing.">Ing.</option>
+                                 <option value="Mg.">Mg.</option>
+                                 <option value="Dr.">Dr.</option>
+                                 </select>
+                            </div>
+                        </div>
+
+              
 
 
                          <div class="form-group row">
@@ -319,6 +357,18 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Grado Academico') }}</label>
+                            <div class="col-md-6">
+                                <select name="profe2_grado_academico" id="profe2_grado_academico" type="text" class="form-control" required>
+                                 <option value="Ing.">Ing.</option>
+                                 <option value="Mg.">Mg.</option>
+                                 <option value="Dr.">Dr.</option>
+                                 </select>
+                            </div>
+                        </div>
+
+
 
                         <div class="form-group row">
                             <label for="correo_profe2_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-mail') }}</label>
@@ -332,6 +382,8 @@
                                 @enderror
                             </div>
                         </div>
+
+
 
                         
                         <div class="form-group row">

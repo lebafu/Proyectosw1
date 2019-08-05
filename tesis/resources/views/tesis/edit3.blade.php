@@ -248,6 +248,18 @@
                             </div>
                         </div>
 
+                         <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Grado Academico') }}</label>
+                            <div class="col-md-6">
+                                <select name="profesor1_grado_academico" id="profesor1_grado_academico" type="text" class="form-control" required="required">
+                                <option value="{{$com->profesor1_grado_academico}}">{{$com->profesor1_grado_academico}}</option>
+                                <option value=""></option>
+                                 <option value="Ing.">Ing.</option>
+                                 <option value="Mg.">Mg.</option>
+                                 <option value="Dr.">Dr.</option>
+                                 </select>
+                            </div>
+                        </div>   
 
                          <div class="form-group row">
                             <label for="correo_profe1_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
@@ -274,6 +286,19 @@
                             <label for="profesor2_externo" class="col-md-4 col-form-label text-md-right">{{ __('Segundo profesor externo') }}</label>
                             <div class="col-md-6">
                               <input id="profesor2_externo" type="text" placeholder="Segundo profesor externo" class="form-control" name="profesor2_externo" value="{{$com->profe2_externo}}">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Grado Academico') }}</label>
+                            <div class="col-md-6">
+                                <select name="profe2_grado_academico" id="profe2_grado_academico" type="text" class="form-control">
+                                <option value="{{$com->profe2_grado_academico}}">{{$com->profe2_grado_academico}}</option>
+                                <option value=""></option>
+                                 <option value="Ing.">Ing.</option>
+                                 <option value="Mg.">Mg.</option>
+                                 <option value="Dr.">Dr.</option>
+                                 </select>
                             </div>
                         </div>
 

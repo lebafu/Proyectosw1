@@ -33,7 +33,7 @@
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->fecha_peticion}}}</td>
+          <td>{{$tesis->fecha_peticion}}</td>
            <td>
           @if($tesis->estado1!=4 and $tesis->estado1!=5)
               En espera
@@ -67,6 +67,7 @@
           <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nueva nota de Prorroga</a></td>
          @endif
       <td>
+        
             <a href="{{url('/tesismostrar/'.$tesis->id)}}"  class="btn btn-info"><span class="far fa-eye"></span>
             <br> 
             <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>

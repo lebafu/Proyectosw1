@@ -262,7 +262,7 @@ class TesisController extends Controller
         }
         $user=User::findorfail($id);
         //dd($user->name);
-        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->paginate(7);
+        $tesistas=DB::table('tesis')->where('profesor_guia','=',$user->name)->orderby('fecha_peticion','desc')->paginate(7);
         return view('tesis.index2',compact('tesistas','user'));
 
     }
@@ -360,6 +360,23 @@ class TesisController extends Controller
         $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->get();
         //dd($tesistas);
         return view('tesis.imprimir_todas_tesis_ins',compact('tesistas','user'));
+       }else{
+        return view('tesis.sinpermiso');
+       }
+
+    }
+
+     public function imprimir_todas_tesis_sol()
+    {
+        $id=Auth::id();
+        if($id==null){
+            return view ('tesis.sinpermiso');
+        }
+        $user=User::findorfail($id);
+        if($user->tipo_usuario==3){
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',3)->where('estado2','=',1)->get();
+        //dd($tesistas);
+        return view('tesis.imprimir_todas_tesis_sol',compact('tesistas','user'));
        }else{
         return view('tesis.sinpermiso');
        }
@@ -1006,8 +1023,10 @@ class TesisController extends Controller
             'profesor2_comision' => $request->profesor2_comision,
             'profesor3_comision' => $request->profesor3_comision,
             'profesor1_externo' => $request->profesor1_externo,
+            'profesor1_grado_academico' => $request->profesor1_grado_academico,
             'correo_profe1_externo' => $request->correo_profe1_externo,
             'profe2_externo' => $request->profesor2_externo,
+            'profe2_grado_academico' => $request->profe2_grado_academico,
             'institucion1' => $request->institucion1,
             'correo_profe2_externo' => $request->correo_profe2_externo,
             'institucion2' => $request->institucion2,
@@ -1071,8 +1090,10 @@ class TesisController extends Controller
             'profesor2_comision' => $request->profesor2_comision,
             'profesor3_comision' => $request->profesor3_comision,
             'profesor1_externo' => $request->profesor1_externo,
+            'profesor1_grado_academico' => $request->profesor1_grado_academico,
             'correo_profe1_externo' => $request->correo_profe1_externo,
             'profe2_externo' => $request->profesor2_externo,
+            'profe2_grado_academico' => $request->profe2_grado_academico,
             'institucion1' => $request->institucion1,
             'correo_profe2_externo' => $request->correo_profe2_externo,
             'institucion2' => $request->institucion2,
@@ -1113,7 +1134,7 @@ class TesisController extends Controller
         $name = time().$file->getClientOriginalName();
         $file->move(public_path().'\constancia_ex/', $name);
         $tesis->constancia_ex=$name;
-        $tesis->publicar=$request->publicar;
+        //$tesis->publicar=$request->publicar;
         $tesis->abstract=$request->abstract;
         $tesis->update();
         //dd($tes);

@@ -119,6 +119,8 @@
                             </div>
                         </div>
 
+
+
                         <div class="form-group row">
                             <label for="profesor2_comision" class="col-md-4 col-form-label text-md-right">{{ __('Segundo Profesor comision') }}</label>
                             <div class="col-md-6">
@@ -142,6 +144,12 @@
                             </div>
                         </div>
 
+                         <div class="form-group row">
+                            <label for="profesor1_grado_academico" class="col-md-4 col-form-label text-md-right">{{ __('Grado Academico Primer Profesor externo') }}</label>
+                           <div class="col-md-6">
+                                 <input id="profesor1_comision" type="text" class="form-control" name="profesor1_comision" value="{{$comision->profesor1_grado_academico}}" required="required" disabled>
+                            </div>
+                        </div>
 
                          <div class="form-group row">
                             <label for="correo_profe1_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
@@ -165,6 +173,12 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="profesor1_grado_academico" class="col-md-4 col-form-label text-md-right">{{ __('Grado Academico Segundo Profesor externo') }}</label>
+                           <div class="col-md-6">
+                                 <input id="profe2_grado_academico" type="text" class="form-control" name="profesor2_grado_academico" value="{{$comision->profe2_grado_academico}}" required="required" disabled>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="correo_profe2_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-mail') }}</label>

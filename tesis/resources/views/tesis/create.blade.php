@@ -28,7 +28,7 @@
                          <div class="form-group row">
                             <label for="rut" class="col-md-4 col-form-label text-md-right">{{ __('Rut') }}</label>
                             <div class="col-md-6">
-                                <input id="rut" type="text" placeholder="rut" class="form-control" name="rut" required="required">
+                                <input id="rut" type="text" placeholder="Ej:12.345.678-9" class="form-control" name="rut" required="required">
                             </div>
                         </div>
 
@@ -89,7 +89,7 @@
                                 <select name="tipo_vinculacion" id="tipo_vinculacion" type="text" class="form-control" required="required">
                                 <option value="Empresa"> Empresa </option>
                                  <option value="Proyecto">Proyecto </option>
-                                 <option value="Fondo concusable"> Fondo concursable</option>
+                                 <option value="Fondo concusable">Fondo concursable</option>
                                  <option value="Comunidad">Comunidad</option>
                                  </select>
                             </div>

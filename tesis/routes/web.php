@@ -116,6 +116,7 @@ Route::get('/descargar_pend_venc', 'TesisController@imprimir_pend_venc')->name('
 Route::get('/descargar_pro_venc', 'TesisController@imprimir_pro_venc')->name('descargar_pro_venc');
 Route::get('/descargar_pend_pro_venc', 'TesisController@imprimir_pend_pro_venc')->name('descargar_pend_pro_venc');
 Route::get('/descargar_todas_tesis_ins','TesisController@imprimir_todas_tesis_ins')->name('descargar_todas_tesis_ins');
+Route::get('/descargar_todas_tesis_sol','TesisController@imprimir_todas_tesis_sol')->name('descargar_todas_tesis_sol');
 
 Route::get('/ingresar_nota_tesis/{tesis}', 'TesisController@ingresar_nota_tesis')->name('tesis.ingresar_nota_tesis');
 Route::put('/update_nota_tesis/{tesis}','TesisController@update_nota_tesis')->name('tesis.update_nota_tesis');

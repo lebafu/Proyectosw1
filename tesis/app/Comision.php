@@ -17,9 +17,11 @@ class Comision extends Model
     'profesor2_comision',
     'profesor3_comision',
     'profesor1_externo',
+    'profesor1_grado_academico',
     'correo_profesor1_externo',
     'institucion1',
     'profe2_externo',
+    'profeo2_grado_academico',
    	'correo_profe2_externo',
    	'institucion2',
     ];

@@ -8,7 +8,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">{{ __('Solicitudes de tesis por aprobar o rechazar') }}</div>
           <div class="card-body">
@@ -53,7 +53,31 @@
      </div>
      </div>
      </div>
-     <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
+     <a href="{{ url('directorhome') }}" class="btn btn-default">Volver a home</a>
      </div>
 </div>
+
+        <div class="col-md-3">
+                  <div class="form-group" align="center">   
+                    <a class="btn btn-primary" href="#" id="descargar_todas_tesis_sol"> <span class="fa fa-print"> </span> Descargar PDF</a>
+              </div>
+        </div>
+ <script>
+  $(function(){
+    $('#descargaPDF').on('click', function(){
+      $.ajax({
+        url:'{{route('descargar_todas_tesis_sol')}}',
+        type:'get',
+        success: function(data){
+          var ventana=window.open("", "_blank");
+          ventana.document.write(data);
+          ventana.document.close();
+        }
+      })
+    });
+  });
+</script>
+
+
+{!! $tesistas->render() !!}
 @endsection
