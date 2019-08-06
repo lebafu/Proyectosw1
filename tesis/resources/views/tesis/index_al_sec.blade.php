@@ -12,7 +12,15 @@
       <div class="card">
         <div class="card-header">{{ __('Tesis inscritas') }}</div>
           <div class="card-body">
-
+             {{ Form::open(['route' => 'tesis.index_al_sec', 'method'=>'GET','class'=>'form-inline pull-right'])}}
+            <div class="form-group">
+            {{Form::text('nombre_completo',null,['class'=>'form-control','placeholder' => 'Autor'])}}
+            </div>
+            <div class="form-group">
+            <button type="submit" class="btn btn-default">
+              <i class="fas fa-search"></i>
+            </button>
+          </div>
  <table class="table table-bordered">
         <tr>
          

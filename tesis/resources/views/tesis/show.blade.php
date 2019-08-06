@@ -92,7 +92,7 @@
 	<p>{{$tesis->nombre_tesis}}</p>
 	<b>Área Tesis</b>
 	<p>{{$tesis->area_tesis}}</p>
-	<b align="justify-content-center">Descripción</b>
+	<b align="justify">Descripción</b>
 	<p>{{$tesis->descripcion}}</p>
 	<b align="justify">Objetivos</b>
 	<p>{{$tesis->objetivos}}</p>

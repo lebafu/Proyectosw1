@@ -279,7 +279,7 @@ class TesisController extends Controller
             if($user->tipo_usuario==2){
                 $user=User::findorfail($id);
                 //dd($user->name);
-                $tesistas=DB::table('tesis')->where('profesor_guia','=',$user->name)->orderby('fecha_peticion','desc')->paginate(7);
+                $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->paginate(7);
                 return view('tesis.index2_ins_pro',compact('tesistas','user'));
             }else{
                 return view('tesis.sinpermiso');
@@ -780,11 +780,16 @@ class TesisController extends Controller
         if(!Auth::id()){
             return view('tesis.sinpermiso');
         }else{
-
             $idlogin=Auth::id();
             $user=User::findorfail($idlogin);
             $tes=Tesis::findorfail($id);
         	$comision=DB::table('comision')->where('id',$id)->first();
+            $com=DB::table('comision')->where('id',$id)->first();
+            $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+            if($comision==null){
+                //dd($comision);
+                return view('tesis.edit2',compact('tes','com','profes'));
+            }
             if($user->tipo_usuario==2 and (($tes->estado1==1) or ($tes->estado1==2))){         
         $tes->estado1=2;
         $tes->update();
@@ -1358,12 +1363,33 @@ class TesisController extends Controller
     return view('tesis.acta_examen',compact('tesis'));
    }
 
-     public function index_al_sec()
+ 
+    public function index_al_sec(Request $request)
    {
-    $tesistas=DB::table('tesis')->where('estado1','=',4)->where('estado2','=',1)->paginate(7);
-        //dd($tesistas);
-        return view('tesis.index_al_sec',compact('tesistas'));
-   }
+    if($request->nombre_completo==null){
+    $id=Auth::id();
+    $user=User::find($id);
+    if(!Auth::id() or $user->tipo_usuario!=4){  //Para garantizar que no entre usuario sin loguearse//
+        return view('tesis.sinpermiso');
+        }else{ //solo secretaria //
+            $tesistas=DB::table('tesis')->where('estado1','=',4)->where('estado2','=',1)->paginate(7);
+            return view('tesis.index_al_sec',compact('tesistas'));
+            //dd($tesistas);
+        }
+    }else{
+        $nombre_completo=$request->nombre_completo;
+        $id=Auth::id();
+        $user=User::find($id);
+        if(!Auth::id() or $user->tipo_usuario!=4){  //Para garantizar que no entre usuario sin loguearse//
+        return view('tesis.sinpermiso');
+        }else{ //solo secretaria //
+            $tesistas=DB::table('tesis')->where('nombre_completo','=',$nombre_completo)->where('estado1','=',4)->where('estado2','=',1)->paginate(7);
+            return view('tesis.index_al_sec',compact('tesistas'));
+            //dd($tesistas);
+        }
+      }
+    }
+
    //Una vez que el alumno haya presentado su tesis la secretaria podra insertar la nota de tesis en el sistema
    public function ingresar_nota_tesis($id)
    {
@@ -1429,7 +1455,7 @@ class TesisController extends Controller
         //($request->file('acta_ex')->store('public'));
 
          $tesis=Tesis::find($id);
-        if($request->hasFile('acta_ex')){
+        if($request->hasFile('acta_ex')){    //almacenar el archivo pdf/doc subido al sistema
          $file = $request->file('acta_ex');
         $name = time().$file->getClientOriginalName();
         $file->move(public_path().'\acta_ex/', $name);
@@ -1443,12 +1469,12 @@ class TesisController extends Controller
             return view('tesis.archivonosepudosubir');
         }
 
-        if($request->hasFile('acta_ex')){           //almacenar el archivo pdf/doc subido al sistema
+        /*if($request->hasFile('acta_ex')){          
             $file = $request->file('acta_ex');
             $name = time().$file->getClientOriginalName();
             $file->move('\acta_ex/', $name);
         }
-        return view('secretariahome',compact('tesis'));
+        return view('secretariahome',compact('tesis'));*/
     }
 
     //Para poder visualizar el pdf de acta del alumno y pdf de constancia examen que sube el alumno se uso el paquete PDFMERGE, que permite habiendo creado una carpeta en este caso en public\acta_ex y public\constancia_ex donde se almacenaran estos documentos que se suban al sistema, y se visualizarán desde estas rutas mas tarde.

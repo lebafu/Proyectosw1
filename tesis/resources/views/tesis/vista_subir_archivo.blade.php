@@ -2,9 +2,9 @@
 
 @section('content')
 
-@if(session()->has('msj'))
-    <div class="alert alert-success", role="alert">{{ session('msj')}}</div>
-@endif
+
+    
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -40,6 +40,8 @@
                             </div>
                         </div>
             @else
+
+                    <div class="alert alert-success", role="alert">Usted ya ha subido un archivo, pero puede modificarlo a continuación</div>
 
                      <div class="form-group row">
                             <label for="constancia_ex" class="col-md-4 col-form-label text-md-right">{{ __('Subir archivo de constancia de examen de titulo') }}</label>
