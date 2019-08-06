@@ -279,7 +279,7 @@ class TesisController extends Controller
             if($user->tipo_usuario==2){
                 $user=User::findorfail($id);
                 //dd($user->name);
-                $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->paginate(7);
+                $tesistas=DB::table('tesis')->where('profesor_guia','=',$user->name)->orderby('fecha_peticion','desc')->paginate(7);
                 return view('tesis.index2_ins_pro',compact('tesistas','user'));
             }else{
                 return view('tesis.sinpermiso');
@@ -1121,11 +1121,14 @@ class TesisController extends Controller
                     return view('tesis.vista_subir_archivo',compact('tes'));
             }
             else{
-                return back()->with('msj','Usted ya ha subido archivo, pero puede actualizarlo');
+                if($tes->fecha_presentacion_tesis >= now()){
+                return view('tesis.vista_subir_archivo',compact('tes'));
+            }else{
+                return view('tesis.archivosubido');
             }
         }
-
     }
+}
 
     //Se guarda el archivo subido por el alumno de constancia de examen
     public function update_archivo_ex($id, Request $request)
