@@ -321,6 +321,10 @@ class TesisController extends Controller
         if($user->tipo_usuario==3){
         $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->paginate(7);
         //dd($tesistas);
+         foreach($tesistas as $tesis)
+        {
+        $tesis->nombre_tes_res=Str::limit($tesis->nombre_tesis,30);
+        }
         return view('tesis.index3_ins',compact('tesistas','user'));
        }else{
        	return view('tesis.sinpermiso');
@@ -1118,6 +1122,7 @@ class TesisController extends Controller
         {
             $tes=Tesis::find($id);
             if($tes->estado1==4 and $tes->estado2==1 and $tes->constancia_ex==null){
+
                     return view('tesis.vista_subir_archivo',compact('tes'));
             }
             else{
@@ -1142,7 +1147,7 @@ class TesisController extends Controller
         $name = time().$file->getClientOriginalName();
         $file->move(public_path().'\constancia_ex/', $name);
         $tesis->constancia_ex=$name;
-        //$tesis->publicar=$request->publicar;
+        $tesis->publicar=$request->publicar;
         $tesis->abstract=$request->abstract;
         $tesis->update();
         //dd($tes);
@@ -1424,12 +1429,26 @@ class TesisController extends Controller
    {
         //dd($request);
         $tes=Tesis::find($id);
-        /*echo gettype($request->fecha_presentacion); 
-        if(whereTime('15:00:00','=',$request->fecha_presentacion))*/                 
-        $tes->fecha_presentacion_tesis=$request->fecha_presentacion_tesis;
+        $todas_tesis=DB::table('tesis')->get();
+        //echo gettype($request->fecha_presentacion); 
+        /*if(whereTime($request->fecha_presentacion,'=','15:00:00') or (whereTime($request->fecha_presentacion, '=' ,'16:00:00')) or   (whereTime(,$request->fecha_presentacion,'=','17:00:00')) or (whereTime($request->fecha_presentacion,'=','18:00:00')) or  (whereTime($request->fecha_presentacion,'=','19:00:00'))or(whereTime($request->fecha_presentacion,'=','20:00:00')) or (whereTime($request->fecha_presentacion,'=','21:00:00'))) */
+        /*$cont=0;
+        foreach($todas_tesis as $tesis)
+        {
+                if($tesis->fecha_presentacion_tesis==$request->fecha_presentacion_tesis)
+                     {
+                     $cont=$cont+1;
         //dd($tes);
+                     }
+        }
+        if($cont==0){
+        $tes->fecha_presentacion_tesis=$request->fecha_presentacion_tesis;
         $tes->update();
         return view('alumnohome');
+        }else{
+            $tesis=Tesis::find($id);
+            return view('tesis.fecha_presentacion',compact('tesis'));  
+        }*/
    }
 
    //En esta vista la secretaria selecciona el acta ya compleetada la presentacion y lo sube.
@@ -1548,15 +1567,6 @@ class TesisController extends Controller
             return('tesis.sinpermiso');
         }else{
             if($user->tipo_usuario==3){
-            /*$tes_empresas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Empresa')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
-            $tes_proyectos=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Proyecto')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);
-            $tes_fondoconcursable=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Fondo concusable')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);  
-            $tes_comunidad=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Comunidad')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->paginate(7);      
-            $notas_pendientes_vencidas=DB::table('tesis')->whereNull('nota_prorroga')->whereBetween('nota_pendiente', [$fecha_inicio,$fecha_final])->get();  
-            $notas_prorrogas_vencidas=DB::table('tesis')->whereNotNull('nota_prorroga')->whereBetween('nota_prorroga',[$fecha_inicio,$fecha_final])->get();
-             $notas_pend_pro_vencidas= DB::table('tesis')->whereNotNull('nota_prorroga')->whereBetween('nota_prorroga',[$fecha_inicio,$fecha_final])->orwhereNull('nota_prorroga')->whereBetween('nota_pendiente', [$fecha_inicio,$fecha_final])->get();
-
-            return view('tesis.informes_generar_pdf',compact('tes_empresas','tes_proyectos','tes_fondoconcursable','tes_comunidad','notas_pendientes_vencidas','notas_prorrogas_vencidas','notas_pend_pro_vencidas'));*/
             return view('tesis.informes_generar_pdf',compact('fecha_inicio','fecha_final'));
             }
         }

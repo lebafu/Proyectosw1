@@ -32,7 +32,7 @@
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->area_tesis}}</td>
-          <td>{{$tesis->nombre_tesis}}</td>
+          <td>{{$tesis->nombre_tes_res}}</td>
           <td>{{$tesis->tipo_vinculacion}}</td>
           <td>
           <div class="row">

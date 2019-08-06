@@ -1,6 +1,12 @@
 @extends('layouts.app')
 
 @section('content')
+
+<link href="{{asset('css/bootstrap-datepicker.standalone.css')}}" rel="stylesheet">
+<script src="{{asset('js/jquery-3.4.1.min.js')}}" ></script>
+<script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
+<script src="{{asset('js/bootstrap-datepicker.es.min.js')}}"></script>
+
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
@@ -44,7 +50,7 @@
 
 <script>
     
-    $('#fecha_inicio,#fecha_fin').datepicker({
+    $('#nota_prorroga').datepicker({
         language: 'es',
         format: 'yyyy-mm-dd'
     });

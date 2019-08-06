@@ -8,7 +8,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-12">
+    <div class="col-md-12"> <!--De esta forma se ocupa toda la pantalla -->
       <div class="card">
         <div class="card-header">{{ __('Solicitudes de tesis por aprobar o rechazar') }}</div>
           <div class="card-body">
@@ -30,7 +30,7 @@
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->area_tesis}}</td>
           <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->fecha_peticion}}}</td>
+          <td>{{$tesis->fecha_peticion}}</td>
           <td>
           <div class="row">
             <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye"></span></a>

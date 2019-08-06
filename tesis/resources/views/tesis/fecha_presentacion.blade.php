@@ -75,6 +75,7 @@ $(function () {
     $('#datetimepicker2').datetimepicker({
         locale: 'es',
         format: 'YYYY-MM-DD HH:mm'
+
     });
 });
 </script>

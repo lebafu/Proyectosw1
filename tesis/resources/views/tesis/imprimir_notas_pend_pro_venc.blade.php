@@ -11,7 +11,7 @@
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 <div class="container">
-  <h4 align="center" style="margin-bottom: 40px; margin-top: 30px"> Tesis con notas prorrogas</h4>
+  <h4 align="center" style="margin-bottom: 40px; margin-top: 30px">Tesis con notas pendientes y prorroga</h4>
     <th>ENTRE {{$fecha_inicio}} y {{$fecha_final}}</th>
     <table class="table table-bordered">
         <tr>
