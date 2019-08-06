@@ -1430,6 +1430,10 @@ class TesisController extends Controller
         //dd($request);
         $tes=Tesis::find($id);
         $todas_tesis=DB::table('tesis')->get();
+        $tesis=Tesis::find($id);
+        $tes->fecha_presentacion_tesis=$request->fecha_presentacion_tesis;
+        $tes->update();
+            return view('alumnohome'); 
         //echo gettype($request->fecha_presentacion); 
         /*if(whereTime($request->fecha_presentacion,'=','15:00:00') or (whereTime($request->fecha_presentacion, '=' ,'16:00:00')) or   (whereTime(,$request->fecha_presentacion,'=','17:00:00')) or (whereTime($request->fecha_presentacion,'=','18:00:00')) or  (whereTime($request->fecha_presentacion,'=','19:00:00'))or(whereTime($request->fecha_presentacion,'=','20:00:00')) or (whereTime($request->fecha_presentacion,'=','21:00:00'))) */
         /*$cont=0;
