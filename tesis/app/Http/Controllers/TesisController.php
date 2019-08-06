@@ -374,7 +374,7 @@ class TesisController extends Controller
         }
         $user=User::findorfail($id);
         if($user->tipo_usuario==3){
-        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',3)->where('estado2','=',1)->get();
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',2)->where('estado2','=',1)->orwhere('estado1','=',3)->where('estado2','=',1)->get();
         //dd($tesistas);
         return view('tesis.imprimir_todas_tesis_sol',compact('tesistas','user'));
        }else{
@@ -1423,7 +1423,9 @@ class TesisController extends Controller
    public function update_fecha_presentacion($id, Request $request)
    {
         //dd($request);
-        $tes=Tesis::find($id);                   
+        $tes=Tesis::find($id);
+        /*echo gettype($request->fecha_presentacion); 
+        if(whereTime('15:00:00','=',$request->fecha_presentacion))*/                 
         $tes->fecha_presentacion_tesis=$request->fecha_presentacion_tesis;
         //dd($tes);
         $tes->update();

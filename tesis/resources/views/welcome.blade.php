@@ -85,6 +85,7 @@
                 </div>
 
                 <div class="links">
+                    <a href="{{ route('repositorio_tesis') }}">Repositorio de Tesis</a>
                 </div>
         
             </div>

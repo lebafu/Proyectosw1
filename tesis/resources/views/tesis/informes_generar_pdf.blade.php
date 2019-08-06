@@ -288,4 +288,21 @@
     });
   });
 </script>
+
+<script>
+  $(function(){
+    $('#descargaPDF_todas_sol').on('click', function(){
+      $.ajax({
+        url:'{{route('descargar_todas_tesis_sol')}}',
+        type:'get',
+        success: function(data){
+          var ventana=window.open("", "_blank");
+          ventana.document.write(data);
+          ventana.document.close();
+        }
+      })
+    });
+  });
+</script>
+
 @endsection
