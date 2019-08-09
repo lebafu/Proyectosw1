@@ -75,6 +75,7 @@
       <li class="active"><a href="{{ url('/home') }}">Home</a></li>
       <li><a href="{{url('/users') }}">Lista de usuarios</a></li>
       <li><a href="{{url('users/create')}}">Crear Usuario</a></li>
+       <li><a href="{{url('/area_tesis')}}">Areas de Tesis</a></li>
     </ul>
   </div>
 </nav>

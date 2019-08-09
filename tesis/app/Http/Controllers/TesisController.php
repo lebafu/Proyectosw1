@@ -18,8 +18,8 @@ use Auth;
 use Closure;
 use Session;
 
-
-
+//Las vistas con nombre print e imprimir son vistas para generar informes, desde ahi se hacen las consultas para pasar los datos //
+//a la vista(informes_generar_pdf), que contiene una tabla con las tesis generadas en el intervalo de tiempo de la consulta realizada por el director de tesis, y se genera un boton para cada una de estas opciones, donde al hacer click se abrira una pestaña que contendra el pdf que deseó generar con los resultados de la consulta.//
 class TesisController extends Controller
 {
 
@@ -33,19 +33,6 @@ class TesisController extends Controller
         $nombre_tesis=$request->get('nombre_tesis');
         $abstract=$request->get('abstract');
          $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())->paginate(7);
-         //dd($tesis);
-         /*$tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())
-        ->where('nombre_completo','like',"%$palabra%")
-        ->orwhere('nombre_tesis','like',"%$palabra%")
-        ->orwhere('abstract','like',"%$palabra%")
-        ->paginate(7);
-        //dd($tesis);
-        foreach($tesis as $tes)
-        {
-        $var=$tes->abstract;
-        $tes->abstract_res=Str::limit($var,309);
-        }
-        return view('tesis.repositorio_tesis',compact('tesis'));*/
         
         if($nombre_completo==null and $nombre_tesis==null and $abstract==null)
         {
@@ -370,7 +357,7 @@ class TesisController extends Controller
 
     }
 
-     public function imprimir_todas_tesis_sol()
+    /* public function imprimir_todas_tesis_sol()
     {
         $id=Auth::id();
         if($id==null){
@@ -385,7 +372,7 @@ class TesisController extends Controller
         return view('tesis.sinpermiso');
        }
 
-    }
+    }*/
 
         //Muestra tesis del alumno.
         public function index1()
@@ -458,7 +445,7 @@ class TesisController extends Controller
         $user=User::findorfail($id);
         //si usuario es de tipo alumno entonces se actualizara el nombre usuario en user
         if($id==null){
-            return view('welcome');
+            return view('tesis.sinpermiso');
         }
         if($user->tipo_usuario==1){ 
 
@@ -1153,7 +1140,7 @@ class TesisController extends Controller
         //dd($tes);
         //($request->file('constancia_ex')->store('public'));
                    //almacenar el archivo pdf/doc subido al sistem
-           return view('tesis.fecha_presentacion',compact('tesis'));
+           return view('alumnohome');
         }else{
             return view('tesis.archivonosepudosubir');
         }
@@ -1234,7 +1221,7 @@ class TesisController extends Controller
         return view('welcome');
     }
 
-        //Se almacena la evaluacion realizada por el director de tesis si acepta estado1 será =4 y estado2=1, ademas el campo fecha_inscripcion tomará el valor del dia actual,y en caso contrario tomará un estado1=5, y estado2=0.
+        //Se almacena la evaluacion realizada por el director de tesis si acepta estado1 será =4 y estado2=1, ademas el campo fecha_inscripcion tomará el valor del dia actual,y en caso contrario tomará un estado1=5, y estado2=0, lo  que permitirá que sea editable tanto para el profesor como para el alumno, segun edite primero el documento.
     
     	public function update4(Request $request,$id)
     {
@@ -1415,7 +1402,7 @@ class TesisController extends Controller
    } 
         //Una vez que el alumno haya subido su constancia de examen se le redireccionará a la vista para definir su fecha de 
         //inscripcion tesis 
-      public function fecha_presentacion($id)
+     public function fecha_presentacion($id)
    {
      //dd($id);
      $tesis=Tesis::find($id);
@@ -1424,8 +1411,8 @@ class TesisController extends Controller
      return view('tesis.fecha_presentacion',compact('tesis'));  
 
    }
-   //Se guarda la fecha seleccionada//
-   public function update_fecha_presentacion($id, Request $request)
+
+    public function update_fecha_presentacion($id, Request $request)
    {
         //dd($request);
         $tes=Tesis::find($id);
@@ -1433,7 +1420,7 @@ class TesisController extends Controller
         $tesis=Tesis::find($id);
         $tes->fecha_presentacion_tesis=$request->fecha_presentacion_tesis;
         $tes->update();
-            return view('alumnohome'); 
+            return view('secretariahome'); 
         //echo gettype($request->fecha_presentacion); 
         /*if(whereTime($request->fecha_presentacion,'=','15:00:00') or (whereTime($request->fecha_presentacion, '=' ,'16:00:00')) or   (whereTime(,$request->fecha_presentacion,'=','17:00:00')) or (whereTime($request->fecha_presentacion,'=','18:00:00')) or  (whereTime($request->fecha_presentacion,'=','19:00:00'))or(whereTime($request->fecha_presentacion,'=','20:00:00')) or (whereTime($request->fecha_presentacion,'=','21:00:00'))) */
         /*$cont=0;
@@ -1454,6 +1441,38 @@ class TesisController extends Controller
             return view('tesis.fecha_presentacion',compact('tesis'));  
         }*/
    }
+   //Se guarda la fecha seleccionada//
+
+   /*public function update_fecha_presentacion($id, Request $request)
+   {
+        //dd($request);
+        $tes=Tesis::find($id);
+        $todas_tesis=DB::table('tesis')->get();
+        $tesis=Tesis::find($id);
+        $tes->fecha_presentacion_tesis=$request->fecha_presentacion_tesis;
+        $tes->update();
+            return view('alumnohome'); 
+        }*/
+        //echo gettype($request->fecha_presentacion); 
+        /*if(whereTime($request->fecha_presentacion,'=','15:00:00') or (whereTime($request->fecha_presentacion, '=' ,'16:00:00')) or   (whereTime(,$request->fecha_presentacion,'=','17:00:00')) or (whereTime($request->fecha_presentacion,'=','18:00:00')) or  (whereTime($request->fecha_presentacion,'=','19:00:00'))or(whereTime($request->fecha_presentacion,'=','20:00:00')) or (whereTime($request->fecha_presentacion,'=','21:00:00'))) */
+        /*$cont=0;
+        foreach($todas_tesis as $tesis)
+        {
+                if($tesis->fecha_presentacion_tesis==$request->fecha_presentacion_tesis)
+                     {
+                     $cont=$cont+1;
+        //dd($tes);
+                     }
+        }
+        if($cont==0){
+        $tes->fecha_presentacion_tesis=$request->fecha_presentacion_tesis;
+        $tes->update();
+        return view('alumnohome');
+        }else{
+            $tesis=Tesis::find($id);
+            return view('tesis.fecha_presentacion',compact('tesis'));  
+        }*/
+   
 
    //En esta vista la secretaria selecciona el acta ya compleetada la presentacion y lo sube.
    public function vista_subir_acta($id)

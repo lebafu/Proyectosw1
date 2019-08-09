@@ -28,7 +28,8 @@
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
-          <th>Constancia_ex</th>
+          <th>Constancia ex</th>
+          <th>Fecha Defensa Ex</th>
           <th>Acta examen</th>
           <th>Subir acta</th>
           <th>Nota</th>
@@ -41,10 +42,13 @@
            <td>{{$tesis->tipo}}</td>
             @if($tesis->constancia_ex!=null)
            <td><a href="{{ route('verPDF', ['id' => $tesis->id]) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Ver constancia de examen</i></a></td>
+           <td><a href="{{url('/fecha_presentacion/'.$tesis->id)}}" class="btn btn-primary">Reservar fecha presentacion
+           </a></td>
            @else
              <td>Debe subir informe</td>
             @endif
             @if($tesis->constancia_ex==null)
+            <td>Operacion no disponible</td>
             <td>Operacion no disponible</td>
             @else
               <td><a class="btn btn-primary" href="{{url('/acta_examen/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span>Generar Acta</a></td>

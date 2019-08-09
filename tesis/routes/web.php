@@ -36,6 +36,14 @@ Route::put('/actualizarusers{users}','UsersController@update')->name('users.upda
 Route::delete('/eliminarusers{users}','UsersController@destroy')->name('users.destroy');
 
 
+/*Route::get('/area_tesis', 'Area_tesisController@index')->name('area_tesis.index');
+Route::get('/area_tesis{area_tesis}', 'Area_tesisController@edit')->name('area_tesis.edit');
+Route::get('/area_tesis/create', 'Area_tesisController@create')->name('area_tesis.create');
+Route::get('/area_tesismostrar/{area_tesis}', 'Area_tesisController@show')->name('area_tesis.show');
+Route::post('/area_tesis','Area_tesisController@store')->name('area_tesis.store');
+Route::put('/actualizararea_tesis{area_tesis}','Area_tesisController@update')->name('area_tesis.update');
+Route::delete('/eliminararea_tesis{area_tesis}','Area_tesisController@destroy')->name('area_tesis.destroy');*/
+
 Route::get('/tesisregistrada', 'TesisController@tesisregistrada')->name('tesis.tesisregistrada');
 Route::get('/archivosubido', 'TesisController@archivosubido')->name('tesis.archivosubido');
 Route::get('/tesis', 'TesisController@index')->name('tesis.index');

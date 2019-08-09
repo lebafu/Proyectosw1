@@ -70,11 +70,15 @@
     </div>
 </div>
 
+<!-- Con format se escoge el formate de datetimepicker, ademas con enable hours se seleccionan las horas disponibles, con dayofweekdisabled se desabilita el dia domingo, y con stepping se define la distancia entre los minutos del calendario en este caso 60 minutos -->
 <script>
 $(function () {
     $('#datetimepicker2').datetimepicker({
         locale: 'es',
-        format: 'YYYY-MM-DD HH:mm'
+        format: 'YYYY-MM-DD HH:mm',   
+        enabledHours: [15, 16, 17, 18, 19, 20],
+        daysOfWeekDisabled: [0],
+        stepping:60
 
     });
 });

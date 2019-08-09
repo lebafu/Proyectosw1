@@ -3,8 +3,7 @@
 @section('content')
 
 <link href="{{asset('css/bootstrap-datepicker.standalone.css')}}" rel="stylesheet">
-<script
-  src="{{asset('js/jquery-3.4.1.min.js')}}" ></script>
+<script src="{{asset('js/jquery-3.4.1.min.js')}}" ></script>
 <script src="{{asset('js/bootstrap-datepicker.js')}}"></script>
 <script src="{{asset('js/bootstrap-datepicker.es.min.js')}}"></script>
 
