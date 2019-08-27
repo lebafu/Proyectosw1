@@ -65,11 +65,16 @@
                             <label for="area_tesis" class="col-md-4 col-form-label text-md-right">{{ __('Area Tesis') }}</label>
                             <div class="col-md-6">
                                 <select name="area_tesis" id="area_tesis" type="text" class="form-control" required="required">
-                                <option value="{{ $tes->area_tesis}}">{{ $tes->area_tesis}}</option>
-                                <option value="Ingenieria de Software">Ingenieria de Software</option>
-                                 <option value="IA">Inteligencia Artificial </option>
-                                 <option value="BI">Inteligencia de negocios</option>
-                                 <option value="Imagenes">Imagenes</option>
+                                <option value="{{$tes->area_tesis}}">{{$tes->area_tesis}}</option>
+                                @foreach($area_tesis as $area_tes)
+                                        @if($area_tes=="BI")
+                                         <option value="BI">Inteligencia de negocios</option>
+                                        @elseif($area_tes=="IA")
+                                        <option value="IA">Inteligencia Artificial </option>
+                                        @else
+                                        <option value="{{$area_tes->area_tesis}}">{{$area_tes->area_tesis}}</option>
+                                        @endif 
+                                 @endforeach
                                  </select>
                             </div>
                         </div>
@@ -159,7 +164,7 @@
                             <label for="profesor2_comision" class="col-md-4 col-form-label text-md-right">{{ __('Segundo Profesor comision') }}</label>
                             <div class="col-md-6">
                                  <select name="profesor2_comision" id="profesor2_comision" class="form-control" required>
-                                <option value="{{$com->profesor2_comision}}">{{$com->profesor2_comision}}</
+                                <option value="{{$com->profesor2_comision}}">{{$com->profesor2_comision}}</option>
                                     @foreach($profes as $profe)
                                     <option value="{{$profe->name}}">{{$profe->name}}</option>
                                     @endforeach

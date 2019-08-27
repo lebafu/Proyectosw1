@@ -19,18 +19,19 @@
 
     <table class="table table-bordered">
         <tr>
+          <th>Id</th>
           <th>Nombre</th>
         </tr>
         @foreach ($areaT as $area_tesis)
         <tr>
+          <td>{{$area_tesis->id}}</td>
           <td>{{$area_tesis->area_tesis}}</td>
           <td>
 
-            <a href="{{url('/area_tesismostrar/'.$area_tesis->area_tesis)}}" class="btn btn-info"><span class="far fa-eye"></span></a> 
-            <br>
-            <a href="{{URL::action('Area_tesisController@edit', $area_tesis->area_tesis)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+            
+            <a href="{{URL::action('Area_tesisController@edit', $area_tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
              <br>
-           <form action="{{ route('area_tesis.destroy', $area_tesis->area_tesis)}}" method="POST">
+           <form action="{{ route('area_tesis.destroy', $area_tesis->id)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
           <br>
            {{ method_field('DELETE') }}
@@ -42,10 +43,17 @@
      </table>
      </div>
      </div>
+     <a href="{{URL::action('Area_tesisController@create')}}" class="btn btn-primary">Crear Area de Tesis</a>
+     
      </div>
      </div>
      </div>
 </div>
+   <div class="row justify-content-center">
+    <div class="col-md-6">
+      <a href="adminhome">Volver a Home</a>
+    </div>
+    </div>  
 
    {!! $areaT->render() !!}
 

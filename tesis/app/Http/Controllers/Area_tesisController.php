@@ -1,14 +1,15 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Collection;
 use App\User;
 use App\Tesis;
 use App\Comision;
+use App\Area_tesis;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
- use Illuminate\Support\Str;
+use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Contracts\Auth\Guard;
 use iio\libmergepdf\Merger;
@@ -30,15 +31,38 @@ class Area_tesisController extends Controller
     return view('area_tesis.index',compact('areaT'));
     }
 
+
+
+
     public function create()
     {
    		return view('area_tesis.create'); 	
     }
 
+     public function edit($id)
+        {
+        //dd($id);
+            //$user = DB::table('users')->where('id', $id)->first();
+            //return view('users.edit',compact('user'));
+        $area_tesis= DB::table('area_tesis')->where('id','=',$id)->first();
+        //$tes->estado1=2;
+        //dd($area_tesis);
+        return view('area_tesis.edit',compact('area_tesis'));
+            //return $user; 
+        }
 
-    public function destroy($area_tesis)
+     public function update(Request $request,$id)
     {
-    	DB::table('area_tesis')->where('area_tesis','=',$area_tesis )->delete();
+        //dd($id);
+        $area_tesis=Area_tesis::findorfail($id);
+        $area_tesis->area_tesis=$request->area_tesis;
+        $area_tesis->update();
+        return view('welcome');
+    }
+
+    public function destroy($id)
+    {
+    	DB::table('area_tesis')->where('id','=',$id )->delete();
         return back()->with('status','La tesis ha sido eliminada con exito');
     }
 
@@ -55,17 +79,22 @@ class Area_tesisController extends Controller
 
     public function store(Request $request)
     {
-    	dd($request);
+    	//dd($request);
     	$request->validate([
     		'area_tesis'=>'required|string']);
     	$id=Auth::id();
     	$user=User::find($id);
-    	if($user->tipo_usuario!=0 or !Auth::id()){
+        //dd($request->area_tesis);
+    	if($user->tipo_usuario!=0 or $id==null){
+             dd($request->area_tesis);
     		return view('tesis.sinpermiso');
     	}else{
-    		$findarea=DB::table('area_tesis')->where('area_tesis','=',$request->area_tesis)->get();
+    		$findarea=DB::table('area_tesis')->where('area_tesis','=',$request->area_tesis)->first();
+            //dd($request->area_tesis);
+            //dd($findarea);
     		if($findarea==null)
     		{
+                //dd($request->area_tesis);
     		DB::table('area_tesis')->insert([
     			'area_tesis' => $request->area_tesis]);
 

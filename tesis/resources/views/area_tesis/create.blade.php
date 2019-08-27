@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Crear Area de Tesis') }}</div>
 
                 <div class="card-body">
-                    <form action="{{route('tesis.store')}}" method="POST">
+                    <form action="{{route('area_tesis.store')}}" method="POST">
                         @csrf
 
                        

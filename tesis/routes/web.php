@@ -36,13 +36,12 @@ Route::put('/actualizarusers{users}','UsersController@update')->name('users.upda
 Route::delete('/eliminarusers{users}','UsersController@destroy')->name('users.destroy');
 
 
-/*Route::get('/area_tesis', 'Area_tesisController@index')->name('area_tesis.index');
+Route::get('/area_tesis', 'Area_tesisController@index')->name('area_tesis.index');
 Route::get('/area_tesis{area_tesis}', 'Area_tesisController@edit')->name('area_tesis.edit');
 Route::get('/area_tesis/create', 'Area_tesisController@create')->name('area_tesis.create');
-Route::get('/area_tesismostrar/{area_tesis}', 'Area_tesisController@show')->name('area_tesis.show');
 Route::post('/area_tesis','Area_tesisController@store')->name('area_tesis.store');
 Route::put('/actualizararea_tesis{area_tesis}','Area_tesisController@update')->name('area_tesis.update');
-Route::delete('/eliminararea_tesis{area_tesis}','Area_tesisController@destroy')->name('area_tesis.destroy');*/
+Route::delete('/eliminararea_tesis{area_tesis}','Area_tesisController@destroy')->name('area_tesis.destroy');
 
 Route::get('/tesisregistrada', 'TesisController@tesisregistrada')->name('tesis.tesisregistrada');
 Route::get('/archivosubido', 'TesisController@archivosubido')->name('tesis.archivosubido');
@@ -57,6 +56,7 @@ Route::get('/tesis_fondoconcursable', 'TesisController@tesis_fondoconcursable')-
 Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.tesis_comunidad');
 //Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.comunidad');
 Route::get('/tesis_inscritas_profesor', 'TesisController@index2_ins_pro')->name('tesis.index2_ins_pro');
+Route::get('/tesis_profesor_comision', 'TesisController@profe_comision')->name('tesis.tesis_profesor_comision');
 Route::get('/tesis{tesis}', 'TesisController@edit')->name('tesis.edit');
 Route::get('/repositorio_tesis','TesisController@repositorio_tesis')->name('repositorio_tesis');
 Route::get('/mostrar_tesis/{id}', 'TesisController@mostrar_tesis')->name('tesis.show');

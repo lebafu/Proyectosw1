@@ -62,10 +62,16 @@
                             <label for="area_tesis" class="col-md-4 col-form-label text-md-right">{{ __('Area Tesis') }}</label>
                             <div class="col-md-6">
                                 <select name="area_tesis" id="area_tesis" type="text" class="form-control" required="required">
-                                <option value="Ingenieria de Software">Ingenieria de Software</option>
-                                 <option value="IA">Inteligencia Artificial </option>
-                                 <option value="BI">Inteligencia de negocios</option>
-                                 <option value="Imagenes">Imagenes</option>
+                                    <option value="{{$tes->area_tesis}}">{{$tes->area_tesis}}</option>
+                                @foreach($area_tesis as $area_tes)
+                                        @if($area_tes=="BI")
+                                         <option value="BI">Inteligencia de negocios</option>
+                                        @elseif($area_tes=="IA")
+                                        <option value="IA">Inteligencia Artificial </option>
+                                        @else
+                                        <option value="{{$area_tes->area_tesis}}">{{$area_tes->area_tesis}}</option>
+                                        @endif 
+                                 @endforeach
                                  </select>
                             </div>
                         </div>
@@ -124,7 +130,7 @@
 
                          <div class="form-group row">
                                 <label for="objetivos" class="col-md-4 col-form-label text-md-right">{{ __('Objetivos') }}</label><div class="col-md-6">
-                                <textarea name="objetivos" type="text" rows="10" cols="40" class="form-control"" required="required" >Escriba aqui los objetivos</textarea>
+                                <textarea name="objetivos" type="text" rows="10" cols="40" class="form-control" required="required" >Escriba aqui los objetivos</textarea>
                              </div>
                         </div>
  
