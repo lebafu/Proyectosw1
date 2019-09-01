@@ -62,7 +62,6 @@
                             <label for="area_tesis" class="col-md-4 col-form-label text-md-right">{{ __('Area Tesis') }}</label>
                             <div class="col-md-6">
                                 <select name="area_tesis" id="area_tesis" type="text" class="form-control" required="required">
-                                    <option value="{{$tes->area_tesis}}">{{$tes->area_tesis}}</option>
                                 @foreach($area_tesis as $area_tes)
                                         @if($area_tes=="BI")
                                          <option value="BI">Inteligencia de negocios</option>
