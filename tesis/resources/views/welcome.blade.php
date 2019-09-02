@@ -86,6 +86,7 @@
 
                 <div class="links">
                     <a href="{{ route('repositorio_tesis') }}">Repositorio de Tesis</a>
+                    <a href="/doc/descarga.php">Descargar DOC</a>
                 </div>
         
             </div>

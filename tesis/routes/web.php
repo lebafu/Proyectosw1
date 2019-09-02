@@ -146,3 +146,10 @@ Route::get('/error_generar_pdf', 'TesisController@error_generar_pdf')->name('tes
 Route::get('/descargar_pendientes_vencidas','TesisController@imprimir_pend_venc')->name('descargar_pendientes_vencidas');
 Route::get('/descargar_prorrogas_vencidas','TesisController@imprimir_pro_venc')->name('descargar_prorrogas_vencidas');
 Route::get('/descargar_pend_pro_vencidas','TesisController@imprimir_pend_pro_venc')->name('descargar_pend_pro_vencidas');
+Route::get('/tesis_filtro_fecha_profesor', 'TesisController@filtro_tesis_fecha')->name('tesis_filtro_fecha_profesor');
+
+//Route::get('/createword',['as'=> 'createword' , 'uses' => 'WordTestController@createworddocx']);
+//Route::post('msword', 'TesisController@msword');
+
+Route::get('create','DocumentController@create');
+Route::post('store','DocumentController@store');
