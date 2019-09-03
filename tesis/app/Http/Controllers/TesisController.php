@@ -980,6 +980,7 @@ class TesisController extends Controller
             'rut' => 'required|string|min:11|max:12',
             'ano_ingreso' => 'required|integer',
             'profesor1_comision' => 'required|string',
+            'coguia' =>'required|integer',
             'profesor2_comision' => 'required|string',
             'profesor3_comision' =>'string',
         ]);
@@ -1020,6 +1021,7 @@ class TesisController extends Controller
             'id_profesor_guia' => $profe->id,
             'nombre_alumno' =>$request->nombre_completo,
             'profesor1_comision' => $request->profesor1_comision,
+            'coguia' => $request->coguia,
             'profesor2_comision' => $request->profesor2_comision,
             'profesor3_comision' => $request->profesor3_comision,
             'profesor1_externo' => $request->profesor1_externo,

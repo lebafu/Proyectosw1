@@ -155,8 +155,7 @@
                          <div class="form-group row">
                             <label for="profesor1_comision" class="col-md-4 col-form-label text-md-right">{{ __('Primer profesor comision') }}</label>
                            <div class="col-md-6">
-                                 
-                                 <select name="profesor1_comision" id="profesor1_comision" class="form-control"  required>
+                                <select name="profesor1_comision" id="profesor1_comision" class="form-control"  required>
                                     <option value="{{$com->profesor1_comision}}">{{$com->profesor1_comision}}</option>
                                     @foreach($profes as $profe)
                                     <option value="{{$profe->name}}">{{$profe->name}}</option>
@@ -164,6 +163,15 @@
                                 </select>
                             </div>
                         </div>
+
+                         <div class="form-group row">
+                            <label for="coguia" class="col-md-4 col-form-label text-md-right">{{ __('Coguia') }}</label>
+                            <div class="col-md-6">
+                                <input type="checkbox" name="coguia" value=1><br>
+                            </div>
+                        </div>
+
+
 
                         <div class="form-group row">
                             <label for="profesor2_comision" class="col-md-4 col-form-label text-md-right">{{ __('Segundo Profesor comision') }}</label>
@@ -297,7 +305,12 @@
                             </div>
                         </div>
 
-
+                        <div class="form-group row">
+                            <label for="coguia" class="col-md-4 col-form-label text-md-right">{{ __('Coguia') }}</label>
+                            <div class="col-md-6">
+                                <input type="checkbox" name="coguia" value=1><br>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
                             <label for="profesor3_comision" class="col-md-4 col-form-label text-md-right">{{ __('Tercer Profesor comision') }}</label>
