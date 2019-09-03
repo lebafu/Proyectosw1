@@ -72,11 +72,13 @@
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Sistema de Tesis</a>
     </div>
+    <!-- Rutas del navbar -->
     <ul class="nav navbar-nav">
       <li class="active"><a href="{{ url('/home') }}">Home</a></li>
       <li><a href="{{url('/tesis_profesor') }}">Tesis En espera</a></li>
       <li><a href="{{url('/tesis_inscritas_profesor')}}">Tesis inscritas</a></li>
       <li><a href="{{url('/tesis_profesor_comision')}}">Profesor participa como miembro Comision</a></li>
+      <li><a href="{{url('/create')}}">Consulta de participacion de tesis por fecha</a></li>
     </ul>
   </div>
 </nav>

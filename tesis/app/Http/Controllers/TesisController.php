@@ -1644,36 +1644,9 @@ class TesisController extends Controller
         }
 
 
-        public function filtro_tesis_fecha()
-        {
+      
 
-         $id=Auth::id();
-         if($id==null)
-         {
-            return view('tesis.sinpermiso');
-         }else{
-            $profesor=Tesis::find($id);
-            if($profesor->tipo_usuario==2){
-                return view('tesis.tesis_filtro__fecha_profesor');
-            }else{
-                return view('tesis.sinpermiso');
-            }
-
-         }
-        }
-
-        public function Profesor_doc(Request $request)
-    {
-         $id=Auth::id();
-         if($id==null)
-         {
-            return view('tesis.sinpermiso');
-         }else{
-            $datos=DB::table('')
-
-         }
-
-        }
+    
     }
        
 
