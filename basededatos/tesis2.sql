@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-08-2019 a las 05:06:09
+-- Tiempo de generación: 04-09-2019 a las 20:45:19
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.6
 
@@ -42,7 +42,8 @@ INSERT INTO `area_tesis` (`id`, `area_tesis`) VALUES
 (2, 'IA'),
 (3, 'Imagenes'),
 (4, 'Ingenieria de Software'),
-(5, 'Investigacion de operaciones');
+(5, 'Investigacion de operaciones'),
+(7, 'Mineria de datos');
 
 -- --------------------------------------------------------
 
@@ -55,6 +56,7 @@ CREATE TABLE `comision` (
   `id_profesor_guia` int(11) DEFAULT NULL,
   `nombre_alumno` varchar(255) NOT NULL,
   `profesor1_comision` varchar(255) DEFAULT NULL,
+  `coguia` int(11) DEFAULT NULL,
   `profesor2_comision` varchar(255) DEFAULT NULL,
   `profesor3_comision` varchar(255) DEFAULT NULL,
   `profesor1_externo` varchar(255) DEFAULT NULL,
@@ -71,33 +73,36 @@ CREATE TABLE `comision` (
 -- Volcado de datos para la tabla `comision`
 --
 
-INSERT INTO `comision` (`id`, `id_profesor_guia`, `nombre_alumno`, `profesor1_comision`, `profesor2_comision`, `profesor3_comision`, `profesor1_externo`, `profesor1_grado_academico`, `correo_profe1_externo`, `institucion1`, `profe2_externo`, `profe2_grado_academico`, `correo_profe2_externo`, `institucion2`) VALUES
-(8, 3, 'Carlos Andres Cancino Duran', 'Xaviera Lopez', 'Paulo Gonzalez', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 17, 'Oscar Raul Perez Fernandez', 'Hugo Araya', 'Paulo Gonzalez', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(16, 12, 'Rodrigo Chavez', 'Hugo Araya', 'Marco Toranzo', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(18, 3, 'Camilo Cavieres', 'Paulo Gonzalez', 'Hugo Araya', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 17, 'Gonzalo Ignacio Paredes Valenzuela', 'Hugo Araya', 'Paulo Gonzalez', 'Wladimir Soto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(22, 21, 'Felipe Nicolas Tapia Nuñez', 'Sergio Hernandez', 'Paulo Gonzalez', 'Xaviera Lopez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(23, 3, 'Rosa Karina Gonzalez Gutierrez', 'Paulo Gonzalez', 'Hugo Araya', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(31, 3, 'Daniel Alarcon Chambles', 'Hugo Araya', 'Marco Toranzo', 'Paulo Gonzalez', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(32, 3, 'Jhon Michael Faundez Miño', 'Paulo Gonzalez', 'Marco Toranzo', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', NULL, NULL, NULL, NULL),
-(38, 3, 'Pedro Lopez', 'Paulo Gonzalez', 'Hugo Araya', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseTorres@utal.com', 'Universidad de Talca', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(39, 3, 'Hugo Rodriguez', 'Hugo Araya', 'Paulo Gonzalez', 'Sergio Hernandez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(40, 3, 'Felipe Javier Barrios Lopez', 'Hugo Araya', 'Paulo Gonzalez', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(41, 13, 'Francisco De la Fuente', 'Hugo Araya', 'Xaviera Lopez', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseTorres@utal.com', 'Universidad de Talca', NULL, NULL, NULL, NULL),
-(42, 3, 'Rodrigo Ramirez', 'Sergio Hernandez', 'Angelica Urrutia', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(44, 3, 'Walter Gonzalo Casanova Hurtado', 'Paulo Gonzalez', 'Marco Toranzo', 'Ninguno', 'Hugo Perez', 'Ing.', 'HugoP@gmail.com', 'Universidad de Concepcion', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(45, 15, 'Fernando Ignacio Olmos Duran', 'Xaviera Lopez', 'Marco Toranzo', 'Xaviera Lopez', 'Jose Torres', 'Mg.', 'JoseTorres@utal.com', 'Universidad de Talca', 'Hugo Yañez', 'Ing.', 'HugoY@utal.com', 'Universidad de Talca'),
-(46, 13, 'Sebastian Garrido', 'Angelica Urrutia', 'Marco Toranzo', 'Hugo Araya', 'Jose Torres', 'Mg.', 'JoseT@utal.com', 'Universidad de Talca', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(47, 3, 'Miguel Ignacio Cancino Nuñez', 'Marco Toranzo', 'Angelica Urrutia', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', NULL, NULL, NULL, NULL),
-(48, 17, 'Karina Patiño Albornoz', 'Paulo Gonzalez', 'Ricardo Barrientos', 'Angelica Urrutia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(49, 3, 'Jose Miguel Valdes Salgado', 'Paulo Gonzalez', 'Hugo Araya', 'Sergio Hernandez', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'Ing.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(50, 3, 'Felipe Antonio Matamala Lopez', 'Sergio Hernandez', 'Angelica Urrutia', 'Hugo Araya', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'Ing.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(51, 15, 'Hector Carrasco Faundez', 'Hugo Araya', 'Paulo Gonzalez', 'Sergio Hernandez', 'Arturo Norambuena', 'Ing.', 'ArturoN@gmail.com', 'Universidad de Talca', NULL, 'Ing.', NULL, NULL),
-(52, 17, 'Boris Salgado Lopez', 'Paulo Gonzalez', 'Wladimir Soto', 'Angelica Urrutia', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
-(53, 12, 'Diego Gaete Bernales', 'Marco Mora', 'Ricardo Barrientos', 'Sergio Hernandez', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
-(54, 12, 'Humberto Muñoz Norambuena', 'Hugo Araya', 'Marco Toranzo', 'Angelica Urrutia', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
-(56, 3, 'Ignacio Lillo', 'Hugo Araya', 'Marco Toranzo', 'Ricardo Barrientos', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL);
+INSERT INTO `comision` (`id`, `id_profesor_guia`, `nombre_alumno`, `profesor1_comision`, `coguia`, `profesor2_comision`, `profesor3_comision`, `profesor1_externo`, `profesor1_grado_academico`, `correo_profe1_externo`, `institucion1`, `profe2_externo`, `profe2_grado_academico`, `correo_profe2_externo`, `institucion2`) VALUES
+(8, 3, 'Carlos Andres Cancino Duran', 'Xaviera Lopez', NULL, 'Paulo Gonzalez', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 17, 'Oscar Raul Perez Fernandez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(16, 12, 'Rodrigo Chavez', 'Hugo Araya', NULL, 'Marco Toranzo', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 3, 'Camilo Cavieres', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 17, 'Gonzalo Ignacio Paredes Valenzuela', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Wladimir Soto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(22, 21, 'Felipe Nicolas Tapia Nuñez', 'Sergio Hernandez', NULL, 'Paulo Gonzalez', 'Xaviera Lopez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 3, 'Rosa Karina Gonzalez Gutierrez', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(31, 3, 'Daniel Alarcon Chambles', 'Hugo Araya', NULL, 'Marco Toranzo', 'Paulo Gonzalez', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
+(32, 3, 'Jhon Michael Faundez Miño', 'Paulo Gonzalez', NULL, 'Marco Toranzo', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', NULL, NULL, NULL, NULL),
+(38, 3, 'Pedro Lopez', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseTorres@utal.com', 'Universidad de Talca', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
+(39, 3, 'Hugo Rodriguez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Sergio Hernandez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(40, 3, 'Felipe Javier Barrios Lopez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
+(41, 13, 'Francisco De la Fuente', 'Hugo Araya', NULL, 'Xaviera Lopez', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseTorres@utal.com', 'Universidad de Talca', NULL, NULL, NULL, NULL),
+(42, 3, 'Rodrigo Ramirez', 'Sergio Hernandez', NULL, 'Angelica Urrutia', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(44, 3, 'Walter Gonzalo Casanova Hurtado', 'Paulo Gonzalez', NULL, 'Marco Toranzo', 'Ninguno', 'Hugo Perez', 'Ing.', 'HugoP@gmail.com', 'Universidad de Concepcion', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
+(45, 15, 'Fernando Ignacio Olmos Duran', 'Xaviera Lopez', NULL, 'Marco Toranzo', 'Xaviera Lopez', 'Jose Torres', 'Mg.', 'JoseTorres@utal.com', 'Universidad de Talca', 'Hugo Yañez', 'Ing.', 'HugoY@utal.com', 'Universidad de Talca'),
+(46, 13, 'Sebastian Garrido', 'Angelica Urrutia', NULL, 'Marco Toranzo', 'Hugo Araya', 'Jose Torres', 'Mg.', 'JoseT@utal.com', 'Universidad de Talca', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
+(47, 3, 'Miguel Ignacio Cancino Nuñez', 'Marco Toranzo', 1, 'Angelica Urrutia', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', NULL, NULL, NULL, NULL),
+(48, 17, 'Karina Patiño Albornoz', 'Paulo Gonzalez', NULL, 'Ricardo Barrientos', 'Angelica Urrutia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(49, 3, 'Jose Miguel Valdes Salgado', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Sergio Hernandez', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'Ing.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
+(50, 3, 'Felipe Antonio Matamala Lopez', 'Sergio Hernandez', NULL, 'Angelica Urrutia', 'Hugo Araya', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'Ing.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
+(51, 15, 'Hector Carrasco Faundez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Sergio Hernandez', 'Arturo Norambuena', 'Ing.', 'ArturoN@gmail.com', 'Universidad de Talca', NULL, 'Ing.', NULL, NULL),
+(52, 17, 'Boris Salgado Lopez', 'Paulo Gonzalez', NULL, 'Wladimir Soto', 'Angelica Urrutia', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
+(53, 12, 'Diego Gaete Bernales', 'Marco Mora', NULL, 'Ricardo Barrientos', 'Sergio Hernandez', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
+(54, 12, 'Humberto Muñoz Norambuena', 'Hugo Araya', NULL, 'Marco Toranzo', 'Angelica Urrutia', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
+(56, 3, 'Ignacio Lillo', 'Hugo Araya', NULL, 'Marco Toranzo', 'Ricardo Barrientos', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
+(57, 7, 'Jose Lopez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Angelica Urrutia', 'Bernardo Lopez', 'Ing.', 'BernardoL@utalca.cl', 'Universidad de Talca', NULL, 'Ing.', NULL, NULL),
+(58, 17, 'Boris Mora Garrido', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Ninguno', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
+(59, 17, 'Alfonso Bilocopetiuc Parra', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Ninguno', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -174,10 +179,10 @@ CREATE TABLE `tesis` (
 
 INSERT INTO `tesis` (`id`, `nombre_completo`, `rut`, `nombre_tesis`, `area_tesis`, `ano_ingreso`, `profesor_guia`, `carrera`, `tipo`, `contribucion`, `descripcion`, `objetivos`, `tipo_vinculacion`, `nombre_vinculacion`, `observacion`, `estado1`, `estado2`, `estado3`, `fecha_peticion`, `nota_pendiente`, `nota_prorroga`, `fecha_inscripcion`, `constancia_ex`, `abstract`, `publicar`, `fecha_presentacion_tesis`, `acta_ex`, `nota_tesis`) VALUES
 (8, 'Carlos Andres Cancino Duran', '18.670.608-2', 'Reconocimiento de patrones con redes neuronalesen imagenes', 'Ingenieria de Software', 2013, 'Sergio Hernandez', 'Ingenieria Civil Informatica', 'Tesis', 'Promover y potenciar el concepto de ciudades inteligentes', 'Descripcion1 Descripcion2 Descripcion3', 'Aplicación de IA, en camaras de seguridad', 'Proyecto', 'Ciudades inteligentes XX', 'Tesis interesante', 4, 1, NULL, '2019-07-16 04:02:26', '2019-07-01', '2019-07-18', '2019-07-18', NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 'Oscar Raul Perez Fernandez', '16.788.324-5', 'Sistema de control', 'Ingenieria de Software', 2013, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Automatizar y agilizar el proceso', 'Descripcion1 Descripcion2', 'Sistema de evidencias para la Universidad', 'Comunidad', 'Municiaplidad de San Clemente', NULL, 4, 1, NULL, '2019-07-16 04:12:04', NULL, NULL, '2019-07-18', '156538477419.pdf', 'Es cada vez más evidente que la informática (manejo de información) y los computadores (procesadores de información), están cambiando nuestro sistema de vida. Por ahora podemos decir que el computador nos ofrece las ventajas de una rapídez, seguridad y gran capacidad de trabajo de datos, por ejemplo: informática y estadísticas, y eso también nos alcanzará.', 1, '2019-08-09 18:00:00', NULL, NULL),
+(10, 'Oscar Raul Perez Fernandez', '16.788.324-5', 'Sistema de control', 'Ingenieria de Software', 2013, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Automatizar y agilizar el proceso', 'Descripcion1 Descripcion2', 'Sistema de evidencias para la Universidad', 'Comunidad', 'Municiaplidad de San Clemente', NULL, 4, 1, NULL, '2019-07-16 04:12:04', NULL, NULL, '2019-07-18', '156538477419.pdf', 'Es cada vez más evidente que la informática (manejo de información) y los computadores (procesadores de información), están cambiando nuestro sistema de vida. Por ahora podemos decir que el computador nos ofrece las ventajas de una rapídez, seguridad y gran capacidad de trabajo de datos, por ejemplo: informática y estadísticas, y eso también nos alcanzará.', 1, '2019-09-03 15:00:00', NULL, NULL),
 (16, 'Rodrigo Chavez', '18.063.911-8', 'Aplicacion movil', 'Ingenieria de Software', 2014, 'Paulo Gonzalez', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'Contribucion1,Contribucion2', 'Descripcion1Descripcion2', 'Ayudar a la comunidad', 'Empresa', 'Tutelkan', NULL, 1, NULL, NULL, '2019-07-16 03:56:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (18, 'Camilo Cavieres', '18.738.562-9', 'Aplicacion en Ionix para ed fisica', 'Ingenieria de Software', 2013, 'Marco Toranzo', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'Se espera ser un apoyo para la carrera de de ed. fisica en la Universidad.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Empresa', 'Ed fisica.', 'Nombre incompleto', 4, 1, NULL, '2019-07-18 06:43:00', '2019-10-25', '2019-12-20', '2019-07-21', NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 'Gonzalo Ignacio Paredes Valenzuela', '17.345.456-3', 'Sistema de inventario UCM', 'Ingenieria de Software', 2012, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Se espera apoyar la automatizacion de un sistema de la universidad, y agilizar procesos.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'Departamento de informatica UCM', NULL, 4, 1, NULL, '2019-07-19 19:11:32', NULL, '2019-07-24', '2019-07-28', '6kJevUClPeZ06vTKSelIPZAvdNPBhgehShMazLeW.pdf', 'presenta en algunos pasajes de esta obra viene a demostrar, como han cambiado las relaciones humanas y jurídicas con el advenimiento de la informática y de las telecomunicaciones. Sin pretender sentar bases sólidas, esta investigación pretende despertar el...', 1, '2019-07-26 20:52:00', 'TdIvKakaANdcnRINpzvLETmCxlCkqQlm67qN12fe.pdf', 7),
+(19, 'Gonzalo Ignacio Paredes Valenzuela', '17.345.456-3', 'Sistema de inventario UCM', 'Ingenieria de Software', 2012, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Se espera apoyar la automatizacion de un sistema de la universidad, y agilizar procesos.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'Departamento de informatica UCM', NULL, 4, 1, NULL, '2019-07-19 19:11:32', NULL, '2019-07-24', '2019-07-28', '6kJevUClPeZ06vTKSelIPZAvdNPBhgehShMazLeW.pdf', 'presenta en algunos pasajes de esta obra viene a demostrar, como han cambiado las relaciones humanas y jurídicas con el advenimiento de la informática y de las telecomunicaciones. Sin pretender sentar bases sólidas, esta investigación pretende despertar el...', 1, '2019-09-03 16:00:00', 'TdIvKakaANdcnRINpzvLETmCxlCkqQlm67qN12fe.pdf', 7),
 (22, 'Felipe Nicolas Tapia Nuñez', '18.732.564-7', 'Estudio de Patrones de venas de la mano', 'IA', 2013, 'Ricardo Barrientos', 'Ingenieria Civil Informatica', 'Tesis', 'Permitir ahorrar recursos en el reconocimiento unico de la poblacion, que actualmente se hace por huella dactilar.', 'El alumno deberá ayudar a generar en el reconocimiento de patrones de las venas de la mano.', 'Generar un modelo que permite el reconocimiento de las venas de la mano.', 'Fondo concusable', 'Conicyt', NULL, 4, 1, NULL, '2019-07-19 23:14:28', NULL, '2019-07-23', '2019-07-23', NULL, NULL, NULL, NULL, NULL, NULL),
 (23, 'Rosa Karina Gonzalez Gutierrez', '18.923.457-4', 'Analisis de sentimientos aplicando una taxonomia de encuestas', 'BI', 2013, 'Angelica Urrutia', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2 Descripcion3', 'Objetivo1, Objetivo2', 'Comunidad', 'Jardin Infantil', 'Escribe aquí su observacion', 4, 1, 1, '2019-07-20 23:38:34', '2019-07-19', '2019-08-20', '2019-07-21', NULL, NULL, NULL, NULL, NULL, NULL),
 (31, 'Daniel Alarcon Chambles', '18.123.456-9', 'Desarrollo modelo de optimización en java', 'Ingenieria de Software', 2013, 'Wladimir Soto', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'UTALCA-UCM', 'Sin observacion', 4, 1, NULL, '2019-07-26 08:22:02', '2019-07-31', NULL, '2019-07-29', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -202,7 +207,10 @@ INSERT INTO `tesis` (`id`, `nombre_completo`, `rut`, `nombre_tesis`, `area_tesis
 (52, 'Boris Salgado Lopez', '14.784562-3', 'Aplicando API REST a proyecto UCM', 'Ingenieria de Software', 2012, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Escriba aqui los objetivos', 'Descripcion1, Descripcion2, Descripcion3, Descripcion4', 'Escriba aqui los objetivos', 'Proyecto', 'UCM', NULL, 4, 1, NULL, '2019-08-06 06:43:31', NULL, NULL, '2019-08-06', '1565074081Evaluacion.pdf', 'Copie aqui su abstract o resumennn', NULL, '2019-08-06 00:00:00', NULL, NULL),
 (53, 'Diego Gaete Bernales', '19.123.526-7', 'Tesis05', 'Imagenes', 2014, 'Paulo Gonzalez', 'Ingenieria Civil Informatica', 'Tesis', 'Escriba aqui los objetivos', 'Descripcion', 'Escriba aqui los objetivos', 'Proyecto', 'UCM', NULL, 4, 1, NULL, '2019-08-06 07:01:29', '2019-08-14', '2019-08-30', '2019-08-06', NULL, NULL, NULL, NULL, NULL, NULL),
 (54, 'Humberto Muñoz Norambuena', '13.564.231-4', 'Tesis10', 'Ingenieria de Software', 2012, 'Paulo Gonzalez', 'Ingenieria Civil Informatica', 'Tesis', 'Escriba aqui los objetivos', 'Descripcion', 'Escriba aqui los objetivos', 'Proyecto', 'UCM', NULL, 4, 1, NULL, '2019-08-06 07:43:24', NULL, NULL, '2019-08-06', '156507864249.pdf', 'Este proyecto explica el diseño e implementación de una aplicación.\r\npara dispositivos móviles para el estudio de un estilo de vida saludable. Para este propósito, el corazón\r\nSe debe obtener una estimación de la tasa y el estado de ánimo de un usuario. El corazón\r\nla detección de velocidad se obtiene a través de la señal del acelerómetro móvil, procesándola y\r\ncomparándolo con un umbral fijo para detectar los latidos del corazón. Mientras tanto,\r\nEl estado de ánimo se determina mediante un cuestionario realizado después de la medición de la frecuencia cardíaca, obteniendo los componentes de estrés, depresión, hostilidad, vigor y\r\nfatiga. Los datos obtenidos dentro del proceso de medición se envían a un\r\ncentro de análisis para poder realizar un estudio a largo plazo. La estimación de la frecuencia cardíaca fue realizada por el acelerómetro móvil y se comparó con\r\nseñal de electrocardiograma de referencia y con acelerómetro externo. los\r\nLos resultados muestran una gran aproximación y están fuertemente influenciados por la inestabilidad en la frecuencia de muestreo del acelerómetro móvil. Las diferencias\r\nentre las medidas del valor del ritmo cardíaco son menos de 2 latidos por minuto', 1, '2019-08-06 09:30:00', '156507878354.pdf', NULL),
-(56, 'Ignacio Lillo', '18.666.444-2', 'Visualizacion de UCM en 3D', 'Imagenes', 2013, 'Paulo Gonzalez', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'La contribucion esperada es, poder generaaar un plano 3D de la Universidadad...', 'Descripcion1, Descripcion2, Descripcion3, Descripcion4', 'Objetivo1, Objetivo2,Objetivo3', 'Proyecto', 'UCM', 'Escribe aquí su observacion', 3, 1, NULL, '2019-08-24 07:23:15', NULL, NULL, '2019-08-24', NULL, NULL, NULL, NULL, NULL, NULL);
+(56, 'Ignacio Lillo', '18.666.444-2', 'Visualizacion de UCM en 3D', 'Imagenes', 2013, 'Paulo Gonzalez', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'La contribucion esperada es, poder generaaar un plano 3D de la Universidadad...', 'Descripcion1, Descripcion2, Descripcion3, Descripcion4', 'Objetivo1, Objetivo2,Objetivo3', 'Proyecto', 'UCM', 'Escribe aquí su observacion', 3, 1, NULL, '2019-08-24 07:23:15', NULL, NULL, '2019-08-24', NULL, NULL, NULL, NULL, NULL, NULL),
+(57, 'Jose Lopez', '18.146.721-k', 'Tesis 55', 'BI', 2012, 'Hugo Araya', 'Ingenieria Civil Informatica', 'Tesis', 'Contribucion1, Contribucion2, Contribucion3', 'La tesis tratara sobre Tesis55', 'Objetivo1, Objetivovo2, Objetivo3, Objetivo4', 'Empresa', 'UCM', NULL, 4, 1, NULL, '2019-09-01 05:14:24', NULL, NULL, '2019-09-01', '1567381138Evaluacion.pdf', 'Se ha dicho que el Derecho no existe ni es imaginable al margen de su historia. Sin duda, la afirmación precedente, conlleva un reconocimiento del enorme contenido de información que se asocia al Derecho en cada uno de sus ámbitos. La información, en este sentido, significa	descripción de algún objeto o suceso.\r\n Para que esta información fluya en forma adecuada y resulte útil, debe organizarse según algún método o sistema, de allí que se debe entender como sistema de información “todo conjunto de elementos diseñado para el soporte, administración y gestión de información” \r\n Información es ante todo un conocimiento y la posibilidad de entregar ese conocimiento a todos los probables usuarios, ella constituye la finalidad esencial de la Ciencia de la Información. Ésta comprende a su vez tres grandes disciplinas: La Documentación, la Informática y las Ciencias de la Comunicación, de las cuales, las dos primeras parecen ser más atingentes al tema abordado en la Separata del CEDI “Informática Jurídica Documental”, en torno a la cual se ha preparado el presente trabajo. La Documentación estudia el establecimiento, investigación, reunión y utilización de documentos, mientras que la Informática estudia el tratamiento automático de la información por medio de computadoras. \r\n Ambas disciplinas, Documentación e Informática abocadas a un objeto particular, la información jurídica, crean la Informática Jurídica Documental, la que como tal, no es una área, ni de la Ciencia de la Información, ni del ámbito de la Ciencia del Derecho. La Informática Jurídica Documental es un \"conjunto de técnicas\", significativas para las computadoras, aplicadas al tratamiento de la información jurídica. \r\n La revolución informática y sus proyecciones socio-económicas se vienen produciendo desde la década del 40, presentando una evolución caracterizada por un continuo crecimiento de su influencia e importancia, tanto en desarrollo tecnológico, mayor capacidad de manejo de datos y rapidez de respuestas, como en amplitud de su ámbito de influencia: se incluyen aquí, materias tan diversas que pueden ir desde la administración financiera hasta las tecnologías de la salud.\r\n Entendiendo la Informática como la ciencia del tratamiento lógico y automático de la información, y considerando que la información puede ir desde el dato científico más complejo hasta la más banal de las actividades, resulta que la Informática tiene un carácter multidisciplinario, ya que se ramifica en sus proyecciones a cualquier disciplina específica. El ámbito del Derecho no se excluye, por supuesto, de lo anterior.\r\n De ahí que al estudio de la concreta aplicación de la Informática al campo del Derecho se le ha denominado como Informática Jurídica.', 1, NULL, NULL, NULL),
+(58, 'Boris Mora Garrido', '13.789.672-3', 'Tesis 56', 'Ingenieria de Software', 2012, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Escriba aqui los objetivos', 'Descripcion', 'Escriba aqui los objetivos', 'Proyecto', 'ICI UCM', NULL, 4, 1, NULL, '2019-09-01 06:12:07', NULL, NULL, '2019-09-01', NULL, NULL, NULL, NULL, NULL, NULL),
+(59, 'Alfonso Bilocopetiuc Parra', '18.574.262-8', 'Tesis Ionix Laravel', 'Ingenieria de Software', 2013, 'Marco Toranzo', 'Ingenieria en Ejecucion e Informatica', 'Tesis', 'Contribucion1', 'Descripcion1', 'Objetivo1', 'Proyecto', 'UCM', NULL, 2, NULL, NULL, '2019-09-03 22:16:33', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -273,7 +281,10 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `ti
 (53, 'Diego Gaete Bernales', 'DiegoGaete@gmail.com', NULL, '$2y$10$gCJpSgtKbaMRdFOQj/qBzOjaNopx5RykJObeGeHFSCxGc7VJBV9DS', 1, NULL, '2019-08-06 06:59:24', '2019-08-06 06:59:24'),
 (54, 'Humberto Muñoz Norambuena', 'HumbertoM@gmail.com', NULL, '$2y$10$dbZHlhrVE8/IijIMVZHxuObaV8lkoM5jQyb4Iw7IcnTRFIGpOipne', 1, NULL, '2019-08-06 07:42:02', '2019-08-06 07:42:02'),
 (55, 'Carlos Hernandez Gonzalez', 'CarlosHernandez@gmail.com', NULL, '$2y$10$rjMRjqebv8CIgsRMiq.H6eu8cpsnxIx1Xn4bDlIHvnM.7c/2IdE4e', 1, NULL, '2019-08-06 14:13:33', '2019-08-06 14:13:33'),
-(56, 'Ignacio Lillo', 'IgnacioL@gmail.com', NULL, '$2y$10$nYTu46h4pWjmGQsPeNA72ui4wqKqcq3MocGKfNfILijiWaitZK/iq', 1, NULL, '2019-08-24 07:20:50', '2019-08-24 07:20:50');
+(56, 'Ignacio Lillo', 'IgnacioL@gmail.com', NULL, '$2y$10$nYTu46h4pWjmGQsPeNA72ui4wqKqcq3MocGKfNfILijiWaitZK/iq', 1, NULL, '2019-08-24 07:20:50', '2019-08-24 07:20:50'),
+(57, 'Jose Lopez', 'Jl@gmail.com', NULL, '$2y$10$v960GkUnudmpxBGFonaOE.j9Mw5pluZYCm7755mid0WiLy3O7dbO.', 1, NULL, '2019-08-27 20:39:10', '2019-08-27 20:39:10'),
+(58, 'Boris Mora Garrido', 'BorisMora@gmail.com', NULL, '$2y$10$wk.L5RhwYI0okK2xMd2OAeQUPsz1.jw9GkysqR6cILTT4Mvqq869S', 1, NULL, '2019-09-01 06:03:18', '2019-09-01 06:03:18'),
+(59, 'Alfonso Bilocopetiuc Parra', 'AlfonsoB@gmail.com', NULL, '$2y$10$4K13XLIIl//D1SYcFYDNF.lr0yo1gxalUbBOiFvvhuE1zNpWUiHUq', 1, NULL, '2019-09-01 20:12:56', '2019-09-01 20:12:56');
 
 --
 -- Índices para tablas volcadas
@@ -328,7 +339,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `area_tesis`
 --
 ALTER TABLE `area_tesis`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `migrations`
@@ -340,7 +351,7 @@ ALTER TABLE `migrations`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 
 --
 -- Restricciones para tablas volcadas
