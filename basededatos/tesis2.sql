@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 04-09-2019 a las 20:45:19
+-- Tiempo de generación: 09-09-2019 a las 19:26:16
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.6
 
@@ -107,6 +107,39 @@ INSERT INTO `comision` (`id`, `id_profesor_guia`, `nombre_alumno`, `profesor1_co
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `comunidad`
+--
+
+CREATE TABLE `comunidad` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `empresas`
+--
+
+CREATE TABLE `empresas` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `fondo_concursable`
+--
+
+CREATE TABLE `fondo_concursable` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `migrations`
 --
 
@@ -135,6 +168,17 @@ CREATE TABLE `password_resets` (
   `token` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `proyectos`
+--
+
+CREATE TABLE `proyectos` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -302,6 +346,12 @@ ALTER TABLE `area_tesis`
 -- Indices de la tabla `comision`
 --
 ALTER TABLE `comision`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `empresas`
+--
+ALTER TABLE `empresas`
   ADD PRIMARY KEY (`id`);
 
 --
