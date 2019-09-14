@@ -22,16 +22,13 @@
           <th>ID</th>
           <th>Nombre</th>
         </tr>
-        @foreach ($empresas as $empresas)
+        @foreach ($empresas as $empresa)
         <tr>
           <td>{{$empresa->id}}</td>
           <td>{{$empresa->nombre}}</td>
           <td>
 
-            <a href="{{url('/empresasmostrar/'.$empresa->id)}}" class="btn btn-info"><span class="far fa-eye"></span>
-            <br>
             <a href="{{URL::action('EmpresasController@edit', $empresa->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
-             <br>
            <form action="{{ route('empresas.destroy', $empresa->id)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
           <br>

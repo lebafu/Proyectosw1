@@ -13,7 +13,7 @@ class EmpresasController extends Controller
 	public function index()
      {
         //
-        $empresas=DB::table('empresas')->paginate();
+        $empresas=DB::table('empresas')->paginate(7);
         return view('empresas.index',compact('empresas'));
     }
 
@@ -38,17 +38,19 @@ class EmpresasController extends Controller
     public function store(Request $request)
     {
         //
+
            $request->validate([
             'nombre' => 'required|string',
      
         ]);
 
-
+         //dd($request->nombre);
        DB::table('empresas')->insert([
             'nombre' => $request->nombre,
         ]);
 
-       return view('empresas.index');
+       $empresas=DB::table('empresas')->paginate(7);
+        return view('empresas.index',compact('empresas'));
     }
 
     /**
@@ -90,6 +92,9 @@ class EmpresasController extends Controller
         $empresas=Empresa::findorfail($id);
         $empresas->nombre=$request->get('nombre');
         $empresas->update();
+
+        $empresas=DB::table('empresas')->paginate(7);
+        return view('empresas.index',compact('empresas'));
     }
 
     /**
