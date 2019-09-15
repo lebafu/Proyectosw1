@@ -48,7 +48,7 @@ Route::get('/comunidad', 'ComunidadController@index')->name('comunidad.index');
 Route::get('/comunidad{comunidad}', 'ComunidadController@edit')->name('comunidad.edit');
 Route::get('/comunidad/create', 'ComunidadController@create')->name('comunidad.create');
 Route::get('/comunidadmostrar/{id}', 'comunidadController@show')->name('comunidad.show');
-Route::post('/comunidad','ComunidadController@store')->name('users.store');
+Route::post('/comunidad','ComunidadController@store')->name('comunidad.store');
 Route::put('/actualizarcomunidad{comunidad}','ComunidadController@update')->name('comunidad.update');
 Route::delete('/eliminarcomunidad{comunidad}','ComunidadController@destroy')->name('comunidad.destroy');
 
@@ -56,17 +56,17 @@ Route::get('/proyectos', 'ProyectosController@index')->name('proyectos.index');
 Route::get('/proyectos{proyectos}', 'ProyectosController@edit')->name('proyectos.edit');
 Route::get('/proyectos/create', 'ProyectosController@create')->name('proyectos.create');
 Route::get('/proyectosmostrar/{id}', 'ProyectosController@show')->name('proyectos.show');
-Route::post('/proyectos','ProyectosController@store')->name('users.store');
+Route::post('/proyectos','ProyectosController@store')->name('proyectos.store');
 Route::put('/actualizarproyectos{proyectos}','ProyectosController@update')->name('proyectos.update');
 Route::delete('/eliminarproyectos{proyectos}','ProyectosController@destroy')->name('proyectos.destroy');
 
-Route::get('/fondoconcursable', 'FondoconcursableController@index')->name('fondoconcursable.index');
-Route::get('/fondoconcursable{fondoconcursable}', 'FondoconcursableController@edit')->name('fondoconcursable.edit');
-Route::get('/fondoconcursable/create', 'FondoconcursableController@create')->name('fondoconcursable.create');
-Route::get('/fondoconcursablemostrar/{id}', 'FondoconcursableController@show')->name('fondoconcursable.show');
-Route::post('/fondoconcursable','FondoconcursableController@store')->name('users.store');
-Route::put('/actualizarfondoconcursable{fondoconcursable}','FondoconcursableController@update')->name('fondoconcursable.update');
-Route::delete('/eliminarfondoconcursable{fondoconcursable}','FondoconcursableController@destroy')->name('fondoconcursable.destroy');
+Route::get('/fondoconcursable', 'FondoConcursableController@index')->name('fondoconcursable.index');
+Route::get('/fondoconcursable{fondoconcursable}', 'FondoConcursableController@edit')->name('fondoconcursable.edit');
+Route::get('/fondoconcursable/create', 'FondoConcursableController@create')->name('fondoconcursable.create');
+Route::get('/fondoconcursablemostrar/{id}', 'FondoConcursableController@show')->name('fondoconcursable.show');
+Route::post('/fondoconcursable','FondoConcursableController@store')->name('fondoconcursable.store');
+Route::put('/actualizarfondoconcursable{fondoconcursable}','FondoConcursableController@update')->name('fondoconcursable.update');
+Route::delete('/eliminarfondoconcursable{fondoconcursable}','FondoConcursableController@destroy')->name('fondoconcursable.destroy');
 
 Route::get('/area_tesis', 'Area_tesisController@index')->name('area_tesis.index');
 Route::get('/area_tesis{area_tesis}', 'Area_tesisController@edit')->name('area_tesis.edit');

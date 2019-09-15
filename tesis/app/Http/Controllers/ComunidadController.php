@@ -51,7 +51,8 @@ class ComunidadController extends Controller
             'nombre' => $request->nombre,
         ]);
 
-       return view('comunidad.index');
+       $comunidads=DB::table('comunidad')->paginate(7);
+       return view('comunidad.index',compact('comunidads'));
     }
 
     /**
@@ -93,6 +94,9 @@ class ComunidadController extends Controller
         $comunidad=Comunidad::findorfail($id);
         $comunidad->nombre=$request->get('nombre');
         $comunidad->update();
+
+       $comunidads=DB::table('comunidad')->paginate(7);
+       return view('comunidad.index',compact('comunidads'));
     }
 
     /**

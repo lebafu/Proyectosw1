@@ -50,8 +50,8 @@ class ProyectosController extends Controller
        DB::table('proyectos')->insert([
             'nombre' => $request->nombre,
         ]);
-
-       return view('proyecto.index');
+        $proyectos=DB::table('proyectos')->paginate(7);
+        return view('proyectos.index',compact('proyectos'));
         
     }
 
@@ -95,6 +95,9 @@ class ProyectosController extends Controller
         $proyecto=Proyecto::findorfail($id);
         $proyecto->nombre=$request->get('nombre');
         $proyecto->update();
+
+        $proyectos=DB::table('proyectos')->paginate(7);
+        return view('proyectos.index',compact('proyectos'));
     }
 
     /**
@@ -106,7 +109,7 @@ class ProyectosController extends Controller
     public function destroy($id)
     {
         //
-         DB::table('proyecto')->where('id', $id)->delete();
+         DB::table('proyectos')->where('id', $id)->delete();
         return back()->with('status','El proyecto ha sido eliminado con exito');
     }
 }

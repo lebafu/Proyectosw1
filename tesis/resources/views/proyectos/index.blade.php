@@ -27,12 +27,9 @@
           <td>{{$proyecto->id}}</td>
           <td>{{$proyecto->nombre}}</td>
           <td>
-
-            <a href="{{url('/proyectosmostrar/'.$proyecto->id)}}" class="btn btn-info"><span class="far fa-eye"></span>
-            <br>
             <a href="{{URL::action('ProyectosController@edit', $proyecto->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
              <br>
-           <form action="{{ route('proyectos.destroy', $proyecto->id)}}" method="POST">
+           <form action="{{route('proyectos.destroy', $proyecto->id)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
           <br>
            {{ method_field('DELETE') }}
@@ -44,8 +41,8 @@
      </table>
      </div>
      </div>
+     <a href="{{URL::action('ProyectosController@create')}}" class="btn btn-primary">Crear Proyectos </a>
      </div>
-     <a href="{{URL::action('ProyetosController@create')}}" class="btn btn-primary">Crear Proyectos </a>
      </div>
      </div>
 </div>

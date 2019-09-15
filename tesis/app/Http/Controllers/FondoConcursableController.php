@@ -50,7 +50,8 @@ class FondoConcursableController extends Controller
             'nombre' => $request->nombre,
         ]);
 
-       return view('fondoconcursable.index');
+        $fcs=DB::table('fondo_concursable')->paginate(7);
+        return view('fondoconcursable.index',compact('fcs'));
     }
 
     /**
@@ -92,6 +93,9 @@ class FondoConcursableController extends Controller
         $fc=Fondo_concursable::findorfail($id);
         $fc->nombre=$request->get('nombre');
         $fc->update();
+
+        $fcs=DB::table('fondo_concursable')->paginate(7);
+        return view('fondoconcursable.index',compact('fcs'));
 
     }
 

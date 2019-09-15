@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Crear Comunidad') }}</div>
+                <div class="card-header">{{ __('Crear Fondo Concursable') }}</div>
 
                 <div class="card-body">
                     <form action="{{route('fondoconcursable.store')}}" method="POST">
@@ -26,7 +26,7 @@
                                     {{ __('Guardar') }}
                                 </button>
 
-                                <a href="/users" class="btn">{{ __('Cancelar') }}</a>
+                                <a href="/profesorhome" class="btn">{{ __('Cancelar') }}</a>
                                     
                             </div>
 

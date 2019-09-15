@@ -26,7 +26,7 @@
                                     {{ __('Guardar') }}
                                 </button>
 
-                                <a href="/users" class="btn">{{ __('Cancelar') }}</a>
+                                <a href="/profesorhome" class="btn">{{ __('Cancelar') }}</a>
                                     
                             </div>
 
@@ -36,7 +36,6 @@
                     </form>
                 </div>
             </div>
-            <a href="{{URL::action('ComunidadController@create')}}" class="btn btn-primary">Crear comunidad</a>
         </div>
     </div>
 </div>

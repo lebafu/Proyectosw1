@@ -28,11 +28,9 @@
           <td>{{$comunidad->nombre}}</td>
           <td>
 
-            <a href="{{url('/comunidadmostrar/'.$comunidad->id)}}" class="btn btn-info"><span class="far fa-eye"></span>
-            <br>
             <a href="{{URL::action('ComunidadController@edit', $comunidad->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
              <br>
-           <form action="{{ route('comunidad.destroy', $comunidad->id)}}" method="POST">
+           <form action="{{route('comunidad.destroy', $comunidad->id)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
           <br>
            {{ method_field('DELETE') }}
@@ -44,8 +42,10 @@
      </table>
      </div>
      </div>
+     <a href="{{URL::action('ComunidadController@create')}}" class="btn btn-primary">Crear Comunidad</a>
      </div>
      </div>
+     <a href="{{ url('/profesorhome')}}" class="btn btn-default">Volver a home</a>
      </div>
 </div>
 

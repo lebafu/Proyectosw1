@@ -25,10 +25,7 @@
           <td>{{$fc->id}}</td>
           <td>{{$fc->nombre}}</td>
           <td>
-
-            <a href="{{url('/fondoconcursablemostrar/'.$fc->id)}}" class="btn btn-info"><span class="far fa-eye"></span>
-            <br>
-            <a href="{{URL::action('FondoconcursableController@edit', $fc->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+            <a href="{{URL::action('FondoConcursableController@edit', $fc->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
              <br>
            <form action="{{ route('fondoconcursable.destroy', $fc->id)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
@@ -42,7 +39,7 @@
      </table>
      </div>
      </div>
-     <a href="{{URL::action('Fondo_concursableController@create')}}" class="btn btn-primary">Crear Fondo Concursable</a>
+     <a href="{{URL::action('FondoConcursableController@create')}}" class="btn btn-primary">Crear Fondo Concursable</a>
      </div>
      </div>
      </div>
