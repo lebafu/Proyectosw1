@@ -89,6 +89,16 @@ body {
       <a href="{{url('/proyectos')}}">Proyectos</a>
     </div>
   </div> 
+  <div class="dropdown">
+    <button class="dropbtn">Solicitudes Notas
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="{{url('/index_solicitud_nota_pendiente')}}">Lista Nota pendiente</a>
+      <a href="{{url('/index_solicitud_nota_prorroga')}}">Lista Nota prorroga</a>
+      <a href="{{url('/index_solicitud_nota_extendida')}}">Solicitud Nota extendida</a>
+    </div>
+  </div> 
   <!--Fin de navbar Todos los navbar tienen la misma estructura-->
  <!-- <div class="dropdown">
     <button class="dropbtn">Filtrar tesis por tipo de vinculacion

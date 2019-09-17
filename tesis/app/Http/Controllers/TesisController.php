@@ -619,6 +619,7 @@ class TesisController extends Controller
 
         		$tes=Tesis::findorfail($id);
         		$tes->nota_prorroga=$request->get('nota_prorroga');
+                $tes->estado5=null;
         		$tes->update();
         	$user=User::findorfail($id);
         	//dd($user->name);
@@ -1645,8 +1646,106 @@ class TesisController extends Controller
             }
         }
 
+    //VER SOLICITUDES DE NOTA PENDIENTE DEL PROFESOR SE PREGUNTA SI EL USUARIO QUE INGRESA A ESTA SESION ES O NO PROFESOR, SI ES ENTONCES LO REDIRECCIONA A LA VISTA CON EL RESPECTIVO LISTADO.
+      public function index_solicitud_nota_pendiente()
+      {
+        $id=Auth::id();
+        $user=User::findorfail($id);
+        if($id==null)
+        {
+            return('tesis.sinpermiso');
+        }
+        if($user->tipo_usuario==2){
+            $tesistas=DB::table('tesis')->whereNotNull('nota_pendiente')->whereNull('nota_prorroga')->whereNull('estado4')->where('profesor_guia','=',$user->name)->paginate(7);
+        return view('tesis.index_solicitud_nota_pendiente',compact('tesistas','user'));  
+        }
+
+      }
+
+        //VER SOLICITUDES DE NOTA PRORROGA DEL PROFESOR SE PREGUNTA SI EL USUARIO QUE INGRESA A ESTA SESION ES O NO PROFESOR, SI ES ENTONCES LO REDIRECCIONA A LA VISTA CON EL RESPECTIVO LISTADO.
+
+        public function index_solicitud_nota_prorroga()
+      {
+        $id=Auth::id();
+        $user=User::findorfail($id);
+        if($id==null)
+        {
+            return('tesis.sinpermiso');
+        }if($user->tipo_usuario==2){
+            $tesistas=DB::table('tesis')->whereNotNull('nota_pendiente')->whereNotNull('nota_prorroga')->whereNull('estado5')->where('profesor_guia','=',$user->name)->paginate(7);
+            return view('tesis.index_solicitud_nota_prorroga',compact('tesistas','user'));
+        }                
+
+      }
+
+      //Se acepta la nota pendiente o la modifica el mismo profesor
+      public function aceptar_nota_pendiente($id)
+      {
+        $tesis=Tesis::find($id);
+        return view('tesis.aceptar_nota_pendiente',compact('tesis'));
+
+      }
+
+      //Se acepta la nota prorroga o la modifica el mismo profesor
+       public function aceptar_nota_prorroga($id)
+      {
+        $tesis=Tesis::find($id);
+        return view('tesis.aceptar_nota_prorroga',compact('tesis'));
+
+      }
+
+
+      public function pendiente_update(Request $request,$id)
+      {
+        $tes=Tesis::findorfail($id);
+        $tes->nota_pendiente=$request->nota_pendiente;
+        $tes->estado4=1;
+        $tes->update();
+        return view('profesorhome');        
+
+      }
+
+      public function prorroga_update(Request $request,$id)
+      {
+        //dd($request);
+        $tes=Tesis::findorfail($id);
+        $tes->nota_prorroga=$request->nota_prorroga;
+        $tes->estado5=1;
+        $tes->update();
+        return view('profesorhome');
+
+      }
 
       
+
+      /*public function plazo_nota_extendida()
+      {
+        $id=Auth::id();
+        $user=User::findorfail($id);
+        if($id==null or $user->tipo_usuario!=2)
+        {
+            return('tesis.sinpermiso');
+        }if($user->tipo_usuario==2){
+             $tesistas=DB::table('tesis')->whereNotNull('nota_prorroga')->whereNull('estado5')->orwhereNull('nota_prorroga')->whereNull('estado4')->where('profesor_guia','=',$user->name)->whereNull('fecha_presentacion_tesis')->paginate(7);
+             foreach($tesistas as $tesis)
+             {
+                if($tesis->nota_prorroga==null and $tesis->nota_pendiente!=null and $tesis->estado4==null)
+                {
+                    $tesis->tipo_nota='Pendiente';
+                    $tesis->fecha_venc=$tesis->nota_pendiente;
+                }else{
+                    if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado5==null){
+                        $tesis->tipo_nota='Prorroga';
+                        $tesis->fecha_venc=$tesis->nota_prorroga;
+                    }
+                }
+             }
+             //dd($tesistas);
+            return view('tesis.index_solicitud_nota_extendida',compact('tesistas','user'));
+        }                
+
+
+      }*/
 
     
     }

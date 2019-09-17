@@ -24,8 +24,14 @@ Route::get('/profesorhome', 'HomeController@index')->name('profesorhome');
 Route::get('/directorhome', 'HomeController@index')->name('directorhome');
 Route::get('/secretariahome','HomeController@index')->name('secretariahome');
 
+Route::get('/index_solicitud_nota_pendiente', 'TesisController@index_solicitud_nota_pendiente')->name('tesis.index_solicitud_nota_pendiente');
+Route::get('/aceptar_nota_pendiente/{tesis}', 'TesisController@aceptar_nota_pendiente')->name('tesis.aceptar_nota_pendiente');
+Route::put('/actualizarpendiente{tesis}','TesisController@pendiente_update')->name('tesis.pendiente_update');	
+Route::get('/index_solicitud_nota_extendida', 'TesisController@plazo_nota_extendida')->name('tesis.index_solicitud_nota_extendida');	
 
-			 												
+Route::get('/index_solicitud_nota_prorroga', 'TesisController@index_solicitud_nota_prorroga')->name('tesis.index_solicitud_nota_prorroga');
+Route::get('/aceptar_nota_prorroga/{tesis}', 'TesisController@aceptar_nota_prorroga')->name('tesis.aceptar_nota_prorroga');
+Route::put('/actualizarprorroga{tesis}','TesisController@prorroga_update')->name('tesis.prorroga_update');												
 
 Route::get('/users', 'UsersController@index')->name('users.index');
 Route::get('/users{users}', 'UsersController@edit')->name('users.edit');
