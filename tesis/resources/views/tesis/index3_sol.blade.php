@@ -26,7 +26,11 @@
         @foreach ($tesistas as $tesis)
         <tr>
           <td>{{$tesis->rut}}</td>
+          @if($tesis->nombre_completo2==null)
           <td>{{$tesis->nombre_completo}}</td>
+          @else
+           <td>{{$tesis->nombre_completo}} - {{$tesis->nombre_completo2}}</td>
+          @endif
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->area_tesis}}</td>
           <td>{{$tesis->tipo}}</td>

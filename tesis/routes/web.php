@@ -179,7 +179,7 @@ Route::get('/acta_ex_ver/{tesis}', 'TesisController@verPDF_acta')->name('verPDF_
 Route::get('/rango_fechas', 'TesisController@rango_fechas')->name('tesis.rango_fechas');
 Route::put('/informes_rangos_fechas/','TesisController@informes_rangos_fechas')->name('tesis.informes_rangos_fechas');
 Route::get('/error_generar_pdf', 'TesisController@error_generar_pdf')->name('tesis.error_generar_pdf');
-
+Route::get('/error_rut', 'TesisController@error_rut')->name('tesis.error_generar_pdf');
 //NOTAS PENDIENTES Y DE PRORROGAS VENCIDAS
 Route::get('/descargar_pendientes_vencidas','TesisController@imprimir_pend_venc')->name('descargar_pendientes_vencidas');
 Route::get('/descargar_prorrogas_vencidas','TesisController@imprimir_pro_venc')->name('descargar_prorrogas_vencidas');

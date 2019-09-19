@@ -40,6 +40,41 @@
                             </div>
                         </div>
 
+
+                         @if($tes->nombre_completo2!=null)
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Segundo Alumno') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nombre_completo2" type="text" class="form-control @error('nombre_completo2') is-invalid @enderror" name="nombre_completo2" value="{{ $tes->nombre_completo2}}" required autocomplete="nombre_completo2" autofocus>
+
+                                @error('nombre_completo2')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="rut2" class="col-md-4 col-form-label text-md-right">{{ __('Rut Segundo Alumno') }}</label>
+                            <div class="col-md-6">
+                                <input id="rut2" type="text" placeholder="rut2" class="form-control" name="rut" value="{{$tes->rut2}}"required="required">
+                            </div>
+                        </div>
+
+
+                         <div class="form-group row">
+                            <label for="ano_ingreso2" class="col-md-4 col-form-label text-md-right">{{ __('Ano Ingreso') }}</label>
+                            <div class="col-md-6">
+                                <input id="ano_ingreso2" type="text" placeholder="año ingreso" class="form-control" name="ano_ingreso2" value="{{$tes->ano_ingreso2}}" required="required">
+                            </div>
+                        </div>
+
+                      @endif
+
+
                          <div class="form-group row">
                             <label for="profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Profesor guia') }}</label>
                              <div class="col-md-6">
@@ -111,6 +146,32 @@
                             <div class="col-md-6">
                               <input id="nombre_vinculacion" type="text" placeholder="nombre_vinculacion" class="form-control" name="nombre_vinculacion" value="{{$tes->nombre_vinculacion}}" required="required">
                                </div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de Vinculacion') }}</label>
+                            <div class="col-md-6">
+                            <select name="nombre_vinculacion" id="nombre_vinculacion" class="form-control" required>
+                              <option value="{{$tes->nombre_vinculacion}}">{{$tes->nombre_vinculacion}}</option>
+                                  @if($tes->tipo_vinculacion=="Empresa")
+                                    @foreach($empresas as $emp)
+                                    <option value="{{$emp->nombre}}">{{$emp->nombre}}</option>
+                                    @endforeach
+                                  @elseif($tes->tipo_vinculacion=="Comunidad")
+                                     @foreach($comunidads as $comunidad)
+                                    <option value="{{$comunidad->nombre}}">{{$comunidad->nombre}}</option>
+                                    @endforeach
+                                  @elseif($tes->tipo_vinculacion=="Proyecto")
+                                    @foreach($proyectos as $proyecto)
+                                    <option value="{{$proyecto->nombre}}">{{$proyecto->nombre}}</option>
+                                    @endforeach
+                                  @else
+                                     @foreach($fcs as $fc)
+                                    <option value="{{$fc->nombre}}">{{$fc->nombre}}</option>
+                                    @endforeach
+                                  @endif
+                                </select>
+                              </div>
                         </div>
 
                          <div class="form-group row">
@@ -293,6 +354,13 @@
                             </div>
                         </div>
 
+                         <div class="form-group row">
+                            <label for="coguia" class="col-md-4 col-form-label text-md-right">{{ __('Coguia') }}</label>
+                            <div class="col-md-6">
+                                <input type="checkbox" name="coguia" value=1><br>
+                            </div>
+                        </div>
+
 
                         <div class="form-group row">
                             <label for="profesor2_comision" class="col-md-4 col-form-label text-md-right">{{ __('Segundo Profesor comision') }}</label>
@@ -305,12 +373,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="coguia" class="col-md-4 col-form-label text-md-right">{{ __('Coguia') }}</label>
-                            <div class="col-md-6">
-                                <input type="checkbox" name="coguia" value=1><br>
-                            </div>
-                        </div>
 
                         <div class="form-group row">
                             <label for="profesor3_comision" class="col-md-4 col-form-label text-md-right">{{ __('Tercer Profesor comision') }}</label>

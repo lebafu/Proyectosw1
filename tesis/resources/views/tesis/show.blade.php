@@ -17,12 +17,15 @@
 @if($comision!=null)
 	<b>Nombre alumno</b>
 	<p>{{$tesis->nombre_completo}}</p>
+	<p>{{$tesis->nombre_completo2}}</p>
 	<b>Rut</b>
 	<p>{{$tesis->rut}}</p>
-	<b>Profesor Guía</b>
-	<p>{{$tesis->profesor_guia}}</p>
+	<p>{{$tesis->rut2}}</p>
 	<b>Año Ingreso</b>
 	<p>{{$tesis->ano_ingreso}}</p>
+	<p>{{$tesis->ano_ingreso2}}</p>
+	<b>Profesor Guía</b>
+	<p>{{$tesis->profesor_guia}}</p>
 	<b>Carrera</b>
 	<p>{{$tesis->carrera}}</p>
 	<b>Tipo de trabajo</b>
@@ -74,12 +77,15 @@
 @else
 	<b>Nombre alumno</b>
 	<p>{{$tesis->nombre_completo}}</p>
+	<p>{{$tesis->nombre_completo2}}</p>
 	<b>Rut</b>
 	<p>{{$tesis->rut}}</p>
-	<b>Profesor Guía</b>
-	<p>{{$tesis->profesor_guia}}</p>
+	<p>{{$tesis->rut2}}</p>
 	<b>Año Ingreso</b>
 	<p>{{$tesis->ano_ingreso}}</p>
+	<p>{{$tesis->ano_ingreso2}}</p>
+	<b>Profesor Guía</b>
+	<p>{{$tesis->profesor_guia}}</p>
 	<b>Carrera</b>
 	<p>{{$tesis->carrera}}</p>
 	<b>Tipo trabajo</b>

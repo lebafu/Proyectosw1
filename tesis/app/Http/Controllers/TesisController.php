@@ -383,11 +383,14 @@ class TesisController extends Controller
             return('welcome');
         }
         $user=User::findorfail($id);
-        //dd($user->name);
-        $tesistas=DB::table('tesis')->where('id','=',$id)->paginate(7);
+        //dd($user);
+        $tesistas=DB::table('tesis')->where('nombre_completo','=',$user->name)->orwhere('nombre_completo2','=',$user->name)->paginate(7);
+        //dd($tesistas);
         return view('tesis.index1',compact('tesistas','user'));
 
     }
+
+
 	public function index()
     {
         
@@ -406,21 +409,34 @@ class TesisController extends Controller
         $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
         $tesista=Tesis::find($id);
         $area_tesis=DB::table('area_tesis')->get();
+        $empresas=DB::table('empresas')->get();
+        $comunidads=DB::table('comunidad')->get();
+        $fcs=DB::table('fondo_concursable')->get();
+        $proyectos=DB::table('proyectos')->get();
         if($tesista==null){
-        return view('tesis.create',compact('alumno','profes','area_tesis'));
-        }else{
+        return view('tesis.create',compact('alumno','profes','area_tesis','empresas','comunidads','fcs','proyectos'));
+        }else
+        {
             return view('tesis.tesisregistrada');
         }
     }
 
+    public function error_rut()
+    {
+
+        return view('tesis.error_rut');
+    }
 
     //Almacena los datos de la tabla tesis llenada preliminarmente por el alumno.
     public function store(Request $request)
     {
         $request->validate([
             'nombre_completo' => 'required|string',
+            'nombre_completo' => 'string',
             'rut' => 'required|string|unique:tesis|min:11|max:12',
+            'rut2' => 'string|unique:tesis|min:11|max:12',
             'ano_ingreso' => 'required|integer',
+            'ano_ingreso2' => 'integer',
             'profesor_guia' => 'required|string',
             'nombre_tesis' => 'required|string',
             'area_tesis' => 'required|string',
@@ -443,6 +459,15 @@ class TesisController extends Controller
             'rut' =>$request->rut,
         ]);*/
             //dd($request->nombre_completo);
+        $rut1=DB::table('tesis')->select('rut')->get();
+        $contador=0;
+        foreach($rut1 as $rut)
+        {
+            if($rut->rut==$request->rut2){
+                return view('tesis.error.rut');
+            }
+        }
+
         $id=Auth::id();
         $user=User::findorfail($id);
         //si usuario es de tipo alumno entonces se actualizara el nombre usuario en user
@@ -456,8 +481,11 @@ class TesisController extends Controller
             DB::table('tesis')->insert([
                 'id' => $id,
                 'nombre_completo' => $request->nombre_completo,
+                'nombre_completo2' => $request->nombre_completo2,
                 'rut' =>$request->rut,
+                'rut2' =>$request->rut2,
                 'ano_ingreso' => $request->ano_ingreso,
+                'ano_ingreso2' => $request->ano_ingreso2,
                 'profesor_guia' =>$request->profesor_guia,
                 'nombre_tesis' => $request->nombre_tesis,
                 'area_tesis' => $request->area_tesis,
@@ -533,14 +561,17 @@ class TesisController extends Controller
                 $tes = Tesis::findorfail($id);
                 $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
                 $area_tesis=DB::table('area_tesis')->get();
-
+                $empresas=DB::table('empresas')->get();
+                $comunidads=DB::table('comunidad')->get();
+                $fcs=DB::table('fondo_concursable')->get();
+                 $proyectos=DB::table('proyectos')->get();
             if(!Auth::id()){
                 return view('sinpermiso');
             }elseif($user->tipo_usuario==1 and $tes->estado1==1 and $tes->estado2==null){
                
                 //$tes->estado1=2;
                 //$tes->update();
-                return view('tesis.edit',compact('tes','profes','area_tesis'));
+                return view('tesis.edit',compact('tes','profes','area_tesis','empresas','comunidads','fcs','proyectos'));
                 //return $user;
             }elseif($user->tipo_usuario==1 and$tes->estado1==5 and $tes->estado2==null){
             $tes->estado1=1;
@@ -645,6 +676,10 @@ class TesisController extends Controller
             $tes = Tesis::findorfail($id);
             $com =Comision::find($id);
             $area_tesis=DB::table('area_tesis')->get();
+            $empresas=DB::table('empresas')->get();
+            $comunidads=DB::table('comunidad')->get();
+            $fcs=DB::table('fondo_concursable')->get();
+             $proyectos=DB::table('proyectos')->get();
             //dd($com);
             //if($com==null){
             //dd($com);
@@ -652,14 +687,14 @@ class TesisController extends Controller
                 $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
                 $tes->estado1=2;
                 $tes->update();
-                return view('tesis.edit2',compact('tes','profes','com','area_tesis'));
+                return view('tesis.edit2',compact('tes','profes','com','area_tesis','empresas','comunidads','fcs','proyectos'));
             }
             if($user->tipo_usuario==2 and $tes->estado1==2 and $tes->estado2==null)
             {           
             $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
             //$tes->estado1=3;
             //$tes->update();
-           return view('tesis.edit2',compact('tes','profes','com','area_tesis'));
+           return view('tesis.edit2',compact('tes','profes','com','area_tesis', 'empresas','comunidads','fcs','proyectos'));
            }
                 if($user->tipo_usuario==2 and $tes->estado1==2 and $tes->estado2==1){           
                 $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
@@ -672,7 +707,7 @@ class TesisController extends Controller
             		$tes->estado3=1;
             	 	$tes->update();
             		$profes=DB::table('users')->where('tipo_usuario','=',2)->get();
-                return view('tesis.edit2',compact('tes','profes','com','area_tesis'));
+                return view('tesis.edit2',compact('tes','profes','com','area_tesis','empresas','comunidads','fcs','proyectos'));
                 }else{
             		return view('tesis.noeditartesis_profe');
                 //}
@@ -724,18 +759,22 @@ class TesisController extends Controller
 	        $tes = Tesis::findorfail($id);
 	        $com=Comision::find($id);
             $area_tesis=DB::table('area_tesis')->get();
+            $empresas=DB::table('empresas')->get();
+            $comunidads=DB::table('comunidad')->get();
+            $fcs=DB::table('fondo_concursable')->get();
+             $proyectos=DB::table('proyectos')->get();
             //dd($com);
             if($user->tipo_usuario==3 && $tes->estado1==2 && $tes->estado2==1 ){           
                 $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
                 $tes->estado1=3;
                 $tes->update();
                 //dd($tes->tipo_vinculacion);
-                return view('tesis.edit3',compact('tes','profes','com','area_tesis'));
+                return view('tesis.edit3',compact('tes','profes','com','area_tesis','empresas','comunidads','fcs','proyectos'));
             }else{
             	if($user->tipo_usuario==3 && $tes->estado1==3 && $tes->estado2==1 ){           
                 $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
                 //dd($tes->tipo_vinculacion);
-                return view('tesis.edit3',compact('tes','profes','com','area_tesis'));
+                return view('tesis.edit3',compact('tes','profes','com','area_tesis','empresas','comunidads','fcs','proyectos'));
             }else{
             	return view('tesis.sinpermiso');
             }
@@ -981,7 +1020,6 @@ class TesisController extends Controller
             'rut' => 'required|string|min:11|max:12',
             'ano_ingreso' => 'required|integer',
             'profesor1_comision' => 'required|string',
-            'coguia' =>'required|integer',
             'profesor2_comision' => 'required|string',
             'profesor3_comision' =>'string',
         ]);
@@ -1090,6 +1128,7 @@ class TesisController extends Controller
             'id_profesor_guia' => $profe->id,
             'nombre_alumno' =>$request->nombre_completo,
             'profesor1_comision' => $request->profesor1_comision,
+            'coguia' => $request->coguia,
             'profesor2_comision' => $request->profesor2_comision,
             'profesor3_comision' => $request->profesor3_comision,
             'profesor1_externo' => $request->profesor1_externo,
@@ -1102,7 +1141,9 @@ class TesisController extends Controller
             'institucion2' => $request->institucion2,
         ]);
 
-        return view('welcome');
+       if($user->tipo_usuario==2){
+        return view('profesorhome');
+    }
     }
 
     //Vista que permite al alumno subir el archivo, en caso de que tenga la tesis inscrita estado1=4, estado2=1.
@@ -1225,7 +1266,7 @@ class TesisController extends Controller
             'correo_profe2_externo' => $request->correo_profe2_externo,
             'institucion2' => $request->institucion2,
         ]);*/
-        return view('welcome');
+        return view('profesorhome');
     }
 
         //Se almacena la evaluacion realizada por el director de tesis si acepta estado1 será =4 y estado2=1, ademas el campo fecha_inscripcion tomará el valor del dia actual,y en caso contrario tomará un estado1=5, y estado2=0, lo  que permitirá que sea editable tanto para el profesor como para el alumno, segun edite primero el documento.

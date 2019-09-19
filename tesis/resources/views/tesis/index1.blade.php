@@ -28,9 +28,9 @@
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
-          @if($tesis->nombre_completo==$user->name)
+          @if($tesis->nombre_completo==$user->name or $tesis->nombre_completo2)
           <td>{{$tesis->id}}</td>
-          <td>{{$tesis->nombre_completo}}</td>
+          <td>{{$tesis->nombre_completo}} {{$tesis->nombre_completo2}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}</td>

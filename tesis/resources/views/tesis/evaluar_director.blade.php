@@ -110,10 +110,17 @@
                             </div>
                         </div>
                         
+                      
+                        
                          <div class="form-group row">
                             <label for="profesor1_comision" class="col-md-4 col-form-label text-md-right">{{ __('Primer profesor comision') }}</label>
                            <div class="col-md-6">
                                  <input id="profesor1_comision" type="text" class="form-control" name="profesor1_comision" value="{{$comision->profesor1_comision}}" required="required" disabled>
+                                    @if($comision->coguia==1)
+                                    
+                                          <p>El profesor {{$comision->profesor1_comision}} es Coguia</p>
+                                       
+                                    @endif
                             </div>
                         </div>
 
