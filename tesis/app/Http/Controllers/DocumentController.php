@@ -25,7 +25,9 @@ class DocumentController extends Controller
 
     public function create()
     {
-        return view('createdocument');
+    	$fecha_inicio=date("01/01/2019");
+    	$fecha_final=date("31/11/2019");
+        return view('createdocument',compact('fecha_inicio','fecha_final'));
     }
 
     public function store(Request $request)
@@ -99,7 +101,7 @@ class DocumentController extends Controller
 				}
         		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
         		$objWriter->save('Appdividend.docx');
-        		return response()->download(public_path('Appdividend.docx'));
+        		return response()->download(public_path('Lista_Tesis.docx'));
         	}
        }
     }

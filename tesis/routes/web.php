@@ -17,12 +17,25 @@ Route::get('/', function () {
 
 Auth::routes();
 
+Route::get('/dashboard',function()
+	{
+		return view('dashboard');
+
+	});
+
+Route::get('/login1',function()
+	{
+		return view('login');
+
+	});
+
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/adminhome', 'HomeController@index')->name('adminhome');
 Route::get('/alumnohome', 'HomeController@index')->name('alumnohome');
 Route::get('/profesorhome', 'HomeController@index')->name('profesorhome');
 Route::get('/directorhome', 'HomeController@index')->name('directorhome');
 Route::get('/secretariahome','HomeController@index')->name('secretariahome');
+Route::get('/inicio','InicioController@index')->name('inicio');
 
 Route::get('/index_solicitud_nota_pendiente', 'TesisController@index_solicitud_nota_pendiente')->name('tesis.index_solicitud_nota_pendiente');
 Route::get('/aceptar_nota_pendiente/{tesis}', 'TesisController@aceptar_nota_pendiente')->name('tesis.aceptar_nota_pendiente');
