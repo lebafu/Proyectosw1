@@ -52,7 +52,7 @@
 
 <script>
     
-    $('#aceptar_nota_pendiente').datepicker({
+    $('#nota_pendiente').datepicker({
         language: 'es',
         format: 'yyyy-mm-dd'
     });

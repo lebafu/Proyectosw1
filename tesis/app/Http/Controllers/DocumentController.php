@@ -25,9 +25,9 @@ class DocumentController extends Controller
 
     public function create()
     {
-    	$fecha_inicio=date("01/01/2019");
-    	$fecha_final=date("31/11/2019");
-        return view('createdocument',compact('fecha_inicio','fecha_final'));
+    	//$fecha_inicio=date("01/01/2019");
+    	//$fecha_final=date("31/11/2019");
+        return view('createdocument');
     }
 
     public function store(Request $request)

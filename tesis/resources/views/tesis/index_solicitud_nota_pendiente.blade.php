@@ -8,7 +8,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Solicitudes Nota de Prorroga')}}</div>
+        <div class="card-header">{{ __('Solicitudes Nota de Pendiente')}}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
@@ -26,7 +26,7 @@
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->nota_pendiente}}}</td>
+          <td>{{$tesis->nota_pendiente}}</td>
           <td>
           <div class="row">
           <td><a href="{{url('/aceptar_nota_pendiente/'.$tesis->id)}}" class="btn btn-info"><span class="fas fa-check"></span></td>                              

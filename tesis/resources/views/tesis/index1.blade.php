@@ -44,8 +44,13 @@
            @if($tesis->estado1==5)
                 Rechazada
            @endif
-           @if($tesis->nota_pendiente!=null and $tesis->nota_prorroga==null)
+           @if($tesis->nota_pendiente!=null and $tesis->nota_prorroga==null and $tesis->estado4==1 and $tesis->estado5==null)
            <td>{{$tesis->nota_pendiente}}</td>
+           <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nota Prorroga</a></td>
+           <td></td>
+         @endif
+           @if($tesis->nota_pendiente!=null and $tesis->nota_prorroga==null and $tesis->estado4!=1 and $tesis->estado5==null)
+           <td>En espera</td>
            <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nota Prorroga</a></td>
            <td></td>
          @endif
@@ -62,7 +67,13 @@
           <td>  </td>
           <td>  </td>
           @endif
-          @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null)
+          @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado4==1 and $tesis->estado5!=1)
+         <td>{{$tesis->nota_pendiente}}</td>
+          <td>En espera</td>
+          <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nueva nota de Prorroga</a></td>
+          <td></td>
+         @endif
+          @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado4==1 and $tesis->estado5==1)
          <td>{{$tesis->nota_pendiente}}</td>
           <td>{{$tesis->nota_prorroga}}</td>
           <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nueva nota de Prorroga</a></td>

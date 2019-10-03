@@ -96,7 +96,7 @@ body {
     <div class="dropdown-content">
       <a href="{{url('/index_solicitud_nota_pendiente')}}">Lista Nota pendiente</a>
       <a href="{{url('/index_solicitud_nota_prorroga')}}">Lista Nota prorroga</a>
-      <a href="{{url('/index_solicitud_nota_extendida')}}">Solicitud Nota extendida</a>
+      <!--<a href="{{url('/index_solicitud_nota_extendida')}}">Solicitud Nota extendida</a>-->
     </div>
   </div> 
   <!--Fin de navbar Todos los navbar tienen la misma estructura-->
