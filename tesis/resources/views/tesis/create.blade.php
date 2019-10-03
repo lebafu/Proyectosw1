@@ -43,7 +43,7 @@
 
 
                          <div class="form-group row">
-                            <label for="ano_ingreso" class="col-md-4 col-form-label text-md-right">{{ __('Ano Ingreso') }}</label>
+                            <label for="ano_ingreso" class="col-md-4 col-form-label text-md-right">{{ __('Año Ingreso') }}</label>
                             <div class="col-md-6">
                                 <input id="ano_ingreso" type="text" placeholder="Año ingreso" class="form-control" name="ano_ingreso" required="required">
                             </div>
@@ -53,7 +53,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre completo Alumno2') }}</label>
 
                              <div class="col-md-6">
-                                <input id="nombre_completo2" type="text" class="form-control @error('nombre_completo2') is-invalid @enderror" name="nombre_completo2" required="required" autocomplete="nombre_completo" autofocus>
+                                <input id="nombre_completo2" type="text" class="form-control @error('nombre_completo2') is-invalid @enderror" name="nombre_completo2" autocomplete="nombre_completo2" autofocus>
 
                                 @error('nombre_completo2')
                                     <span class="invalid-feedback" role="alert">
@@ -63,13 +63,7 @@
                             </div>
                          </div>
 
-                                @error('nombre_completo2')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+                
 
                          <div class="form-group row">
                             <label for="rut2" class="col-md-4 col-form-label text-md-right">{{ __('Rut Segundo Alumno') }}</label>
@@ -79,9 +73,9 @@
                         </div>
 
                          <div class="form-group row">
-                            <label for="ano_ingreso2" class="col-md-4 col-form-label text-md-right">{{ __('Ano Ingreso') }}</label>
+                            <label for="ano_ingreso2" class="col-md-4 col-form-label text-md-right">{{ __('Año Ingreso') }}</label>
                             <div class="col-md-6">
-                                <input id="ano_ingreso2" type="text" placeholder="Año ingreso" class="form-control" name="ano_ingreso2" required="required">
+                                <input id="ano_ingreso2" type="text" placeholder="Año ingreso" class="form-control" name="ano_ingreso2" >
                             </div>
                         </div>
 

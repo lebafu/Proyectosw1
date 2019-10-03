@@ -427,16 +427,19 @@ class TesisController extends Controller
         return view('tesis.error_rut');
     }
 
+     public function usuario_no_existe()
+    {
+
+        return view('tesis.usuario_no_existe');
+    }
+
     //Almacena los datos de la tabla tesis llenada preliminarmente por el alumno.
     public function store(Request $request)
     {
         $request->validate([
             'nombre_completo' => 'required|string',
-            'nombre_completo' => 'string',
             'rut' => 'required|string|unique:tesis|min:11|max:12',
-            'rut2' => 'string|unique:tesis|min:11|max:12',
             'ano_ingreso' => 'required|integer',
-            'ano_ingreso2' => 'integer',
             'profesor_guia' => 'required|string',
             'nombre_tesis' => 'required|string',
             'area_tesis' => 'required|string',
@@ -451,6 +454,16 @@ class TesisController extends Controller
 
 
 
+        $id=Auth::id();
+        $user=User::findorfail($id);
+        //si usuario es de tipo alumno entonces se actualizara el nombre usuario en user
+
+
+        if($id==null){
+            return view('tesis.sinpermiso');
+        }
+
+
         /*DB::table('users')->insert([
             'name' => $request->name,
             'email' =>$request->email,
@@ -459,25 +472,59 @@ class TesisController extends Controller
             'rut' =>$request->rut,
         ]);*/
             //dd($request->nombre_completo);
+
+        //En caso de que complete 2 de los 3 campos del segundo alumno tesista
+        //dd($request);
+        if(($request->nombre_completo2==null and $request->rut2!=null and $request->ano_ingreso2!=null)or($request->nombre_completo2!=null and $request->rut2==null and $request->ano_ingreso2!=null)or($request->nombre_completo2!=null and $request->rut2!=null and $request->ano_ingreso2==null)or($request->nombre_completo2!=null and $request->rut2==null and $request->ano_ingreso2==null)or($request->nombre_completo2==null and $request->rut2!=null and $request->ano_ingreso2==null)or $request->nombre_completo2==null and $request->rut2==null and $request->ano_ingreso2!=null)
+        {
+        //dd($request->nombre_completo2);
+            return view('tesis.error_campos');
+
+        }
+
         $rut1=DB::table('tesis')->select('rut')->get();
         $contador=0;
+        $buscar_segundo_alumno_user=DB::table('users')->where('name','=',$request->nombre_completo2)->get();
+        $buscar_segundo_alumno_tesis=DB::table('tesis')->where('nombre_completo','=',$request->nombre_completo2)->orwhere('nombre_completo2','=',$request->nombre_completo2)->get();
+        $users=DB::table('users')->first();
+
+        //En caso de que el rut ya exista en la bd, es por que se ingresó mal
         foreach($rut1 as $rut)
         {
             if($rut->rut==$request->rut2){
-                return view('tesis.error.rut');
+                return view('tesis.error_rut');
             }
         }
 
+        //Si el usuario no existe en el registro de usuario entonces no podra registrarse segundo alumno
+        //dd($buscar_segundo_alumno_user);
+    
+            //dd('buscar_segundo_alumno_user'=> $buscar_segundo_alumno_user);
+            //dd($buscar_segundo_alumno_user->isEmpty());
+            //dd($buscar_segundo_alumno_user);
+            if(($buscar_segundo_alumno_user->isEmpty())==true){
+                 return view('tesis.usuario_no_existe');
+                //echo 'Si son iguales';
+            }
+
+   
+
+        //buscar si el alumno ya tiene una tesis creada
+        //dd($buscar_segundo_alumno_tesis);
+        //dd($buscar_segundo_alumno_tesis->isEmpty());
+        if(($buscar_segundo_alumno_tesis->isEmpty())==false){
+            return view('tesis.tesisregistrada');
+        }
+
+
         $id=Auth::id();
         $user=User::findorfail($id);
-        //si usuario es de tipo alumno entonces se actualizara el nombre usuario en user
-        if($id==null){
-            return view('tesis.sinpermiso');
-        }
+
+
         if($user->tipo_usuario==1){ 
 
-            $user->name=$request->get('nombre_completo');
-            $user->update();
+            $user->name=$request->nombre_completo;
+            $user->save();
             DB::table('tesis')->insert([
                 'id' => $id,
                 'nombre_completo' => $request->nombre_completo,
@@ -499,7 +546,7 @@ class TesisController extends Controller
             ]);
     }
 
-    return  view('welcome');
+    return  view('alumnohome');
         
         /*if($request->get('tipo_usuario')=='Alumno'){
             $info_alumno = new Info_alumno;

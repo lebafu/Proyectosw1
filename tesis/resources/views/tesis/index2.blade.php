@@ -1,4 +1,4 @@
-@extends("theme.$theme.layout")
+@extends("layouts.app")
 
 
 
