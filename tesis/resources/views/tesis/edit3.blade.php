@@ -39,8 +39,8 @@
                                 <input id="ano_ingreso" type="text" placeholder="ano_ingreso" class="form-control" name="ano_ingreso" value="{{$tes->ano_ingreso}}" required="required">
                             </div>
                         </div>
-
-                         @if($tes->nombre_completo2!=null)
+                    <!--En caso de que se deje el nombre completo 2 en nulo significa que la tesis es individual y entonces lo de este if no iría en la vista del director de tesis -->
+    @if($tes->nombre_completo2!=null)
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Segundo Alumno') }}</label>
@@ -178,27 +178,29 @@
 
                        
  
-                        <div class="form-group row">
+                        < <div class="form-group row">
                             <label for="descripcion" class="col-md-4 col-form-label text-md-right">{{ __('Descripcion') }}</label>
                             <div class="col-md-6">
-                                <input id="descripcion" type="text" placeholder="Breve descripcion del tema" class="form-control" name="descripcion" value="{{$tes->descripcion}}" required="required">
+                                <textarea id="descripcion" type="text" rows="10" cols="40" placeholder="Breve descripcion del tema" class="form-control" name="descripcion" value="{{$tes->descripcion}}" required="required">{{$tes->descripcion}}</textarea>
                             </div>
                         </div>
  
                        <div class="form-group row">
                             <label for="objetivos" class="col-md-4 col-form-label text-md-right">{{ __('Objetivos') }}</label>
                             <div class="col-md-6">
-                                <input id="objetivos" type="text" placeholder="Objetivos del tema" class="form-control" name="objetivos" value="{{$tes->objetivos}}" required="required">
+                                <textarea id="objetivos" type="text" rows="10" cols="40" placeholder="Objetivos del tema" class="form-control" name="objetivos" value="{{$tes->objetivos}}" required="required">{{$tes->objetivos}}</textarea>
                             </div>
                         </div>
+
+  
+
  
                        <div class="form-group row">
                             <label for="contribucion" class="col-md-4 col-form-label text-md-right">{{ __('Contribucion esperada') }}</label>
                             <div class="col-md-6">
-                                <input id="contribucion" type="text" placeholder="contribucion" class="form-control" name="contribucion" value="{{$tes->contribucion}}" required="required">
+                                <textarea id="contribucion" type="text" rows="10" cols="40" placeholder="contribucion" class="form-control" name="contribucion" value="{{$tes->contribucion}}" required="required">{{$tes->contribucion}}</textarea>
                             </div>
                         </div>
-
                         
                          <div class="form-group row">
                             <label for="profesor1_comision" class="col-md-4 col-form-label text-md-right">{{ __('Primer profesor comision') }}</label>
@@ -212,12 +214,22 @@
                             </div>
                         </div>
 
-                          <div class="form-group row">
+                         <div class="form-group row">
                             <label for="coguia" class="col-md-4 col-form-label text-md-right">{{ __('Coguia') }}</label>
                             <div class="col-md-6">
-                                <input type="checkbox" name="coguia" value=1><br>
+                                <select name="coguia" id="coguia" class="form-control">
+                                 @if($com->coguia==1)
+                                    <option value="{{$com->coguia}}">Si</option>
+                                  @endif
+                                    @if($com->coguia==0)
+                                    <option value="{{$com->coguia}}">No</option>
+                                  @endif
+                                    <option value=1>Si</option>
+                                    <option value=0>No</option>
+                                </select>
                             </div>
                         </div>
+
 
                         <div class="form-group row">
                             <label for="profesor2_comision" class="col-md-4 col-form-label text-md-right">{{ __('Segundo Profesor comision') }}</label>

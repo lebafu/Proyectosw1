@@ -459,6 +459,8 @@ class TesisController extends Controller
         //si usuario es de tipo alumno entonces se actualizara el nombre usuario en user
 
 
+
+
         if($id==null){
             return view('tesis.sinpermiso');
         }
@@ -499,6 +501,23 @@ class TesisController extends Controller
         //Si el usuario no existe en el registro de usuario entonces no podra registrarse segundo alumno
         //dd($buscar_segundo_alumno_user);
     
+          
+          
+
+   
+
+        //buscar si el alumno ya tiene una tesis creada
+        //dd($buscar_segundo_alumno_tesis);
+        //dd($buscar_segundo_alumno_tesis->isEmpty());
+       
+
+
+        $id=Auth::id();
+        $user=User::findorfail($id);
+
+
+        if($user->tipo_usuario==1 and $request->nombre_completo2!=null and $request->rut2!=null and $request->ano_ingreso2!=null){ 
+
             //dd('buscar_segundo_alumno_user'=> $buscar_segundo_alumno_user);
             //dd($buscar_segundo_alumno_user->isEmpty());
             //dd($buscar_segundo_alumno_user);
@@ -507,21 +526,9 @@ class TesisController extends Controller
                 //echo 'Si son iguales';
             }
 
-   
-
-        //buscar si el alumno ya tiene una tesis creada
-        //dd($buscar_segundo_alumno_tesis);
-        //dd($buscar_segundo_alumno_tesis->isEmpty());
-        if(($buscar_segundo_alumno_tesis->isEmpty())==false){
+            if(($buscar_segundo_alumno_tesis->isEmpty())==false){
             return view('tesis.tesisregistrada');
-        }
-
-
-        $id=Auth::id();
-        $user=User::findorfail($id);
-
-
-        if($user->tipo_usuario==1){ 
+            }
 
             $user->name=$request->nombre_completo;
             $user->save();
@@ -546,6 +553,28 @@ class TesisController extends Controller
             ]);
     }
 
+
+        if($user->tipo_usuario==1 and $request->nombre_completo2==null and $request->rut2==null and $request->ano_ingreso2==null){ 
+
+            $user->name=$request->nombre_completo;
+            $user->save();
+            DB::table('tesis')->insert([
+                'id' => $id,
+                'nombre_completo' => $request->nombre_completo,
+                'rut' =>$request->rut,
+                'ano_ingreso' => $request->ano_ingreso,
+                'profesor_guia' =>$request->profesor_guia,
+                'nombre_tesis' => $request->nombre_tesis,
+                'area_tesis' => $request->area_tesis,
+                'carrera' => $request->carrera,
+                'tipo_vinculacion' => $request->tipo_vinculacion,
+                'nombre_vinculacion' =>$request->nombre_vinculacion,
+                'tipo'=> $request->tipo,
+                'descripcion' =>$request->descripcion,
+                'objetivos' => $request->objetivos,
+                'contribucion'=> $request->contribucion,
+            ]);
+    }
     return  view('alumnohome');
         
         /*if($request->get('tipo_usuario')=='Alumno'){
@@ -1094,14 +1123,16 @@ class TesisController extends Controller
         $user->name=$tes->nombre_completo;
         $user->update();
 
+
         //$comision=new Comision;
         //$alumno=DB::table('users')->join('tesis','users.name','=',$tes->nombre_completo)->get();
         //dd($alumno);
         //$comision =new Comision;;
         //$comision->id_profesor_guia=$profe->id;
         
+
+
         DB::table('comision')->where('id','=', $id)->delete();
-      
        DB::table('comision')->insert([
             'id' => $id,
             'id_profesor_guia' => $profe->id,
@@ -1120,7 +1151,7 @@ class TesisController extends Controller
             'institucion2' => $request->institucion2,
         ]);
 
-        return view('welcome');
+        return view('profesorhome');
     }
 
      //Se guardan los datos de tesis y de comision insertados por el director de tesis
@@ -1141,12 +1172,18 @@ class TesisController extends Controller
         //return 'tamos';
         //dd($request);
         $idlogin=Auth::id();
-        $profe=User::findorfail($idlogin);
         $tes=Tesis::findorfail($id);
         $tes->nombre_completo=$request->get('nombre_completo');
         $tes->rut=$request->get('rut');
         $tes->ano_ingreso=$request->get('ano_ingreso');
         $tes->profesor_guia=$request->get('profesor_guia');
+        $id_profesor=DB::table('users')->where('users.name','=',$tes->profesor_guia)->select('id')->get();
+        //dd($id_profesor);
+        foreach($id_profesor as $id_profe)
+        {
+            $id_profesor_guia=$id_profe->id;
+
+        }
         $tes->nombre_tesis=$request->get('nombre_tesis');
         $tes->area_tesis=$request->get('area_tesis');
         $tes->carrera=$request->get('carrera');
@@ -1172,7 +1209,7 @@ class TesisController extends Controller
       
        DB::table('comision')->insert([
             'id' => $id,
-            'id_profesor_guia' => $profe->id,
+            'id_profesor_guia' => $id_profesor_guia,
             'nombre_alumno' =>$request->nombre_completo,
             'profesor1_comision' => $request->profesor1_comision,
             'coguia' => $request->coguia,
@@ -1188,9 +1225,12 @@ class TesisController extends Controller
             'institucion2' => $request->institucion2,
         ]);
 
+
        if($user->tipo_usuario==2){
         return view('profesorhome');
     }
+
+         return view('directorhome');
     }
 
     //Vista que permite al alumno subir el archivo, en caso de que tenga la tesis inscrita estado1=4, estado2=1.
@@ -1387,7 +1427,7 @@ class TesisController extends Controller
             'correo_profe2_externo' => $request->correo_profe2_externo,
             'institucion2' => $request->institucion2,
         ]);*/
-        return view('welcome');
+        return view('directorhome');
     }
 
 

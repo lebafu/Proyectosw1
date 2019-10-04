@@ -40,7 +40,7 @@
                             </div>
                         </div>
 
-
+                        <!--En caso de que se deje el nombre completo 2 en nulo significa que la tesis es individual y entonces lo de este if no iría en la vista del profesor -->
                          @if($tes->nombre_completo2!=null)
 
                         <div class="form-group row">
@@ -141,12 +141,6 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de Vinculacion') }}</label>
-                            <div class="col-md-6">
-                              <input id="nombre_vinculacion" type="text" placeholder="nombre_vinculacion" class="form-control" name="nombre_vinculacion" value="{{$tes->nombre_vinculacion}}" required="required">
-                               </div>
-                        </div>
 
                          <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de Vinculacion') }}</label>
@@ -210,6 +204,8 @@
                             </div>
                         </div>
 
+
+                <!--En caso de que la comision no se haya creado entonces mostrara los select list a los que puede acceder el profesor y los demás campos en blanco-->
                 @if($com!=null)  
 
             
@@ -228,7 +224,16 @@
                          <div class="form-group row">
                             <label for="coguia" class="col-md-4 col-form-label text-md-right">{{ __('Coguia') }}</label>
                             <div class="col-md-6">
-                                <input type="checkbox" name="coguia" value=1><br>
+                                <select name="coguia" id="coguia" class="form-control">
+                                   @if($com->coguia==1)
+                                    <option value="{{$com->coguia}}">Si</option>
+                                  @endif
+                                    @if($com->coguia==0)
+                                    <option value="{{$com->coguia}}">No</option>
+                                  @endif
+                                    <option value=1>Si</option>
+                                    <option value=0>No</option>
+                                </select>
                             </div>
                         </div>
 
@@ -342,6 +347,7 @@
                             </div>
                         </div>
 
+               <!--En caso contrario si el profesor ya ha ingresado a los miembros de la comisión y desea editar, se le mostrarán los campos que el haya seleccionado previamente-->
                 @else
                                 <div class="form-group row">
                             <label for="profesor1_comision" class="col-md-4 col-form-label text-md-right">{{ __('Primer profesor comision') }}</label>
@@ -354,10 +360,13 @@
                             </div>
                         </div>
 
-                         <div class="form-group row">
+                      <div class="form-group row">
                             <label for="coguia" class="col-md-4 col-form-label text-md-right">{{ __('Coguia') }}</label>
                             <div class="col-md-6">
-                                <input type="checkbox" name="coguia" value=1><br>
+                                <select name="coguia" id="coguia" class="form-control">
+                                    <option value=1>Si</option>
+                                    <option value=0>No</option>
+                                  </select>
                             </div>
                         </div>
 
