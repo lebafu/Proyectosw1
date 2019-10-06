@@ -4,11 +4,14 @@ namespace App\Http\Controllers;
 use Barryvdh\DomPDF\Facade as PDF;
 use App\User;
 use App\Tesis;
-
+use App\Grado_academico;
 use Illuminate\Http\Request;
+use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
-
+use Closure;
+use Session;
+use Auth;
 use DB;
 
 class UsersController extends Controller
@@ -130,4 +133,16 @@ class UsersController extends Controller
         return back()->with('status','El usuario ha sido eliminado con exito');
     }
 
+    /**/
+
+    public function save_profe_grado_academico(Request $request)
+    {
+     $id=Auth::id();
+     $profesor_grado_academico=Grado_academico::find($id);
+     $profesor_grado_academico->grado_academico=$request->grado_academico;
+     $profesor_grado_academico->estado=1;
+     $profesor_grado_academico->save();
+
+     return view('profesorhome');
+    }
 }

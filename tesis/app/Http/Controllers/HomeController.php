@@ -32,7 +32,21 @@ class HomeController extends Controller
        
         $users=DB::table('users')->paginate(7);
         $tipo = $this->auth->user()->tipo_usuario;
-         $id=$this->auth->user()->id;
+        $id=$this->auth->user()->id;
+
+        $profesor_existe_en_grad_academico=DB::table('grado_academico_profesor_planta')->where('id',$id)->get();
+        if($tipo==2 and $profesor_existe_en_grad_academico->isEmpty()==true)
+        {
+
+         DB::table('grado_academico_profesor_planta')->insert([
+            'id' => $id,
+            'estado' => null,
+            'grado_academico'=>null
+        ]);
+        }
+
+        //Con este switch case dependiendo del tipo de usuario que se loguee  e inicie sesion se redirijira a su respectivo home.
+        $profesor_tiene_grad_academico_asignado=DB::table('grado_academico_profesor_planta')->where('id',$id)->where('estado',1)->get();
         switch($tipo)
         {
             case 0:
@@ -40,7 +54,13 @@ class HomeController extends Controller
             case 1:
             return view('alumnohome');
             case 2:
-            return view('profesorhome');
+            if($tipo==2 and $profesor_tiene_grad_academico_asignado->isEmpty()==true)
+            {
+                //dd($profesor_tiene_grad_academico_asignado->isEmpty());
+                return view('grado_academico_create',compact('id'));
+            }else{
+               return view('profesorhome'); 
+            }
             case 3:
             return view('directorhome');
             case 4: 
@@ -49,6 +69,11 @@ class HomeController extends Controller
         }
         return view('home');
     }
+
+    /*public function grado_academico_create 
+    {
+        return view('grado_academico_create')
+    }*/
 
     /*public function admin(){
         $id=$this->auth->user()->id;

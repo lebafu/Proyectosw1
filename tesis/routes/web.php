@@ -35,6 +35,8 @@ Route::get('/alumnohome', 'HomeController@index')->name('alumnohome');
 Route::get('/profesorhome', 'HomeController@index')->name('profesorhome');
 Route::get('/directorhome', 'HomeController@index')->name('directorhome');
 Route::get('/secretariahome','HomeController@index')->name('secretariahome');
+Route::get('/grado_academico_create', 'HomeController@index')->name('grado_academico_create');
+Route::post('/grado_academico_create','UsersController@save_profe_grado_academico')->name('users.save_profe_grado_academico');
 Route::get('/inicio','InicioController@index')->name('inicio');
 
 Route::get('/index_solicitud_nota_pendiente', 'TesisController@index_solicitud_nota_pendiente')->name('tesis.index_solicitud_nota_pendiente');
