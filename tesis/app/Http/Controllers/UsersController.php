@@ -162,12 +162,12 @@ class UsersController extends Controller
     public function update_profesor(Request $request, $id)
     {
         //dd($request);
-        $user=User::find($id);
+        /*$user=User::find($id);
         $user=User::findorfail($id);
         $user->name=$request->get('name');
         $user->email=$request->get('email');
         $user->tipo_usuario=2;
-        $user->update();
+        $user->update();*/
         $grado_academico=Grado_academico::find($id);
         $grado_academico->grado_academico=$request->get('grado_academico');
         $grado_academico->update();

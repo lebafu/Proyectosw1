@@ -1064,6 +1064,16 @@ class TesisController extends Controller
         $tes->nombre_completo=$request->get('nombre_completo');
         $tes->rut=$request->get('rut');
         $tes->ano_ingreso=$request->get('ano_ingreso');
+        //En caso de que se ingresen los datos del segundo alumno tesista
+        if($request->get('nombre_completo2')!=null){
+            $tes->nombre_completo2=$request->get('nombre_completo2');
+        }
+         if($request->get('rut2')!=null){
+            $tes->rut2=$request->get('rut2');
+        }
+         if($request->get('ano_ingreso2')!=null){
+            $tes->ano_ingreso2=$request->get('ano_ingreso2');
+        }
         $tes->profesor_guia=$request->get('profesor_guia');
         $tes->nombre_tesis=$request->get('nombre_tesis');
         $tes->area_tesis=$request->get('area_tesis');
@@ -1078,7 +1088,7 @@ class TesisController extends Controller
         $user=User::findorfail($id);
         $user->name=$tes->nombre_completo;
         $user->update();
-        return view('welcome');
+        return view('alumnohome');
         }else{
              return back()->with('status','El registro de tesis ha fallado');
         }
@@ -1099,15 +1109,20 @@ class TesisController extends Controller
             'profesor2_comision' => 'required|string',
             'profesor3_comision' =>'string',
         ]);
-
+        $idlogin=Auth::id();
+        $user=User::findorfail($id);
+        if($idlogin==null){
+            return view('tesis.sinpermiso');
+        }
         //return 'tamos';
-        //dd($request);
         $idlogin=Auth::id();
         $profe=User::findorfail($idlogin);
         $tes=Tesis::findorfail($id);
         $tes->nombre_completo=$request->get('nombre_completo');
         $tes->rut=$request->get('rut');
         $tes->ano_ingreso=$request->get('ano_ingreso');
+        //En caso de que se ingresen los datos del segundo alumno tesista
+        
         $tes->profesor_guia=$request->get('profesor_guia');
         $tes->nombre_tesis=$request->get('nombre_tesis');
         $tes->area_tesis=$request->get('area_tesis');
@@ -1129,10 +1144,7 @@ class TesisController extends Controller
         //dd($alumno);
         //$comision =new Comision;;
         //$comision->id_profesor_guia=$profe->id;
-        
-
-
-        DB::table('comision')->where('id','=', $id)->delete();
+       DB::table('comision')->where('id','=', $id)->delete();
        DB::table('comision')->insert([
             'id' => $id,
             'id_profesor_guia' => $profe->id,
@@ -1150,7 +1162,7 @@ class TesisController extends Controller
             'correo_profe2_externo' => $request->correo_profe2_externo,
             'institucion2' => $request->institucion2,
         ]);
-
+        //dd($request);
         return view('profesorhome');
     }
 
@@ -1169,13 +1181,27 @@ class TesisController extends Controller
             'profesor3_comision' =>'string',
         ]);
 
-        //return 'tamos';
         //dd($request);
+
+
+        $idlogin=Auth::id();
+        $user=User::findorfail($id);
+        if($idlogin==null){
+            return view('tesis.sinpermiso');
+        }
+
         $idlogin=Auth::id();
         $tes=Tesis::findorfail($id);
         $tes->nombre_completo=$request->get('nombre_completo');
         $tes->rut=$request->get('rut');
         $tes->ano_ingreso=$request->get('ano_ingreso');
+        //En caso de que se ingresen los datos del segundo alumno tesista
+        if($tes->nombre_completo2!=null)
+        {
+            $tes->nombre_completo2=$request->get('nombre_completo2');
+            $tes->ano_ingreso2=$request->get('ano_ingreso2');
+            $tes->rut2=$request->get('rut2');
+        }
         $tes->profesor_guia=$request->get('profesor_guia');
         $id_profesor=DB::table('users')->where('users.name','=',$tes->profesor_guia)->select('id')->get();
         //dd($id_profesor);

@@ -59,7 +59,7 @@
                          <div class="form-group row">
                             <label for="rut2" class="col-md-4 col-form-label text-md-right">{{ __('Rut Segundo Alumno') }}</label>
                             <div class="col-md-6">
-                                <input id="rut2" type="text" placeholder="rut2" class="form-control" name="rut" value="{{$tes->rut2}}"required="required">
+                                <input id="rut2" type="text" placeholder="rut2" class="form-control" name="rut2" value="{{$tes->rut2}}"required="required">
                             </div>
                         </div>
 

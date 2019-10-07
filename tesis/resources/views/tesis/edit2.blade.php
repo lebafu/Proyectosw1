@@ -60,13 +60,13 @@
                          <div class="form-group row">
                             <label for="rut2" class="col-md-4 col-form-label text-md-right">{{ __('Rut Segundo Alumno') }}</label>
                             <div class="col-md-6">
-                                <input id="rut2" type="text" placeholder="rut2" class="form-control" name="rut" value="{{$tes->rut2}}"required="required">
+                                <input id="rut2" type="text" placeholder="rut2" class="form-control" name="rut2" value="{{$tes->rut2}}"required="required">
                             </div>
                         </div>
 
 
                          <div class="form-group row">
-                            <label for="ano_ingreso2" class="col-md-4 col-form-label text-md-right">{{ __('Ano Ingreso') }}</label>
+                            <label for="ano_ingreso2" class="col-md-4 col-form-label text-md-right">{{ __('Año Ingreso') }}</label>
                             <div class="col-md-6">
                                 <input id="ano_ingreso2" type="text" placeholder="año ingreso" class="form-control" name="ano_ingreso2" value="{{$tes->ano_ingreso2}}" required="required">
                             </div>
@@ -499,7 +499,7 @@
                                     {{ __('Guardar') }}
                                 </button>
 
-                                <a href="/tesis" class="btn">{{ __('Cancelar') }}</a>
+                                <a href="/profesorhome" class="btn">{{ __('Cancelar') }}</a>
                                     
                             </div>
 

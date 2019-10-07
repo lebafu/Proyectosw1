@@ -74,7 +74,7 @@ class HomeController extends Controller
     {
         return view('grado_academico_create')
     }*/
-
+    
     /*public function admin(){
         $id=$this->auth->user()->id;
         $users=DB::table('users')->paginate(7);

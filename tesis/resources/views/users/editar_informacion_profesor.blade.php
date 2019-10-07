@@ -5,13 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Editar información personal profesor') }}</div>
+                <div class="card-header">{{ __('Modificar Grado Academico') }}</div>
 
                 <div class="card-body">
                     <form action="{{route('users.update_profesor', $profesor->id)}}" method="POST">
                         @csrf
 
-                        <div class="form-group row">
+                        <!--<div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre completo') }}</label>
 
                             <div class="col-md-6">
@@ -39,7 +39,7 @@
                             </div>
                         </div>
 
-                         <!--<div class="form-group row">
+                         <div class="form-group row">
                             <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
 
                             <div class="col-md-6">
@@ -59,7 +59,7 @@
                             <div class="col-md-6">
                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password">
                             </div>
-                        </div> -->
+                        </div> 
 
                          <div class="form-group row">
                             <label for="tipo_usuario" class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
@@ -69,7 +69,7 @@
                                 <input id="tipo_usuario" type="text" class="form-control" name="tipo_usuario" value="Profesor" required disabled>
                                 @endif
                             </div>
-                        </div>
+                        </div> -->
 
                           <div class="form-group row">
                             <label for="grado_academico" class="col-md-4 col-form-label text-md-right">{{ __('Grado academico') }}</label>
