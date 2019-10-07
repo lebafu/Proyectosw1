@@ -73,10 +73,18 @@ body {
 
 <div class="navbar">
       <a href="{{ url('/home') }}">Home</a>
+      <div class="dropdown">
+    <button class="dropbtn">Tesis
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
       <a href="{{url('/tesis_profesor')}}">Tesis En espera</a>
       <a href="{{url('/tesis_inscritas_profesor')}}">Tesis inscritas</a>
+    </div>
+  </div> 
       <a href="{{url('/tesis_profesor_comision')}}">Profesor participa como miembro Comision</a>
       <a href="{{url('/create')}}">Consulta de participacion de tesis por fecha</a>
+      <a href="{{url('/editar_profesor')}}">Actualizar informacion</a>
    <!--Inicio de navbar-->
  <div class="dropdown">
     <button class="dropbtn">Vinculacion

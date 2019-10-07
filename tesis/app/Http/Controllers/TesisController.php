@@ -1704,6 +1704,8 @@ class TesisController extends Controller
         }
 
     }
+
+
     //en caso de error al generar pdf.
     public function error_generar_pdf()
     {

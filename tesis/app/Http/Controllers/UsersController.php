@@ -145,4 +145,32 @@ class UsersController extends Controller
 
      return view('profesorhome');
     }
+
+    public function editar_informacion_profesor()
+    {
+        $id=Auth::id();
+        $profesor_grado_academico=Grado_academico::find($id);
+        $profesor=User::find($id);
+        if($id==null or $profesor_grado_academico==null or $profesor==null)
+        {
+            return view('tesis.sinpermiso');
+        }else{
+            return view('users.editar_informacion_profesor',compact('profesor','profesor_grado_academico'));
+        }
+    }
+
+    public function update_profesor(Request $request, $id)
+    {
+        //dd($request);
+        $user=User::find($id);
+        $user=User::findorfail($id);
+        $user->name=$request->get('name');
+        $user->email=$request->get('email');
+        $user->tipo_usuario=2;
+        $user->update();
+        $grado_academico=Grado_academico::find($id);
+        $grado_academico->grado_academico=$request->get('grado_academico');
+        $grado_academico->update();
+        return view('profesorhome');
+    }
 }

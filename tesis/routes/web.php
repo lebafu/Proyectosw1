@@ -56,6 +56,10 @@ Route::post('/users','UsersController@store')->name('users.store');
 Route::put('/actualizarusers{users}','UsersController@update')->name('users.update');
 Route::delete('/eliminarusers{users}','UsersController@destroy')->name('users.destroy');
 
+//Rutas de editar profesor//
+
+Route::get('/editar_profesor', 'UsersController@editar_informacion_profesor')->name('users.editar_informacion_profesor');
+Route::put('/actualizarinfoprofesor{users}','UsersController@update_profesor')->name('users.update_profesor');
 
 Route::get('/empresas', 'EmpresasController@index')->name('empresas.index');
 Route::get('/empresas{empresas}', 'EmpresasController@edit')->name('empresas.edit');
