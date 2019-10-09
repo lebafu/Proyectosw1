@@ -100,6 +100,16 @@ class UsersController extends Controller
         $user->password=Hash::make($request->get('password'));
         $user->tipo_usuario=$request->get('tipo_usuario');
         $user->update();
+
+         $email=$request->get('email');
+        $profes=DB::table('users')->where('email',$email)->get();
+        //para transformar consulta en array, que pueda ser recibido por la vista, y saber 
+        //a que profesor corresponderá el grado academico a seleccionar
+        foreach($profes as $profesor);
+                //dd($profesor->id);
+        if($request->tipo_usuario==2){
+             return view('grado_academico_create',compact('profesor'));   
+        }
         return view('welcome');
     }
 
@@ -118,12 +128,19 @@ class UsersController extends Controller
     public function save_profe_grado_academico(Request $request,$id)
     {
      //dd($request->get('grado_academico'));
+     $profesor_grado_academico=DB::table('grado_academico_profesor_planta')->where('id',$id)->get();
+     //dd($profesor_grado_academico);
+     if(($profesor_grado_academico->isEmpty()==true)){
       DB::table('grado_academico_profesor_planta')->insert([
             'id' => $id,
             'estado' =>1,
             'grado_academico' => $request->grado_academico
         ]);
+    }else{
 
+    $profesor_grado_academico->grado_academico=$request->grado_academico;
+
+        }
 
      return view('adminhome');
     }
