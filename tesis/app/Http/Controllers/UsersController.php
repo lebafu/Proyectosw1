@@ -57,45 +57,25 @@ class UsersController extends Controller
             'password' => Hash::make($request->password),
             'tipo_usuario' =>$request->tipo_usuario
         ]);
-        
-        /*if($request->get('tipo_usuario')=='Alumno'){
-            $info_alumno = new Info_alumno;
-            $info_alumno->id= $usuario->id;
-            $info_alumno->ano_ingreso=0;
-            $info_alumno->carrera="";
-            $info_alumno->telefono="";
-            $info_alumno->condicion=0;
-            $info_alumno->save();
 
-            // ahora se ingresa su id en la tabla tesis_alumnos
-
-            $tesis_alumno = new Tesis_alumno;
-
-            $tesis_alumno->id = $usuario->id;
-            
-            $tesis_alumno->nombre_tesis="";
-            $tesis_alumno->descripcion="";
-            $tesis_alumno->objetivos="";
-            $tesis_alumno->contribucion_e="";
-            $tesis_alumno->area_tesis="";
-            $tesis_alumno->save();
-            
+        $email=$request->get('email');
+        $profes=DB::table('users')->where('email',$email)->get();
+        //para transformar consulta en array, que pueda ser recibido por la vista, y saber 
+        //a que profesor corresponderá el grado academico a seleccionar
+        foreach($profes as $profesor);
+                //dd($profesor->id);
+        if($request->tipo_usuario==2){
+             return view('grado_academico_create',compact('profesor'));   
         }
 
-        if($request->get('tipo_usuario')=='Prof_ext'){
-            $prof_ext = new Info_proExt;
-            $prof_ext->id=$usuario->id;
-            $prof_ext->correo_profesor=$usuario->email;
-            $prof_ext->institucion="";
-            $prof_ext->condicion=0;
-            $prof_ext->save();
-            
 
-        }*/
-
-        return view('welcome');
+        return view('adminhome');
     }
         
+        public function create_grado_academico_profesor()
+    {
+       return view('users.create_grado_academico_profesor');
+    }
 
         public function show($id)
         {
@@ -135,15 +115,17 @@ class UsersController extends Controller
 
     /**/
 
-    public function save_profe_grado_academico(Request $request)
+    public function save_profe_grado_academico(Request $request,$id)
     {
-     $id=Auth::id();
-     $profesor_grado_academico=Grado_academico::find($id);
-     $profesor_grado_academico->grado_academico=$request->grado_academico;
-     $profesor_grado_academico->estado=1;
-     $profesor_grado_academico->save();
+     //dd($request->get('grado_academico'));
+      DB::table('grado_academico_profesor_planta')->insert([
+            'id' => $id,
+            'estado' =>1,
+            'grado_academico' => $request->grado_academico
+        ]);
 
-     return view('profesorhome');
+
+     return view('adminhome');
     }
 
     public function editar_informacion_profesor()
@@ -162,15 +144,25 @@ class UsersController extends Controller
     public function update_profesor(Request $request, $id)
     {
         //dd($request);
-        /*$user=User::find($id);
+        $user=User::find($id);
         $user=User::findorfail($id);
         $user->name=$request->get('name');
         $user->email=$request->get('email');
         $user->tipo_usuario=2;
-        $user->update();*/
+        $user->update();
         $grado_academico=Grado_academico::find($id);
         $grado_academico->grado_academico=$request->get('grado_academico');
         $grado_academico->update();
         return view('profesorhome');
+    }
+
+      public function store_grado_academico(Request $request)
+    {
+        //dd($request);
+        $grado_academico=Grado_academico::find($id);
+        $grado_academico->estado=1;
+        $grado_academico->grado_academico=$request->get('grado_academico');
+        $grado_academico->update();
+        return view('adminhome');
     }
 }

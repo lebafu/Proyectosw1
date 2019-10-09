@@ -9,10 +9,69 @@
                 <div class="card-header">{{ __('Crear usuarios') }}</div>
 
                 <div class="card-body">
-                    <form action="{{route('users.save_profe_grado_academico')}}" method="POST">
+                    <form action="{{route('users.save_profe_grado_academico',$profesor->id)}}" method="POST">
                         @csrf
 
-                       
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre completo') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ $profesor->name }}" required autocomplete="name" disabled autofocus>
+
+                                @error('name')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ $profesor->email }}" disabled required autocomplete="email">
+
+                                @error('email')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Contraseña') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="new-password" disabled>
+
+                                @error('password')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="password-confirm" class="col-md-4 col-form-label text-md-right">{{ __('Confirmar contraseña') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required autocomplete="new-password" disabled>
+                            </div>
+                        </div> 
+
+                         <div class="form-group row">
+                            <label for="tipo_usuario" class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
+
+                            <div class="col-md-6">
+                                @if($profesor->tipo_usuario==2)
+                                <input id="tipo_usuario" type="text" class="form-control" name="tipo_usuario" value="Profesor" required disabled>
+                                @endif
+                            </div>
+                        </div> 
+                        
                          <div class="form-group row">
                             <label for="grado_academico" class="col-md-4 col-form-label text-md-right">{{ __('Grado academico') }}</label>
                             <div class="col-md-6">
@@ -20,6 +79,7 @@
                                 <option value="Ing.">Ingeniero</option>
                                  <option value="Mg.">Magister</option>
                                  <option value="Dr.">Doctor</option>
+                                 <option value="Dra.">Doctora</option>
                                 </select>
                             </div>
                         </div>
@@ -35,7 +95,8 @@
                                     
                             </div>
 
-        
+                  {{ csrf_field() }}
+                {{ method_field('PUT')}}
                             
                         </div>
                     </form>

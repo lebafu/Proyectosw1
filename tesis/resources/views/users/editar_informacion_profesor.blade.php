@@ -5,13 +5,13 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Modificar Grado Academico') }}</div>
+                <div class="card-header">{{ __('Editar Perfil Profesor') }}</div>
 
                 <div class="card-body">
                     <form action="{{route('users.update_profesor', $profesor->id)}}" method="POST">
                         @csrf
 
-                        <!--<div class="form-group row">
+                        <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre completo') }}</label>
 
                             <div class="col-md-6">
@@ -69,7 +69,7 @@
                                 <input id="tipo_usuario" type="text" class="form-control" name="tipo_usuario" value="Profesor" required disabled>
                                 @endif
                             </div>
-                        </div> -->
+                        </div> 
 
                           <div class="form-group row">
                             <label for="grado_academico" class="col-md-4 col-form-label text-md-right">{{ __('Grado academico') }}</label>
@@ -93,7 +93,7 @@
                                     {{ __('Guardar') }}
                                 </button>
 
-                                <a href="/users" class="btn">{{ __('Cancelar') }}</a>
+                                <a href="/profesorhome" class="btn">{{ __('Cancelar') }}</a>
                                     
                             </div>
 
