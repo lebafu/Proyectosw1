@@ -25,7 +25,7 @@
 		</div>
 		<h3 align="center" style="margin-bottom: 20px; margin-top: 30px"> ACTA EXÁMEN DE TÍTULO</h3>
 		<h3 align="center" style="margin-bottom: 20px; margin-top: 20px"> {{$tes->carrera}} </h3>
-		<h4 style="margin-bottom: 40px; margin-top: 30px">		En Talca  el dia {{$tes->fecha_presentacion_tesis}} , se constituyó la comision Evaluadora compuesta por los señores academicos:</h4>
+		<h4 style="margin-bottom: 40px; margin-top: 30px">		En Talca, a las {{$hora_presentacion_tesis}} horas del dia {{$nombre_dia}} {{$dia_fecha}} de {{$mes_fecha}} de {{$year_fecha}} ,se constituyó la comision Evaluadora compuesta por los Sres. Académicos:</h4>
 		<h4></h4>
 		
 		@if($tes->profesor1_comision=="Marco Toranzo" or $tes->profesor1_comision=="Sergio Hernandez" or 	$tes->profesor1_comision=="Paulo Gonzalez" or $tes->profesor1_comision=="Ricardo Barrientos" or $tes->profesor1_comision=="Marco Mora")

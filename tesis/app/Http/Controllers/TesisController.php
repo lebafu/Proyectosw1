@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Tesis;
 use App\Comision;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
@@ -1516,7 +1517,63 @@ class TesisController extends Controller
    {
     $tesis=DB::table('tesis')->join('comision','tesis.id','=','comision.id')->where('tesis.id',$id)->get();
     //dd($tesis);
-    return view('tesis.acta_examen',compact('tesis'));
+    foreach($tesis as $tes)
+    {
+        //para obtener campos necesario de la tupla de la base de datos, el dia, mes, año y la hora, usando carbon
+        //paquete de laravel para trabajar con fechas.
+        $fecha=Carbon::parse($tes->fecha_presentacion_tesis);
+        $nombre_dia=$day=date('w', strtotime($fecha));
+        $dia_fecha=$fecha->day;
+        $mes_fecha=$fecha->month;
+        $year_fecha=$fecha->year;
+        $hora_presentacion_tesis=$fecha->format('H:i');
+    }
+
+    //dd($hora_presentacion_tesis);
+    switch($nombre_dia)
+    {
+        case 1: $nombre_dia="Lunes";
+        break;
+        case 2: $nombre_dia="Martes";
+        break;
+        case 3: $nombre_dia="Miercoles";
+        break;
+        case 4: $nombre_dia="Jueves";
+        break;
+        case 5: $nombre_dia="Viernes";
+        break;
+        case 6: $nombre_dia="Sabado";
+        break;
+    }
+    switch($mes_fecha)
+    {
+     case 1: $mes_fecha="Enero";
+     break;
+     case 2: $mes_fecha="Febrero";
+     break;
+     case 3: $mes_fecha="Marzo";
+     break;
+     case 4:$mes_fecha="Abril";
+     break;
+     case 5: $mes_Fecha="Mayo";
+     break;
+     case 6: $mes_fecha="Junio";
+     break;
+     case 7: $mes_fecha="Julio";
+     break;
+     case 8: $mes_fecha="Agosto";
+     break;
+     case 9: $mes_fecha="Septiembre";
+     break;
+     case 10:$mes_fecha="Octubre";
+     break;
+     case 11:$mes_fecha="Noviembre";
+     break;
+     case 12:$mes_fecha="Diciembre";
+     break;
+    }
+
+    return view('tesis.acta_examen',compact('tesis','dia_fecha','nombre_dia','mes_fecha','year_fecha','hora_presentacion_tesis'));
    }
 
  
