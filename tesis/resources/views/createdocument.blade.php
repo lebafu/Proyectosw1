@@ -15,14 +15,14 @@
         <div class="form-group row">
                 <label for="fecha_inicio" class="col-md-4 col-form-label text-md-right">{{ __('Fecha inicio') }}</label>
              <div class="col-md-6">
-             <input id="fecha_inicio" type="date" placeholder="Fecha inicio" class="form-control" name="fecha inicio" required="required">
+             <input id="fecha_inicio" type="date" placeholder="Fecha inicio" class="form-control" name="fecha inicio"  value="{{$fecha_inicio}}" required="required">
              </div>
         </div>
         
         <div class="form-group row">
             <label for="fecha_fin" class="col-md-4 col-form-label text-md-right">{{ __('Fecha fin') }}</label>
                             <div class="col-md-6">
-                                <input id="fecha_fin" type="date" placeholder="Fecha fin" class="form-control" name="fecha fin" required="required">
+                                <input id="fecha_fin" type="date" placeholder="Fecha fin" class="form-control" name="fecha fin" value="{{$fecha_final}}" required="required">
                             </div>
                         </div>
         <div class="row">
@@ -36,6 +36,7 @@
   </body>
 </html>
 
+<!-- OJO SI SE DESEA DEFINIR LA FECHA POR DEFECTO CON UN VALUE EN EL INPUT DE MAS ARRIBA, ESTE FORMATO DEBE COINCIDIR CON EL QUE SE DEFINE EN LA FUNCION JS DATEPICKER, PARA QUE SEA MOSTRADO EN PANTALLA -->
 <script>
     
     $('#fecha_inicio,#fecha_fin').datepicker({

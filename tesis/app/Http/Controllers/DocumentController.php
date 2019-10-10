@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\User;
 use App\Tesis;
 use App\Comision;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
  use Illuminate\Support\Str;
@@ -25,9 +26,16 @@ class DocumentController extends Controller
 
     public function create()
     {
-    	//$fecha_inicio=date("01/01/2019");
-    	//$fecha_final=date("31/11/2019");
-        return view('createdocument');
+
+    	//El punto sirve para concatener string en php
+    	$fecha=Carbon::parse(now());
+    	$año=$fecha->year;
+    	//dd($año);
+    	$mes_dia_inicio="01-01";
+    	$mes_dia_final="11-30";
+    	$fecha_inicio=$año."-" . $mes_dia_inicio;
+    	$fecha_final=$año."-". $mes_dia_final;
+        return view('createdocument',compact('fecha_inicio','fecha_final'));
     }
 
     public function store(Request $request)
@@ -66,7 +74,7 @@ class DocumentController extends Controller
 				$table1->addCell()->addText("Nombre de Tesis"); // agregamos la columna 2
 				$table1->addCell()->addText("Estado de desarrollo"); // agregamos la columna 3
 				$table1->addCell()->addText("Observaciones"); // agregamos la columna 4
-				$table1->addCell()->addText("Fecha de inscripcion"); // agregamos la columna 4
+				//$table1->addCell()->addText("Fecha de presentacion"); // agregamos la columna 4
 				foreach($tesis as $tes)
 				{
 					//si la fecha de inscripcion no existe, por que no esta dentro de los rangos de la consulta, simplemente no se añaden filas ni nada al documento.
@@ -96,12 +104,14 @@ class DocumentController extends Controller
 						}
 					}
 
-					$table1->addCell()->addText($tes->fecha_inscripcion); 
+					//$table1->addCell()->addText($tes->fecha_presentacion_tesis); 
 					}
 				}
         		$objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
-        		$objWriter->save('Appdividend.docx');
+        		$objWriter->save('Lista_Tesis.docx');
         		return response()->download(public_path('Lista_Tesis.docx'));
         	}
        }
     }
+
+    //Al generar el word puede que algunas fechas de presentaciones sean extrañas, pero esto es debido a que fueron ingresadas antes de que tuviesen la restriccion por hora y dia  en el calendario.
