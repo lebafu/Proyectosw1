@@ -28,30 +28,15 @@
 		<h4 style="margin-bottom: 40px; margin-top: 30px">		En Talca, a las {{$hora_presentacion_tesis}} horas del dia {{$nombre_dia}} {{$dia_fecha}} de {{$mes_fecha}} de {{$year_fecha}} ,se constituyó la comision Evaluadora compuesta por los Sres. Académicos:</h4>
 		<h4></h4>
 		
-		@if($tes->profesor1_comision=="Marco Toranzo" or $tes->profesor1_comision=="Sergio Hernandez" or 	$tes->profesor1_comision=="Paulo Gonzalez" or $tes->profesor1_comision=="Ricardo Barrientos" or $tes->profesor1_comision=="Marco Mora")
-		<h4>Dr.{{$tes->profesor1_comision}}</h4>
-		@elseif($tes->profesor1_comision=="Xaviera Lopez" or $tes->profesor1_comision=="Angelica Urrutia")
-		<h4>Dra.{{$tes->profesor1_comision}}</h4>
-		@elseif($tes->profesor1_comision=="Hugo Araya" or $tes->profesor1_comision=="Wladimir Soto")
-		<h4>Mg.{{$tes->profesor1_comision}}</h4>
-		@endif
-		@if($tes->profesor2_comision=="Marco Toranzo" or $tes->profesor2_comision=="Sergio Hernandez" or $tes->profesor2_comision=="Paulo Gonzalez" or $tes->profesor2_comision=="Ricardo Barrientos" or $tes->profesor2_comision=="Marco Mora")
-		<h4 style="margin-bottom: 20px; margin-top: 10px">Dr.{{$tes->profesor2_comision}}</h4>
-		@elseif($tes->profesor2_comision=="Xaviera Lopez" or $tes->profesor2_comision=="Angelica Urrutia")
-		<h4 style="margin-bottom: 20px; margin-top: 10px">Dra.{{$tes->profesor2_comision}}</h4>
-		@elseif($tes->profesor2_comision=="Hugo Araya" or $tes->profesor2_comision=="Wladimir Soto")
-		<h4 style="margin-bottom: 20px; margin-top: 10px">Dra.{{$tes->profesor2_comision}}</h4>
-		@endif
+		<!--Se añaden en columna hacia abajo los profesores que participan de la comision -->
+		<h4>{{$grado_profe1_com}}{{$tes->profesor1_comision}}</h4>
+		<h4 style="margin-bottom: 20px; margin-top: 10px">{{$grado_profe2_com}}{{$tes->profesor2_comision}}</h4>
+
+		<!--Debemos recordar que la comision cuenta con el profesor guia, profe1_comision, y profe2_comision como fijos, el resto pueden ser nulos o no existir-->
 		@if($tes->profesor3_comision=="Ninguno")
 
 		@else	
-			 @if($tes->profesor3_comision=="Marco Toranzo" or $tes->profesor3_comision=="Sergio Hernandez" or $tes->profesor3_comision=="Paulo Gonzalez" or $tes->profesor3_comision=="Ricardo Barrientos" or $tes->profesor3_comision=="Marco Mora")
-			<h4 style="margin-bottom: 20px; margin-top: 10px">Dr.{{$tes->profesor3_comision}}</h4>
-			@elseif($tes->profesor3_comision=="Xaviera Lopez" or $tes->profesor3_comision=="Angelica Urrutia")
-			<h4 style="margin-bottom: 20px; margin-top: 10px">Dra.{{$tes->profesor3_comision}}</h4>
-			@elseif($tes->profesor3_comision=="Hugo Araya" or $tes->profesor3_comision=="Wladimir Soto")
-			<h4 style="margin-bottom: 20px; margin-top: 10px">Mg.{{$tes->profesor3_comision}}</h4>
-			@endif
+			<h4 style="margin-bottom: 20px; margin-top: 10px">{{$grado_profe3_com}}{{$tes->profesor3_comision}}</h4>
 		@endif
 
 		@if($tes->profesor1_externo==null)
@@ -71,15 +56,11 @@
 			
 
 			<h4>Profesor Guia:</h4>
-			@if($tes->profesor_guia=="Marco Toranzo" or $tes->profesor_guia=="Sergio Hernandez" or $tes->profesor_guia="Paulo Gonzalez" or $tes->profesor_guia="Ricardo Barrientos" or $tes->profesor_guia="Marco Mora")
-			<h4 style="margin-bottom: 20px; margin-top: 10px">Dr.{{$tes->profesor_guia}}</h4>
-			@elseif($tes->profesor_guia="Xaviera Lopez" or $tes->profesor_guia=="Angelica Urrutia")
-			<h4 style="margin-bottom: 20px; margin-top: 10px">Dra.{{$tes->profesor_guia}}</h4>
-			@elseif($tes->profesor_guia=="Hugo Araya" or $tes->profesor_guia="Wladimir Soto")
-			<h4 style="margin-bottom: 20px; margin-top: 10px">Mg.{{$tes->profesor_guia}}</h4>
-			@endif
+			<h4 style="margin-bottom: 20px; margin-top: 10px">{{$grado_profe_guia}}{{$tes->profesor_guia}}</h4>
+
+		<!--Margin Bottom nos hace cuidar el espacio en horizontal que se deja, y margin top el espacio en vertical -->
 		<h4>Para evaluar la Exposición y Defensa del examen de titulo denominado:</h4>
-		
+		 
 		<h4 style="margin-bottom: 40px; margin-top: 30px">Tema:"{{$tes->nombre_tesis}}"</h4>
 
 		<div class="row">
@@ -91,7 +72,17 @@
 			</div>
 		</div>	
 
-		   
+ 		@if($tes->nombre_completo2!=null)
+		<div class="row">
+			<div class="col-8">
+				<h4 style="margin-bottom: 20px; margin-top: 10px">{{$tes->nombre_completo2}} </h4>
+			</div>
+			<div class="col-4">
+				<h4 style="margin-bottom: 20px; margin-top: 10px"> {{$tes->rut2}}<h4>
+			</div>
+		</div>	
+	    @endif
+		   <!--Se usa la clase creada en la linea 9 para generar el cuadrado de texto donde se pondra la nota-->
 	<div class="row">
 		<h4>Realizada la exposición se concluye que la nota final de la exposicion es:</h4>
 		<div class="cuadrado"></div>
@@ -99,80 +90,33 @@
 
 		<div class="row" style="margin-top:50px" align="center">
 			<div class="col-4">
-				@if($tes->profesor_guia=="Marco Toranzo" or $tes->profesor_guia=="Sergio Hernandez" or $tes->profesor_guia="Paulo Gonzalez" or $tes->profesor_guia="Ricardo Barrientos" or $tes->profesor_guia="Marco Mora")
 				<h4>....................................</h4>
-				<h4>Dr. {{$tes->profesor_guia}}</h4>  
+				<h4>{{$grado_profe_guia}}{{$tes->profesor_guia}}</h4>  
 				<h6>Profesor Guia</h6>
-				<h5 style="margin-top: 30px">Nota: ....... </h5>
-				@elseif($tes->profesor_guia="Xaviera Lopez" or $tes->profesor_guia=="Angelica Urrutia")
-				<h4>....................................</h4>
-				<h4>Dra. {{$tes->profesor_guia}}</h4>  
-				<h6>Profesor Guia</h6>
-				<h5 style="margin-top: 30px">Nota: ....... </h5>
-				@elseif($tes->profesor_guia=="Hugo Araya" or $tes->profesor_guia="Wladimir Soto")
-				<h4>....................................</h4>
-				<h4>Mg.{{$tes->profesor_guia}}</h4>  
-				<h6>Profesor Guia</h6>
-				<h5 style="margin-top: 30px">Nota: ....... </h5>)
-				@endif
 			</div>
 			<div class="col-4">
-				@if($tes->profesor1_comision=="Marco Toranzo" or $tes->profesor1_comision=="Sergio Hernandez" or 	$tes->profesor1_comision=="Paulo Gonzalez" or $tes->profesor1_comision=="Ricardo Barrientos" or $tes->profesor1_comision=="Marco Mora")
 				<h4>....................................</h4>
-				<h4>{{$tes->profesor1_comision}}</h4>
+				<h4>{{$grado_profe1_com}}{{$tes->profesor1_comision}}</h4>
 				<h6>Profesor Comision</h6>
 				<h5 style="margin-top: 30px">Nota: ....... </h5>
-				@elseif($tes->profesor1_comision=="Xaviera Lopez" or $tes->profesor1_comision=="Angelica Urrutia")
-				<h4>....................................</h4>
-				<h4>Dra.{{$tes->profesor1_comision}}</h4>
-				<h6>Profesor Comision</h6>
-				<h5 style="margin-top: 30px">Nota: ....... </h5>
-				@elseif($tes->profesor1_comision=="Hugo Araya" or $tes->profesor1_comision=="Wladimir Soto")
-				<h4>....................................</h4>
-				<h4>Mg.{{$tes->profesor1_comision}}</h4>
-				<h6>Profesor Comision</h6>
-				<h5 style="margin-top: 30px">Nota: ....... </h5>
-				@endif
 			</div>
 			<div class="col-4">
-				@if($tes->profesor2_comision=="Marco Toranzo" or $tes->profesor2_comision=="Sergio Hernandez" or $tes->profesor2_comision=="Paulo Gonzalez" or $tes->profesor2_comision=="Ricardo Barrientos" or $tes->profesor2_comision=="Marco Mora")
 				<h4>....................................</h4>
-				<h4>Dr.{{$tes->profesor2_comision}}</h4>
+				<h4>{{$grado_profe2_com}}{{$tes->profesor2_comision}}</h4>
 				<h6>Profesor Comision</h6>
 				<h5 style="margin-top: 30px">Nota: ....... </h5>
-				@elseif($tes->profesor2_comision=="Xaviera Lopez" or $tes->profesor2_comision=="Angelica Urrutia")
-				<h4>....................................</h4>
-				<h4>Dra.{{$tes->profesor2_comision}}</h4>
-				<h6>Profesor Comision</h6>
-				<h5 style="margin-top: 30px">Nota: ....... </h5>
-				@elseif($tes->profesor2_comision=="Hugo Araya" or $tes->profesor2_comision=="Wladimir Soto")
-				<h4>....................................</h4>
-				<h4>Mg.{{$tes->profesor2_comision}}</h4>
-				<h6>Profesor Comision</h6>
-				<h5 style="margin-top: 30px">Nota: ....... </h5>
-				@endif
 			</div>			
 		</div>
 
 		<div class="row" style="margin-top:50px" align="center">
+			@if($grado_profe3_com!="Ninguno")
 			<div class="col-4">
-			@if($tes->profesor3_comision=="Marco Toranzo" or $tes->profesor3_comision=="Sergio Hernandez" or $tes->profesor3_comision=="Paulo Gonzalez" or $tes->profesor3_comision=="Ricardo Barrientos" or $tes->profesor3_comision=="Marco Mora")
 				<h4>....................................</h4>
-				<h4>Dr.{{$tes->profesor3_comision}}</h4>
+				<h4>{{$grado_profe3_com}}{{$tes->profesor3_comision}}</h4>
 				<h6>Profesor Comision</h6>
 				<h5 style="margin-top: 30px">Nota: ....... </h5>
-				@elseif($tes->profesor3_comision=="Xaviera Lopez" or $tes->profesor3_comision=="Angelica Urrutia")
-				<h4>....................................</h4>
-				<h4>Dra.{{$tes->profesor3_comision}}</h4>
-				<h6>Profesor Comision</h6>
-				<h5 style="margin-top: 30px">Nota: ....... </h5>
-				@elseif($tes->profesor3_comision=="Hugo Araya" or $tes->profesor3_comision=="Wladimir Soto")
-				<h4>....................................</h4>
-				<h4>Mg.{{$tes->profesor3_comision}}</h4>
-				<h6>Profesor Comision</h6>
-				<h5 style="margin-top: 30px">Nota: ....... </h5>
-				@endif
 			</div>
+			@endif
 			@if($tes->profesor1_externo!=null)
 			<div class="col-4">
 				<h4>....................................</h4>

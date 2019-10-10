@@ -1517,16 +1517,38 @@ class TesisController extends Controller
    {
     $tesis=DB::table('tesis')->join('comision','tesis.id','=','comision.id')->where('tesis.id',$id)->get();
     //dd($tesis);
+   
+
     foreach($tesis as $tes)
     {
+        $nombre_alumno1=$tes->nombre_completo;
+        $nombre_alumno2=$tes->nombre_completo2;
         //para obtener campos necesario de la tupla de la base de datos, el dia, mes, año y la hora, usando carbon
         //paquete de laravel para trabajar con fechas.
         $fecha=Carbon::parse($tes->fecha_presentacion_tesis);
-        $nombre_dia=$day=date('w', strtotime($fecha));
-        $dia_fecha=$fecha->day;
-        $mes_fecha=$fecha->month;
-        $year_fecha=$fecha->year;
-        $hora_presentacion_tesis=$fecha->format('H:i');
+        $nombre_dia=$day=date('w', strtotime($fecha)); //w es funcion de php para obtener nombre del dia 0 es domingo y sucesivamente hasta que es el 6 es sabado.
+        $dia_fecha=$fecha->day; //obtengo dia
+        $mes_fecha=$fecha->month; //obtengo mes
+        $year_fecha=$fecha->year; //obtengo año
+        $hora_presentacion_tesis=$fecha->format('H:i'); //obtengo hora y minuto de inicio presentacion
+    }
+
+    //consultas para obtener grado academico de los profesores de planta.
+    $profesor_guia=DB::table('users')->join('comision','users.id','=','comision.id_profesor_guia')->join('grado_academico_profesor_planta','users.id','=','grado_academico_profesor_planta.id')->where('nombre_alumno','=',$nombre_alumno1)->get();
+    $profesor1_com=DB::table('users')->join('comision','users.name','=','comision.profesor1_comision')->join('grado_academico_profesor_planta','users.id','=','grado_academico_profesor_planta.id')->where('nombre_alumno','=',$nombre_alumno1)->get();
+    $profesor2_com=DB::table('users')->join('comision','users.name','=','comision.profesor2_comision')->join('grado_academico_profesor_planta','users.id','=','grado_academico_profesor_planta.id')->where('nombre_alumno','=',$nombre_alumno1)->get();
+    $profesor3_com=DB::table('users')->join('comision','users.name','=','comision.profesor3_comision')->join('grado_academico_profesor_planta','users.id','=','grado_academico_profesor_planta.id')->where('nombre_alumno','=',$nombre_alumno1)->get();
+
+    //dd($profesor1_com);
+    //Se hace el foreach para entrar al elemento del array, y asi llegar e imprimirlo en la vista;
+    foreach($profesor_guia as $profe_guia) $grado_profe_guia=$profe_guia->grado_academico;
+    foreach($profesor1_com as $profe1_com) $grado_profe1_com=$profe1_com->grado_academico;
+    foreach($profesor2_com as $profe2_com) $grado_profe2_com=$profe2_com->grado_academico;
+
+    if($profesor3_com->isEmpty()==false){
+    foreach($profesor3_com as $profe3_com) $grado_profe3_com=$profe3_com->grado_academico;
+    }else{
+        $grado_profe3_com="Ninguno";
     }
 
     //dd($hora_presentacion_tesis);
@@ -1573,7 +1595,10 @@ class TesisController extends Controller
      break;
     }
 
-    return view('tesis.acta_examen',compact('tesis','dia_fecha','nombre_dia','mes_fecha','year_fecha','hora_presentacion_tesis'));
+
+
+
+    return view('tesis.acta_examen',compact('tesis','dia_fecha','nombre_dia','mes_fecha','year_fecha','hora_presentacion_tesis','grado_profe_guia','grado_profe1_com','grado_profe2_com','grado_profe3_com'));
    }
 
  
