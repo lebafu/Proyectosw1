@@ -76,6 +76,7 @@
       <li><a href="{{url('/users') }}">Lista de usuarios</a></li>
       <li><a href="{{url('users/create')}}">Crear Usuario</a></li>
      <li><a href="{{url('/area_tesis')}}">Areas de Tesis</a></li> 
+    <li><a href="{{url('/definir_director_escuela')}}">Asignar Director Escuela</a></li> 
     </ul>
   </div>
 </nav>

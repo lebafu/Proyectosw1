@@ -182,4 +182,57 @@ class UsersController extends Controller
         $grado_academico->update();
         return view('adminhome');
     }
+
+
+    public function definir_director_escuela()
+    {
+        $id=Auth::id();
+        $user=User::find($id);
+        $profes=DB::table('users')->where('tipo_usuario',2)->get();
+        if($id==null or $user->tipo_usuario!=0){
+            return view('tesis.sinpermiso');
+        }else{
+            if($user->tipo_usuario==0)
+            {
+                return view('users.definir_director_escuela',compact('profes'));
+            }
+        }
+    }
+
+    //NOTA:a veces  al realizar consulta el save o el update no funcionan, esto se debe en la mayoria de los casos
+    //debido al no uso de find u findorfail, entonces lo mejor es almacenar el $id buscado en una variable y posteriormente usarle para no complicar generar ese error con save o update.
+    public function guardar_director_escuela(Request $request)
+    {
+        $director_escuela_existe=DB::table('users')->where('director_escuela',1)->get();
+        //dd($director_escuela_existe);
+        if($director_escuela_existe->isEmpty()==true) //No existe director de escuela
+        {
+        $user=User::find($request->profesor);
+        $user->director_escuela=1;
+        $user->save();
+        //dd($user);
+        }else{
+            if($director_escuela_existe->isEmpty()==false) //Ya existe director_escuela;
+            {
+             foreach($director_escuela_existe as $director_escuela)
+             {
+                //dd($director_escuela->director_escuela);
+                $id=$director_escuela->id;
+             }
+             //dd($director_escuela);
+            $director_escuela=User::find($id);
+            $director_escuela->director_escuela=0;
+            //dd($director_escuela->director_escuela);
+            $director_escuela->save();
+            $user=User::find($request->profesor);
+             $user->director_escuela=1;
+             //dd($user->director_escuela);
+             $user->save();
+            }
+        }
+
+        return view('adminhome');
+    }
+
+
 }

@@ -138,7 +138,7 @@
 
 			<div class="row" style="margin-top:60px">
 				<div class="col-12">
-					<h6 align="right">DR.PAULO GONZALEZ GUTIERREZ<h6>
+					<h6 align="right">{{$director_escuela}}<h6>
 				</div>
 				<div class="col-11">
 					<h6 align="right">Director<h6>

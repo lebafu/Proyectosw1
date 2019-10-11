@@ -44,7 +44,10 @@ Route::put('/grado_academico_create{profesor}','UsersController@save_profe_grado
 Route::get('/create_grado_academico_profesor{profesor}','UsersController@create_grado_academico_profesor')->name('users.create_grado_academico_profesor');
 Route::put('/create_grado_academico','UsersController@store_grado_academico')->name('users.store_grado_academico');
 
-Route::get('/inicio','InicioController@index')->name('inicio');
+//Vista para crear o asignar director de escuela//
+Route::get('/definir_director_escuela', 'UsersController@definir_director_escuela')->name('users.definir_director_escuela');
+Route::post('/guardar_director_escuela','UsersController@guardar_director_escuela')->name('users.guardar_director_escuela');
+
 
 Route::get('/index_solicitud_nota_pendiente', 'TesisController@index_solicitud_nota_pendiente')->name('tesis.index_solicitud_nota_pendiente');
 Route::get('/aceptar_nota_pendiente/{tesis}', 'TesisController@aceptar_nota_pendiente')->name('tesis.aceptar_nota_pendiente');

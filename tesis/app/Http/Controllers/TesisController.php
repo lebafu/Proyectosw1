@@ -1521,10 +1521,12 @@ class TesisController extends Controller
 
     foreach($tesis as $tes)
     {
-        $nombre_alumno1=$tes->nombre_completo;
-        $nombre_alumno2=$tes->nombre_completo2;
+        $nombre_alumno1=($tes->nombre_completo);//stropper para colocar en mayuscula el nombre del o los alumnos de la tesis o memoria.
+        $nombre_alumno2=($tes->nombre_completo2);
         //para obtener campos necesario de la tupla de la base de datos, el dia, mes, año y la hora, usando carbon
         //paquete de laravel para trabajar con fechas.
+        $tes->nombre_completo=strtoupper($tes->nombre_completo);
+        $tes->nombre_completo2=strtoupper($tes->nombre_completo2);
         $fecha=Carbon::parse($tes->fecha_presentacion_tesis);
         $nombre_dia=$day=date('w', strtotime($fecha)); //w es funcion de php para obtener nombre del dia 0 es domingo y sucesivamente hasta que es el 6 es sabado.
         $dia_fecha=$fecha->day; //obtengo dia
@@ -1538,19 +1540,20 @@ class TesisController extends Controller
     $profesor1_com=DB::table('users')->join('comision','users.name','=','comision.profesor1_comision')->join('grado_academico_profesor_planta','users.id','=','grado_academico_profesor_planta.id')->where('nombre_alumno','=',$nombre_alumno1)->get();
     $profesor2_com=DB::table('users')->join('comision','users.name','=','comision.profesor2_comision')->join('grado_academico_profesor_planta','users.id','=','grado_academico_profesor_planta.id')->where('nombre_alumno','=',$nombre_alumno1)->get();
     $profesor3_com=DB::table('users')->join('comision','users.name','=','comision.profesor3_comision')->join('grado_academico_profesor_planta','users.id','=','grado_academico_profesor_planta.id')->where('nombre_alumno','=',$nombre_alumno1)->get();
+    $direc_esc=DB::table('users')->join('comision','users.id','=','comision.id_profesor_guia')->join('grado_academico_profesor_planta','users.id','=','grado_academico_profesor_planta.id')->where('director_escuela',1)->get();
 
     //dd($profesor1_com);
     //Se hace el foreach para entrar al elemento del array, y asi llegar e imprimirlo en la vista;
     foreach($profesor_guia as $profe_guia) $grado_profe_guia=$profe_guia->grado_academico;
     foreach($profesor1_com as $profe1_com) $grado_profe1_com=$profe1_com->grado_academico;
     foreach($profesor2_com as $profe2_com) $grado_profe2_com=$profe2_com->grado_academico;
-
+    foreach($direc_esc as $d_e) $director_escuela=$d_e->name;
     if($profesor3_com->isEmpty()==false){
     foreach($profesor3_com as $profe3_com) $grado_profe3_com=$profe3_com->grado_academico;
     }else{
         $grado_profe3_com="Ninguno";
     }
-
+    $director_escuela = strtoupper($director_escuela); //Para colocar string en mayuscula
     //dd($hora_presentacion_tesis);
     switch($nombre_dia)
     {
@@ -1598,7 +1601,7 @@ class TesisController extends Controller
 
 
 
-    return view('tesis.acta_examen',compact('tesis','dia_fecha','nombre_dia','mes_fecha','year_fecha','hora_presentacion_tesis','grado_profe_guia','grado_profe1_com','grado_profe2_com','grado_profe3_com'));
+    return view('tesis.acta_examen',compact('tesis','dia_fecha','nombre_dia','mes_fecha','year_fecha','hora_presentacion_tesis','grado_profe_guia','grado_profe1_com','grado_profe2_com','grado_profe3_com','director_escuela'));
    }
 
  
