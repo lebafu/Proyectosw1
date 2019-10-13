@@ -1,0 +1,15 @@
+1-Cambiar vista de grado academico de profesor a administrador
+2-Ahora se permite editar, el grado academico del profesor.
+3-Se puede ingresar como alumno y en parejas en las tesis en la tesis, si el alumno esta //Estaba listo el otro dia
+
+4-El administrador puede asignarle el cargo de director de escuela a cualquiera de los profesores.
+5-En el acta de tesis, ahora aparecen los datos por BD.
+6-La fecha dia, mes, año, aparece en el formato original del acta examen, use un paquete de laravel de nombre carbon para segmentar la fecha
+7-La fecha de descarga del documento word, ahora esta fijada por defecto entre el 01/01/añopresente y 30/11/añopresente
+
+
+8-Definir bien lo que hare en software 2 y calidad
+9- Con respecto a nota de taller por subir archivos al sistema que almacena información de versiones de asignaturas de años anteriores
+subi esos 35 archivos, bueno en realidad 38 antes de las 23 hrs de la fecha que usted dij(el viernes de la semana pasada) y
+en total subi 40 archivos, pero no le mande email ni nada, anoche cuando vi
+el sistema ingrese y me dejo sacar el pantallazo

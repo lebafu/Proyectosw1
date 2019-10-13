@@ -49,6 +49,12 @@ Route::get('/definir_director_escuela', 'UsersController@definir_director_escuel
 Route::post('/guardar_director_escuela','UsersController@guardar_director_escuela')->name('users.guardar_director_escuela');
 
 
+//Routas para resetear contraseña//
+Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
+Route::get('password/reset/{token}','Auth\ResetPasswordController@showResetForm')->name('password.reset');
+Route::post('password/reset', 'Auth\ResetPasswordController@reset');
+
 Route::get('/index_solicitud_nota_pendiente', 'TesisController@index_solicitud_nota_pendiente')->name('tesis.index_solicitud_nota_pendiente');
 Route::get('/aceptar_nota_pendiente/{tesis}', 'TesisController@aceptar_nota_pendiente')->name('tesis.aceptar_nota_pendiente');
 Route::put('/actualizarpendiente{tesis}','TesisController@pendiente_update')->name('tesis.pendiente_update');	

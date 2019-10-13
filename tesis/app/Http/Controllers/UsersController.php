@@ -41,6 +41,7 @@ class UsersController extends Controller
             'email' => 'required|string',
             'password' => 'required|string',
             'tipo_usuario' => 'required|integer',
+
         ]);
 
         /*DB::table('users')->insert([
@@ -55,7 +56,7 @@ class UsersController extends Controller
             'name' => $request->name,
             'email' =>$request->email,
             'password' => Hash::make($request->password),
-            'tipo_usuario' =>$request->tipo_usuario
+            'tipo_usuario' =>$request->tipo_usuario,
         ]);
 
         $email=$request->get('email');
@@ -221,7 +222,7 @@ class UsersController extends Controller
              }
              //dd($director_escuela);
             $director_escuela=User::find($id);
-            $director_escuela->director_escuela=0;
+            $director_escuela->director_escuela=null;
             //dd($director_escuela->director_escuela);
             $director_escuela->save();
             $user=User::find($request->profesor);
