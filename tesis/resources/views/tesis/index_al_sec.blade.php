@@ -41,8 +41,8 @@
           <td>{{$tesis->profesor_guia}}</td>
            <td>{{$tesis->tipo}}</td>
             @if($tesis->constancia_ex!=null)
-           <td><a href="{{ route('verPDF', ['id' => $tesis->id]) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Ver constancia de examen</i></a></td>
-           <td><a href="{{url('/fecha_presentacion/'.$tesis->id)}}" class="btn btn-primary">Reservar fecha presentacion
+           <td><a href="{{ route('verPDF', ['id' => $tesis->id]) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Constancia</i></a></td>
+           <td><a href="{{url('/fecha_presentacion/'.$tesis->id)}}" class="btn btn-primary">Presentacion
            </a></td>
            @else
              <td>Debe subir informe</td>
@@ -51,10 +51,10 @@
             <td>Operacion no disponible</td>
             <td>Operacion no disponible</td>
             @else
-              <td><a class="btn btn-primary" href="{{url('/acta_examen/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span>Generar Acta</a></td>
+              <td><a class="btn btn-primary" href="{{url('/acta_examen/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span>Acta</a></td>
            @endif
                @if($tesis->acta_ex==null and $tesis->fecha_inscripcion!=null)
-              <td><a class="btn btn-primary" href="{{url('/vista_subir_acta/'.$tesis->id)}}">Subir acta alumno</a></td>
+              <td><a class="btn btn-primary" href="{{url('/vista_subir_acta/'.$tesis->id)}}">Subir acta</a></td>
             @elseif($tesis->acta_ex!=null)
                 <td><a href="{{ route('verPDF_acta', ['id' => $tesis->id]) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Ver acta</i></a></td>
                 @else
@@ -65,7 +65,7 @@
             @elseif($tesis->nota_tesis!=null)
             <td>{{$tesis->nota_tesis}}</td>
             @else      
-              <td>Aun no expone</td>
+              <td>Sin nota aun</td>
            @endif
         @endforeach
      </table>

@@ -18,6 +18,6 @@ return [
     'sent' => '
 ¡Hemos enviado su enlace de restablecimiento de contraseña por correo electrónico!',
     'token' => 'This password reset token is invalid.',
-    'user' => "We can't find a user with that e-mail address.",
+    'user' => "Nosotros no podemos encontrar un usuario con esa dirección de E-mail",
 
 ];

@@ -61,10 +61,38 @@
                             </div>
                         </div>
 
+
+                         <div class="form-group row">
+                            <label for="sexo" class="col-md-4 col-form-label text-md-right">{{ __('Sexo') }}</label>
+                            <div class="col-md-6">
+                                <select name="sexo" id="sexo" type="text" class="form-control" required="required">
+                                <option value="{{$user->sexo}}">{{$user->sexo}}</option>
+                                <option value="Masculino">Masculino</option>
+                                <option value="Femenino">Femenino</option>
+                                
+                                 </select>
+                            </div>
+                        </div>
+
                          <div class="form-group row">
                             <label for="tipo_usuario" class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
                             <div class="col-md-6">
                                 <select name="tipo_usuario" id="tipo_usuario" type="text" class="form-control" required="required">
+                                @if($user->tipo_usuario==0)
+                                <option value="{{$user->tipo_usuario}}">Administrador</option>
+                                @endif
+                                @if($user->tipo_usuario==1)
+                                <option value="{{$user->tipo_usuario}}">Alumno</option>
+                                @endif
+                                @if($user->tipo_usuario==2)
+                                <option value="{{$user->tipo_usuario}}">Profesor</option>
+                                @endif
+                                @if($user->tipo_usuario==3)
+                                <option value="{{$user->tipo_usuario}}">Director de Tesis</option>
+                                @endif
+                                @if($user->tipo_usuario==4)
+                                <option value="{{$user->tipo_usuario}}">Secretaria</option>
+                                @endif
                                 <option value=1> Alumno </option>
                                 <option value=2> Profesor </option>
                                 <option value=3>Director de Tesis </option>

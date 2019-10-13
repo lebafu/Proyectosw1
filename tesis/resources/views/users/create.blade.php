@@ -61,6 +61,16 @@
                             </div>
                         </div>
 
+                          <div class="form-group row">
+                            <label for="sexo" class="col-md-4 col-form-label text-md-right">{{ __('Sexo') }}</label>
+                            <div class="col-md-6">
+                                <select name="sexo" id="sexo" type="text" class="form-control" required="required">
+                                <option value="Masculino"> Masculino</option>
+                                 <option value="Femenino">Femenino</option>
+                                </select>
+                            </div>
+                        </div>
+
                          <div class="form-group row">
                             <label for="tipo_usuario" class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
                             <div class="col-md-6">

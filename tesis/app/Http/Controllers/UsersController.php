@@ -41,7 +41,7 @@ class UsersController extends Controller
             'email' => 'required|string',
             'password' => 'required|string',
             'tipo_usuario' => 'required|integer',
-
+ 
         ]);
 
         /*DB::table('users')->insert([
@@ -57,6 +57,7 @@ class UsersController extends Controller
             'email' =>$request->email,
             'password' => Hash::make($request->password),
             'tipo_usuario' =>$request->tipo_usuario,
+            'sexo' =>$request->sexo
         ]);
 
         $email=$request->get('email');
@@ -100,6 +101,7 @@ class UsersController extends Controller
         $user->email=$request->get('email');
         $user->password=Hash::make($request->get('password'));
         $user->tipo_usuario=$request->get('tipo_usuario');
+        $user->sexo=$request->get('sexo');
         $user->update();
 
          $email=$request->get('email');
@@ -167,6 +169,7 @@ class UsersController extends Controller
         $user->name=$request->get('name');
         $user->email=$request->get('email');
         $user->tipo_usuario=2;
+        $user->sexo=$request->get('sexo');
         $user->update();
         $grado_academico=Grado_academico::find($id);
         $grado_academico->grado_academico=$request->get('grado_academico');
