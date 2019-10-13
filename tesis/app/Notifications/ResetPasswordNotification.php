@@ -64,7 +64,7 @@ class ResetPasswordNotification extends Notification
             ->line(Lang::getFromJson('Recibes este email porque se solicitó un reestablecimiento de contraseña para tu cuenta.'))
             ->action(Lang::getFromJson('Reestablecer contraseña'), url(config('app.url').route('password.reset', ['token' => $this->token, 'email' => $notifiable->getEmailForPasswordReset()], false)))
             ->line(Lang::getFromJson('Este enlace de restablecimiento de contraseña caducará en:count minutes.', ['count' => config('auth.passwords.'.config('auth.defaults.passwords').'.expire')]))
-            ->line(Lang::getFromJson('Si no realizaste esta petición, puedes ignorar este correo y nada habrá cambiado'));
+            ->line(Lang::getFromJson('Si no realizaste esta petición, puedes ignorar este correo y nada habrá cambiado'))
             ->salutation('¡Saludos!');
     }
 
