@@ -75,6 +75,7 @@
     <ul class="nav navbar-nav">
       <li class="active"><a href="{{ url('/home')}}">Home</a></li>
       <li><a href="{{url('/index_al_sec')}}">Lista Alumnos</a></li>
+      <li><a href="{{url('/index_titulados_sec')}}">Titulados</a></li>
       </ul>
   </div>
 </nav>

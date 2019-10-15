@@ -9,8 +9,8 @@
 	.cuadrado{
      width: 80px;      
      height: 40px; 
-     border: 3px solid #555;
-     background: #428bca;
+     border: 3px solid #000000;
+     background: #FFFFFF;
 }</style>
   	 @foreach ($tesis as $tes)
 	<div class="container">
@@ -93,6 +93,7 @@
 				<h4>....................................</h4>
 				<h4>{{$grado_profe_guia}}{{$tes->profesor_guia}}</h4>  
 				<h6>Profesor Guia</h6>
+				<h5 style="margin-top: 30px">Nota: ....... </h5>
 			</div>
 			<div class="col-4">
 				<h4>....................................</h4>

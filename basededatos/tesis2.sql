@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 11-10-2019 a las 02:07:20
+-- Tiempo de generación: 15-10-2019 a las 08:50:01
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.6
 
@@ -188,7 +188,9 @@ INSERT INTO `grado_academico_profesor_planta` (`id`, `estado`, `grado_academico`
 (17, 1, 'Dr.'),
 (20, 1, 'Dr.'),
 (21, 1, 'Mg.'),
-(96, 1, 'Dra.');
+(96, 1, 'Dra.'),
+(99, 1, 'Mg.'),
+(104, 1, 'Ing.');
 
 -- --------------------------------------------------------
 
@@ -222,6 +224,13 @@ CREATE TABLE `password_resets` (
   `created_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Volcado de datos para la tabla `password_resets`
+--
+
+INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
+('leonardob94@hotmail.com', '$2y$10$OSpMQNf7sn2hY8c4pg84iOs8l.XUsIWIwKcC5plg6jCr1kQxJNtRy', '2019-10-12 22:53:56');
+
 -- --------------------------------------------------------
 
 --
@@ -240,6 +249,38 @@ CREATE TABLE `proyectos` (
 INSERT INTO `proyectos` (`id`, `nombre`) VALUES
 (1, 'Proyecto1'),
 (2, 'Proyecto2');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `recopilacion_inf_titulados`
+--
+
+CREATE TABLE `recopilacion_inf_titulados` (
+  `id` bigint(20) UNSIGNED NOT NULL,
+  `fecha_nac` date NOT NULL,
+  `titulo` varchar(60) NOT NULL,
+  `telefono_celular` varchar(12) NOT NULL,
+  `telefono_fijo` varchar(10) NOT NULL,
+  `facebook` varchar(255) NOT NULL,
+  `direccion_actual` varchar(50) NOT NULL,
+  `ano_egreso` date NOT NULL,
+  `fecha_nac2` date DEFAULT NULL,
+  `titulo2` varchar(20) DEFAULT NULL,
+  `telefono_celular2` varchar(20) DEFAULT NULL,
+  `telefono_fijo2` varchar(20) DEFAULT NULL,
+  `subido_constancia` int(11) NOT NULL,
+  `facebook2` varchar(20) DEFAULT NULL,
+  `direccion_actual2` varchar(30) DEFAULT NULL,
+  `ano_egreso2` date DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `recopilacion_inf_titulados`
+--
+
+INSERT INTO `recopilacion_inf_titulados` (`id`, `fecha_nac`, `titulo`, `telefono_celular`, `telefono_fijo`, `facebook`, `direccion_actual`, `ano_egreso`, `fecha_nac2`, `titulo2`, `telefono_celular2`, `telefono_fijo2`, `subido_constancia`, `facebook2`, `direccion_actual2`, `ano_egreso2`) VALUES
+(22, '1994-10-10', 'Ingeniero', '78494810', '23530328', 'Felipe Tapia', 'Talca 26 sur', '2018-10-15', NULL, NULL, NULL, NULL, 1, NULL, '', NULL);
 
 -- --------------------------------------------------------
 
@@ -292,8 +333,8 @@ INSERT INTO `tesis` (`id`, `nombre_completo`, `nombre_completo2`, `rut`, `rut2`,
 (10, 'Oscar Raul Perez Fernandez', NULL, '16.788.324-5', NULL, 'Sistema de control', 'Ingenieria de Software', 2013, NULL, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Automatizar y agilizar el proceso', 'Descripcion1 Descripcion2', 'Sistema de evidencias para la Universidad', 'Comunidad', 'Municiaplidad de San Clemente', NULL, 4, 1, NULL, '2019-07-16 04:12:04', NULL, NULL, NULL, NULL, '2019-07-18', '156538477419.pdf', 'Es cada vez más evidente que la informática (manejo de información) y los computadores (procesadores de información), están cambiando nuestro sistema de vida. Por ahora podemos decir que el computador nos ofrece las ventajas de una rapídez, seguridad y gran capacidad de trabajo de datos, por ejemplo: informática y estadísticas, y eso también nos alcanzará.', 1, '2019-10-09 19:00:00', NULL, NULL),
 (16, 'Rodrigo Chavez', NULL, '18.063.911-8', NULL, 'Aplicacion movil', 'Ingenieria de Software', 2014, NULL, 'Paulo Gonzalez', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'Contribucion1,Contribucion2', 'Descripcion1Descripcion2', 'Ayudar a la comunidad', 'Empresa', 'Tutelkan', NULL, 1, NULL, NULL, '2019-07-16 03:56:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (18, 'Camilo Cavieres', NULL, '18.738.562-9', NULL, 'Aplicacion en Ionix para ed fisica', 'Ingenieria de Software', 2013, NULL, 'Marco Toranzo', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'Se espera ser un apoyo para la carrera de de ed. fisica en la Universidad.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Empresa', 'Ed fisica.', 'Nombre incompleto', 4, 1, NULL, '2019-07-18 06:43:00', '2019-10-25', NULL, '2019-12-27', 1, '2019-07-21', NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 'Gonzalo Ignacio Paredes Valenzuela', NULL, '17.345.456-3', NULL, 'Sistema de inventario UCM', 'Ingenieria de Software', 2012, NULL, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Se espera apoyar la automatizacion de un sistema de la universidad, y agilizar procesos.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'Departamento de informatica UCM', NULL, 4, 1, NULL, '2019-07-19 19:11:32', NULL, NULL, '2019-07-24', NULL, '2019-07-28', '6kJevUClPeZ06vTKSelIPZAvdNPBhgehShMazLeW.pdf', 'presenta en algunos pasajes de esta obra viene a demostrar, como han cambiado las relaciones humanas y jurídicas con el advenimiento de la informática y de las telecomunicaciones. Sin pretender sentar bases sólidas, esta investigación pretende despertar el...', 1, '2019-09-03 16:00:00', 'TdIvKakaANdcnRINpzvLETmCxlCkqQlm67qN12fe.pdf', 7),
-(22, 'Felipe Nicolas Tapia Nuñez', NULL, '18.732.564-7', NULL, 'Estudio de Patrones de venas de la mano', 'IA', 2013, NULL, 'Ricardo Barrientos', 'Ingenieria Civil Informatica', 'Tesis', 'Permitir ahorrar recursos en el reconocimiento unico de la poblacion, que actualmente se hace por huella dactilar.', 'El alumno deberá ayudar a generar en el reconocimiento de patrones de las venas de la mano.', 'Generar un modelo que permite el reconocimiento de las venas de la mano.', 'Fondo concusable', 'Conicyt', NULL, 4, 1, NULL, '2019-07-19 23:14:28', NULL, NULL, '2019-07-23', NULL, '2019-07-23', NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 'Gonzalo Ignacio Paredes Valenzuela', NULL, '17.345.456-3', NULL, 'Sistema de inventario UCM', 'Ingenieria de Software', 2012, NULL, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Tesis', 'Se espera apoyar la automatizacion de un sistema de la universidad, y agilizar procesos.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'Departamento de informatica UCM', NULL, 4, 1, NULL, '2019-07-19 19:11:32', NULL, NULL, '2019-10-24', NULL, '2019-07-28', '6kJevUClPeZ06vTKSelIPZAvdNPBhgehShMazLeW.pdf', 'presenta en algunos pasajes de esta obra viene a demostrar, como han cambiado las relaciones humanas y jurídicas con el advenimiento de la informática y de las telecomunicaciones. Sin pretender sentar bases sólidas, esta investigación pretende despertar el...', 1, '2019-09-03 16:00:00', 'TdIvKakaANdcnRINpzvLETmCxlCkqQlm67qN12fe.pdf', 7),
+(22, 'Felipe Nicolas Tapia Nuñez', NULL, '18.732.564-7', NULL, 'Estudio de Patrones de venas de la mano', 'IA', 2013, NULL, 'Ricardo Barrientos', 'Ingenieria Civil Informatica', 'Tesis', 'Permitir ahorrar recursos en el reconocimiento unico de la poblacion, que actualmente se hace por huella dactilar.', 'El alumno deberá ayudar a generar en el reconocimiento de patrones de las venas de la mano.', 'Generar un modelo que permite el reconocimiento de las venas de la mano.', 'Fondo concusable', 'Conicyt', NULL, 4, 1, NULL, '2019-07-19 23:14:28', '2019-08-21', 1, '2019-12-19', 1, '2019-07-23', '1571110545d-separation (1).pdf', 'Copie aqui su abstract o resumen.', NULL, '2019-10-15 15:00:00', '157111431622.pdf', 7),
 (23, 'Rosa Karina Gonzalez Gutierrez', NULL, '18.923.457-4', NULL, 'Analisis de sentimientos aplicando una taxonomia de encuestas', 'BI', 2013, NULL, 'Angelica Urrutia', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2 Descripcion3', 'Objetivo1, Objetivo2', 'Comunidad', 'Jardin Infantil', 'Escribe aquí su observacion', 4, 1, 1, '2019-07-20 23:38:34', '2019-07-19', NULL, '2019-08-20', NULL, '2019-07-21', NULL, NULL, NULL, NULL, NULL, NULL),
 (31, 'Daniel Alarcon Chambles', NULL, '18.123.456-9', NULL, 'Desarrollo modelo de optimización en java', 'Ingenieria de Software', 2013, NULL, 'Wladimir Soto', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'UTALCA-UCM', 'Sin observacion', 4, 1, NULL, '2019-07-26 08:22:02', '2019-10-18', 1, NULL, NULL, '2019-07-29', NULL, NULL, NULL, NULL, NULL, NULL),
 (32, 'Jhon Michael Faundez Miño', 'Alfonso Bilocopetiuc Parra', '18.574.262-8', '18.574.262-8', 'Desarrollo de aplicacion movil ed. fisica', 'Ingenieria de Software', 2013, 2013, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Memoria', 'Se espera contribuir a la carrera de Educación fisica, desarrollando una aplicación de utilidad para ellos...', 'Esta tesis pretende...', 'Dentro de los objetivos de esta tesis se espera...', 'Proyecto', 'Proyecto1', 'Escribe aquí su observacion', 4, 1, NULL, '2019-09-19 01:30:10', NULL, NULL, NULL, NULL, '2019-09-19', NULL, NULL, NULL, NULL, NULL, NULL),
@@ -335,8 +376,9 @@ CREATE TABLE `users` (
   `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `email_verified_at` timestamp NULL DEFAULT NULL,
   `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `tipo_usuario` int(11) NOT NULL,
-  `director_escuela` int(11) DEFAULT NULL,
+  `sexo` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipo_usuario` int(11) NOT NULL DEFAULT 0,
+  `director_escuela` int(11) DEFAULT 0,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
@@ -346,61 +388,66 @@ CREATE TABLE `users` (
 -- Volcado de datos para la tabla `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `tipo_usuario`, `director_escuela`, `remember_token`, `created_at`, `updated_at`) VALUES
-(1, 'Admin', 'Admin@admin.com', NULL, '$2y$10$P7Por1l.Ep3mdBZyEvq5OOaTOCePQZw.T0S4Zkj9qF5LFJADxsrue', 0, NULL, NULL, NULL, NULL),
-(3, 'Ivan Merino Gonzalez', 'IvanMer@gmail.com', NULL, '$2y$10$AG5RKsQM47Vjfo5CrlkFte/qGCZaj3hC/SBQRCf1tuzfj/NH//zXy', 3, NULL, NULL, NULL, '2019-08-24 01:35:10'),
-(4, 'Leonardo Ignacio Bascuñan Fuentealba', 'leonardob94@hotmail.com', NULL, '$2y$10$6490PIadS/2p/RGUcq2j0eZ/Up/adnCsGAqoO3.7f7f2Wb/UZeMlS', 1, NULL, NULL, '2019-07-14 23:56:55', '2019-07-14 23:56:55'),
-(7, 'Hugo Araya', 'Haraya@gmail.com', NULL, '$2y$10$rw7BfPGCEarFKsm/TMcy9OdZYszb./FJeu5gDcjkIx1yJ2vbP8ln6', 2, 0, NULL, NULL, '2019-10-11 00:14:17'),
-(8, 'Carlos Andres Cancino Duran', 'CarlosCancino@gmail.com', NULL, '$2y$10$FI0FmorGtaq2VMHczi3RMO9aQNqozX1FNIeDet09n6TMf2.n8cZSK', 1, NULL, NULL, '2019-07-16 04:16:21', '2019-07-16 04:16:21'),
-(9, 'Rafael  Alexis Perez Torres', 'RafaelPerez@gmail.com', NULL, '$2y$10$raKHvuUg4HJKAh6UO2pwXuiVfwzu7F5VTyesjCOvZxNoi3C7tsgJW', 1, NULL, NULL, '2019-07-16 04:18:50', '2019-07-16 04:18:50'),
-(10, 'Oscar Raul Perez Fernandez', 'OscarPerez@gmail.com', NULL, '$2y$10$UHCQuJdxJw8aJTFDi3dL1.zW7F4HcfX35y99g.8iMiZvbPDkUin1.', 1, NULL, NULL, '2019-07-16 04:20:43', '2019-07-16 04:20:43'),
-(11, 'Sergio Hernandez', 'SergioH@gmail.com', NULL, '$2y$10$bGwldwqEeiVRDetxT2ZjNOONUPt/q1n/k86ad4aGkSpOdvMMtxd5q', 2, NULL, NULL, NULL, '2019-10-10 08:15:28'),
-(12, 'Paulo Gonzalez', 'PauloGonzalez@gmail.com', NULL, '$2y$10$W5PPczjvJ0HYjUnB4OrjOe7FpWju69ieVGaf/k4ZtnTAxxWOBSrM.', 2, 1, NULL, NULL, '2019-10-11 00:14:35'),
-(13, 'Wladimir Soto', 'wsoto@hotmail.com', NULL, '$2y$10$HJz7PXN14.qafcKQmEHXoumhvGzLXHK4kGz.YXeDbN6PmTGw1MPoG', 2, NULL, NULL, NULL, '2019-10-10 06:50:22'),
-(14, 'Xaviera Lopez', 'XavieraL@gmail.com', NULL, '$2y$10$Iy8sRhRFOl8EjoHFgjjAKegJzr5RoRKk8ZzIO/I4Zu2s5F4i1z2pC', 2, NULL, NULL, NULL, '2019-10-10 06:50:50'),
-(15, 'Angelica Urrutia', 'AngelicaU@gmail.com', NULL, '$2y$10$UHeuUhqSxgVUMzTRCKgj2ewR3oS8oRGWLK1xwnxm24LKcrAwKdnu.', 2, NULL, NULL, NULL, '2019-10-10 06:56:34'),
-(16, 'Rodrigo Chavez', 'RodrigoC@gmail.com', NULL, '$2y$10$IIMkIRIefVWEIR6u5Saby.szXbs5GmJ6cdumfFnmtgVArUi81R1c6', 1, NULL, NULL, '2019-07-16 07:55:40', '2019-07-17 22:44:22'),
-(17, 'Marco Toranzo', 'mtoranzo@gmail.com', NULL, '$2y$10$/tGoCVb4KMYJvxU5/zTsTug0hnoqshVEAVuVkvqiChPqRSJS0hNcG', 2, 0, NULL, NULL, '2019-10-11 00:14:35'),
-(18, 'Camilo Cavieres', 'CamiloC@gmail.com', NULL, '$2y$10$U9YUF0dsIGH.mtoDiuaOJuho1QeRg/kZCpK9GjiL7h0J24GbsqH/S', 1, NULL, NULL, '2019-07-16 08:27:48', '2019-07-16 08:27:48'),
-(19, 'Gonzalo Ignacio Paredes Valenzuela', 'GonzaloParedes@gmail.com', NULL, '$2y$10$cqV6yLeBy8YZUIj6i13mFuye2MWyDwAHwa1KnGHFiaATaWVy.EGsu', 1, NULL, NULL, '2019-07-19 23:08:31', '2019-07-19 23:08:31'),
-(20, 'Marco Mora', 'MarcoM@gmail.com', NULL, '$2y$10$TqMJh2XVrNb/EkpZMpepaO0lI2BaTmNUTsx0eSRKBVaVfyBsnfT0.', 2, NULL, NULL, NULL, NULL),
-(21, 'Ricardo Barrientos', 'RicardoB@gmail.com', NULL, '$2y$10$zlT4j9NW096tlHmalTxpCePrS2E5C3MJ3J478RVKUqPVDZxIzBBpe', 2, NULL, NULL, NULL, '2019-10-10 06:57:39'),
-(22, 'Felipe Nicolas Tapia Nuñez', 'FelipeTapia@gmail.com', NULL, '$2y$10$5GLPqQqZX7NP8TpC02U1Seb1gv.oBvlWyz1ZYYiGpz8ZWlG8UwSPe', 1, NULL, NULL, '2019-07-20 03:11:25', '2019-07-20 03:11:25'),
-(23, 'Rosa Karina Gonzalez Gutierrez', 'RosaGonzalez@gmail.com', NULL, '$2y$10$A706x5VrUJACCLTtvYc6FuVKhOuYzGTnRPcdVCRELNF2BzBgcvp1S', 1, NULL, NULL, '2019-07-21 03:32:43', '2019-07-21 03:59:35'),
-(24, 'Jorge Gabriel Ramirez Perez', 'JorgeRamirez@gmail.com', NULL, '$2y$10$3gm/ql.92ksvlce2epChJuNL8LzkWreslcv9E70uiY5FRFSQXQfpu', 1, NULL, NULL, '2019-07-26 04:26:50', '2019-07-26 04:26:50'),
-(31, 'Daniel Alarcon Chambles', 'DanielA@gmail.com', NULL, '$2y$10$EIN4vEKP8bMJiBsp0SkF/umiq8/f82YV4jyRAiVScO42S61ERKuu2', 1, NULL, NULL, '2019-07-26 11:49:01', '2019-07-26 12:39:55'),
-(32, 'Jhon Michael Faundez Miño', 'JhonF@gmail.com', NULL, '$2y$10$ahzlv/f8/FnFZvQrdE1jqujo0R8uSY/05ZSJiieOoL.lvzAW4ecPq', 1, NULL, NULL, '2019-07-26 14:38:52', '2019-07-26 15:09:51'),
-(33, 'Vicente Valdes', 'VicenteV@gmail.com', NULL, '$2y$10$0Xdv3Oc5h6fm9QA6BoUov.hy4mjlrH99VmFf22jBEiiTAsUjq4IHS', 1, NULL, NULL, '2019-07-26 15:26:23', '2019-07-26 15:26:23'),
-(34, 'Felipe Garrido Perez', 'FelipeGarrido@gmail.com', NULL, '$2y$10$PGtMfMTMeu3UBOkiEddSXOUfcrmr.fdhpgjfi8DUWiGdUzCEsLQ3K', 1, NULL, NULL, '2019-07-26 16:02:24', '2019-07-26 16:02:24'),
-(35, 'Nelson Guerra', 'NelsonG@gmail.com', NULL, '$2y$10$vCoKsvhC3DmnMSK71AMOjOdjmmQOwuChYL3seANSUYjq5Tg3VZ3Ti', 1, NULL, NULL, '2019-07-26 16:11:18', '2019-07-26 16:11:18'),
-(36, 'Cesar Poblete', 'CesarP@gmail.com', NULL, '$2y$10$Q8Fcs.1uOa8YhOrPqCFggOFFYIyCIVsYS7Vb98BsLDP/4Sec9iFh.', 1, NULL, NULL, '2019-07-26 16:13:34', '2019-07-26 16:13:34'),
-(37, 'Arturo Fernandez', 'ArturoF@gmail.com', NULL, '$2y$10$9Z2QuIyLfuWERzcbwqbrteOz0wP89iQjzPKngWZCfAlMiLEHeOIiy', 1, NULL, NULL, '2019-07-26 16:16:47', '2019-07-26 16:16:47'),
-(38, 'Pedro Lopez', 'PedroL@gmail.com', NULL, '$2y$10$ULR0DSxxqclNwxt/QWPPMutmrHszkr2b.EbJ6YFWkv1c4S/HZnjI.', 1, NULL, NULL, '2019-07-26 16:22:33', '2019-07-26 16:22:33'),
-(39, 'Hugo Rodriguez', 'HugoR@gmail.com', NULL, '$2y$10$KVy3K0V88xuFo2z9xWFOkudUbAbr3N/gQnxSVUnRMZzTEvMJN9O8.', 1, NULL, NULL, '2019-07-26 16:24:52', '2019-07-26 16:24:52'),
-(40, 'Felipe Javier Barrios Lopez', 'FelipeBarrios@gmail.com', NULL, '$2y$10$5xHZ3RncZ2QPluTsCXjCMug0xq4jF2r2q2iGcYPH4W7OZZhtnXw3W', 1, NULL, NULL, '2019-07-26 19:19:20', '2019-07-26 19:19:20'),
-(41, 'Francisco De la Fuente', 'FranciscoDF@gmail.com', NULL, '$2y$10$BTQil1FC8u4kt3f/YmrMr.WdUv4BFo4dx0AyQG5zpKnzcx0wgdoKG', 1, NULL, NULL, '2019-07-27 07:06:43', '2019-07-27 07:06:43'),
-(42, 'Rodrigo Ramirez', 'RodrigoR@gmail.com', NULL, '$2y$10$d9HZLRSpc/etYaMewAClnOKRZdTIq0o49jYG8Vkz9PMk0dA2nQ06y', 1, NULL, NULL, '2019-07-27 22:54:21', '2019-07-27 22:54:21'),
-(43, 'Barbara Castro', 'bcastro@ucm.cl', NULL, '$2y$10$bQ2ai9f57L0x.btzIBgJ9e7xM48mJCfY/TDGULmcO97Cpfyqv39lG', 4, NULL, NULL, NULL, NULL),
-(44, 'Walter Gonzalo Casanova Hurtado', 'WaterC@gmail.com', NULL, '$2y$10$zOb/mHTfVnhSmiyQN8KUS.ovDQauYKWCIocyh9wZ0yMccJg54SEG6', 1, NULL, NULL, '2019-07-31 18:14:50', '2019-07-31 18:14:50'),
-(45, 'Fernando Ignacio Olmos Duran', 'FernandoOlmos@gmail.com', NULL, '$2y$10$Nvu1LcLeFHrDlIYG0Yy/9eqqPPKKNQ/ChxLFk4RJMgSgoJRZxIhAK', 1, NULL, NULL, '2019-08-02 11:05:35', '2019-08-02 11:05:35'),
-(46, 'Sebastian Garrido', 'SebastianG@gmail.com', NULL, '$2y$10$GTku6pBK38kipS/vAjiy.uheUMFQlB0jjKfGy/YPpmK24EHB.MKFa', 1, NULL, NULL, '2019-08-03 00:16:28', '2019-08-03 00:16:28'),
-(47, 'Miguel Ignacio Cancino Nuñez', 'MiguelCancino@gmail.com', NULL, '$2y$10$wJNMKinj8M3f9FVVc8UOxeDea2G9Uybl9cVJhcwNM4.yFogSCmsTm', 1, NULL, NULL, '2019-08-04 03:28:44', '2019-08-04 03:28:44'),
-(48, 'Karina Patiño Albornoz', 'KarinaPA@gmail.com', NULL, '$2y$10$pW9lFbbkUs1pJcCN6jw1/OHlt7.avKI1XJmgbbECLIDi/sCC.wrVa', 1, NULL, NULL, '2019-08-05 06:12:09', '2019-08-05 06:12:09'),
-(49, 'Jose Miguel Valdes Salgado', 'JoseValdes@gmail.com', NULL, '$2y$10$FPPhdYnm/7UwDghPIl1K8OCL0EMAXUMDGQGCmpOu8YXfXNhAYTZJm', 1, NULL, NULL, '2019-08-05 17:22:04', '2019-08-05 17:22:04'),
-(50, 'Felipe Antonio Matamala Lopez', 'FelipeM@gmail.com', NULL, '$2y$10$I2cOwjlKUc7gWNbChsIm8OyFRAU5uinui43DptVoDsAq2dN2IAH.m', 1, NULL, NULL, '2019-08-05 23:31:38', '2019-08-06 00:38:02'),
-(51, 'Hector Carrasco Faundez', 'HectorCarrasco@gmail.com', NULL, '$2y$10$8jw8pMMBbi/wh2icBgjoeOH3/M9KbMQvJ96dpdCffyLdjdVgPNpTq', 1, NULL, NULL, '2019-08-06 05:32:33', '2019-08-06 05:32:33'),
-(52, 'Boris Salgado Lopez', 'BorisSalgado@gmail.com', NULL, '$2y$10$dFfBS7LRJCjuFVHANjiTNuzgn9KnD6hEiUQDQNhL1AkkUnk/VpTe2', 1, NULL, NULL, '2019-08-06 06:41:57', '2019-08-06 06:41:57'),
-(53, 'Diego Gaete Bernales', 'DiegoGaete@gmail.com', NULL, '$2y$10$gCJpSgtKbaMRdFOQj/qBzOjaNopx5RykJObeGeHFSCxGc7VJBV9DS', 1, NULL, NULL, '2019-08-06 06:59:24', '2019-08-06 06:59:24'),
-(54, 'Humberto Muñoz Norambuena', 'HumbertoM@gmail.com', NULL, '$2y$10$dbZHlhrVE8/IijIMVZHxuObaV8lkoM5jQyb4Iw7IcnTRFIGpOipne', 1, NULL, NULL, '2019-08-06 07:42:02', '2019-08-06 07:42:02'),
-(55, 'Carlos Hernandez Gonzalez', 'CarlosHernandez@gmail.com', NULL, '$2y$10$rjMRjqebv8CIgsRMiq.H6eu8cpsnxIx1Xn4bDlIHvnM.7c/2IdE4e', 1, NULL, NULL, '2019-08-06 14:13:33', '2019-08-06 14:13:33'),
-(56, 'Ignacio Lillo', 'IgnacioL@gmail.com', NULL, '$2y$10$nYTu46h4pWjmGQsPeNA72ui4wqKqcq3MocGKfNfILijiWaitZK/iq', 1, NULL, NULL, '2019-08-24 07:20:50', '2019-08-24 07:20:50'),
-(57, 'Jose Lopez', 'Jl@gmail.com', NULL, '$2y$10$v960GkUnudmpxBGFonaOE.j9Mw5pluZYCm7755mid0WiLy3O7dbO.', 1, NULL, NULL, '2019-08-27 20:39:10', '2019-08-27 20:39:10'),
-(58, 'Boris Mora Garrido', 'BorisMora@gmail.com', NULL, '$2y$10$wk.L5RhwYI0okK2xMd2OAeQUPsz1.jw9GkysqR6cILTT4Mvqq869S', 1, NULL, NULL, '2019-09-01 06:03:18', '2019-09-01 06:03:18'),
-(59, 'Alfonso Bilocopetiuc Parra', 'AlfonsoB@gmail.com', NULL, '$2y$10$4K13XLIIl//D1SYcFYDNF.lr0yo1gxalUbBOiFvvhuE1zNpWUiHUq', 1, NULL, NULL, '2019-09-01 20:12:56', '2019-09-01 20:12:56'),
-(60, 'Hugo Fuentes ', 'HugoF@gmail.com', NULL, '$2y$10$kFOp7oDiJm3w7PvdIY3SIOStnEXM8LRAIj0zZ.rDAdwlZjGV5VOUi', 1, NULL, NULL, '2019-10-03 16:02:49', '2019-10-03 16:02:49'),
-(61, 'Hugo Gutierrez', 'HugoG@gmail.com', NULL, '$2y$10$m5a0LN31UgHZj/JAD5s6hOOHBJNq.vdUg2pAAXKV.pxTQ0OMQogQS', 1, NULL, NULL, '2019-10-03 16:03:53', '2019-10-03 16:03:53'),
-(63, 'Adolfo Fuentes', 'AdolfoF@gmail.com', NULL, '$2y$10$Ss8/KBqPGEMnblkBAaKcq.YWzi80H3oeZcJzf8a3gzIbk8zK5Iqm2', 1, NULL, NULL, '2019-10-03 23:32:36', '2019-10-03 23:32:36'),
-(96, 'Mary Carmen Jarur', 'Mjarur@gmail.com', NULL, '$2y$10$r35uyScKmDskm1R1uJy3POp.DDhiCo7tXuSbX1aYutoVBbDk/D7Du', 2, NULL, NULL, NULL, NULL);
+INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `sexo`, `tipo_usuario`, `director_escuela`, `remember_token`, `created_at`, `updated_at`) VALUES
+(1, 'Admin', 'Admin@admin.com', NULL, '$2y$10$P7Por1l.Ep3mdBZyEvq5OOaTOCePQZw.T0S4Zkj9qF5LFJADxsrue', 'Masculino', 0, 0, NULL, NULL, NULL),
+(3, 'Ivan Merino Gonzalez', 'IvanMer@gmail.com', NULL, '$2y$10$AG5RKsQM47Vjfo5CrlkFte/qGCZaj3hC/SBQRCf1tuzfj/NH//zXy', 'Masculino', 3, 0, NULL, NULL, '2019-08-24 01:35:10'),
+(4, 'Leonardo Ignacio Bascuñan Fuentealba', 'leonardo211294@gmail.com', NULL, '$2y$10$7hsTqDu10ALsH3qhiQVyfuOmKJ7fiuurnw09DMJoJsus7l8cWviv.', 'Masculino', 1, 0, 'Mog3bsZ4nn8gNTyU6qSXmw64WfYgax7JBLnfhnVGyR41xqikUM3WNgZLFTCK', '2019-07-14 23:56:55', '2019-10-13 05:33:15'),
+(7, 'Hugo Araya', 'Haraya@gmail.com', NULL, '$2y$10$rw7BfPGCEarFKsm/TMcy9OdZYszb./FJeu5gDcjkIx1yJ2vbP8ln6', 'Masculino', 2, 0, NULL, NULL, '2019-10-11 23:40:31'),
+(8, 'Carlos Andres Cancino Duran', 'CarlosCancino@gmail.com', NULL, '$2y$10$FI0FmorGtaq2VMHczi3RMO9aQNqozX1FNIeDet09n6TMf2.n8cZSK', 'Masculino', 1, 0, NULL, '2019-07-16 04:16:21', '2019-07-16 04:16:21'),
+(9, 'Rafael  Alexis Perez Torres', 'RafaelPerez@gmail.com', NULL, '$2y$10$raKHvuUg4HJKAh6UO2pwXuiVfwzu7F5VTyesjCOvZxNoi3C7tsgJW', 'Masculino', 1, 0, NULL, '2019-07-16 04:18:50', '2019-07-16 04:18:50'),
+(10, 'Oscar Raul Perez Fernandez', 'OscarPerez@gmail.com', NULL, '$2y$10$UHCQuJdxJw8aJTFDi3dL1.zW7F4HcfX35y99g.8iMiZvbPDkUin1.', 'Masculino', 1, 0, NULL, '2019-07-16 04:20:43', '2019-07-16 04:20:43'),
+(11, 'Sergio Hernandez', 'SergioH@gmail.com', NULL, '$2y$10$bGwldwqEeiVRDetxT2ZjNOONUPt/q1n/k86ad4aGkSpOdvMMtxd5q', 'Masculino', 2, 0, NULL, NULL, '2019-10-10 08:15:28'),
+(12, 'Paulo Gonzalez', 'PauloGonzalez@gmail.com', NULL, '$2y$10$W5PPczjvJ0HYjUnB4OrjOe7FpWju69ieVGaf/k4ZtnTAxxWOBSrM.', 'Masculino', 2, 1, NULL, NULL, '2019-10-11 23:40:31'),
+(13, 'Wladimir Soto', 'wsoto@hotmail.com', NULL, '$2y$10$HJz7PXN14.qafcKQmEHXoumhvGzLXHK4kGz.YXeDbN6PmTGw1MPoG', 'Masculino', 2, 0, NULL, NULL, '2019-10-10 06:50:22'),
+(14, 'Xaviera Lopez', 'XavieraL@gmail.com', NULL, '$2y$10$Iy8sRhRFOl8EjoHFgjjAKegJzr5RoRKk8ZzIO/I4Zu2s5F4i1z2pC', 'Femenino', 2, 0, NULL, NULL, '2019-10-10 06:50:50'),
+(15, 'Angelica Urrutia', 'AngelicaU@gmail.com', NULL, '$2y$10$UHeuUhqSxgVUMzTRCKgj2ewR3oS8oRGWLK1xwnxm24LKcrAwKdnu.', 'Femenino', 2, 0, NULL, NULL, '2019-10-10 06:56:34'),
+(16, 'Rodrigo Chavez', 'RodrigoC@gmail.com', NULL, '$2y$10$IIMkIRIefVWEIR6u5Saby.szXbs5GmJ6cdumfFnmtgVArUi81R1c6', 'Masculino', 1, 0, NULL, '2019-07-16 07:55:40', '2019-07-17 22:44:22'),
+(17, 'Marco Toranzo', 'mtoranzo@gmail.com', NULL, '$2y$10$RxyZZIw5NjYkSNL95uaRhuZ8SnoAZsm5QOLGzT30Z/ivnTQfPHJXm', 'Masculino', 2, 0, 'r2GwoE97JPzvp6dJjBP9cXL5VcJ5VR8hDWDIhR4RmfAAu41hxHo2BHELEIGI', NULL, '2019-10-13 21:56:39'),
+(18, 'Camilo Cavieres', 'CamiloC@gmail.com', NULL, '$2y$10$U9YUF0dsIGH.mtoDiuaOJuho1QeRg/kZCpK9GjiL7h0J24GbsqH/S', 'Masculino', 1, 0, NULL, '2019-07-16 08:27:48', '2019-07-16 08:27:48'),
+(19, 'Gonzalo Ignacio Paredes Valenzuela', 'GonzaloParedes@gmail.com', NULL, '$2y$10$cqV6yLeBy8YZUIj6i13mFuye2MWyDwAHwa1KnGHFiaATaWVy.EGsu', 'Masculino', 1, 0, NULL, '2019-07-19 23:08:31', '2019-07-19 23:08:31'),
+(20, 'Marco Mora', 'MarcoM@gmail.com', NULL, '$2y$10$TqMJh2XVrNb/EkpZMpepaO0lI2BaTmNUTsx0eSRKBVaVfyBsnfT0.', 'Masculino', 2, 0, NULL, NULL, NULL),
+(21, 'Ricardo Barrientos', 'RicardoB@gmail.com', NULL, '$2y$10$zlT4j9NW096tlHmalTxpCePrS2E5C3MJ3J478RVKUqPVDZxIzBBpe', 'Masculino', 2, 0, NULL, NULL, '2019-10-10 06:57:39'),
+(22, 'Felipe Nicolas Tapia Nuñez', 'FelipeTapia@gmail.com', NULL, '$2y$10$5GLPqQqZX7NP8TpC02U1Seb1gv.oBvlWyz1ZYYiGpz8ZWlG8UwSPe', 'Masculino', 1, 0, NULL, '2019-07-20 03:11:25', '2019-07-20 03:11:25'),
+(23, 'Rosa Karina Gonzalez Gutierrez', 'RosaGonzalez@gmail.com', NULL, '$2y$10$A706x5VrUJACCLTtvYc6FuVKhOuYzGTnRPcdVCRELNF2BzBgcvp1S', 'Femenino', 1, 0, NULL, '2019-07-21 03:32:43', '2019-07-21 03:59:35'),
+(24, 'Jorge Gabriel Ramirez Perez', 'JorgeRamirez@gmail.com', NULL, '$2y$10$3gm/ql.92ksvlce2epChJuNL8LzkWreslcv9E70uiY5FRFSQXQfpu', 'Masculino', 1, 0, NULL, '2019-07-26 04:26:50', '2019-07-26 04:26:50'),
+(31, 'Daniel Alarcon Chambles', 'DanielA@gmail.com', NULL, '$2y$10$EIN4vEKP8bMJiBsp0SkF/umiq8/f82YV4jyRAiVScO42S61ERKuu2', 'Masculino', 1, 0, NULL, '2019-07-26 11:49:01', '2019-07-26 12:39:55'),
+(32, 'Jhon Michael Faundez Miño', 'JhonF@gmail.com', NULL, '$2y$10$ahzlv/f8/FnFZvQrdE1jqujo0R8uSY/05ZSJiieOoL.lvzAW4ecPq', 'Masculino', 1, 0, NULL, '2019-07-26 14:38:52', '2019-07-26 15:09:51'),
+(33, 'Vicente Valdes', 'VicenteV@gmail.com', NULL, '$2y$10$0Xdv3Oc5h6fm9QA6BoUov.hy4mjlrH99VmFf22jBEiiTAsUjq4IHS', 'Masculino', 1, 0, NULL, '2019-07-26 15:26:23', '2019-07-26 15:26:23'),
+(34, 'Felipe Garrido Perez', 'FelipeGarrido@gmail.com', NULL, '$2y$10$PGtMfMTMeu3UBOkiEddSXOUfcrmr.fdhpgjfi8DUWiGdUzCEsLQ3K', 'Masculino', 1, 0, NULL, '2019-07-26 16:02:24', '2019-07-26 16:02:24'),
+(35, 'Nelson Guerra', 'NelsonG@gmail.com', NULL, '$2y$10$vCoKsvhC3DmnMSK71AMOjOdjmmQOwuChYL3seANSUYjq5Tg3VZ3Ti', 'Masculino', 1, 0, NULL, '2019-07-26 16:11:18', '2019-07-26 16:11:18'),
+(36, 'Cesar Poblete', 'CesarP@gmail.com', NULL, '$2y$10$Q8Fcs.1uOa8YhOrPqCFggOFFYIyCIVsYS7Vb98BsLDP/4Sec9iFh.', 'Masculino', 1, 0, NULL, '2019-07-26 16:13:34', '2019-07-26 16:13:34'),
+(37, 'Arturo Fernandez', 'ArturoF@gmail.com', NULL, '$2y$10$9Z2QuIyLfuWERzcbwqbrteOz0wP89iQjzPKngWZCfAlMiLEHeOIiy', 'Masculino', 1, 0, NULL, '2019-07-26 16:16:47', '2019-07-26 16:16:47'),
+(38, 'Pedro Lopez', 'PedroL@gmail.com', NULL, '$2y$10$ULR0DSxxqclNwxt/QWPPMutmrHszkr2b.EbJ6YFWkv1c4S/HZnjI.', 'Masculino', 1, 0, NULL, '2019-07-26 16:22:33', '2019-07-26 16:22:33'),
+(39, 'Hugo Rodriguez', 'HugoR@gmail.com', NULL, '$2y$10$KVy3K0V88xuFo2z9xWFOkudUbAbr3N/gQnxSVUnRMZzTEvMJN9O8.', 'Masculino', 1, 0, NULL, '2019-07-26 16:24:52', '2019-07-26 16:24:52'),
+(40, 'Felipe Javier Barrios Lopez', 'FelipeBarrios@gmail.com', NULL, '$2y$10$5xHZ3RncZ2QPluTsCXjCMug0xq4jF2r2q2iGcYPH4W7OZZhtnXw3W', 'Masculino', 1, 0, NULL, '2019-07-26 19:19:20', '2019-07-26 19:19:20'),
+(41, 'Francisco De la Fuente', 'FranciscoDF@gmail.com', NULL, '$2y$10$BTQil1FC8u4kt3f/YmrMr.WdUv4BFo4dx0AyQG5zpKnzcx0wgdoKG', 'Masculino', 1, 0, NULL, '2019-07-27 07:06:43', '2019-07-27 07:06:43'),
+(42, 'Rodrigo Ramirez', 'RodrigoR@gmail.com', NULL, '$2y$10$d9HZLRSpc/etYaMewAClnOKRZdTIq0o49jYG8Vkz9PMk0dA2nQ06y', 'Masculino', 1, 0, NULL, '2019-07-27 22:54:21', '2019-07-27 22:54:21'),
+(43, 'Barbara Castro', 'bcastro@ucm.cl', NULL, '$2y$10$bQ2ai9f57L0x.btzIBgJ9e7xM48mJCfY/TDGULmcO97Cpfyqv39lG', 'Femenino', 4, 0, NULL, NULL, NULL),
+(44, 'Walter Gonzalo Casanova Hurtado', 'WaterC@gmail.com', NULL, '$2y$10$zOb/mHTfVnhSmiyQN8KUS.ovDQauYKWCIocyh9wZ0yMccJg54SEG6', 'Masculino', 1, 0, NULL, '2019-07-31 18:14:50', '2019-07-31 18:14:50'),
+(45, 'Fernando Ignacio Olmos Duran', 'FernandoOlmos@gmail.com', NULL, '$2y$10$Nvu1LcLeFHrDlIYG0Yy/9eqqPPKKNQ/ChxLFk4RJMgSgoJRZxIhAK', 'Masculino', 1, 0, NULL, '2019-08-02 11:05:35', '2019-08-02 11:05:35'),
+(46, 'Sebastian Garrido', 'SebastianG@gmail.com', NULL, '$2y$10$GTku6pBK38kipS/vAjiy.uheUMFQlB0jjKfGy/YPpmK24EHB.MKFa', 'Masculino', 1, 0, NULL, '2019-08-03 00:16:28', '2019-08-03 00:16:28'),
+(47, 'Miguel Ignacio Cancino Nuñez', 'MiguelCancino@gmail.com', NULL, '$2y$10$wJNMKinj8M3f9FVVc8UOxeDea2G9Uybl9cVJhcwNM4.yFogSCmsTm', 'Masculino', 1, 0, NULL, '2019-08-04 03:28:44', '2019-08-04 03:28:44'),
+(48, 'Karina Patiño Albornoz', 'KarinaPA@gmail.com', NULL, '$2y$10$pW9lFbbkUs1pJcCN6jw1/OHlt7.avKI1XJmgbbECLIDi/sCC.wrVa', 'Femenino', 1, 0, NULL, '2019-08-05 06:12:09', '2019-08-05 06:12:09'),
+(49, 'Jose Miguel Valdes Salgado', 'JoseValdes@gmail.com', NULL, '$2y$10$FPPhdYnm/7UwDghPIl1K8OCL0EMAXUMDGQGCmpOu8YXfXNhAYTZJm', 'Masculino', 1, 0, NULL, '2019-08-05 17:22:04', '2019-08-05 17:22:04'),
+(50, 'Felipe Antonio Matamala Lopez', 'FelipeM@gmail.com', NULL, '$2y$10$I2cOwjlKUc7gWNbChsIm8OyFRAU5uinui43DptVoDsAq2dN2IAH.m', 'Masculino', 1, 0, NULL, '2019-08-05 23:31:38', '2019-08-06 00:38:02'),
+(51, 'Hector Carrasco Faundez', 'HectorCarrasco@gmail.com', NULL, '$2y$10$8jw8pMMBbi/wh2icBgjoeOH3/M9KbMQvJ96dpdCffyLdjdVgPNpTq', 'Masculino', 1, 0, NULL, '2019-08-06 05:32:33', '2019-08-06 05:32:33'),
+(52, 'Boris Salgado Lopez', 'BorisSalgado@gmail.com', NULL, '$2y$10$dFfBS7LRJCjuFVHANjiTNuzgn9KnD6hEiUQDQNhL1AkkUnk/VpTe2', 'Masculino', 1, 0, NULL, '2019-08-06 06:41:57', '2019-08-06 06:41:57'),
+(53, 'Diego Gaete Bernales', 'DiegoGaete@gmail.com', NULL, '$2y$10$gCJpSgtKbaMRdFOQj/qBzOjaNopx5RykJObeGeHFSCxGc7VJBV9DS', 'Masculino', 1, 0, NULL, '2019-08-06 06:59:24', '2019-08-06 06:59:24'),
+(54, 'Humberto Muñoz Norambuena', 'HumbertoM@gmail.com', NULL, '$2y$10$dbZHlhrVE8/IijIMVZHxuObaV8lkoM5jQyb4Iw7IcnTRFIGpOipne', 'Masculino', 1, 0, NULL, '2019-08-06 07:42:02', '2019-08-06 07:42:02'),
+(55, 'Carlos Hernandez Gonzalez', 'CarlosHernandez@gmail.com', NULL, '$2y$10$rjMRjqebv8CIgsRMiq.H6eu8cpsnxIx1Xn4bDlIHvnM.7c/2IdE4e', 'Masculino', 1, 0, NULL, '2019-08-06 14:13:33', '2019-08-06 14:13:33'),
+(56, 'Ignacio Lillo', 'IgnacioL@gmail.com', NULL, '$2y$10$nYTu46h4pWjmGQsPeNA72ui4wqKqcq3MocGKfNfILijiWaitZK/iq', 'Masculino', 1, 0, NULL, '2019-08-24 07:20:50', '2019-08-24 07:20:50'),
+(57, 'Jose Lopez', 'Jl@gmail.com', NULL, '$2y$10$v960GkUnudmpxBGFonaOE.j9Mw5pluZYCm7755mid0WiLy3O7dbO.', 'Masculino', 1, 0, NULL, '2019-08-27 20:39:10', '2019-08-27 20:39:10'),
+(58, 'Boris Mora Garrido', 'BorisMora@gmail.com', NULL, '$2y$10$wk.L5RhwYI0okK2xMd2OAeQUPsz1.jw9GkysqR6cILTT4Mvqq869S', 'Masculino', 1, 0, NULL, '2019-09-01 06:03:18', '2019-09-01 06:03:18'),
+(59, 'Alfonso Bilocopetiuc Parra', 'AlfonsoB@gmail.com', NULL, '$2y$10$4K13XLIIl//D1SYcFYDNF.lr0yo1gxalUbBOiFvvhuE1zNpWUiHUq', 'Masculino', 1, 0, NULL, '2019-09-01 20:12:56', '2019-09-01 20:12:56'),
+(60, 'Hugo Fuentes ', 'HugoF@gmail.com', NULL, '$2y$10$kFOp7oDiJm3w7PvdIY3SIOStnEXM8LRAIj0zZ.rDAdwlZjGV5VOUi', 'Masculino', 1, 0, NULL, '2019-10-03 16:02:49', '2019-10-03 16:02:49'),
+(61, 'Hugo Gutierrez', 'HugoG@gmail.com', NULL, '$2y$10$m5a0LN31UgHZj/JAD5s6hOOHBJNq.vdUg2pAAXKV.pxTQ0OMQogQS', 'Masculino', 1, 0, NULL, '2019-10-03 16:03:53', '2019-10-03 16:03:53'),
+(63, 'Adolfo Fuentes', 'AdolfoF@gmail.com', NULL, '$2y$10$Ss8/KBqPGEMnblkBAaKcq.YWzi80H3oeZcJzf8a3gzIbk8zK5Iqm2', 'Masculino', 1, 0, NULL, '2019-10-03 23:32:36', '2019-10-03 23:32:36'),
+(96, 'Mary Carmen Jarur', 'Mjarur@gmail.com', NULL, '$2y$10$r35uyScKmDskm1R1uJy3POp.DDhiCo7tXuSbX1aYutoVBbDk/D7Du', 'Femenino', 2, 0, NULL, NULL, NULL),
+(97, 'Juan Manuel Cabezas Contardo', 'JuanManuelC@gmail.com', NULL, '$2y$10$3JJSYYerAWZN.1z4DqnA2OjZDFTDvo4DibO6Pe5WEhyHN8CBQPT7u', 'Masculino', 1, 0, NULL, '2019-10-11 15:38:34', '2019-10-11 15:38:34'),
+(98, 'Bastian Escalona', 'BastianEscalona@gmail.com', NULL, '$2y$10$2cBXcdLx16qfEwkGEdwHfe3rzAgW/F6OjXXe4ASq.LKYNuhnNzjTa', 'Masculino', 1, 0, NULL, '2019-10-11 15:40:07', '2019-10-11 15:40:07'),
+(99, 'Javier Torrente', 'JavierTorrente@gmail.com', NULL, '$2y$10$Hs5AMm8JiYGJN0HC532s5OWMBx9OTGR/2B2tjTnUf6tcst77cGB46', 'Masculino', 2, 0, NULL, NULL, NULL),
+(103, 'Paula  Gabriela Torres', 'PaulaT@gmail.com', NULL, '$2y$10$5hcbQjDbSeqxQrmZb3lnTOO8ijhEnl0G1DpouwyrUTYcfugRb9lJu', 'Femenino', 1, 0, NULL, '2019-10-13 23:50:04', '2019-10-13 23:50:04'),
+(104, 'Carlos Perez Valenzuela', 'CarlosPV@gmail.com', NULL, '$2y$10$LMzy3UkuUsbhButV7BvApuJqVJAbBlWwPiLILrzhPg41/ce4IgVWy', 'Masculino', 2, 0, NULL, NULL, '2019-10-13 23:56:37');
 
 --
 -- Índices para tablas volcadas
@@ -463,6 +510,12 @@ ALTER TABLE `proyectos`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indices de la tabla `recopilacion_inf_titulados`
+--
+ALTER TABLE `recopilacion_inf_titulados`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indices de la tabla `tesis`
 --
 ALTER TABLE `tesis`
@@ -521,7 +574,7 @@ ALTER TABLE `proyectos`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=97;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
 
 --
 -- Restricciones para tablas volcadas
@@ -538,6 +591,12 @@ ALTER TABLE `comision`
 --
 ALTER TABLE `grado_academico_profesor_planta`
   ADD CONSTRAINT `grado_academico_profesor_planta_ibfk_1` FOREIGN KEY (`id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `recopilacion_inf_titulados`
+--
+ALTER TABLE `recopilacion_inf_titulados`
+  ADD CONSTRAINT `recopilacion_inf_titulados_ibfk_1` FOREIGN KEY (`id`) REFERENCES `tesis` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `tesis`

@@ -10,7 +10,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-12"> <!--Con 12 se ocupa todo el ancho de la pantalla-->
       <div class="card">
         <div class="card-header">{{ __('Tesis del alumno') }}</div>
           <div class="card-body">
@@ -47,11 +47,13 @@
            @if($tesis->nota_pendiente!=null and $tesis->nota_prorroga==null and $tesis->estado4==1 and $tesis->estado5==null)
            <td>{{$tesis->nota_pendiente}}</td>
            <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nota Prorroga</a></td>
+            <td><a href="{{url('/vista_subir_archivo', $tesis->id)}}">Subir archivo constancia</a><td>
            <td></td>
          @endif
            @if($tesis->nota_pendiente!=null and $tesis->nota_prorroga==null and $tesis->estado4!=1 and $tesis->estado5==null)
            <td>En espera</td>
            <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nota Prorroga</a></td>
+            <td><a href="{{url('/vista_subir_archivo', $tesis->id)}}">Subir archivo constancia</a><td>
            <td></td>
          @endif
           @if($tesis->nota_pendiente==null and $tesis->estado1==4 and $tesis->nota_prorroga==null)
@@ -71,12 +73,14 @@
          <td>{{$tesis->nota_pendiente}}</td>
           <td>En espera</td>
           <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nueva nota de Prorroga</a></td>
+          <td><a href="{{url('/vista_subir_archivo', $tesis->id)}}">Subir archivo constancia</a><td>
           <td></td>
          @endif
           @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado4==1 and $tesis->estado5==1)
          <td>{{$tesis->nota_pendiente}}</td>
           <td>{{$tesis->nota_prorroga}}</td>
           <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nueva nota de Prorroga</a></td>
+          <td><a href="{{url('/vista_subir_archivo', $tesis->id)}}">Subir archivo constancia</a><td>
           <td></td>
          @endif
       <td>

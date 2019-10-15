@@ -143,6 +143,8 @@ Route::put('/nota_prorroga_ingresada/{tesis}','TesisController@save_nota_prorrog
 //Acta examen
 Route::get('/index_al_sec','TesisController@index_al_sec')->name('tesis.index_al_sec');
 Route::get('/acta_examen/{tesis}','TesisController@acta_examen')->name('tesis.acta_examen');
+Route::get('/index_titulados_sec','TesisController@index_titulados_sec')->name('tesis.index_titulados_sec');
+Route::get('/recopilacion_inf/{tesis}','TesisController@recopilacion_inf')->name('tesis.recopilacion_inf');
 //RUTAS PARA FILTROS POR FECHA:
 Route::get('/filtro_nota_pendiente_prorroga','TesisController@llamar_filtro_pendiente_prorroga_vencida')->name('tesis.filtro_nota_pendiente_prorroga');
 Route::get('/filtro_nota_pendiente', 'TesisController@llamar_filtro_pendiente_vencida')->name('tesis.filtro_pendiente_vencida');
@@ -205,8 +207,10 @@ Route::put('/update_nota_tesis/{tesis}','TesisController@update_nota_tesis')->na
 Route::get('/fecha_presentacion/{tesis}', 'TesisController@fecha_presentacion')->name('tesis.fecha_presentacion');
 Route::put('/update_fecha_presentacion/{tesis}','TesisController@update_fecha_presentacion')->name('tesis.update_fecha_presentacion');
 
+//Subir acta examen
 Route::get('/vista_subir_acta/{tesis}','TesisController@vista_subir_acta')->name('tesis.vista_subir_acta');
 Route::put('/update_acta_ex/{tesis}','TesisController@update_acta_ex')->name('tesis.update_acta_ex');
+//
 
 Route::get('/constancia_ex_ver/{tesis}', 'TesisController@verPDF')->name('verPDF');
 Route::get('/acta_ex_ver/{tesis}', 'TesisController@verPDF_acta')->name('verPDF_acta');
@@ -223,6 +227,10 @@ Route::get('/tesis_filtro_fecha_profesor', 'TesisController@filtro_tesis_fecha')
 
 //Route::get('/createword',['as'=> 'createword' , 'uses' => 'WordTestController@createworddocx']);
 //Route::post('msword', 'TesisController@msword');
-
+//Rutas para crear word con tesis en las que participa el profesor.
 Route::get('create','DocumentController@create');
 Route::post('store','DocumentController@store');
+
+//Rutas recopilacion_informacion
+Route::get('/recopilacion_informacion','Recopilacion_infController@create')->name('recopilacion.recopilacion_informacion_titulados');
+Route::post('store_recopilacion_informacion','Recopilacion_infController@store')->name('recopilacion.recopilacion_store');

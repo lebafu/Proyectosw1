@@ -37,7 +37,9 @@ class Tesis extends Model
     'acta_ex',
     'fecha_presentacion_tesis',
     'publicar',
-    'abstract'
+    'abstract',
+    'estado4',
+    'estado5'
     ];
 
      public function scopeNombre_completo($query, $nombre_completo)

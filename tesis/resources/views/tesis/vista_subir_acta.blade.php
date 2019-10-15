@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Subir archivo constancia examen de titulo') }}</div>
+                <div class="card-header">{{ __('Subir archivo acta examen de titulo') }}</div>
 
                 <div class="card-body">
                     <form action="{{route('tesis.update_acta_ex', $tes->id)}}" method="POST" 

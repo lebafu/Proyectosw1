@@ -51,7 +51,7 @@
             <td>Operacion no disponible</td>
             <td>Operacion no disponible</td>
             @else
-              <td><a class="btn btn-primary" href="{{url('/acta_examen/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span>Acta</a></td>
+              <td><a class="btn btn-primary" href="{{url('/acta_examen/'.$tesis->id)}}" id="#descargaPDF" ><span class="fa fa-print"> </span>Acta</a></td>
            @endif
                @if($tesis->acta_ex==null and $tesis->fecha_inscripcion!=null)
               <td><a class="btn btn-primary" href="{{url('/vista_subir_acta/'.$tesis->id)}}">Subir acta</a></td>

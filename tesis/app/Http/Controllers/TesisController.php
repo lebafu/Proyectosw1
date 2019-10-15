@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use App\User;
 use App\Tesis;
 use App\Comision;
+use App\Recopilacion_inf;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -1260,6 +1261,8 @@ class TesisController extends Controller
          return view('directorhome');
     }
 
+
+
     //Vista que permite al alumno subir el archivo, en caso de que tenga la tesis inscrita estado1=4, estado2=1.
     public function vista_subir_archivo()
     {
@@ -1275,7 +1278,7 @@ class TesisController extends Controller
                     return view('tesis.vista_subir_archivo',compact('tes'));
             }
             else{
-                if($tes->fecha_presentacion_tesis >= now()){
+                if($tes->fecha_presentacion_tesis >= now()){ //Condicion es necesariaaaa??/
                 return view('tesis.vista_subir_archivo',compact('tes'));
             }else{
                 return view('tesis.archivosubido');
@@ -1302,7 +1305,23 @@ class TesisController extends Controller
         //dd($tes);
         //($request->file('constancia_ex')->store('public'));
                    //almacenar el archivo pdf/doc subido al sistem
-           return view('alumnohome');
+        $recopilacion=Recopilacion_inf::find($id);
+        //dd($recopilacion);
+        if($recopilacion==null){
+            $al=DB::table('tesis')->join('users','tesis.id','=','users.id')->where('tesis.id','=',$id)->get();
+            //dd($alumno);
+            if($al->isEmpty()){ //Si la consulta anterior es vacia, entonces significa que el alumno que es el segundo alumno relacionado con la tesis, el que subio el archivo y desea completar el documento de recopilacion de inf.
+            $al=DB::table('tesis')->join('users','tesis.nombre_completo2','=','users.nombre_completo')->get();
+            }
+            $fecha_hoy=Carbon::parse(now());
+            //$dia_fecha=$fecha_hoy->day; //obtengo dia
+            //$mes_fecha=$fecha_hoy->month; //obtengo mes
+            //$year_actual=$fecha_hoy->year; //obtengo año
+            $fecha=$fecha_hoy->subYear();
+           return view('recopilacion.recopilacion_informacion_titulados',compact('al','fecha'));
+        }else{
+            return view('alumnohome');
+        }
         }else{
             return view('tesis.archivonosepudosubir');
         }
@@ -1524,9 +1543,9 @@ class TesisController extends Controller
         $nombre_alumno1=($tes->nombre_completo);//stropper para colocar en mayuscula el nombre del o los alumnos de la tesis o memoria.
         $nombre_alumno2=($tes->nombre_completo2);
         //para obtener campos necesario de la tupla de la base de datos, el dia, mes, año y la hora, usando carbon
-        //paquete de laravel para trabajar con fechas.
-        $tes->nombre_completo=strtoupper($tes->nombre_completo);
-        $tes->nombre_completo2=strtoupper($tes->nombre_completo2);
+        //paquete de laravel para trabajar con fechas, con mb_stroupper pasa la ñ y a mayuscula.
+        $tes->nombre_completo=mb_strtoupper($tes->nombre_completo);
+        $tes->nombre_completo2=mb_strtoupper($tes->nombre_completo2);
         $fecha=Carbon::parse($tes->fecha_presentacion_tesis);
         $nombre_dia=$day=date('w', strtotime($fecha)); //w es funcion de php para obtener nombre del dia 0 es domingo y sucesivamente hasta que es el 6 es sabado.
         $dia_fecha=$fecha->day; //obtengo dia
@@ -1630,6 +1649,29 @@ class TesisController extends Controller
         }
       }
     }
+
+
+     public function index_titulados_sec(Request $request)
+   {
+
+    $id=Auth::id();
+    $user=User::find($id);
+    if(!Auth::id() or $user->tipo_usuario!=4){  //Para garantizar que no entre usuario sin loguearse//
+        return view('tesis.sinpermiso');
+        }else{ //solo secretaria //
+            $tesistas=DB::table('tesis')->where('estado1','=',4)->where('estado2','=',1)->whereNotNull('nota_tesis')->paginate(7);
+            return view('tesis.index_titulados_sec',compact('tesistas'));
+            //dd($tesistas);
+        }
+    }
+
+    public function recopilacion_inf($id)
+   {
+    $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id',$id)->get();
+    //dd($tesis);
+   
+   return view('tesis.recopilacion_inf',compact('tesis'));
+   }
 
    //Una vez que el alumno haya presentado su tesis la secretaria podra insertar la nota de tesis en el sistema
    public function ingresar_nota_tesis($id)
@@ -1892,12 +1934,14 @@ class TesisController extends Controller
       {
         $id=Auth::id();
         $user=User::findorfail($id);
+        //dd($user);
         if($id==null)
         {
             return('tesis.sinpermiso');
         }
+
         if($user->tipo_usuario==2){
-            $tesistas=DB::table('tesis')->whereNotNull('nota_pendiente')->whereNull('nota_prorroga')->whereNull('estado4')->where('profesor_guia','=',$user->name)->paginate(7);
+             $tesistas=DB::table('tesis')->where('profesor_guia','=',$user->name)->orderby('fecha_peticion','desc')->whereNull('estado4')->whereNotnull('nota_pendiente')->paginate(7);
         return view('tesis.index_solicitud_nota_pendiente',compact('tesistas','user'));  
         }
 
