@@ -34,6 +34,7 @@
 		<h4 style="margin-top:40px">Facebook:{{$tes->facebook}}</h4>
 		<h4 style="margin-top:40px">Direccion Actual:{{$tes->direccion_actual}}</h4>
 		<h4 style="margin-top:40px">Año Ingreso:{{$tes->ano_ingreso}}</h4>
+		<h4>**Se considera la fecha de ingreso a partir de Marzo del año ingresado.**<h4>
 		<h4 style="margin-top:40px">Año Egreso:{{$tes->ano_egreso}}</h4>
 		<h4 style="margin-top:40px">Fecha Examen Titulo:{{$tes->fecha_presentacion_tesis}}</h4>
 		<h4 style="margin-top:40px">Titulo Tesis o Memoria:{{$tes->tipo}}</h4>
