@@ -131,7 +131,7 @@
                             <label for="rut2" class="col-md-4 col-form-label text-md-right">{{ __('Rut') }}</label>
 
                             <div class="col-md-6">
-                                <input id="rut2" type="text" class="form-control" name="rut2" value="{{$alumno->rut2}}}" required autocomplete="rut" autofocus disabled>
+                                <input id="rut2" type="text" class="form-control" name="rut2" value="{{$alumno->rut2}}}" required autocomplete="rut2" autofocus disabled>
 
                             </div>
                         </div>
@@ -176,9 +176,9 @@
                         </div>
 
                         <div class="form-group row">
-                            <label for="direccion" class="col-md-4 col-form-label text-md-right">{{ __('Direccion Actual') }}</label>
+                            <label for="direccion2" class="col-md-4 col-form-label text-md-right">{{ __('Direccion Actual') }}</label>
                             <div class="col-md-6">
-                               <input id="direccion" type="text" class="form-control" name="direccion" required="required">
+                               <input id="direccion2" type="text" class="form-control" name="direccion2" required="required">
                             </div>
                         </div>
 
@@ -190,9 +190,9 @@
                         </div>
 
                        <div class="form-group row">
-                            <label for="ano_egreso" class="col-md-4 col-form-label text-md-right">{{ __('Año egreso') }}</label>
+                            <label for="ano_egreso2" class="col-md-4 col-form-label text-md-right">{{ __('Año egreso') }}</label>
                             <div class="col-md-6">
-                                <input id="ano_egreso" type="date" class="form-control" value={{$fecha}} name="ano_egreso" required>
+                                <input id="ano_egreso2" type="date" class="form-control" value={{$fecha}} name="ano_egreso2" required>
                             </div>
                         </div>
 

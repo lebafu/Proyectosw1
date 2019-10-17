@@ -25,7 +25,7 @@
         <tr>
          
           <th>ID</th>
-          <th>Nombre Estudiante</th>
+          <th>Nombre Estudiantes</th>
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
           <th>Constancia ex</th>
@@ -37,7 +37,7 @@
         @foreach ($tesistas as $tesis)
         <tr>
           <td>{{$tesis->id}}</td>
-          <td>{{$tesis->nombre_completo}}</td>
+          <td>{{$tesis->nombre_completo}} ----{{$tesis->nombre_completo2}}</td>
           <td>{{$tesis->profesor_guia}}</td>
            <td>{{$tesis->tipo}}</td>
             @if($tesis->constancia_ex!=null)

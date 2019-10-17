@@ -1273,7 +1273,7 @@ class TesisController extends Controller
         elseif($id!=null)
         {
             $tes=Tesis::find($id);
-            if($tes->estado1==4 and $tes->estado2==1 and $tes->constancia_ex==null){
+            if($tes->estado1==4 and $tes->estado2==1 /*and $tes->constancia_ex==null*/){
 
                     return view('tesis.vista_subir_archivo',compact('tes'));
             }
@@ -1323,7 +1323,7 @@ class TesisController extends Controller
             return view('alumnohome');
         }
         }else{
-            return view('tesis.archivonosepudosubir');
+            return view('tesis.archivonosepudosubir'); 
         }
 
         
@@ -1656,22 +1656,40 @@ class TesisController extends Controller
 
     $id=Auth::id();
     $user=User::find($id);
-    if(!Auth::id() or $user->tipo_usuario!=4){  //Para garantizar que no entre usuario sin loguearse//
+    $tesista=DB::table('tesis')->where('estado1','=',4)->where('estado2','=',1)->whereNotNull('nota_tesis')->select('tesis.id','tesis.nombre_completo','tesis.nombre_completo2','tesis.profesor_guia')->paginate(7);
+    //dd($tesista2);
+     if(!Auth::id() or $user->tipo_usuario!=4){  //Para garantizar que no entre usuario sin loguearse//
         return view('tesis.sinpermiso');
         }else{ //solo secretaria //
-            $tesistas=DB::table('tesis')->where('estado1','=',4)->where('estado2','=',1)->whereNotNull('nota_tesis')->paginate(7);
-            return view('tesis.index_titulados_sec',compact('tesistas'));
+            //$tesistas=DB::table('users')->join('tesis','users.id','=','tesis.id')->where('estado1','=',4)->where('estado2','=',1)->whereNotNull('nota_tesis')->paginate(7);
             //dd($tesistas);
-        }
+        return view('tesis.index_titulados_sec',compact('tesista'));
+    }
+    
     }
 
     public function recopilacion_inf($id)
    {
-    $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id',$id)->get();
+
+    $user=User::find($id);
+    $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id',$id)->where('tesis.id','=',$user->id)->get();
+    $tesista2=DB::table('users')->join('tesis','users.name','=','tesis.nombre_completo2')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->where('users.id','=',$user->id)->get();
     //dd($tesis);
    
-   return view('tesis.recopilacion_inf',compact('tesis'));
+   return view('tesis.recopilacion_inf',compact('tesis','tesista2'));
    }
+
+     public function recopilacion_inf2($nombre_completo2)
+   {
+
+    //$user=User::find($id);
+    $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.nombre_completo2','=','users.name')->where('users.name',$nombre_completo2)->where('tesis.nombre_completo2','=',$nombre_completo2)->get();
+    $tesista2=DB::table('users')->join('tesis','users.name','=','tesis.nombre_completo2')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->where('users.name','=',$nombre_completo2)->get();
+    //dd($tesis);
+   
+   return view('tesis.recopilacion_inf',compact('tesis','tesista2'));
+   }
+
 
    //Una vez que el alumno haya presentado su tesis la secretaria podra insertar la nota de tesis en el sistema
    public function ingresar_nota_tesis($id)

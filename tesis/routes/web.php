@@ -145,6 +145,7 @@ Route::get('/index_al_sec','TesisController@index_al_sec')->name('tesis.index_al
 Route::get('/acta_examen/{tesis}','TesisController@acta_examen')->name('tesis.acta_examen');
 Route::get('/index_titulados_sec','TesisController@index_titulados_sec')->name('tesis.index_titulados_sec');
 Route::get('/recopilacion_inf/{tesis}','TesisController@recopilacion_inf')->name('tesis.recopilacion_inf');
+Route::get('/recopilacion_inf2/{tesis}','TesisController@recopilacion_inf2')->name('tesis.recopilacion_inf2');
 //RUTAS PARA FILTROS POR FECHA:
 Route::get('/filtro_nota_pendiente_prorroga','TesisController@llamar_filtro_pendiente_prorroga_vencida')->name('tesis.filtro_nota_pendiente_prorroga');
 Route::get('/filtro_nota_pendiente', 'TesisController@llamar_filtro_pendiente_vencida')->name('tesis.filtro_pendiente_vencida');

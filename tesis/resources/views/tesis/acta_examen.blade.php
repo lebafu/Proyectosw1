@@ -73,18 +73,18 @@
 		</div>	
 
  		@if($tes->nombre_completo2!=null)
-		<div class="row">
+		<!--<div class="row">
 			<div class="col-8">
 				<h4 style="margin-bottom: 20px; margin-top: 10px">{{$tes->nombre_completo2}} </h4>
 			</div>
 			<div class="col-4">
 				<h4 style="margin-bottom: 20px; margin-top: 10px"> {{$tes->rut2}}<h4>
 			</div>
-		</div>	
+		</div>	-->
 	    @endif
 		   <!--Se usa la clase creada en la linea 9 para generar el cuadrado de texto donde se pondra la nota-->
 	<div class="row">
-		<h4>Realizada la exposición se concluye que la nota final de la exposicion es:</h4>
+		<h4>Realizada la exposición se concluye que la nota final de la exposición es:</h4>
 		<div class="cuadrado"></div>
 	</div>
 

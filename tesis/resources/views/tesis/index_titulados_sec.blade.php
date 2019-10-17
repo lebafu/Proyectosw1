@@ -21,16 +21,24 @@
         <tr>
          
           <th>ID</th>
-          <th>Nombre Estudiante</th>
+          <th>Estudiante1</th>
+          <th>Estudiante2</th>
           <th>Profesor Guia</th>
+          <th>Informacion Estudiante1</th>
+          <th>Informacion Estudiante2</th>
         </tr>
-        @foreach ($tesistas as $tesis)
+      @foreach($tesista as $tesis)
         <tr>
           <td>{{$tesis->id}}</td>
           <td>{{$tesis->nombre_completo}}</td>
+          <td>{{$tesis->nombre_completo2}}</td>
           <td>{{$tesis->profesor_guia}}</td>
-          <td><a class="btn btn-primary" href="{{url('/recopilacion_inf/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span>Recopilacion Informacion</a></td>
-        @endforeach
+
+          <td><a class="btn btn-primary" href="{{url('/recopilacion_inf/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a></td>
+          @if($tesis->nombre_completo2!=null)
+           <td><a class="btn btn-primary" href="{{url('/recopilacion_inf2/'.$tesis->nombre_completo2)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a></td>
+          @endif
+      @endforeach
      </table>
      </div>
      </div>
@@ -40,9 +48,7 @@
      </div>
 </div>
 
-
-
-{!! $tesistas->render() !!}
+{!! $tesista->render() !!}
 @endsection
 
   

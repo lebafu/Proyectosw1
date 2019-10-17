@@ -46,8 +46,10 @@ class Recopilacion_infController extends Controller
   		if($id==null){
             return view('tesis.sinpermiso');
         }
-
-
+        $tesis=Tesis::find($id);
+        //dd($request);
+                if($tesis->nombre_completo2==null)
+            {
        
             DB::table('recopilacion_inf_titulados')->insert([
                 'id' => $id,
@@ -59,7 +61,34 @@ class Recopilacion_infController extends Controller
                 'direccion_actual' => $request->direccion,
                 'ano_egreso' => $request->ano_egreso,
                	'subido_constancia' => 1,
+
             ]);
+
+        }
+
+              if($tesis->nombre_completo2!=null)
+            {
+
+                DB::table('recopilacion_inf_titulados')->insert([
+                'id' => $id,
+                'fecha_nac' => $request->fecha_nac,
+                'titulo' => $request->titulo,
+                'telefono_celular' =>$request->celular,
+                'telefono_fijo' =>$request->telefono,
+                'facebook' => $request->facebook,
+                'direccion_actual' => $request->direccion,
+                'ano_egreso' => $request->ano_egreso,
+                'subido_constancia' => 1,
+                'fecha_nac2' => $request->fecha_nac2,
+                'titulo2' => $request->titulo2,
+                'telefono_celular2' =>$request->celular2,
+                'telefono_fijo2' =>$request->telefono2,
+                'facebook2' => $request->facebook2,
+                'direccion_actual2' => $request->direccion2,
+                'ano_egreso2' => $request->ano_egreso2,
+                ]);
+            }
+
 
        return view('alumnohome');
     }

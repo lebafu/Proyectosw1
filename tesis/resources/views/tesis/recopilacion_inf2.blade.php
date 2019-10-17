@@ -22,16 +22,16 @@
 		<h4 align="justify" style="margin-bottom: 40px; margin-top: 30px">El presente formulario,tiene por objetivo recopilar información para mantener contacto con sus ex-alumnos y orientar así las politicas y beneficios de acuerdo a sus necesidades. </h4>
 
 		<h4 style="margin-top:40px">Nombre: {{$tes->name}} </h4>
-		<h4 style="margin-top:40px">RUT: {{$tes->rut2}} </h4>
-		<h4 style="margin-top:40px">Titulo:{{$tes->titulo2}}</h4>
+		<h4 style="margin-top:40px">RUT: {{$tes->rut}} </h4>
+		<h4 style="margin-top:40px">Titulo:{{$tes->titulo}}</h4>
 		<h4 style="margin-top:40px">Email Personal:{{$tes->email}}</h4>
-		<h4 style="margin-top:40px">N°Telefono Celular: {{$tes->telefono_celular2}}</h4>
-		<h4 style="margin-top:40px">N°Telefono Fijo: {{$tes->telefono_fijo2}}</h4>
-		<h4 style="margin-top:40px">Facebook:{{$tes->facebook2}}</h4>
-		<h4 style="margin-top:40px">Direccion Actual:{{$tes->direccion_actual2}}</h4>
-		<h4 style="margin-top:40px">Año Ingreso:{{$tes->ano_ingreso2}}</h4>
+		<h4 style="margin-top:40px">N°Telefono Celular: {{$tes->telefono_celular}}</h4>
+		<h4 style="margin-top:40px">N°Telefono Fijo: {{$tes->telefono_fijo}}</h4>
+		<h4 style="margin-top:40px">Facebook:{{$tes->facebook}}</h4>
+		<h4 style="margin-top:40px">Direccion Actual:{{$tes->direccion_actual}}</h4>
+		<h4 style="margin-top:40px">Año Ingreso:{{$tes->ano_ingreso}}</h4>
 		<h4>**Se considera la fecha de ingreso a partir de Marzo del año ingresado.**<h4>
-		<h4 style="margin-top:40px">Año Egreso:{{$tes->ano_egreso2}}</h4>
+		<h4 style="margin-top:40px">Año Egreso:{{$tes->ano_egreso}}</h4>
 		<h4 style="margin-top:40px">Fecha Examen Titulo:{{$tes->fecha_presentacion_tesis}}</h4>
 		<h4 style="margin-top:40px">Titulo Tesis o Memoria:{{$tes->tipo}}</h4>
 		<h4 style="margin-top:40px">Profesor Guia:{{$tes->profesor_guia}}</h4>
