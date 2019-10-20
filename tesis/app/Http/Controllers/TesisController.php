@@ -5,11 +5,12 @@ use App\User;
 use App\Tesis;
 use App\Comision;
 use App\Recopilacion_inf;
+use App\Memorandum;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
- use Illuminate\Support\Str;
+use Illuminate\Support\Str;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Contracts\Auth\Guard;
 use iio\libmergepdf\Merger;
@@ -1544,7 +1545,7 @@ class TesisController extends Controller
         $nombre_alumno2=($tes->nombre_completo2);
         //para obtener campos necesario de la tupla de la base de datos, el dia, mes, año y la hora, usando carbon
         //paquete de laravel para trabajar con fechas, con mb_stroupper pasa la ñ y a mayuscula.
-        $tes->nombre_completo=mb_strtoupper($tes->nombre_completo);
+        $tes->nombre_completo=mb_strtoupper(str)($tes->nombre_completo);
         $tes->nombre_completo2=mb_strtoupper($tes->nombre_completo2);
         $fecha=Carbon::parse($tes->fecha_presentacion_tesis);
         $nombre_dia=$day=date('w', strtotime($fecha)); //w es funcion de php para obtener nombre del dia 0 es domingo y sucesivamente hasta que es el 6 es sabado.
@@ -2019,7 +2020,94 @@ class TesisController extends Controller
 
       }
 
-      
+      public function create_num_memo($id)
+      {
+        $id_usuario=Auth::id();
+        $user=User::find($id_usuario);
+        $tesis=Tesis::find($id);
+        if($user->tipo_usuario==4 or $user->tipo_usuario==3){
+            return view('tesis.create_num_memo',compact('tesis'));
+        }else{
+            return view('tesis.sinpermiso');
+        }
+      }
+
+      public function memo_revision(Request $request,$id)
+      {
+         //dd($request);
+         $num_memo=$request->get('numero');
+         //dd($num_memo);
+         $tesis=Tesis::find($id);
+         $comision=Tesis::find($id);
+         $revision=Memorandum::find(1);
+         $coordinador_tesis=DB::table('users')->where('tipo_usuario','=',3)->get();
+         $fecha=now();
+
+        $year=$fecha->year;
+        $dia_fecha=$fecha->day; //obtengo dia
+        $mes_fecha=$fecha->month;
+
+         switch($mes_fecha)
+    {
+     case 1: $mes_fecha="Enero";
+     break;
+     case 2: $mes_fecha="Febrero";
+     break;
+     case 3: $mes_fecha="Marzo";
+     break;
+     case 4:$mes_fecha="Abril";
+     break;
+     case 5: $mes_Fecha="Mayo";
+     break;
+     case 6: $mes_fecha="Junio";
+     break;
+     case 7: $mes_fecha="Julio";
+     break;
+     case 8: $mes_fecha="Agosto";
+     break;
+     case 9: $mes_fecha="Septiembre";
+     break;
+     case 10:$mes_fecha="Octubre";
+     break;
+     case 11:$mes_fecha="Noviembre";
+     break;
+     case 12:$mes_fecha="Diciembre";
+     break;
+    }
+    
+     //dd($year);
+         //dd($coordinador_tesis);
+         foreach($coordinador_tesis as $coordinador)
+        {
+           $nombre_coordinador=$coordinador->name; 
+        }
+
+    $alumno1=DB::table('users')->where('name','=',$tesis->nombre_completo)->get();
+    $alumno2=DB::table('users')->where('name','=',$tesis->nombre_completo2)->get();
+    //dd($alumno1);
+    $sexo1=null;
+    $sexo2=null;
+    $tesis->nombre_tesis=mb_strtoupper($tesis->nombre_tesis);
+    //dd($tesis->nombre_tesis);
+    foreach($alumno1 as $al){
+        $sexo1=$al->sexo;
+    }
+    
+   
+            foreach($alumno2 as $al2)
+            {
+                $sexo2=$al2->sexo;
+            }
+
+        //dd($nombre_coordinador);
+         //dd($coordinador_tesis);
+         $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
+        $revision->escuela1=mb_strtoupper($revision->escuela);
+         //dd($revision->escuela);
+         return view('memorandum.memorandum_revision',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2'));
+      }
+
+
 
       /*public function plazo_nota_extendida()
       {

@@ -8,7 +8,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-12">
+    <div class="col-md-16">
       <div class="card">
         <div class="card-header">{{ __('Tesis inscritas') }}</div>
           <div class="card-body">
@@ -29,7 +29,8 @@
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
           <th>Constancia ex</th>
-          <th>Fecha Defensa Ex</th>
+          <th>Revision</th>
+          <th>Fecha Ex</th>
           <th>Acta examen</th>
           <th>Subir acta</th>
           <th>Nota</th>
@@ -41,13 +42,15 @@
           <td>{{$tesis->profesor_guia}}</td>
            <td>{{$tesis->tipo}}</td>
             @if($tesis->constancia_ex!=null)
-           <td><a href="{{ route('verPDF', ['id' => $tesis->id]) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Constancia</i></a></td>
+           <td><a href="{{ route('verPDF', ['id' => $tesis->id]) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Ver</i></a></td>
+           <td><a href="{{url('tesis/create_num_memo'.$tesis->id) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Memo</i></a></td>
            <td><a href="{{url('/fecha_presentacion/'.$tesis->id)}}" class="btn btn-primary">Presentacion
            </a></td>
            @else
              <td>Debe subir informe</td>
             @endif
             @if($tesis->constancia_ex==null)
+            <td>Operacion no disponible</td>
             <td>Operacion no disponible</td>
             <td>Operacion no disponible</td>
             @else

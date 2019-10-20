@@ -111,9 +111,10 @@ body {
     </button>
     <div class="dropdown-content">
       <a href="{{url('/rango_fechas')}}">Consulta por intervalo de fechas</a>
-    </div>
-  </div> 
+      <a href="{{url('/memorandum')}}">Lista de memos</a>
+    </div>           
 </div>
+
 
 
 

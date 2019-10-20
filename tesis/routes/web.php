@@ -72,11 +72,13 @@ Route::post('/users','UsersController@store')->name('users.store');
 Route::put('/actualizarusers{users}','UsersController@update')->name('users.update');
 Route::delete('/eliminarusers{users}','UsersController@destroy')->name('users.destroy');
 
+
 //Rutas de editar profesor//
 
 Route::get('/editar_profesor', 'UsersController@editar_informacion_profesor')->name('users.editar_informacion_profesor');
 Route::put('/actualizarinfoprofesor{users}','UsersController@update_profesor')->name('users.update_profesor');
 
+//Vistas de tipos de vinculacion:
 Route::get('/empresas', 'EmpresasController@index')->name('empresas.index');
 Route::get('/empresas{empresas}', 'EmpresasController@edit')->name('empresas.edit');
 Route::get('/empresas/create', 'EmpresasController@create')->name('empresass.create');
@@ -108,6 +110,15 @@ Route::get('/fondoconcursablemostrar/{id}', 'FondoConcursableController@show')->
 Route::post('/fondoconcursable','FondoConcursableController@store')->name('fondoconcursable.store');
 Route::put('/actualizarfondoconcursable{fondoconcursable}','FondoConcursableController@update')->name('fondoconcursable.update');
 Route::delete('/eliminarfondoconcursable{fondoconcursable}','FondoConcursableController@destroy')->name('fondoconcursable.destroy');
+
+//Vistas de memorandums										  
+Route::get('/memorandum', 'MemorandumController@index')->name('memorandum.index');
+Route::get('/memorandum{memoradum}', 'MemorandumController@edit')->name('memorandum.edit');
+Route::get('/memorandum/create', 'MemorandumController@create')->name('memorandum.create');
+Route::post('/memorandums','MemorandumController@store')->name('memorandum.store');
+Route::put('/actualizarmemorandum{memorandum}','MemorandumController@update')->name('memorandum.update');
+Route::get('/memorandum_ya_existe', 'MemorandumController@ya_existe_memorandum')->name('memorandum.ya_existe_memorandum');
+
 
 Route::get('/area_tesis', 'Area_tesisController@index')->name('area_tesis.index');
 Route::get('/area_tesis{area_tesis}', 'Area_tesisController@edit')->name('area_tesis.edit');
@@ -235,3 +246,12 @@ Route::post('store','DocumentController@store');
 //Rutas recopilacion_informacion
 Route::get('/recopilacion_informacion','Recopilacion_infController@create')->name('recopilacion.recopilacion_informacion_titulados');
 Route::post('store_recopilacion_informacion','Recopilacion_infController@store')->name('recopilacion.recopilacion_store');
+
+
+
+Route::get('htmlpdf58','PDFController@htmlPDF58')->name('htmlpdf58');
+Route::get('generatePDF58','PDFController@generatePDF58')->name('generatePDF58');
+
+Route::get('/tesis/create_num_memo{tesis}', 'TesisController@create_num_memo')->name('tesis.create_num_memo');
+Route::put('/tesis/memo_revision{tesis}', 'TesisController@memo_revision')->name('tesis.memo_revision');
+//Route::get('/memorandum_revision/{tesis}', 'TesisController@memo_revision')->('tesis.memo_revision');
