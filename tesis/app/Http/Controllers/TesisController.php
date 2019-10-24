@@ -2063,7 +2063,11 @@ class TesisController extends Controller
         //dd($id);
          $num_memo=$request->get('numero');
          $comision=Comision::find($id);
-         $comision->profesor1_comision=mb_strtoupper($comision->profesor1_comision);
+         $comision->profesor=mb_strtoupper($comision->profesor1_comision);
+         $profesor_comision=DB::table('grado_academico_profesor_planta')->join('users','grado_academico_profesor_planta.id','=','users.id')->where('users.name','=',$comision->profesor)->get();
+         foreach($profesor_comision as $profe_comision);
+         $profe_comision->grado_academico=mb_strtoupper($profe_comision->grado_academico);
+         //$profesor_com=DB::table('users')->where('name','=',$comision_profesor)->get();
          //dd($comision);
          //$grado_director_tesis=
          //dd($num_memo);
@@ -2169,6 +2173,10 @@ class TesisController extends Controller
         //dd("6");
         //dd($j);
         $fecha=now()->addDays($j);
+        if((date('w', strtotime($fecha)))=="6")
+        {
+          $fecha=now()->addDays($j+2);  
+        }
         //dd($fecha);
        
         //dd($nombre_coordinador);
@@ -2176,7 +2184,7 @@ class TesisController extends Controller
          $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
         $revision->escuela1=mb_strtoupper($revision->escuela);
         //dd($revision->escuela);
-         return view('memorandum.memorandum_revision1',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador'));
+         return view('memorandum.memorandum_revision1',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','profe_comision'));
       }
         
 

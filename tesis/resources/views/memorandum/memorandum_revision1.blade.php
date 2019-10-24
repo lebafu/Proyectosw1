@@ -30,6 +30,12 @@
 				<div align="center" style="margin-left: 100px">
 						<b> :</b>
 				</div>
+				<div align="center" style="margin-left: 65px">
+						@if($grado_director_tesis=="Dr." and $coordinador->sexo=="Femenino")
+							<b>{{Dra. $grado_director_tesis}}</b>
+						@endif
+						<b>{{$profe_comision->grado_academico}}{{$comision->profesor}}</b>
+				</div>
 			</div>
 		</div>
 
@@ -115,7 +121,14 @@
 		<div align="left">__________________________________________________________________________________________________________________________________________________________________________________________</div>
 
 		<div align="left">
-			
+		@if($profe_comision->sexo=="Masculino")
+		    <h4 style="margin-bottom: 100px; margin-top:30px">Estimado Docente:</h4>
+		@endif	
+		@if($profe_comision->sexo=="Femenino")
+				<h4 style="margin-bottom: 100px; margin-top:30px">Estimada Docente:</h4>
+		@endif
+			</div>
+
 			<div align=justify style="margin-bottom: 100px; margin-top:100px">
 			<h4><p align="left">{{$revision->texto1}}<b>"{{$tesis->nombre_tesis}}"</b>.
 				@if($tesis->nombre_completo!=null and $tesis->nombre_completo2!=null)
@@ -164,7 +177,7 @@
 			</div>
 
 			<h4>
-			<div align="left" style="margin-bottom: 30px; margin-top: 30px">{{$revision->texto4}}</div>
+			<div align="left" style="margin-bottom: 300px; margin-top: 30px">{{$revision->texto4}}</div>
 			</h4>
 
 			
@@ -192,7 +205,7 @@
 			@endif-->
 				
 
-			</div>
+			
 
 
 			<div class="row" style="margin-top:60px">
