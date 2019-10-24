@@ -69,6 +69,9 @@
                                 @if($profesor->tipo_usuario==2)
                                 <input id="tipo_usuario" type="text" class="form-control" name="tipo_usuario" value="Profesor" required disabled>
                                 @endif
+                                 @if($profesor->tipo_usuario==3)
+                                <input id="tipo_usuario" type="text" class="form-control" name="tipo_usuario" value="Director de Tesis" required disabled>
+                                @endif
                             </div>
                         </div> 
                         
@@ -79,7 +82,6 @@
                                 <option value="Ing.">Ingeniero</option>
                                  <option value="Mg.">Magister</option>
                                  <option value="Dr.">Doctor</option>
-                                 <option value="Dra.">Doctora</option>
                                 </select>
                             </div>
                         </div>

@@ -6,6 +6,7 @@ use App\Tesis;
 use App\Comision;
 use App\Recopilacion_inf;
 use App\Memorandum;
+use App\Grado_academico;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
@@ -1545,7 +1546,7 @@ class TesisController extends Controller
         $nombre_alumno2=($tes->nombre_completo2);
         //para obtener campos necesario de la tupla de la base de datos, el dia, mes, año y la hora, usando carbon
         //paquete de laravel para trabajar con fechas, con mb_stroupper pasa la ñ y a mayuscula.
-        $tes->nombre_completo=mb_strtoupper(str)($tes->nombre_completo);
+        $tes->nombre_completo=mb_strtoupper($tes->nombre_completo);
         $tes->nombre_completo2=mb_strtoupper($tes->nombre_completo2);
         $fecha=Carbon::parse($tes->fecha_presentacion_tesis);
         $nombre_dia=$day=date('w', strtotime($fecha)); //w es funcion de php para obtener nombre del dia 0 es domingo y sucesivamente hasta que es el 6 es sabado.
@@ -1968,6 +1969,7 @@ class TesisController extends Controller
 
         //VER SOLICITUDES DE NOTA PRORROGA DEL PROFESOR SE PREGUNTA SI EL USUARIO QUE INGRESA A ESTA SESION ES O NO PROFESOR, SI ES ENTONCES LO REDIRECCIONA A LA VISTA CON EL RESPECTIVO LISTADO.
 
+
         public function index_solicitud_nota_prorroga()
       {
         $id=Auth::id();
@@ -1981,6 +1983,8 @@ class TesisController extends Controller
         }                
 
       }
+
+
 
       //Se acepta la nota pendiente o la modifica el mismo profesor
       public function aceptar_nota_pendiente($id)
@@ -2032,13 +2036,38 @@ class TesisController extends Controller
         }
       }
 
-      public function memo_revision(Request $request,$id)
+
+      public function lista_profe_comision_revision(Request $request,$id)
+      {
+        //dd($id);
+        //dd($request);
+        $numero=$request->get('numero');
+        $comision=Comision::find($id);
+        //dd($comision);
+        //$tesis=Tesis::find($id);
+        //$id=$tesis->id;
+        $profesor1=$comision->profesor1_comision;
+        $profesor2=$comision->profesor2_comision;
+        $profesor3=$comision->profesor3_comision;
+        $profesor4=$comision->profesor_comision;
+        $profesor5=$comision->profesor5_comision;
+
+        return view('tesis.lista_profes_comision_revision',compact('numero','id','profesor1','profesor2','profesor3','profesor4','profesor5'));
+      }
+
+
+      public function memo_revision1(Request $request)
       {
          //dd($request);
+        $id=$request->get('id');
+        //dd($id);
          $num_memo=$request->get('numero');
+         $comision=Comision::find($id);
+         $comision->profesor1_comision=mb_strtoupper($comision->profesor1_comision);
+         //dd($comision);
+         //$grado_director_tesis=
          //dd($num_memo);
          $tesis=Tesis::find($id);
-         $comision=Tesis::find($id);
          $revision=Memorandum::find(1);
          $coordinador_tesis=DB::table('users')->where('tipo_usuario','=',3)->get();
          $fecha=now();
@@ -2046,6 +2075,8 @@ class TesisController extends Controller
         $year=$fecha->year;
         $dia_fecha=$fecha->day; //obtengo dia
         $mes_fecha=$fecha->month;
+
+
 
          switch($mes_fecha)
     {
@@ -2078,10 +2109,32 @@ class TesisController extends Controller
      //dd($year);
          //dd($coordinador_tesis);
          foreach($coordinador_tesis as $coordinador)
-        {
+        {  
+           $id_coordinador=$coordinador->id; 
            $nombre_coordinador=$coordinador->name; 
         }
+         $grado_director_tesis=Grado_academico::find($id_coordinador);
+         $grado_director_tesis->grado_academico=mb_strtoupper($grado_director_tesis->grado_academico);
+    $profesor_guia=DB::table('users')->where('name','=',$tesis->profesor_guia)->get();
+    $j=0;
+    $iniciales_coordinador=array();
+    for($i=0;$i<strlen($nombre_coordinador);$i++)
+        {
+            if(($nombre_coordinador[$i]=="A" or $nombre_coordinador[$i]=="B" or $nombre_coordinador[$i]=="C" or $nombre_coordinador[$i]=="D" or $nombre_coordinador[$i]=="E" or $nombre_coordinador[$i]=="F" or $nombre_coordinador[$i]=="G" or $nombre_coordinador[$i]=="H" or $nombre_coordinador[$i]=="I" or $nombre_coordinador[$i]=="J" or $nombre_coordinador[$i]=="K" or $nombre_coordinador[$i]=="L" or $nombre_coordinador[$i]=="M" or $nombre_coordinador[$i]=="N" or $nombre_coordinador[$i]=="Ñ" or $nombre_coordinador[$i]=="O" or$nombre_coordinador[$i]=="P" or $nombre_coordinador[$i]=="Q" or $nombre_coordinador[$i]=="R" or $nombre_coordinador[$i]=="S" or $nombre_coordinador[$i]=="T" or $nombre_coordinador[$i]=="V" or $nombre_coordinador[$i]=="W" or $nombre_coordinador[$i]=="U" or $nombre_coordinador[$i]=="X" or $nombre_coordinador[$i]=="Y" or $nombre_coordinador[$i]=="Z"))
+        {
+              array_push($iniciales_coordinador,$nombre_coordinador[$i]);
+        }
+    }
+    //dd($iniciales_coordinador);
 
+    foreach($profesor_guia as $profe)
+    {   
+        $id_profesor_guia=$profe->id;
+        $profesor_guia_nombre=$profe->name;
+        $sexo_profe_guia=$profe->sexo;
+    }
+    $nombre_coordinador=mb_strtoupper($nombre_coordinador);
+    $profesor_guia=Grado_academico::find($id_profesor_guia);
     $alumno1=DB::table('users')->where('name','=',$tesis->nombre_completo)->get();
     $alumno2=DB::table('users')->where('name','=',$tesis->nombre_completo2)->get();
     //dd($alumno1);
@@ -2098,15 +2151,36 @@ class TesisController extends Controller
             {
                 $sexo2=$al2->sexo;
             }
-
+        $i=0;
+        $j=0;
+        //$fecha=date("2019-10-12");
+        while($i<15){              //Con ciclo while se cuentan los 15 dias solo para los habiles con i, y con j todos los dias.
+           $date=date('w', strtotime($fecha));
+           if($date=="6" or $date=="0"){
+            $j=$j+1;
+            }elseif($date=="1" or $date=="2" or $date=="3" or $date=="4" or $date=="5"){
+             $i=$i+1;
+             $j=$j+1;  
+            //dd($date);
+            }
+            $fecha=$fecha->addDay();
+        }
+        //dd(date('w', strtotime($fecha)));
+        //dd("6");
+        //dd($j);
+        $fecha=now()->addDays($j);
+        //dd($fecha);
+       
         //dd($nombre_coordinador);
          //dd($coordinador_tesis);
          $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
         $revision->escuela1=mb_strtoupper($revision->escuela);
-         //dd($revision->escuela);
-         return view('memorandum.memorandum_revision',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2'));
+        //dd($revision->escuela);
+         return view('memorandum.memorandum_revision1',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador'));
       }
+        
 
+}
 
 
       /*public function plazo_nota_extendida()
@@ -2139,6 +2213,6 @@ class TesisController extends Controller
       }*/
 
     
-    }
+
        
 

@@ -253,5 +253,8 @@ Route::get('htmlpdf58','PDFController@htmlPDF58')->name('htmlpdf58');
 Route::get('generatePDF58','PDFController@generatePDF58')->name('generatePDF58');
 
 Route::get('/tesis/create_num_memo{tesis}', 'TesisController@create_num_memo')->name('tesis.create_num_memo');
-Route::put('/tesis/memo_revision{tesis}', 'TesisController@memo_revision')->name('tesis.memo_revision');
+Route::put('/tesis/lista_profe_comision_revision{tesis}', 'TesisController@lista_profe_comision_revision')->name('tesis.lista_profe_comision_revision');
+Route::get('/memo_revision1', 'TesisController@memo_revision1')->name('descargar_memorandum_revision1');
+
+
 //Route::get('/memorandum_revision/{tesis}', 'TesisController@memo_revision')->('tesis.memo_revision');

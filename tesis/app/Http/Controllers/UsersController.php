@@ -67,7 +67,7 @@ class UsersController extends Controller
         //a que profesor corresponderá el grado academico a seleccionar
         foreach($profes as $profesor);
                 //dd($profesor->id);
-        if($request->tipo_usuario==2){
+        if($request->tipo_usuario==2 or $request->tipo_usuario==3){
              return view('grado_academico_create',compact('profesor'));   
         }
 
@@ -111,7 +111,7 @@ class UsersController extends Controller
         //a que profesor corresponderá el grado academico a seleccionar
         foreach($profes as $profesor);
                 //dd($profesor->id);
-        if($request->tipo_usuario==2){
+        if($request->tipo_usuario==2 or  $request->tipo_usuario==3){
              return view('grado_academico_create',compact('profesor'));   
         }
         return view('welcome');
