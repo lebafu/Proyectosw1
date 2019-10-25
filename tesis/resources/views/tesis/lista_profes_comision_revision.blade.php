@@ -28,24 +28,24 @@
       </tr>
       <tr>
         <td>{{$profesor2}}</td>
-        <td><a class="btn btn-primary" href="#" id="descargaPDF_profesor2"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
+        <td><a class="btn btn-primary" href="#" id="descargarPDF_profesor2"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
       @if($profesor3!="Ninguno")
       <tr>
         <td>{{$profesor3}}</td>
-        <td><a class="btn btn-primary" href="#" id="descargaPDF_profesor3"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
+        <td><a class="btn btn-primary" href="#" id="descargarPDF_profesor3"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
       @endif
       @if(($profesor4!=null))
       <tr>
         <td>{{$profesor4}}</td>
-          <td><a class="btn btn-primary" href="#" id="descargaPDF_profesor4"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
+          <td><a class="btn btn-primary" href="#" id="descargarPDF_profesor4"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
       @endif
       @if(($profesor5!=null))
       <tr>
         <td>{{$profesor5}}</td>
-         <td><a class="btn btn-primary" href="#" id="descargaPDF_profesor5"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
+         <td><a class="btn btn-primary" href="#" id="descargarPDF_profesor5"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
       @endif
       <tr>
@@ -67,6 +67,44 @@
     $('#descargarPDF_profesor1').on('click', function(){
       $.ajax({
         url:'{{route('descargar_memorandum_revision1')}}',
+        type:'get',
+         data:{
+          numero:'{{$numero}}',
+          id: '{{$id}}'
+        },        success: function(data){
+          var ventana=window.open("/", "_blank");
+          ventana.document.write(data);
+          ventana.document.close();
+        }
+      })
+    });
+  });
+</script>
+
+<script>
+  $(function(){
+    $('#descargarPDF_profesor2').on('click', function(){
+      $.ajax({
+        url:'{{route('descargar_memorandum_revision2')}}',
+        type:'get',
+         data:{
+          numero:'{{$numero}}',
+          id: '{{$id}}'
+        },        success: function(data){
+          var ventana=window.open("/", "_blank");
+          ventana.document.write(data);
+          ventana.document.close();
+        }
+      })
+    });
+  });
+</script>
+
+<script>
+  $(function(){
+    $('#descargarPDF_profesor3').on('click', function(){
+      $.ajax({
+        url:'{{route('descargar_memorandum_revision3')}}',
         type:'get',
          data:{
           numero:'{{$numero}}',
