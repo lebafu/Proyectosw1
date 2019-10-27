@@ -38,8 +38,8 @@
       @endif
       @if(($profesor4!=null))
       <tr>
-        <td>{{$profesor4}}</td>
-          <td><a class="btn btn-primary" href="#" id="descargarPDF_profesor4"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
+        <td>{{$profesor4}}</td>                       
+        <td><a class="btn btn-primary" href="#" id="descargarPDF_profesor4"> <span class="fa fa-print"> </span> Descargar PDF</a></td>
       </tr>
       @endif
       @if(($profesor5!=null))
@@ -119,5 +119,44 @@
   });
 </script>
 
+
+<script>
+  $(function(){
+    $('#descargarPDF_profesor4').on('click', function(){
+      $.ajax({
+        url:'{{route('descargar_memorandum_revision4')}}',
+        type:'get',
+         data:{
+          numero:'{{$numero}}',
+          id: '{{$id}}'
+        },        success: function(data){
+          var ventana=window.open("/", "_blank");
+          ventana.document.write(data);
+          ventana.document.close();
+        }
+      })
+    });
+  });
+</script>
+
+
+<script>
+  $(function(){
+    $('#descargarPDF_profesor5').on('click', function(){
+      $.ajax({
+        url:'{{route('descargar_memorandum_revision5')}}',
+        type:'get',
+         data:{
+          numero:'{{$numero}}',
+          id: '{{$id}}'
+        },        success: function(data){
+          var ventana=window.open("/", "_blank");
+          ventana.document.write(data);
+          ventana.document.close();
+        }
+      })
+    });
+  });
+</script>
 
 @endsection

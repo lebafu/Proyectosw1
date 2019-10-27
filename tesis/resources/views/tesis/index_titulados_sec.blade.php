@@ -21,23 +21,28 @@
         <tr>
          
           <th>ID</th>
-          <th>Estudiante1</th>
-          <th>Estudiante2</th>
+          <th>Estudiantes</th>
           <th>Profesor Guia</th>
-          <th>Informacion Estudiante1</th>
-          <th>Informacion Estudiante2</th>
+          <th>Informacion</th>
+          <th>Memorandum de Titulados</th>
         </tr>
       @foreach($tesista as $tesis)
         <tr>
           <td>{{$tesis->id}}</td>
-          <td>{{$tesis->nombre_completo}}</td>
-          <td>{{$tesis->nombre_completo2}}</td>
+          <td>{{$tesis->nombre_completo}}----
+              @if($tesis->nombre_completo2!=null)
+          {{$tesis->nombre_completo2}}
+              @endif
+            </td>
           <td>{{$tesis->profesor_guia}}</td>
 
-          <td><a class="btn btn-primary" href="{{url('/recopilacion_inf/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a></td>
-          @if($tesis->nombre_completo2!=null)
-           <td><a class="btn btn-primary" href="{{url('/recopilacion_inf2/'.$tesis->nombre_completo2)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a></td>
-          @endif
+          <td><a class="btn btn-primary" href="{{url('/recopilacion_inf/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a>
+               @if($tesis->nombre_completo2!=null)
+              <a class="btn btn-primary" href="{{url('/recopilacion_inf2/'.$tesis->nombre_completo2)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a>
+              @endif
+          </td>
+
+           <td><a href="{{url('tesis/create_num_memotitulados/'.$tesis->id) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Memo titulo</i></a></td>
       @endforeach
      </table>
      </div>

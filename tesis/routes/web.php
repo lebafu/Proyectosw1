@@ -252,9 +252,18 @@ Route::post('store_recopilacion_informacion','Recopilacion_infController@store')
 Route::get('htmlpdf58','PDFController@htmlPDF58')->name('htmlpdf58');
 Route::get('generatePDF58','PDFController@generatePDF58')->name('generatePDF58');
 
+//ruta de memorandum de revision tesis;
 Route::get('/tesis/create_num_memo{tesis}', 'TesisController@create_num_memo')->name('tesis.create_num_memo');
-Route::put('/tesis/lista_profe_comision_revision{tesis}', 'TesisController@lista_profe_comision_revision')->name('tesis.lista_profe_comision_revision');
+Route::put('/tesis/lista_profe_comision_revision{tesis}', 'TesisController@lista_profe_comision_revision')->name('tesis.lista_profes_comision_revision');
 Route::get('/memo_revision1', 'TesisController@memo_revision1')->name('descargar_memorandum_revision1');
 Route::get('/memo_revision2', 'TesisController@memo_revision2')->name('descargar_memorandum_revision2');
 Route::get('/memo_revision3', 'TesisController@memo_revision3')->name('descargar_memorandum_revision3');
+Route::get('/memo_revision4', 'TesisController@memo_revision4')->name('descargar_memorandum_revision4');
+Route::get('/memo_revision5', 'TesisController@memo_revision5')->name('descargar_memorandum_revision5');
+
+
+
+
+Route::get('/tesis/create_num_memo_titulados/{tesis}', 'TesisController@create_num_memotitulados')->name('tesis.create_num_memotitulados');
+Route::put('/memo_titulados/', 'TesisController@memo_titulados')->name('memorandum.memorandum_titulados');
 //Route::get('/memorandum_revision/{tesis}', 'TesisController@memo_revision')->('tesis.memo_revision');

@@ -2024,8 +2024,10 @@ class TesisController extends Controller
 
       }
 
+    //crear numero de memo para memoradum de revision de tesis
       public function create_num_memo($id)
       {
+        //dd($id);
         $id_usuario=Auth::id();
         $user=User::find($id_usuario);
         $tesis=Tesis::find($id);
@@ -2049,8 +2051,8 @@ class TesisController extends Controller
         $profesor1=$comision->profesor1_comision;
         $profesor2=$comision->profesor2_comision;
         $profesor3=$comision->profesor3_comision;
-        $profesor4=$comision->profesor_comision;
-        $profesor5=$comision->profesor5_comision;
+        $profesor4=$comision->profesor1_externo;
+        $profesor5=$comision->profe2_externo;
 
         return view('tesis.lista_profes_comision_revision',compact('numero','id','profesor1','profesor2','profesor3','profesor4','profesor5'));
       }
@@ -2318,7 +2320,6 @@ class TesisController extends Controller
          //dd($coordinador_tesis);
          $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
         $revision->escuela1=mb_strtoupper($revision->escuela);
-        ($revision->escuela);
          return view('memorandum.memorandum_revision2',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','profe_comision'));
       }
 
@@ -2451,11 +2452,335 @@ class TesisController extends Controller
          //dd($coordinador_tesis);
          $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
         $revision->escuela1=mb_strtoupper($revision->escuela);
-        ($revision->escuela);
          return view('memorandum.memorandum_revision3',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','profe_comision'));
       }
 
 
+    public function memo_revision4(Request $request)
+      {
+        //dd($request);
+        $id=$request->get('id');
+        //dd($id);
+         $num_memo=$request->get('numero');
+         $comision=Comision::find($id);
+         $comision->profesor1_externo=mb_strtoupper($comision->profesor1_externo);
+         $comision->profesor1_grado_academico=mb_strtoupper($comision->profesor1_grado_academico);
+         //$profesor_com=DB::table('users')->where('name','=',$comision_profesor)->get();
+         //dd($comision);
+         //$grado_director_tesis=
+         //dd($num_memo);
+         $tesis=Tesis::find($id);
+         //dd($tesis);
+         $revision=Memorandum::find(1);
+         $coordinador_tesis=DB::table('users')->where('tipo_usuario','=',3)->get();
+         $fecha=now();
+
+        $year=$fecha->year;
+        $dia_fecha=$fecha->day; //obtengo dia
+        $mes_fecha=$fecha->month;
+
+
+
+         switch($mes_fecha)
+    {
+     case 1: $mes_fecha="Enero";
+     break;
+     case 2: $mes_fecha="Febrero";
+     break;
+     case 3: $mes_fecha="Marzo";
+     break;
+     case 4:$mes_fecha="Abril";
+     break;
+     case 5: $mes_Fecha="Mayo";
+     break;
+     case 6: $mes_fecha="Junio";
+     break;
+     case 7: $mes_fecha="Julio";
+     break;
+     case 8: $mes_fecha="Agosto";
+     break;
+     case 9: $mes_fecha="Septiembre";
+     break;
+     case 10:$mes_fecha="Octubre";
+     break;
+     case 11:$mes_fecha="Noviembre";
+     break;
+     case 12:$mes_fecha="Diciembre";
+     break;
+    }
+    
+     //dd($year);
+         //dd($coordinador_tesis);
+         foreach($coordinador_tesis as $coordinador)
+        {  
+           $id_coordinador=$coordinador->id; 
+           $nombre_coordinador=$coordinador->name; 
+        }
+         $grado_director_tesis=Grado_academico::find($id_coordinador);
+         $grado_director_tesis->grado_academico=mb_strtoupper($grado_director_tesis->grado_academico);
+    $profesor_guia=DB::table('users')->where('name','=',$tesis->profesor_guia)->get();
+    $j=0;
+    $iniciales_coordinador=array();
+    for($i=0;$i<strlen($nombre_coordinador);$i++)
+        {
+            if(($nombre_coordinador[$i]=="A" or $nombre_coordinador[$i]=="B" or $nombre_coordinador[$i]=="C" or $nombre_coordinador[$i]=="D" or $nombre_coordinador[$i]=="E" or $nombre_coordinador[$i]=="F" or $nombre_coordinador[$i]=="G" or $nombre_coordinador[$i]=="H" or $nombre_coordinador[$i]=="I" or $nombre_coordinador[$i]=="J" or $nombre_coordinador[$i]=="K" or $nombre_coordinador[$i]=="L" or $nombre_coordinador[$i]=="M" or $nombre_coordinador[$i]=="N" or $nombre_coordinador[$i]=="Ñ" or $nombre_coordinador[$i]=="O" or$nombre_coordinador[$i]=="P" or $nombre_coordinador[$i]=="Q" or $nombre_coordinador[$i]=="R" or $nombre_coordinador[$i]=="S" or $nombre_coordinador[$i]=="T" or $nombre_coordinador[$i]=="V" or $nombre_coordinador[$i]=="W" or $nombre_coordinador[$i]=="U" or $nombre_coordinador[$i]=="X" or $nombre_coordinador[$i]=="Y" or $nombre_coordinador[$i]=="Z"))
+        {
+              array_push($iniciales_coordinador,$nombre_coordinador[$i]);
+        }
+    }
+    //dd($iniciales_coordinador);
+
+    foreach($profesor_guia as $profe)
+    {   
+        $id_profesor_guia=$profe->id;
+        $profesor_guia_nombre=$profe->name;
+        $sexo_profe_guia=$profe->sexo;
+    }
+    $nombre_coordinador=mb_strtoupper($nombre_coordinador);
+    $profesor_guia=Grado_academico::find($id_profesor_guia);
+    $alumno1=DB::table('users')->where('name','=',$tesis->nombre_completo)->get();
+    $alumno2=DB::table('users')->where('name','=',$tesis->nombre_completo2)->get();
+    //dd($alumno1);
+    $sexo1=null;
+    $sexo2=null;
+    $tesis->nombre_tesis=mb_strtoupper($tesis->nombre_tesis);
+    //dd($tesis->nombre_tesis);
+    foreach($alumno1 as $al){
+        $sexo1=$al->sexo;
+    }
+    
+   
+            foreach($alumno2 as $al2)
+            {
+                $sexo2=$al2->sexo;
+            }
+        $i=0;
+        $j=0;
+        while($i<15){              //Con ciclo while se cuentan los 15 dias solo para los habiles con i, y con j todos los dias.
+           $date=date('w', strtotime($fecha));
+           if($date=="6" or $date=="0"){
+            $j=$j+1;
+            }elseif($date=="1" or $date=="2" or $date=="3" or $date=="4" or $date=="5"){
+             $i=$i+1;
+             $j=$j+1;  
+            //dd($date);
+            }
+            $fecha=$fecha->addDay();
+        }
+        //dd(date('w', strtotime($fecha)));
+        //dd("6");
+        //dd($j);
+        $fecha=now()->addDays($j);
+        if((date('w', strtotime($fecha)))=="6")
+        {
+          $fecha=now()->addDays($j+2);  
+        }
+        //dd($fecha);
+       
+        //dd($nombre_coordinador);
+        //dd($coordinador_tesis);
+         $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
+        $revision->escuela1=mb_strtoupper($revision->escuela);
+         return view('memorandum.memorandum_revision4',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador'));
+      }
+
+
+      public function memo_revision5(Request $request)
+      {
+        //dd($request);
+        $id=$request->get('id');
+        //dd($id);
+         $num_memo=$request->get('numero');
+         $comision=Comision::find($id);
+         $comision->profe2_grado_academico=mb_strtoupper($comision->profe2_grado_academico);
+         $comision->profe2_externo=mb_strtoupper($comision->profe2_externo);
+         //$comision->profesor1_externo=mb_strtoupper($comision->profesor1_externo);
+         //$comision->profesor1_grado_academico=mb_strtoupper($profesor1_grado_academico);
+         //$profesor_com=DB::table('users')->where('name','=',$comision_profesor)->get();
+         //dd($comision);
+         //$grado_director_tesis=
+         //dd($num_memo);
+         $tesis=Tesis::find($id);
+         //dd($tesis);
+         $revision=Memorandum::find(1);
+         $coordinador_tesis=DB::table('users')->where('tipo_usuario','=',3)->get();
+         $fecha=now();
+
+        $year=$fecha->year;
+        $dia_fecha=$fecha->day; //obtengo dia
+        $mes_fecha=$fecha->month;
+
+
+
+         switch($mes_fecha)
+    {
+     case 1: $mes_fecha="Enero";
+     break;
+     case 2: $mes_fecha="Febrero";
+     break;
+     case 3: $mes_fecha="Marzo";
+     break;
+     case 4:$mes_fecha="Abril";
+     break;
+     case 5: $mes_Fecha="Mayo";
+     break;
+     case 6: $mes_fecha="Junio";
+     break;
+     case 7: $mes_fecha="Julio";
+     break;
+     case 8: $mes_fecha="Agosto";
+     break;
+     case 9: $mes_fecha="Septiembre";
+     break;
+     case 10:$mes_fecha="Octubre";
+     break;
+     case 11:$mes_fecha="Noviembre";
+     break;
+     case 12:$mes_fecha="Diciembre";
+     break;
+    }
+    
+     //dd($year);
+         //dd($coordinador_tesis);
+         foreach($coordinador_tesis as $coordinador)
+        {  
+           $id_coordinador=$coordinador->id; 
+           $nombre_coordinador=$coordinador->name; 
+        }
+         $grado_director_tesis=Grado_academico::find($id_coordinador);
+         $grado_director_tesis->grado_academico=mb_strtoupper($grado_director_tesis->grado_academico);
+    $profesor_guia=DB::table('users')->where('name','=',$tesis->profesor_guia)->get();
+    $j=0;
+    $iniciales_coordinador=array();
+    for($i=0;$i<strlen($nombre_coordinador);$i++)
+        {
+            if(($nombre_coordinador[$i]=="A" or $nombre_coordinador[$i]=="B" or $nombre_coordinador[$i]=="C" or $nombre_coordinador[$i]=="D" or $nombre_coordinador[$i]=="E" or $nombre_coordinador[$i]=="F" or $nombre_coordinador[$i]=="G" or $nombre_coordinador[$i]=="H" or $nombre_coordinador[$i]=="I" or $nombre_coordinador[$i]=="J" or $nombre_coordinador[$i]=="K" or $nombre_coordinador[$i]=="L" or $nombre_coordinador[$i]=="M" or $nombre_coordinador[$i]=="N" or $nombre_coordinador[$i]=="Ñ" or $nombre_coordinador[$i]=="O" or$nombre_coordinador[$i]=="P" or $nombre_coordinador[$i]=="Q" or $nombre_coordinador[$i]=="R" or $nombre_coordinador[$i]=="S" or $nombre_coordinador[$i]=="T" or $nombre_coordinador[$i]=="V" or $nombre_coordinador[$i]=="W" or $nombre_coordinador[$i]=="U" or $nombre_coordinador[$i]=="X" or $nombre_coordinador[$i]=="Y" or $nombre_coordinador[$i]=="Z"))
+        {
+              array_push($iniciales_coordinador,$nombre_coordinador[$i]);
+        }
+    }
+    //dd($iniciales_coordinador);
+
+    foreach($profesor_guia as $profe)
+    {   
+        $id_profesor_guia=$profe->id;
+        $profesor_guia_nombre=$profe->name;
+        $sexo_profe_guia=$profe->sexo;
+    }
+    $nombre_coordinador=mb_strtoupper($nombre_coordinador);
+    $profesor_guia=Grado_academico::find($id_profesor_guia);
+    $alumno1=DB::table('users')->where('name','=',$tesis->nombre_completo)->get();
+    $alumno2=DB::table('users')->where('name','=',$tesis->nombre_completo2)->get();
+    //dd($alumno1);
+    $sexo1=null;
+    $sexo2=null;
+    $tesis->nombre_tesis=mb_strtoupper($tesis->nombre_tesis);
+    //dd($tesis->nombre_tesis);
+    foreach($alumno1 as $al){
+        $sexo1=$al->sexo;
+    }
+    
+   
+            foreach($alumno2 as $al2)
+            {
+                $sexo2=$al2->sexo;
+            }
+        $i=0;
+        $j=0;
+        while($i<15){              //Con ciclo while se cuentan los 15 dias solo para los habiles con i, y con j todos los dias.
+           $date=date('w', strtotime($fecha));
+           if($date=="6" or $date=="0"){
+            $j=$j+1;
+            }elseif($date=="1" or $date=="2" or $date=="3" or $date=="4" or $date=="5"){
+             $i=$i+1;
+             $j=$j+1;  
+            //dd($date);
+            }
+            $fecha=$fecha->addDay();
+        }
+        //dd(date('w', strtotime($fecha)));
+        //dd("6");
+        //dd($j);
+        //En caso de que al sumar 15 dias de como resultado un dia sabado, entonces deberá sumar 2 dias mas, para que resulte un dia lunes
+        $fecha=now()->addDays($j);
+        if((date('w', strtotime($fecha)))=="6")
+        {
+          $fecha=now()->addDays($j+2);  
+        }
+        //dd($fecha);
+       
+        //dd($nombre_coordinador);
+        //dd($coordinador_tesis);
+         $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
+        $revision->escuela1=mb_strtoupper($revision->escuela);
+         return view('memorandum.memorandum_revision5',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador'));
+      }
+    
+      public function create_num_memo_titulados($id)
+      {
+        dd($id);
+        //$id_usuario=Auth::id();
+        //dd($id_usuario);
+        //$user=User::find($id_usuario);
+        //dd($id);
+        $tesis=Tesis::find($id);
+        //if($user->tipo_usuario==4 or $user->tipo_usuario==3){
+            return view('tesis.create_num_memotitulados',compact('tesis'));
+        //}else{
+          //  return view('tesis.sinpermiso');
+        //}
+      }
+
+
+        public function memorandum_titulados(Request $request,$id)
+   {
+
+     dd($request);
+     $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id',$id)->where('tesis.id','=',$user->id)->get();
+    $users=DB::table('users')->where('director_escuela',1)->get();
+    foreach($users as $director_escuela);
+    //dd($director_escuela);
+    $memos=DB::table('memorandum')->where('nombre_memorandum','=','Titulación')->get();
+    //dd($tesis);
+    $fecha=now();
+
+        $year=$fecha->year;
+        $dia_fecha=$fecha->day; //obtengo dia
+        $mes_fecha=$fecha->month;
+
+
+
+         switch($mes_fecha)
+    {
+     case 1: $mes_fecha="Enero";
+     break;
+     case 2: $mes_fecha="Febrero";
+     break;
+     case 3: $mes_fecha="Marzo";
+     break;
+     case 4:$mes_fecha="Abril";
+     break;
+     case 5: $mes_Fecha="Mayo";
+     break;
+     case 6: $mes_fecha="Junio";
+     break;
+     case 7: $mes_fecha="Julio";
+     break;
+     case 8: $mes_fecha="Agosto";
+     break;
+     case 9: $mes_fecha="Septiembre";
+     break;
+     case 10:$mes_fecha="Octubre";
+     break;
+     case 11:$mes_fecha="Noviembre";
+     break;
+     case 12:$mes_fecha="Diciembre";
+     break;
+    }
+   foreach($memos as $memo); 
+   $memo->nombre_jefe_titulo=mb_strtoupper($memo->nombre_jefe_titulo);
+   return view('memorandum.memorandum_titulados',compact('tesis','director_escuela','memo','year','mes_fecha','dia_fecha'));
+   }
 }
 
 
