@@ -2718,39 +2718,95 @@ class TesisController extends Controller
     
       public function create_num_memo_titulados($id)
       {
-        dd($id);
+        //dd($id);
         //$id_usuario=Auth::id();
         //dd($id_usuario);
         //$user=User::find($id_usuario);
         //dd($id);
         $tesis=Tesis::find($id);
         //if($user->tipo_usuario==4 or $user->tipo_usuario==3){
-            return view('tesis.create_num_memotitulados',compact('tesis'));
+            return view('tesis.createnummemotitulados',compact('tesis'));
         //}else{
           //  return view('tesis.sinpermiso');
         //}
       }
 
 
-        public function memorandum_titulados(Request $request,$id)
+        public function memorandum_titulados(Request $request)
    {
 
-     dd($request);
-     $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id',$id)->where('tesis.id','=',$user->id)->get();
+     //dd($request);
+    $director_escuela_consulta=DB::table('users')->where('director_escuela',1)->get();
+    foreach($director_escuela_consulta as $director_escuela);
+    $director_escuela->name=mb_strtoupper($director_escuela->name);
+    $grado_academico_director_escuela_consulta=DB::table('grado_academico_profesor_planta')->where('id',$director_escuela->id)->get();
+    foreach($grado_academico_director_escuela_consulta as $grado_academico_director_escuela);
+    $grado_academico_director_escuela->grado_academico=mb_strtoupper($grado_academico_director_escuela->grado_academico);
+    $id=$request->get('id_tesis');
+    $num_memo=$request->get('num_memo');
+    $user=User::find($id);
+     //$tesistas=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id',$id)->where('tesis.id','=',$user->id)->get();
+    //foreach($tesistas as $tesis);
+    $tesis=Tesis::find($id);
     $users=DB::table('users')->where('director_escuela',1)->get();
     foreach($users as $director_escuela);
-    //dd($director_escuela);
     $memos=DB::table('memorandum')->where('nombre_memorandum','=','Titulación')->get();
+    foreach($memos as $memo); 
+   $memo->nombre_jefe_titulo=mb_strtoupper($memo->nombre_jefe_titulo);
+   $memo->escuela1=mb_strtoupper($memo->escuela);
     //dd($tesis);
     $fecha=now();
 
         $year=$fecha->year;
         $dia_fecha=$fecha->day; //obtengo dia
         $mes_fecha=$fecha->month;
+    
+    $fecha_presentacion=Carbon::parse($tesis->fecha_presentacion_tesis);
+    $year_presentacion=$fecha_presentacion->year;
+    $dia_presentacion=$fecha_presentacion->day;
+    $mes_presentacion=$fecha_presentacion->month;
+    $hora_presentacion=$fecha_presentacion->format('H:i');
+    
+    switch($mes_presentacion)
+    {
+     case 1: $mes_presentacion="Enero";
+     break;
+     case 2: $mes_presentacion="Febrero";
+     break;
+     case 3: $mes_presentacion="Marzo";
+     break;
+     case 4:$mes_presentacion="Abril";
+     break;
+     case 5: $mes_presentacion="Mayo";
+     break;
+     case 6: $mes_presentacion="Junio";
+     break;
+     case 7: $mes_presentacion="Julio";
+     break;
+     case 8: $mes_presentacion="Agosto";
+     break;
+     case 9: $mes_presentacion="Septiembre";
+     break;
+     case 10:$mes_presentacion="Octubre";
+     break;
+     case 11:$mes_presentacion="Noviembre";
+     break;
+     case 12:$mes_presentacion="Diciembre";
+     break;
+    }
 
 
+    $nombre_director_escuela=$director_escuela->name;
+    $iniciales_director_escuela=array();
+     for($i=0;$i<strlen($nombre_director_escuela);$i++)
+        {
+            if(($nombre_director_escuela[$i]=="A" or $nombre_director_escuela[$i]=="B" or $nombre_director_escuela[$i]=="C" or $nombre_director_escuela[$i]=="D" or $nombre_director_escuela[$i]=="E" or $nombre_director_escuela[$i]=="F" or $nombre_director_escuela[$i]=="G" or $nombre_director_escuela[$i]=="H" or $nombre_director_escuela[$i]=="I" or $nombre_director_escuela[$i]=="J" or $nombre_director_escuela[$i]=="K" or $nombre_director_escuela[$i]=="L" or $nombre_director_escuela[$i]=="M" or $nombre_director_escuela[$i]=="N" or $nombre_director_escuela[$i]=="Ñ" or $nombre_director_escuela[$i]=="O" or $nombre_director_escuela[$i]=="P" or $nombre_director_escuela[$i]=="Q" or $nombre_director_escuela[$i]=="R" or $nombre_director_escuela[$i]=="S" or $nombre_director_escuela[$i]=="T" or $nombre_director_escuela[$i]=="V" or $nombre_director_escuela[$i]=="W" or $nombre_director_escuela[$i]=="U" or $nombre_director_escuela[$i]=="X" or $nombre_director_escuela[$i]=="Y" or $nombre_director_escuela[$i]=="Z"))
+        {
+              array_push($iniciales_director_escuela,$nombre_director_escuela[$i]);
+        }
+    }
 
-         switch($mes_fecha)
+        switch($mes_fecha)
     {
      case 1: $mes_fecha="Enero";
      break;
@@ -2777,9 +2833,16 @@ class TesisController extends Controller
      case 12:$mes_fecha="Diciembre";
      break;
     }
-   foreach($memos as $memo); 
-   $memo->nombre_jefe_titulo=mb_strtoupper($memo->nombre_jefe_titulo);
-   return view('memorandum.memorandum_titulados',compact('tesis','director_escuela','memo','year','mes_fecha','dia_fecha'));
+ 
+    $sexo1=null;
+    $sexo2=null;
+    $alumno1=DB::table('users')->where('name','=',$tesis->nombre_completo)->get();
+    $alumno2=DB::table('users')->where('name','=',$tesis->nombre_completo2)->get();
+    foreach($alumno1 as $al)$sexo1=$al->sexo;
+    foreach($alumno2 as $al2)$sexo2=$al2->sexo;
+     $director_escuela->name=mb_strtoupper($director_escuela->name);//Poner en mayuscula nombre director escuela.
+    //dd($director_escuela);
+   return view('memorandum.memorandum_titulados',compact('tesis','director_escuela','memo','year','mes_fecha','dia_fecha','num_memo','director_escuela','grado_academico_director_escuela','sexo1','sexo2','fecha','iniciales_director_escuela','hora_presentacion','dia_presentacion','mes_presentacion','year_presentacion'));
    }
 }
 

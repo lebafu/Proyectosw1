@@ -264,6 +264,6 @@ Route::get('/memo_revision5', 'TesisController@memo_revision5')->name('descargar
 
 
 
-Route::get('/tesis/create_num_memo_titulados/{tesis}', 'TesisController@create_num_memotitulados')->name('tesis.create_num_memotitulados');
-Route::put('/memo_titulados/', 'TesisController@memo_titulados')->name('memorandum.memorandum_titulados');
+Route::get('/tesis/createnummemotitulados{tesis}', 'TesisController@create_num_memo_titulados')->name('tesis.createnummemotitulados');
+Route::put('/memo_titulados/', 'TesisController@memorandum_titulados')->name('memorandum.memorandum_titulados');
 //Route::get('/memorandum_revision/{tesis}', 'TesisController@memo_revision')->('tesis.memo_revision');

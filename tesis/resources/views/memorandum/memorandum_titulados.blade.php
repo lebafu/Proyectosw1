@@ -12,7 +12,7 @@
 			</div>
 			<h3>
 				<div align="center" style="margin-top:100px">FACULTAD DE CIENCIAS DE LA INGENIERÍA</div>
-				<u align="center" style="">ESCUELA {{$revision->escuela1}}</u>
+				<u align="center" style="">ESCUELA {{$memo->escuela1}}</u>
 				</div>
 			</h3>
 			<h3>
@@ -31,10 +31,11 @@
 						<b> :</b>
 				</div>
 				<div align="center" style="margin-left: 65px">
-						@if($grado_director_tesis=="Dr." and $coordinador->sexo=="Femenino")
-							<b>{{Dra. $grado_director_tesis}}</b>
+						@if($memo->sexo_jefe_titulos=="Masculino")
+							<b>SR.{{$memo->nombre_jefe_titulo}}</b>
+						@else
+							<b>SRA.{{$memo->nombre_jefe_titulo}}</b>
 						@endif
-						<b>{{$profe_comision->grado_academico}}{{$profe_comision->name}}</b>
 				</div>
 			</div>
 		</div>
@@ -44,7 +45,7 @@
 				<div align="center" style="margin-left: 87px">
 				</div>
 				<div align="center" style="margin-left: 100px">
-					<h5>Profesor Comisión</h5>
+					<h5>Jefe de Títulos y Grados</h5>
 				</div>
 			</div>
 		</div>
@@ -56,10 +57,10 @@
 						<b> :</b>
 				</div>
 				<div align="center" style="margin-left: 65px">
-						@if($grado_director_tesis=="Dr." and $coordinador->sexo=="Femenino")
-							<b>{{Dra. $grado_director_tesis}}</b>
+						@if($grado_academico_director_escuela->grado_academico=="Dr." and $coordinador->sexo=="Femenino")
+							<b>Dra. {{$director_escuela->name}}</b>
 						@endif
-						<b>{{$grado_director_tesis->grado_academico}}{{$nombre_coordinador}}</b>
+						<b>{{$grado_academico_director_escuela->grado_academico}}{{$director_escuela->name}}</b>
 				</div>
 			</div>
 		</div>
@@ -69,7 +70,7 @@
 				<div align="center" style="margin-left: 87px">
 				</div>
 				<div align="center" style="margin-left: 100px">
-					<h5>Coordinador de Tesis y Memorias</h5>
+					<h5>Director Escuela {{$memo->escuela}}</h5>
 				</div>
 			</div>
 		</div>
@@ -81,19 +82,20 @@
 						<b> :</b>
 				</div>
 				<div align="center" style="margin-left: 63px">
-						<div>Envia Tesis a revisión
-						@if($tesis->nombre_completo!=null)
+						<div>Envia Acta de titulación 
+						@if($tesis->nombre_completo!=null and $tesis->nombre_completo2==null)
 								@if($sexo1=="Masculino")
-									del Sr.
+									del alumno Sr.
 								@endif
 								@if($sexo1=="Femenino")
-									de la Srta.
+									de la alumna Srta.
 								@endif		
 								{{$tesis->nombre_completo}}				
 						@endif
-						@if($tesis->nombre_completo2!=null)
+						@if($tesis->nombre_completo2!=null and $tesis->nombre_completo!=null)
+								De los alumnos
 								@if($sexo2=="Masculino")
-								y del Sr.
+								
 								@endif
 								@if($sexo2=="Femenino")
 								y de la	Srta.
@@ -117,3 +119,140 @@
 			</div>
 		</div>
 	</h4>
+
+
+
+		<div align="left">__________________________________________________________________________________________________________________________________________________________________________________________</div>
+	    <h4>
+		<div align="left">
+		{{$memo->texto0}}
+			</div></h4>
+
+			<div align=justify style="margin-bottom: 100px; margin-top:100px">
+			<h4><p align="left">{{$memo->texto1}}{{$dia_presentacion}}/{{$mes_presentacion}}/{{$year_presentacion}} a las {{$hora_presentacion}} Hrs. {{$memo->texto2}}
+					@if($tesis->carrera=="Ingenieria en Ejecucion e Informatica")
+					{{$memo->texto3}} {{$tesis->carrera}}
+					@elseif($tesis->carrera=="Ingenieria Informatica")
+					{{$memo->texto3}} {{$tesis->carrera}}	
+					@else				
+					@endif
+				<b>"{{$tesis->nombre_tesis}}"</b>.
+				@if($tesis->nombre_completo!=null and $tesis->nombre_completo2!=null)
+					De los alumnos
+					@if($tesis->nombre_completo!=null)
+								@if($sexo1=="Masculino")
+								  el Sr.
+								@endif
+								@if($sexo1=="Femenino")
+								 De la Srta.
+								@endif		
+								{{$tesis->nombre_completo}}
+								Rut:{{$tesis->rut}}.								
+						@endif
+						@if($tesis->nombre_completo2!=null)
+								@if($sexo2=="Masculino")
+								 y el Sr.
+								@endif
+								@if($sexo2=="Femenino")
+								 y la Srta.
+								@endif
+								{{$tesis->nombre_completo2}}
+								Rut:{{$tesis->rut2}}.			
+						@endif
+			@endif
+			@if($tesis->nombre_completo!=null and $tesis->nombre_completo2==null)
+						Del alumno
+								@if($sexo1=="Masculino")
+								  el Sr.
+								@endif
+								@if($sexo1=="Femenino")
+								 de la Srta.
+								@endif		
+								{{$tesis->nombre_completo}}
+								Rut:{{$tesis->rut}}.									
+						
+
+			@endif
+			{{$memo->texto2}}({{$fecha->day}}/{{$fecha->month}}/{{$fecha->year}}){{$memo->texto3}}
+					
+			</h4></p>
+			</div>
+
+			<h4>
+			<div align="left" style="margin-bottom: 300px; margin-top: 30px">{{$memo->texto4}}</div>
+			</h4>
+
+			
+
+			<!--@if($tesis->nombre_completo!=null and $tesis->nombre_completo2!=null)
+					<div>De los alumnos
+					@if($tesis->nombre_completo!=null)
+								@if($sexo1=="Masculino")
+								  el Sr.
+								@endif
+								@if($sexo1=="Femenino")
+								 De la Srta.
+								@endif		
+								{{$tesis->nombre_completo}}								
+						@endif
+						@if($tesis->nombre_completo2!=null)
+								@if($sexo2=="Masculino")
+								 y el Sr.
+								@endif
+								@if($sexo2=="Femenino")
+								 y la Srta.
+								@endif
+								{{$tesis->nombre_completo2}}	
+						@endif
+			@endif-->
+				
+
+			
+
+
+			<div class="row" style="margin-top:60px">
+				<div class="col-12">
+					<h6 align="left">____________________________________</h6>
+					<div style="margin-left:900px">
+					<b>{{$grado_academico_director_escuela->grado_academico}}{{$director_escuela->name}}</b>
+					</div>
+				</div>
+			</div>
+
+			<div class="row" style="margin-top:0px">
+			<div class="col-12">
+					<div style="margin-left:0px">Recepción Prof. Comisión</div>
+					<div style="margin-left:900px">
+					<b>Director</b>
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<div style="margin-left:900px">
+						<b>Escuela {{$memo->escuela}}</b>
+					</div>
+					<div style="margin-left:0px">{{$iniciales_director_escuela[0]}}{{$iniciales_director_escuela[1]}}{{$iniciales_director_escuela[2]}}/bcsm
+				  </div>
+				 </div>
+			</div>
+
+			<div class="row">
+				<div class="col-12">
+					<div align="left">c.c.:-Archivo<div>
+					
+				</div>
+			</div>
+				
+
+
+	<script>
+		$(document).ready(function(){
+			window.print();
+		})
+		
+	</script>
+
+</body>
+</html>

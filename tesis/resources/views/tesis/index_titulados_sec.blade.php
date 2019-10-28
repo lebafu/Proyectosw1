@@ -42,7 +42,7 @@
               @endif
           </td>
 
-           <td><a href="{{url('tesis/create_num_memotitulados/'.$tesis->id) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Memo titulo</i></a></td>
+           <td><a href="{{url('tesis/createnummemotitulados'.$tesis->id) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Memo titulo</i></a></td>
       @endforeach
      </table>
      </div>
