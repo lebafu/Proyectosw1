@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-10-2019 a las 08:50:01
+-- Tiempo de generación: 30-10-2019 a las 00:49:32
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.6
 
@@ -61,49 +61,53 @@ CREATE TABLE `comision` (
   `profesor3_comision` varchar(255) DEFAULT NULL,
   `profesor1_externo` varchar(255) DEFAULT NULL,
   `profesor1_grado_academico` varchar(255) DEFAULT NULL,
+  `sexo1` varchar(20) DEFAULT NULL,
   `correo_profe1_externo` varchar(255) DEFAULT NULL,
   `institucion1` varchar(255) DEFAULT NULL,
+  `codigo_postal1` int(7) DEFAULT NULL,
   `profe2_externo` varchar(255) DEFAULT NULL,
+  `sexo2` varchar(15) DEFAULT NULL,
   `profe2_grado_academico` varchar(255) DEFAULT NULL,
   `correo_profe2_externo` varchar(255) DEFAULT NULL,
-  `institucion2` varchar(255) DEFAULT NULL
+  `institucion2` varchar(255) DEFAULT NULL,
+  `codigo_postal2` int(7) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `comision`
 --
 
-INSERT INTO `comision` (`id`, `id_profesor_guia`, `nombre_alumno`, `profesor1_comision`, `coguia`, `profesor2_comision`, `profesor3_comision`, `profesor1_externo`, `profesor1_grado_academico`, `correo_profe1_externo`, `institucion1`, `profe2_externo`, `profe2_grado_academico`, `correo_profe2_externo`, `institucion2`) VALUES
-(8, 11, 'Carlos Andres Cancino Duran', 'Xaviera Lopez', NULL, 'Paulo Gonzalez', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(10, 17, 'Oscar Raul Perez Fernandez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(16, 12, 'Rodrigo Chavez', 'Hugo Araya', NULL, 'Marco Toranzo', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(18, 17, 'Camilo Cavieres', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(19, 17, 'Gonzalo Ignacio Paredes Valenzuela', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Wladimir Soto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(22, 21, 'Felipe Nicolas Tapia Nuñez', 'Sergio Hernandez', NULL, 'Paulo Gonzalez', 'Xaviera Lopez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(23, 15, 'Rosa Karina Gonzalez Gutierrez', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(31, 13, 'Daniel Alarcon Chambles', 'Hugo Araya', NULL, 'Marco Toranzo', 'Paulo Gonzalez', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(32, 17, 'Jhon Michael Faundez Miño', 'Paulo Gonzalez', 1, 'Hugo Araya', 'Angelica Urrutia', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
-(38, 17, 'Pedro Lopez', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseTorres@utal.com', 'Universidad de Talca', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(39, 20, 'Hugo Rodriguez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Sergio Hernandez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(40, 17, 'Felipe Javier Barrios Lopez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(41, 13, 'Francisco De la Fuente', 'Hugo Araya', NULL, 'Xaviera Lopez', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseTorres@utal.com', 'Universidad de Talca', NULL, NULL, NULL, NULL),
-(42, 14, 'Rodrigo Ramirez', 'Sergio Hernandez', NULL, 'Angelica Urrutia', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(44, 7, 'Walter Gonzalo Casanova Hurtado', 'Paulo Gonzalez', NULL, 'Marco Toranzo', 'Ninguno', 'Hugo Perez', 'Ing.', 'HugoP@gmail.com', 'Universidad de Concepcion', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(45, 15, 'Fernando Ignacio Olmos Duran', 'Xaviera Lopez', NULL, 'Marco Toranzo', 'Xaviera Lopez', 'Jose Torres', 'Mg.', 'JoseTorres@utal.com', 'Universidad de Talca', 'Hugo Yañez', 'Ing.', 'HugoY@utal.com', 'Universidad de Talca'),
-(46, 13, 'Sebastian Garrido', 'Angelica Urrutia', NULL, 'Marco Toranzo', 'Hugo Araya', 'Jose Torres', 'Mg.', 'JoseT@utal.com', 'Universidad de Talca', 'Gabriel Perez', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(47, 7, 'Miguel Ignacio Cancino Nuñez', 'Marco Toranzo', 1, 'Angelica Urrutia', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', NULL, NULL, NULL, NULL),
-(48, 17, 'Karina Patiño Albornoz', 'Paulo Gonzalez', NULL, 'Ricardo Barrientos', 'Angelica Urrutia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(49, 11, 'Jose Miguel Valdes Salgado', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Sergio Hernandez', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'Ing.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(50, 14, 'Felipe Antonio Matamala Lopez', 'Sergio Hernandez', NULL, 'Angelica Urrutia', 'Hugo Araya', 'Jose Torres', 'Mg.', 'JoseT@gmail.com', 'Universidad de Talca', 'Gabriel Perez', 'Ing.', 'GabrielP@gmail.com', 'Universidad Autonoma'),
-(51, 15, 'Hector Carrasco Faundez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Sergio Hernandez', 'Arturo Norambuena', 'Ing.', 'ArturoN@gmail.com', 'Universidad de Talca', NULL, 'Ing.', NULL, NULL),
-(52, 17, 'Boris Salgado Lopez', 'Paulo Gonzalez', NULL, 'Wladimir Soto', 'Angelica Urrutia', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
-(53, 12, 'Diego Gaete Bernales', 'Marco Mora', NULL, 'Ricardo Barrientos', 'Sergio Hernandez', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
-(54, 12, 'Humberto Muñoz Norambuena', 'Hugo Araya', NULL, 'Marco Toranzo', 'Angelica Urrutia', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
-(56, 12, 'Ignacio Lillo', 'Hugo Araya', NULL, 'Marco Toranzo', 'Ricardo Barrientos', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
-(57, 7, 'Jose Lopez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Angelica Urrutia', 'Bernardo Lopez', 'Ing.', 'BernardoL@utalca.cl', 'Universidad de Talca', NULL, 'Ing.', NULL, NULL),
-(58, 17, 'Boris Mora Garrido', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Ninguno', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
-(61, 7, 'Hugo Gutierrez', 'Marco Toranzo', 1, 'Paulo Gonzalez', 'Ninguno', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL),
-(63, 17, 'Adolfo Fuentes', 'Hugo Araya', 0, 'Paulo Gonzalez', 'Angelica Urrutia', NULL, 'Ing.', NULL, NULL, NULL, 'Ing.', NULL, NULL);
+INSERT INTO `comision` (`id`, `id_profesor_guia`, `nombre_alumno`, `profesor1_comision`, `coguia`, `profesor2_comision`, `profesor3_comision`, `profesor1_externo`, `profesor1_grado_academico`, `sexo1`, `correo_profe1_externo`, `institucion1`, `codigo_postal1`, `profe2_externo`, `sexo2`, `profe2_grado_academico`, `correo_profe2_externo`, `institucion2`, `codigo_postal2`) VALUES
+(8, 11, 'Carlos Andres Cancino Duran', 'Xaviera Lopez', NULL, 'Paulo Gonzalez', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(10, 17, 'Oscar Raul Perez Fernandez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(16, 12, 'Rodrigo Chavez', 'Hugo Araya', NULL, 'Marco Toranzo', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(18, 17, 'Camilo Cavieres', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(19, 17, 'Gonzalo Ignacio Paredes Valenzuela', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Wladimir Soto', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(22, 21, 'Felipe Nicolas Tapia Nuñez', 'Sergio Hernandez', NULL, 'Paulo Gonzalez', 'Xaviera Lopez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(23, 15, 'Rosa Karina Gonzalez Gutierrez', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(31, 13, 'Daniel Alarcon Chambles', 'Hugo Araya', NULL, 'Marco Toranzo', 'Paulo Gonzalez', 'Jose Torres', 'Mg.', 'Masculino', 'JoseT@gmail.com', 'Universidad de Talca', 3460000, 'Gabriel Perez', NULL, 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma', 3460000),
+(32, 17, 'Jhon Michael Faundez Miño', 'Paulo Gonzalez', 1, 'Hugo Araya', 'Angelica Urrutia', NULL, 'Ing.', NULL, NULL, NULL, NULL, NULL, NULL, 'Ing.', NULL, NULL, NULL),
+(38, 17, 'Pedro Lopez', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'Masculino', 'JoseTorres@utal.com', 'Universidad de Talca', NULL, 'Gabriel Perez', 'Masculino', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma', 3460000),
+(39, 20, 'Hugo Rodriguez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Sergio Hernandez', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(40, 17, 'Felipe Javier Barrios Lopez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'Masculino', 'JoseT@gmail.com', 'Universidad de Talca', 3460000, 'Gabriel Perez', 'Masculino', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma', 3460000),
+(41, 13, 'Francisco De la Fuente', 'Hugo Araya', NULL, 'Xaviera Lopez', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'Masculino', 'JoseTorres@utal.com', 'Universidad de Talca', 3460000, NULL, NULL, NULL, NULL, NULL, NULL),
+(42, 14, 'Rodrigo Ramirez', 'Sergio Hernandez', NULL, 'Angelica Urrutia', 'Ninguno', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(44, 7, 'Walter Gonzalo Casanova Hurtado', 'Paulo Gonzalez', NULL, 'Marco Toranzo', 'Ninguno', 'Hugo Perez', 'Ing.', 'Masculino', 'HugoP@gmail.com', 'Universidad de Concepcion', 4030000, 'Gabriel Perez', 'Masculino', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma', 3460000),
+(45, 15, 'Fernando Ignacio Olmos Duran', 'Xaviera Lopez', NULL, 'Marco Toranzo', 'Xaviera Lopez', 'Jose Torres', 'Mg.', 'Masculino', 'JoseTorres@utal.com', 'Universidad de Talca', 3460000, 'Hugo Yañez', 'Masculino', 'Ing.', 'HugoY@utal.com', 'Universidad de Talca', 3460000),
+(46, 13, 'Sebastian Garrido', 'Angelica Urrutia', NULL, 'Marco Toranzo', 'Hugo Araya', 'Jose Torres', 'Mg.', 'Masculino', 'JoseT@utal.com', 'Universidad de Talca', 3460000, 'Gabriel Perez', 'Masculino', 'Dr.', 'GabrielP@gmail.com', 'Universidad Autonoma', 3460000),
+(47, 7, 'Miguel Ignacio Cancino Nuñez', 'Marco Toranzo', 1, 'Angelica Urrutia', 'Ricardo Barrientos', 'Jose Torres', 'Mg.', 'Masculino', 'JoseT@gmail.com', 'Universidad de Talca', NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(48, 17, 'Karina Patiño Albornoz', 'Paulo Gonzalez', NULL, 'Ricardo Barrientos', 'Angelica Urrutia', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(49, 11, 'Jose Miguel Valdes Salgado', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Xaviera Lopez', 'Jose Torres', 'Mg.', 'Mascuino', 'JoseT@gmail.com', 'Universidad de Talca', 3460000, 'Gabriel Perez', 'Masculino', 'Ing.', 'GabrielP@gmail.com', 'Universidad Autonoma', 3460000),
+(50, 14, 'Felipe Antonio Matamala Lopez', 'Sergio Hernandez', NULL, 'Angelica Urrutia', 'Hugo Araya', 'Jose Torres', 'Mg.', 'Masculino', 'JoseT@gmail.com', 'Universidad de Talca', 3460000, 'Gabriel Perez', 'Masculino', 'Ing.', 'GabrielP@gmail.com', 'Universidad Autonoma', 3460000),
+(51, 15, 'Hector Carrasco Faundez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Sergio Hernandez', 'Arturo Norambuena', 'Ing.', 'Masculino', 'ArturoN@gmail.com', 'Universidad de Talca', 3460000, NULL, NULL, 'Ing.', NULL, NULL, NULL),
+(52, 17, 'Boris Salgado Lopez', 'Paulo Gonzalez', NULL, 'Wladimir Soto', 'Angelica Urrutia', NULL, 'Ing.', NULL, NULL, NULL, NULL, NULL, NULL, 'Ing.', NULL, NULL, NULL),
+(53, 12, 'Diego Gaete Bernales', 'Marco Mora', NULL, 'Ricardo Barrientos', 'Sergio Hernandez', NULL, 'Ing.', NULL, NULL, NULL, NULL, NULL, NULL, 'Ing.', NULL, NULL, NULL),
+(54, 12, 'Humberto Muñoz Norambuena', 'Hugo Araya', NULL, 'Marco Toranzo', 'Angelica Urrutia', NULL, 'Ing.', NULL, NULL, NULL, NULL, NULL, NULL, 'Ing.', NULL, NULL, NULL),
+(56, 12, 'Ignacio Lillo', 'Hugo Araya', NULL, 'Marco Toranzo', 'Ricardo Barrientos', NULL, 'Ing.', NULL, NULL, NULL, NULL, NULL, NULL, 'Ing.', NULL, NULL, NULL),
+(57, 7, 'Jose Lopez', 'Hugo Araya', NULL, 'Paulo Gonzalez', 'Angelica Urrutia', 'Bernardo Lopez', 'Ing.', 'Masculino', 'BernardoL@utalca.cl', 'Universidad de Talca', 3460000, NULL, NULL, 'Ing.', NULL, NULL, NULL),
+(58, 17, 'Boris Mora Garrido', 'Paulo Gonzalez', NULL, 'Hugo Araya', 'Ninguno', NULL, 'Ing.', NULL, NULL, NULL, NULL, NULL, NULL, 'Ing.', NULL, NULL, NULL),
+(61, 7, 'Hugo Gutierrez', 'Marco Toranzo', 1, 'Paulo Gonzalez', 'Ninguno', NULL, 'Ing.', NULL, NULL, NULL, NULL, NULL, NULL, 'Ing.', NULL, NULL, NULL),
+(63, 17, 'Adolfo Fuentes', 'Hugo Araya', 0, 'Paulo Gonzalez', 'Angelica Urrutia', NULL, 'Ing.', NULL, NULL, NULL, NULL, NULL, NULL, 'Ing.', NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -179,6 +183,7 @@ CREATE TABLE `grado_academico_profesor_planta` (
 --
 
 INSERT INTO `grado_academico_profesor_planta` (`id`, `estado`, `grado_academico`) VALUES
+(3, 1, 'Mg.'),
 (7, 1, 'Mg.'),
 (11, 1, 'Dr.'),
 (12, 1, 'Dr.'),
@@ -191,6 +196,36 @@ INSERT INTO `grado_academico_profesor_planta` (`id`, `estado`, `grado_academico`
 (96, 1, 'Dra.'),
 (99, 1, 'Mg.'),
 (104, 1, 'Ing.');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `memorandum`
+--
+
+CREATE TABLE `memorandum` (
+  `id` bigint(20) NOT NULL,
+  `nombre_memorandum` varchar(30) NOT NULL,
+  `escuela` varchar(50) NOT NULL,
+  `texto0` text DEFAULT NULL,
+  `texto1` text NOT NULL,
+  `texto2` text NOT NULL,
+  `texto3` text NOT NULL,
+  `texto4` text DEFAULT NULL,
+  `texto5` text DEFAULT NULL,
+  `texto6` text DEFAULT NULL,
+  `texto7` text DEFAULT NULL,
+  `nombre_jefe_titulo` varchar(255) DEFAULT NULL,
+  `sexo_jefe_titulos` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `memorandum`
+--
+
+INSERT INTO `memorandum` (`id`, `nombre_memorandum`, `escuela`, `texto0`, `texto1`, `texto2`, `texto3`, `texto4`, `texto5`, `texto6`, `texto7`, `nombre_jefe_titulo`, `sexo_jefe_titulos`) VALUES
+(1, 'Revisión', 'Ingeniería Civil Informática', 'Estimado Docente', 'Junto con saludarle, y como integrante de la Comisión de Examen de Título', 'Una vez recepcionado el documento solicito a usted, en el plazo de 15 días habiles', ', entregar el informe de evaluación de este trabajo al Profesor Guía.', 'A la espera de una favorable recepción y respuesta, saluda atentamente a usted,', NULL, NULL, NULL, NULL, NULL),
+(2, 'Titulación', 'Ingeniería Civil Informática', 'De mi consideración', 'Mediante el presente y para su tramitación correspondiente, adjunto envío a usted Acta de Titulación de fecha', 'de la carrera Ingeniería Civil Informática,', 'bajada intermedia', ',correspondiente ', 'quien obtuvo como nota promedio final', 'Sin otro particular, saluda atentamente a usted', 'quienes obtuvieron como nota promedio final', 'Yolanda Medel González', 'Femenino');
 
 -- --------------------------------------------------------
 
@@ -229,7 +264,9 @@ CREATE TABLE `password_resets` (
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('leonardob94@hotmail.com', '$2y$10$OSpMQNf7sn2hY8c4pg84iOs8l.XUsIWIwKcC5plg6jCr1kQxJNtRy', '2019-10-12 22:53:56');
+('leonardob94@hotmail.com', '$2y$10$OSpMQNf7sn2hY8c4pg84iOs8l.XUsIWIwKcC5plg6jCr1kQxJNtRy', '2019-10-12 22:53:56'),
+('mtoranzo@gmail.com', '$2y$10$k.W7h6MvsspkQILyRJLqAe51Xk0vGWWsu1hS1hDSKprDPwy9y8t5K', '2019-10-16 00:41:28'),
+('leonardo211294@gmail.com', '$2y$10$R8ovPN3Z/3Uvf.fdQOepQu5PcxRXB879RYHZ3BBgJ6Y72sa.9xKm2', '2019-10-16 20:32:04');
 
 -- --------------------------------------------------------
 
@@ -280,7 +317,8 @@ CREATE TABLE `recopilacion_inf_titulados` (
 --
 
 INSERT INTO `recopilacion_inf_titulados` (`id`, `fecha_nac`, `titulo`, `telefono_celular`, `telefono_fijo`, `facebook`, `direccion_actual`, `ano_egreso`, `fecha_nac2`, `titulo2`, `telefono_celular2`, `telefono_fijo2`, `subido_constancia`, `facebook2`, `direccion_actual2`, `ano_egreso2`) VALUES
-(22, '1994-10-10', 'Ingeniero', '78494810', '23530328', 'Felipe Tapia', 'Talca 26 sur', '2018-10-15', NULL, NULL, NULL, NULL, 1, NULL, '', NULL);
+(22, '1994-10-10', 'Ingeniero', '78494810', '23530328', 'Felipe Tapia', 'Talca 26 sur', '2018-10-15', NULL, NULL, NULL, NULL, 1, NULL, '', NULL),
+(32, '1994-07-21', 'Ingeniero', '75802274', '979504954', 'Joh Faundez', 'Constitucion 3509', '2018-07-10', '1993-12-09', 'Ingeniero', '76583402', '23546721', 1, 'Alfonso Bilocopetiuc', 'Constitucion 2152', '2018-07-10');
 
 -- --------------------------------------------------------
 
@@ -337,7 +375,7 @@ INSERT INTO `tesis` (`id`, `nombre_completo`, `nombre_completo2`, `rut`, `rut2`,
 (22, 'Felipe Nicolas Tapia Nuñez', NULL, '18.732.564-7', NULL, 'Estudio de Patrones de venas de la mano', 'IA', 2013, NULL, 'Ricardo Barrientos', 'Ingenieria Civil Informatica', 'Tesis', 'Permitir ahorrar recursos en el reconocimiento unico de la poblacion, que actualmente se hace por huella dactilar.', 'El alumno deberá ayudar a generar en el reconocimiento de patrones de las venas de la mano.', 'Generar un modelo que permite el reconocimiento de las venas de la mano.', 'Fondo concusable', 'Conicyt', NULL, 4, 1, NULL, '2019-07-19 23:14:28', '2019-08-21', 1, '2019-12-19', 1, '2019-07-23', '1571110545d-separation (1).pdf', 'Copie aqui su abstract o resumen.', NULL, '2019-10-15 15:00:00', '157111431622.pdf', 7),
 (23, 'Rosa Karina Gonzalez Gutierrez', NULL, '18.923.457-4', NULL, 'Analisis de sentimientos aplicando una taxonomia de encuestas', 'BI', 2013, NULL, 'Angelica Urrutia', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2 Descripcion3', 'Objetivo1, Objetivo2', 'Comunidad', 'Jardin Infantil', 'Escribe aquí su observacion', 4, 1, 1, '2019-07-20 23:38:34', '2019-07-19', NULL, '2019-08-20', NULL, '2019-07-21', NULL, NULL, NULL, NULL, NULL, NULL),
 (31, 'Daniel Alarcon Chambles', NULL, '18.123.456-9', NULL, 'Desarrollo modelo de optimización en java', 'Ingenieria de Software', 2013, NULL, 'Wladimir Soto', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'UTALCA-UCM', 'Sin observacion', 4, 1, NULL, '2019-07-26 08:22:02', '2019-10-18', 1, NULL, NULL, '2019-07-29', NULL, NULL, NULL, NULL, NULL, NULL),
-(32, 'Jhon Michael Faundez Miño', 'Alfonso Bilocopetiuc Parra', '18.574.262-8', '18.574.262-8', 'Desarrollo de aplicacion movil ed. fisica', 'Ingenieria de Software', 2013, 2013, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Memoria', 'Se espera contribuir a la carrera de Educación fisica, desarrollando una aplicación de utilidad para ellos...', 'Esta tesis pretende...', 'Dentro de los objetivos de esta tesis se espera...', 'Proyecto', 'Proyecto1', 'Escribe aquí su observacion', 4, 1, NULL, '2019-09-19 01:30:10', NULL, NULL, NULL, NULL, '2019-09-19', NULL, NULL, NULL, NULL, NULL, NULL),
+(32, 'Jhon Michael Faundez Miño', 'Alfonso Bilocopetiuc Parra', '18.574.262-8', '18.574.262-8', 'Desarrollo de aplicacion movil ed. fisica', 'Ingenieria de Software', 2013, 2013, 'Marco Toranzo', 'Ingenieria Civil Informatica', 'Memoria', 'Se espera contribuir a la carrera de Educación fisica, desarrollando una aplicación de utilidad para ellos...', 'Esta tesis pretende...', 'Dentro de los objetivos de esta tesis se espera...', 'Proyecto', 'Proyecto1', 'Escribe aquí su observacion', 4, 1, NULL, '2019-09-19 01:30:10', NULL, NULL, NULL, NULL, '2019-09-19', '157126632210.pdf', 'Copie aqui su abstract o resumen.', NULL, '2019-10-16 20:00:00', '157126715332.pdf', 7),
 (34, 'Felipe Garrido Perez', NULL, '19.234.544-6', NULL, 'Desarrollo de algoritmo de limpieza de imagenes', 'Imagenes', 2014, NULL, 'Paulo Gonzalez', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2 Descripcion3', 'Objetivo1, Objetivo2', 'Proyecto', 'Proyecto F2', NULL, 1, NULL, NULL, '2019-07-26 12:03:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (35, 'Nelson Guerra', NULL, '12.345.678-8', NULL, 'Desarrollo aplicacion', 'Imagenes', 2013, NULL, 'Ricardo Barrientos', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2', 'objetivo1 objetivo2', 'Fondo concusable', 'Conycit', NULL, 1, NULL, NULL, '2019-07-26 12:12:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (36, 'Cesar Poblete', NULL, '12-356.789-4', NULL, 'Aplicando BI sobre datos registro civil', 'BI', 2014, NULL, 'Angelica Urrutia', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2', 'objetivo1 objetivo2', 'Empresa', '3it', NULL, 1, NULL, NULL, '2019-07-26 12:14:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
@@ -390,14 +428,14 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `sexo`, `tipo_usuario`, `director_escuela`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'Admin@admin.com', NULL, '$2y$10$P7Por1l.Ep3mdBZyEvq5OOaTOCePQZw.T0S4Zkj9qF5LFJADxsrue', 'Masculino', 0, 0, NULL, NULL, NULL),
-(3, 'Ivan Merino Gonzalez', 'IvanMer@gmail.com', NULL, '$2y$10$AG5RKsQM47Vjfo5CrlkFte/qGCZaj3hC/SBQRCf1tuzfj/NH//zXy', 'Masculino', 3, 0, NULL, NULL, '2019-08-24 01:35:10'),
+(3, 'Ivan Raul Merino Gonzalez', 'IvanMer@gmail.com', NULL, '$2y$10$gTj.qdoj79Ef/egiyT4yNuv.ROtmOiI59dIkzVLWnAlPRWGgylQ/G', 'Masculino', 3, 0, NULL, NULL, '2019-10-22 04:15:15'),
 (4, 'Leonardo Ignacio Bascuñan Fuentealba', 'leonardo211294@gmail.com', NULL, '$2y$10$7hsTqDu10ALsH3qhiQVyfuOmKJ7fiuurnw09DMJoJsus7l8cWviv.', 'Masculino', 1, 0, 'Mog3bsZ4nn8gNTyU6qSXmw64WfYgax7JBLnfhnVGyR41xqikUM3WNgZLFTCK', '2019-07-14 23:56:55', '2019-10-13 05:33:15'),
-(7, 'Hugo Araya', 'Haraya@gmail.com', NULL, '$2y$10$rw7BfPGCEarFKsm/TMcy9OdZYszb./FJeu5gDcjkIx1yJ2vbP8ln6', 'Masculino', 2, 0, NULL, NULL, '2019-10-11 23:40:31'),
+(7, 'Hugo Araya', 'Haraya@gmail.com', NULL, '$2y$10$RXRtEEKqB2TR.qzMm9Fxo..RSyXb7FiYIHumhu2qKwy/IX0grY1/S', 'Masculino', 2, 0, NULL, NULL, '2019-10-22 04:05:17'),
 (8, 'Carlos Andres Cancino Duran', 'CarlosCancino@gmail.com', NULL, '$2y$10$FI0FmorGtaq2VMHczi3RMO9aQNqozX1FNIeDet09n6TMf2.n8cZSK', 'Masculino', 1, 0, NULL, '2019-07-16 04:16:21', '2019-07-16 04:16:21'),
 (9, 'Rafael  Alexis Perez Torres', 'RafaelPerez@gmail.com', NULL, '$2y$10$raKHvuUg4HJKAh6UO2pwXuiVfwzu7F5VTyesjCOvZxNoi3C7tsgJW', 'Masculino', 1, 0, NULL, '2019-07-16 04:18:50', '2019-07-16 04:18:50'),
 (10, 'Oscar Raul Perez Fernandez', 'OscarPerez@gmail.com', NULL, '$2y$10$UHCQuJdxJw8aJTFDi3dL1.zW7F4HcfX35y99g.8iMiZvbPDkUin1.', 'Masculino', 1, 0, NULL, '2019-07-16 04:20:43', '2019-07-16 04:20:43'),
 (11, 'Sergio Hernandez', 'SergioH@gmail.com', NULL, '$2y$10$bGwldwqEeiVRDetxT2ZjNOONUPt/q1n/k86ad4aGkSpOdvMMtxd5q', 'Masculino', 2, 0, NULL, NULL, '2019-10-10 08:15:28'),
-(12, 'Paulo Gonzalez', 'PauloGonzalez@gmail.com', NULL, '$2y$10$W5PPczjvJ0HYjUnB4OrjOe7FpWju69ieVGaf/k4ZtnTAxxWOBSrM.', 'Masculino', 2, 1, NULL, NULL, '2019-10-11 23:40:31'),
+(12, 'Paulo Gonzalez Gutierrez', 'PauloGonzalez@gmail.com', NULL, '$2y$10$W5PPczjvJ0HYjUnB4OrjOe7FpWju69ieVGaf/k4ZtnTAxxWOBSrM.', 'Masculino', 2, 1, NULL, NULL, '2019-10-11 23:40:31'),
 (13, 'Wladimir Soto', 'wsoto@hotmail.com', NULL, '$2y$10$HJz7PXN14.qafcKQmEHXoumhvGzLXHK4kGz.YXeDbN6PmTGw1MPoG', 'Masculino', 2, 0, NULL, NULL, '2019-10-10 06:50:22'),
 (14, 'Xaviera Lopez', 'XavieraL@gmail.com', NULL, '$2y$10$Iy8sRhRFOl8EjoHFgjjAKegJzr5RoRKk8ZzIO/I4Zu2s5F4i1z2pC', 'Femenino', 2, 0, NULL, NULL, '2019-10-10 06:50:50'),
 (15, 'Angelica Urrutia', 'AngelicaU@gmail.com', NULL, '$2y$10$UHeuUhqSxgVUMzTRCKgj2ewR3oS8oRGWLK1xwnxm24LKcrAwKdnu.', 'Femenino', 2, 0, NULL, NULL, '2019-10-10 06:56:34'),
@@ -422,7 +460,7 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `se
 (40, 'Felipe Javier Barrios Lopez', 'FelipeBarrios@gmail.com', NULL, '$2y$10$5xHZ3RncZ2QPluTsCXjCMug0xq4jF2r2q2iGcYPH4W7OZZhtnXw3W', 'Masculino', 1, 0, NULL, '2019-07-26 19:19:20', '2019-07-26 19:19:20'),
 (41, 'Francisco De la Fuente', 'FranciscoDF@gmail.com', NULL, '$2y$10$BTQil1FC8u4kt3f/YmrMr.WdUv4BFo4dx0AyQG5zpKnzcx0wgdoKG', 'Masculino', 1, 0, NULL, '2019-07-27 07:06:43', '2019-07-27 07:06:43'),
 (42, 'Rodrigo Ramirez', 'RodrigoR@gmail.com', NULL, '$2y$10$d9HZLRSpc/etYaMewAClnOKRZdTIq0o49jYG8Vkz9PMk0dA2nQ06y', 'Masculino', 1, 0, NULL, '2019-07-27 22:54:21', '2019-07-27 22:54:21'),
-(43, 'Barbara Castro', 'bcastro@ucm.cl', NULL, '$2y$10$bQ2ai9f57L0x.btzIBgJ9e7xM48mJCfY/TDGULmcO97Cpfyqv39lG', 'Femenino', 4, 0, NULL, NULL, NULL),
+(43, 'Barbara Sandra Castro Muñoz', 'bcastro@ucm.cl', NULL, '$2y$10$bQ2ai9f57L0x.btzIBgJ9e7xM48mJCfY/TDGULmcO97Cpfyqv39lG', 'Femenino', 4, 0, NULL, NULL, NULL),
 (44, 'Walter Gonzalo Casanova Hurtado', 'WaterC@gmail.com', NULL, '$2y$10$zOb/mHTfVnhSmiyQN8KUS.ovDQauYKWCIocyh9wZ0yMccJg54SEG6', 'Masculino', 1, 0, NULL, '2019-07-31 18:14:50', '2019-07-31 18:14:50'),
 (45, 'Fernando Ignacio Olmos Duran', 'FernandoOlmos@gmail.com', NULL, '$2y$10$Nvu1LcLeFHrDlIYG0Yy/9eqqPPKKNQ/ChxLFk4RJMgSgoJRZxIhAK', 'Masculino', 1, 0, NULL, '2019-08-02 11:05:35', '2019-08-02 11:05:35'),
 (46, 'Sebastian Garrido', 'SebastianG@gmail.com', NULL, '$2y$10$GTku6pBK38kipS/vAjiy.uheUMFQlB0jjKfGy/YPpmK24EHB.MKFa', 'Masculino', 1, 0, NULL, '2019-08-03 00:16:28', '2019-08-03 00:16:28'),
@@ -489,6 +527,12 @@ ALTER TABLE `fondo_concursable`
 -- Indices de la tabla `grado_academico_profesor_planta`
 --
 ALTER TABLE `grado_academico_profesor_planta`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `memorandum`
+--
+ALTER TABLE `memorandum`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -559,6 +603,12 @@ ALTER TABLE `fondo_concursable`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
+-- AUTO_INCREMENT de la tabla `memorandum`
+--
+ALTER TABLE `memorandum`
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- AUTO_INCREMENT de la tabla `migrations`
 --
 ALTER TABLE `migrations`
@@ -574,7 +624,7 @@ ALTER TABLE `proyectos`
 -- AUTO_INCREMENT de la tabla `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=105;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=109;
 
 --
 -- Restricciones para tablas volcadas
