@@ -159,7 +159,7 @@
 								@if($sexo1=="Femenino")
 								  la <b>SRTA.</b>
 								@endif		
-								<b>{{$al->name}}
+								<b>{{$nombre1}}
 								Rut:{{$tesis->rut}}</b>							
 						@endif
 						@if($tesis->nombre_completo2!=null)
@@ -169,7 +169,7 @@
 								@if($sexo2=="Femenino")
 								 y la <b>SRTA.</b> 
 								@endif
-								<b>{{$al2->name}}
+								<b>{{$nombre2}}
 								RUT:{{$tesis->rut2}}.</b>	
 								{{$memo->texto7}} {{$tesis->nota_tesis}}.		
 						@endif
@@ -183,8 +183,8 @@
 								a la alumna
 								la Srta.
 								@endif		
-								{{$al->name}}
-								RUT:{{$tesis->rut}},									
+								<b>{{$nombre1}}
+								RUT:{{$tesis->rut}}</b>,									
 								{{$memo->texto5}} {{$tesis->nota_tesis}}.
 			@endif
 			
