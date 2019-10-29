@@ -93,16 +93,29 @@
 								{{$tesis->nombre_completo}}				
 						@endif
 						@if($tesis->nombre_completo2!=null and $tesis->nombre_completo!=null)
-								De los alumnos
+							de los alumnos
+						@endif
+						 </div>
+				</div>
+			</div>
+			<div class="row">
+				<div align="left" style="margin-left: 190px">
+				@if($tesis->nombre_completo2!=null and $tesis->nombre_completo!=null)
+								@if($sexo1=="Masculino")
+									 Sr.
+								@endif
+								@if($sexo1=="Femenino")
+									Srta.
+								@endif		
+								{{$tesis->nombre_completo}}	
 								@if($sexo2=="Masculino")
-								
+								y del Sr.
 								@endif
 								@if($sexo2=="Femenino")
 								y de la	Srta.
 								@endif
 								{{$tesis->nombre_completo2}}	
 						@endif
-						 </div>
 				</div>
 			</div>
 		</div>
@@ -136,50 +149,51 @@
 					{{$memo->texto3}} {{$tesis->carrera}}	
 					@else				
 					@endif
-				<b>"{{$tesis->nombre_tesis}}"</b>.
+				{{$memo->texto4}}
 				@if($tesis->nombre_completo!=null and $tesis->nombre_completo2!=null)
 					De los alumnos
 					@if($tesis->nombre_completo!=null)
 								@if($sexo1=="Masculino")
-								  el Sr.
+								  el <b>SR. </b>
 								@endif
 								@if($sexo1=="Femenino")
-								 De la Srta.
+								  la <b>SRTA.</b>
 								@endif		
-								{{$tesis->nombre_completo}}
-								Rut:{{$tesis->rut}}.								
+								<b>{{$al->name}}
+								Rut:{{$tesis->rut}}</b>							
 						@endif
 						@if($tesis->nombre_completo2!=null)
 								@if($sexo2=="Masculino")
-								 y el Sr.
+								 y el <b>SR.</b>
 								@endif
 								@if($sexo2=="Femenino")
-								 y la Srta.
+								 y la <b>SRTA.</b> 
 								@endif
-								{{$tesis->nombre_completo2}}
-								Rut:{{$tesis->rut2}}.			
+								<b>{{$al2->name}}
+								RUT:{{$tesis->rut2}}.</b>	
+								{{$memo->texto7}} {{$tesis->nota_tesis}}.		
 						@endif
 			@endif
-			@if($tesis->nombre_completo!=null and $tesis->nombre_completo2==null)
-						Del alumno
+			@if($tesis->nombre_completo!=null and $tesis->nombre_completo2==null)	
 								@if($sexo1=="Masculino")
-								  el Sr.
+								al alumno
+								  el <b>SR.</b>
 								@endif
 								@if($sexo1=="Femenino")
-								 de la Srta.
+								a la alumna
+								la Srta.
 								@endif		
-								{{$tesis->nombre_completo}}
-								Rut:{{$tesis->rut}}.									
-						
-
+								{{$al->name}}
+								RUT:{{$tesis->rut}},									
+								{{$memo->texto5}} {{$tesis->nota_tesis}}.
 			@endif
-			{{$memo->texto2}}({{$fecha->day}}/{{$fecha->month}}/{{$fecha->year}}){{$memo->texto3}}
+			
 					
 			</h4></p>
 			</div>
 
 			<h4>
-			<div align="left" style="margin-bottom: 300px; margin-top: 30px">{{$memo->texto4}}</div>
+			<div align="left" style="margin-bottom: 300px; margin-top: 30px">{{$memo->texto6}}</div>
 			</h4>
 
 			

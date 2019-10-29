@@ -2840,9 +2840,11 @@ class TesisController extends Controller
     $alumno2=DB::table('users')->where('name','=',$tesis->nombre_completo2)->get();
     foreach($alumno1 as $al)$sexo1=$al->sexo;
     foreach($alumno2 as $al2)$sexo2=$al2->sexo;
+     $al->name=mb_strtoupper($al->name);
+    $al2->name=mb_strtoupper($al2->name);
      $director_escuela->name=mb_strtoupper($director_escuela->name);//Poner en mayuscula nombre director escuela.
     //dd($director_escuela);
-   return view('memorandum.memorandum_titulados',compact('tesis','director_escuela','memo','year','mes_fecha','dia_fecha','num_memo','director_escuela','grado_academico_director_escuela','sexo1','sexo2','fecha','iniciales_director_escuela','hora_presentacion','dia_presentacion','mes_presentacion','year_presentacion'));
+   return view('memorandum.memorandum_titulados',compact('tesis','director_escuela','memo','year','mes_fecha','dia_fecha','num_memo','director_escuela','grado_academico_director_escuela','sexo1','sexo2','fecha','iniciales_director_escuela','hora_presentacion','dia_presentacion','mes_presentacion','year_presentacion','al','al2'));
    }
 }
 
