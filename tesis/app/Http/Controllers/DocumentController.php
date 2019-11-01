@@ -112,6 +112,96 @@ class DocumentController extends Controller
         		return response()->download(public_path('Lista_Tesis.docx'));
         	}
        }
-    }
 
+       public function create_formulario_inscripcion($id)
+    {
+
+      $phpWord = new \PhpOffice\PhpWord\PhpWord();
+      $phpWord->setDefaultFontName('Times New Roman');
+        $section= $phpWord->addSection();
+       $tesis=Tesis::find($id);
+       $comision=Comision::find($id);
+       $alumno1=DB::table('users')->where('name','=',$tesis->nombre_completo)->get();
+       $alumno2=DB::table('users')->where('name','=',$tesis->nombre_completo2)->get();
+       foreach($alumno1 as $al) $email1=$al->email;
+       foreach($alumno2 as $al) $email2=$al->email;
+       $phpWord = new \PhpOffice\PhpWord\PhpWord();
+       $section= $phpWord->addSection();
+       $nombre1="NOMBRE COMPLETO:". $tesis->nombre_completo;
+       $rut1_año_ingreso1="Rut:". $tesis->rut." AÑO INGRESO:". $tesis->ano_ingreso;
+       $nombre2="NOMBRE COMPLETO:". $tesis->nombre_completo;
+       $rut2_año_ingreso2="Rut:". $tesis->rut." AÑO INGRESO:". $tesis->ano_ingreso;
+       $carrera="CARRERA:".$tesis->carrera;
+       $email1_telefono1="EMAIL:  ". $email1. " TELÉFONO: ". $tesis->telefono1;
+       $email2_telefono2="EMAIL: ". $email2. " TELÉFONO: ". $tesis->telefono2;
+       $nombre_tesis="NOMBRE TESIS/MEMORIA: ".$tesis->nombre_tesis;
+       $descripcion="BREVE DESCRIPCIÓN DEL TEMA: ". $tesis->descripcion;
+       $objetivos="OBJETIVOS DEL TEMA: ".$tesis->objetivos;
+       $contribucion="CONTRIBUCIÓN ESPERADA: ". $tesis->contribucion;
+      $fuente_titulo = [
+            "name" => "Arial",
+            "size" => 11,
+            "align" => "center",
+            "bold" => true,
+      ];
+      $section->addTitleStyle(11,array("size"=>11,"bold"=>true,"align"=>"center"));
+       //size es para el tamaño bold=>true es para que la letra sea negrita, y align, para centrar ese texto.
+       $section->addTitle("U N I V E R S I D A D C A T Ó L I C A D E L M A U L E",); // Agregamos un titulo al documento con 
+       $section->addTitle("F A C U L T A D D E C I E N C I A S D E L A I N G E N I E R Í A");
+       $section->addTitle("ESCUELA DE INGENIERÍA CIVIL INFORMÁTICA"); 
+       $section->addTitle("FORMULARIO DE INSCRIPCIÓN DE TESIS Y"); 
+       $section->addTitle("MEMORÍAS DE TÍTULO"); 
+       $section->addText("(A COMPLETAR POR EL ALUMNO)",array("size"=>11,"bold"=>true,"align"=>"center"));
+       $section->addText($nombre1 ,array("size"=>11,"align"=>"left"));
+       $section->addText($rut1_año_ingreso1,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addText($carrera,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addText($email1_telefono1,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addText($nombre_tesis,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addText($descripcion,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addText($objetivos,array("size"=>11,"bold"=>false,"align"=>"center"));
+       $section->addText($contribucion,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addText("FIRMA ALUMNO",array("size"=>11,"bold"=>true,"align"=>"center"));
+       $section->addText("FECHA:...../...../.....",array("size"=>11,"bold"=>true,"align"=>"left"));
+       if($tesis->nombre_completo2!=null)
+       {
+       $section->addTitle("U N I V E R S I D A D C A T Ó L I C A D E L M A U L E"); // Agregamos un titulo al documento con 
+       $section->addTitle("F A C U L T A D D E C I E N C I A S D E L A I N G E N I E R Í A");
+       $section->addTitle("ESCUELA DE INGENIERÍA CIVIL INFORMÁTICA"); 
+       $section->addTitle("FORMULARIO DE INSCRIPCIÓN DE TESIS Y"); 
+       $section->addTitle("MEMORÍAS DE TÍTULO");  
+       $section->addText("(A COMPLETAR POR EL ALUMNO)",array("size"=>11,"bold"=>true,"align"=>"center"));
+       $section->addText($nombre2 ,array("size"=>11,"align"=>"left"));
+       $section->addText($rut2_año_ingreso2,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addText($carrera,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addText($email2_telefono2,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addText($nombre_tesis,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addText($descripcion,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addText($objetivos,array("size"=>11,"bold"=>false,"align"=>"center"));
+       $section->addText($contribucion,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addText("FIRMA ALUMNO",array("size"=>11,"bold"=>true,"align"=>"center"));
+       $section->addText("FECHA:...../...../.....",array("size"=>11,"bold"=>true,"align"=>"left"));
+       }
+       
+        $section->addText("(A COMPLETAR POR PROFESOR GUIA)",array("size"=>11,"bold"=>true,"align"=>"center"));
+        $section->addText("PROFESOR GUÍA: $tesis->profesor_guia",array("size"=>11,"bold"=>false,"align"=>"left"));
+        $section->addText("COMISION SUGERIDA POR PROFESOR GUIA:",array("size"=>11,"bold"=>false,"align"=>"left"));
+        $section->addText("1-$comision->profesor1_comision",array("size"=>11,"bold"=>false,"align"=>"left"));
+        $section->addText("2-$comision->profesor2_comision",array("size"=>11,"bold"=>false,"align"=>"left"));
+        $section->addText("3- $comision->profesor3_comision",array("size"=>11,"bold"=>false,"align"=>"left"));
+        $section->addText("(EXTERNO(S) U OTRO(S) SI ES REQUERIDO. INDICAR CORREO E INSTITUCIÓN EN CASO DE SER EXTERNO):",array("size"=>11,"bold"=>false,"align"=>"center"));
+        $section->addText("4-$comision->profesor1_externo",array("size"=>11,"bold"=>false,"align"=>"left"));
+        $section->addText("CORREO:$comision->correo_profe1_externo",array("size"=>11,"bold"=>false,"align"=>"left"));
+        $section->addText("INSTITUCIÓN:$comision->institucion1",array("size"=>11,"bold"=>false,"align"=>"center"));
+        $section->addText("DIRECCIÓN POSTAL:$comision->codigo_postal1",array("size"=>11,"bold"=>false,"align"=>"left"));
+        $section->addText("5-$comision->profes2_externo",array("size"=>11,"bold"=>false,"align"=>"left"));
+        $section->addText("CORREO:$comision->correo_profe2_externo",array("size"=>11,"bold"=>false,"align"=>"left"));
+        $section->addText("INSTITUCIÓN:$comision->institucion2",array("size"=>11,"bold"=>false,"align"=>"left"));
+        $section->addText("DIRECCIÓN POSTAL:$comision->codigo_postal2",array("size"=>11,"bold"=>false,"align"=>"left"));
+         $section->addText("FIRMA PROFESOR GUIA                   FIRMA DIRECTOR DE ESCUELA "),array("size"=>11,"bold"=>true,"align"=>"center"));
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
+        $objWriter->save('Formulario_Inscripcion.docx');
+        return response()->download(public_path('Formulario_Inscripcion.docx'));
+    }
+    }
+    //la funcion addText igualmente imprime los valores dentro de las comillas como el objeto que se encuentra allí despues de $.
     //Al generar el word puede que algunas fechas de presentaciones sean extrañas, pero esto es debido a que fueron ingresadas antes de que tuviesen la restriccion por hora y dia  en el calendario.

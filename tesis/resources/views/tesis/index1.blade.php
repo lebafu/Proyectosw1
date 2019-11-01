@@ -30,7 +30,7 @@
         <tr>
           @if($tesis->nombre_completo==$user->name or $tesis->nombre_completo2)
           <td>{{$tesis->id}}</td>
-          <td>{{$tesis->nombre_completo}} {{$tesis->nombre_completo2}}</td>
+          <td>{{$tesis->nombre_completo}} {{$tesis->nombre_completo2}}    <a href="{{url('/generar_formulario_inscripcion_tesis/'.$tesis->id)}}">Formulario Inscripción</a></td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}</td>
@@ -84,7 +84,6 @@
           <td></td>
          @endif
       <td>
-        
             <a href="{{url('/tesismostrar/'.$tesis->id)}}"  class="btn btn-info"><span class="far fa-eye"></span>
             <br> 
             <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
