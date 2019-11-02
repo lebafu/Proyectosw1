@@ -268,3 +268,15 @@ Route::get('/tesis/createnummemotitulados{tesis}', 'TesisController@create_num_m
 Route::put('/memo_titulados/', 'TesisController@memorandum_titulados')->name('memorandum.memorandum_titulados'); 
 Route::get('/generar_formulario_inscripcion_tesis/{tesis}','DocumentController@create_formulario_inscripcion');
 //Route::get('/memorandum_revision/{tesis}', 'TesisController@memo_revision')->('tesis.memo_revision');
+
+Route::get('sendmail',function()
+		{
+			$data=array('name'=>'CursoLaravel');
+			Mail::send('emails.email',$data,function($message)
+			{
+				$message->from('leonardo211294@gmail.com');
+				$message->to('leonardo211294@gmail.com')->subject('test Email Curso Laravel');
+			});	
+			return 'Tu email ha sido enviado correctamente';
+
+		});
