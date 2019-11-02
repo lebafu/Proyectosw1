@@ -30,7 +30,11 @@
         <tr>
           @if($tesis->nombre_completo==$user->name or $tesis->nombre_completo2)
           <td>{{$tesis->id}}</td>
-          <td>{{$tesis->nombre_completo}} {{$tesis->nombre_completo2}}    <a href="{{url('/generar_formulario_inscripcion_tesis/'.$tesis->id)}}">Formulario Inscripción</a></td>
+          <td>{{$tesis->nombre_completo}} {{$tesis->nombre_completo2}}    
+            @if($tesis->estado1>=2 and $tesis->estado2==1)  <!--Al alumno le aparecerá la opcion de descargar word de inscripcion solo una vez que el profesor lo envie al director de tesis -->
+            <a href="{{url('/generar_formulario_inscripcion_tesis/'.$tesis->id)}}">Formulario Inscripción</a>
+            @endif
+          </td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}</td>
