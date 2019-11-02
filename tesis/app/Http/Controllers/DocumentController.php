@@ -118,7 +118,8 @@ class DocumentController extends Controller
 
       $phpWord = new \PhpOffice\PhpWord\PhpWord();
       $phpWord->setDefaultFontName('Times New Roman');
-        $section= $phpWord->addSection();
+       $phpWord->addParagraphStyle('parrafo_titulo', array('align' => 'center'));
+       $section= $phpWord->addSection();
        $tesis=Tesis::find($id);
        $comision=Comision::find($id);
        $alumno1=DB::table('users')->where('name','=',$tesis->nombre_completo)->get();
@@ -127,41 +128,51 @@ class DocumentController extends Controller
        foreach($alumno2 as $al) $email2=$al->email;
        $phpWord = new \PhpOffice\PhpWord\PhpWord();
        $section= $phpWord->addSection();
+  
        $nombre1="NOMBRE COMPLETO:". $tesis->nombre_completo;
-       $rut1_año_ingreso1="Rut:". $tesis->rut." AÑO INGRESO:". $tesis->ano_ingreso;
+       $rut1_año_ingreso1="RUT:". $tesis->rut."            AÑO INGRESO:". $tesis->ano_ingreso;
        $nombre2="NOMBRE COMPLETO:". $tesis->nombre_completo;
-       $rut2_año_ingreso2="Rut:". $tesis->rut." AÑO INGRESO:". $tesis->ano_ingreso;
+       $rut2_año_ingreso2="RUT:". $tesis->rut."            AÑO INGRESO:". $tesis->ano_ingreso;
        $carrera="CARRERA:".$tesis->carrera;
-       $email1_telefono1="EMAIL:  ". $email1. " TELÉFONO: ". $tesis->telefono1;
-       $email2_telefono2="EMAIL: ". $email2. " TELÉFONO: ". $tesis->telefono2;
+       $email1_telefono1="EMAIL:  ". $email1. "            TELÉFONO: ". $tesis->telefono1;
+       $email2_telefono2="EMAIL: ". $email2. "             TELÉFONO: ". $tesis->telefono2;
        $nombre_tesis="NOMBRE TESIS/MEMORIA: ".$tesis->nombre_tesis;
        $descripcion="BREVE DESCRIPCIÓN DEL TEMA: ". $tesis->descripcion;
        $objetivos="OBJETIVOS DEL TEMA: ".$tesis->objetivos;
        $contribucion="CONTRIBUCIÓN ESPERADA: ". $tesis->contribucion;
       $fuente_titulo = [
-            "name" => "Arial",
+            "name" => "Times New Roman",
             "size" => 11,
             "align" => "center",
             "bold" => true,
       ];
-      $section->addTitleStyle(11,array("size"=>11,"bold"=>true,"align"=>"center"));
        //size es para el tamaño bold=>true es para que la letra sea negrita, y align, para centrar ese texto.
-       $section->addTitle("U N I V E R S I D A D C A T Ó L I C A D E L M A U L E",); // Agregamos un titulo al documento con 
-       $section->addTitle("F A C U L T A D D E C I E N C I A S D E L A I N G E N I E R Í A");
-       $section->addTitle("ESCUELA DE INGENIERÍA CIVIL INFORMÁTICA"); 
-       $section->addTitle("FORMULARIO DE INSCRIPCIÓN DE TESIS Y"); 
-       $section->addTitle("MEMORÍAS DE TÍTULO"); 
-       $section->addText("(A COMPLETAR POR EL ALUMNO)",array("size"=>11,"bold"=>true,"align"=>"center"));
+       $section->addText('                                             UNIVERSIDAD CATÓLICA DEL MAULE',array("size"=>11,"bold"=>true, 'parrafo_titulo')); // Agregamos un titulo al documento con 
+       $section->addText("                                          FACULTAD DE CIENCIAS DE LA INGENIERÍA",array("size"=>11,"bold"=>true, 'parrafo_titulo'));
+       $section->addText("                                         ESCUELA DE INGENIERÍA CIVIL INFORMÁTICA",array("size"=>11,"bold"=>true,'parrafo_titulo'));
+       $section->addText("                                                ",array("size"=>11,"bold"=>true, 'centerTab'));  
+       $section->addText("                                        FORMULARIO DE INSCRIPCIÓN DE TEMAS DE TESIS Y  ",array("size"=>11,"bold"=>true,'parrafo_titulo')); 
+       $section->addText("                                           MEMORÍAS DE TÍTULO",array("size"=>11,"bold"=>true, 'centerTab')); 
+       $section->addText("                                                ",array("size"=>11,"bold"=>true, 'centerTab'));  
+       $section->addText("                                    (A COMPLETAR POR EL ALUMNO)",array("size"=>11,"bold"=>true, 'centerTab'));
+       $section->addTextBreak();
+       $section->addTextBreak();
        $section->addText($nombre1 ,array("size"=>11,"align"=>"left"));
+       $section->addTextBreak();
        $section->addText($rut1_año_ingreso1,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addTextBreak();
        $section->addText($carrera,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addTextBreak();
        $section->addText($email1_telefono1,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addTextBreak();
        $section->addText($nombre_tesis,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addTextBreak();
        $section->addText($descripcion,array("size"=>11,"bold"=>false,"align"=>"left"));
        $section->addText($objetivos,array("size"=>11,"bold"=>false,"align"=>"center"));
        $section->addText($contribucion,array("size"=>11,"bold"=>false,"align"=>"left"));
        $section->addText("FIRMA ALUMNO",array("size"=>11,"bold"=>true,"align"=>"center"));
        $section->addText("FECHA:...../...../.....",array("size"=>11,"bold"=>true,"align"=>"left"));
+       $section->addPageBreak();
        if($tesis->nombre_completo2!=null)
        {
        $section->addTitle("U N I V E R S I D A D C A T Ó L I C A D E L M A U L E"); // Agregamos un titulo al documento con 
@@ -170,16 +181,24 @@ class DocumentController extends Controller
        $section->addTitle("FORMULARIO DE INSCRIPCIÓN DE TESIS Y"); 
        $section->addTitle("MEMORÍAS DE TÍTULO");  
        $section->addText("(A COMPLETAR POR EL ALUMNO)",array("size"=>11,"bold"=>true,"align"=>"center"));
+       $section->addTextBreak();
+       $section->addTextBreak();
        $section->addText($nombre2 ,array("size"=>11,"align"=>"left"));
+       $section->addTextBreak();
        $section->addText($rut2_año_ingreso2,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addTextBreak();
        $section->addText($carrera,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addTextBreak();
        $section->addText($email2_telefono2,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addTextBreak();
        $section->addText($nombre_tesis,array("size"=>11,"bold"=>false,"align"=>"left"));
+       $section->addTextBreak();
        $section->addText($descripcion,array("size"=>11,"bold"=>false,"align"=>"left"));
        $section->addText($objetivos,array("size"=>11,"bold"=>false,"align"=>"center"));
        $section->addText($contribucion,array("size"=>11,"bold"=>false,"align"=>"left"));
        $section->addText("FIRMA ALUMNO",array("size"=>11,"bold"=>true,"align"=>"center"));
        $section->addText("FECHA:...../...../.....",array("size"=>11,"bold"=>true,"align"=>"left"));
+       $section->addPageBreak();
        }
        
         $section->addText("(A COMPLETAR POR PROFESOR GUIA)",array("size"=>11,"bold"=>true,"align"=>"center"));
@@ -197,7 +216,13 @@ class DocumentController extends Controller
         $section->addText("CORREO:$comision->correo_profe2_externo",array("size"=>11,"bold"=>false,"align"=>"left"));
         $section->addText("INSTITUCIÓN:$comision->institucion2",array("size"=>11,"bold"=>false,"align"=>"left"));
         $section->addText("DIRECCIÓN POSTAL:$comision->codigo_postal2",array("size"=>11,"bold"=>false,"align"=>"left"));
-         $section->addText("FIRMA PROFESOR GUIA                   FIRMA DIRECTOR DE ESCUELA "),array("size"=>11,"bold"=>true,"align"=>"center"));
+         $section->addText("FIRMA PROFESOR GUIA       FIRMA DIRECTOR DE ESCUELA ",array("size"=>11,"bold"=>true,"align"=>"center"));
+         $section->addText("FECHA: …......../ …...... / …............-                    FECHA: …......../ …...... / …............-    ",array("size"=>11,"bold"=>true,"align"=>"left"));
+        $section->addText("***************************************************************************************",array("size"=>11,"bold"=>true,"align"=>"left"));
+        $section->addText("A COMPLETAR POR DIRECTOR DEL DEPARTAMENTO)",array("size"=>11,"bold"=>true,"align"=>"left"));
+        $section->addText("OBSERVACIONES DEL DIRECTOR DEL DEPARTAMENTO:",array("size"=>11,"bold"=>true,"align"=>"left"));
+        $section->addText("FIRMA DIRECTOR DEL DEPARTAMENTO",array("size"=>11,"bold"=>true,"align"=>"right"));
+        $section->addText("FECHA: …......../ …...... / …............-",array("size"=>11,"bold"=>true,"align"=>"right"));
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($phpWord, 'Word2007');
         $objWriter->save('Formulario_Inscripcion.docx');
         return response()->download(public_path('Formulario_Inscripcion.docx'));
