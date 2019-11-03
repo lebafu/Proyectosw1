@@ -5,6 +5,7 @@ use Barryvdh\DomPDF\Facade as PDF;
 use App\User;
 use App\Tesis;
 use App\Grado_academico;
+use Mail;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Support\Facades\Redirect;
@@ -240,8 +241,25 @@ class UsersController extends Controller
     }
 
 
-   public function showLinkRequestForm()
-    {
+
+   public function showLinkRequestForm(Request $request)
+    {   
+         dd($request->email);
+         if($request->email!=null)
+            {
+
+                    $users=DB::table('users')->where('email','=',$request->email)->get();
+                    foreach($users as $user)
+                    {
+                        $usuario->name='Javier Perez';
+                        $usuario->email=$user->email;
+                    }
+            Mail::send('auth.passwords.view_email',$usuario,function($message)
+                    {
+                        $message->from('leonardo211294@gmail.com');
+                        $message->to($request->email)->subject('test Email Curso Laravel');
+                    }); 
+        }
         return view('auth.passwords.email');
     }
 

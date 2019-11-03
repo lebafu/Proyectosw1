@@ -50,7 +50,8 @@ Route::post('/guardar_director_escuela','UsersController@guardar_director_escuel
 
 
 //Routas para resetear contraseña//
-Route::get('password/reset', 'Auth\ForgotPasswordController@showLinkRequestForm')->name('password.request');
+Route::get('password/reset', 'UsersController@showLinkRequestForm')->name('password.request');
+//Route::get('password/reset', 'UsersController@reestablecer_pass')->name('password.reestablecer');
 Route::post('password/email', 'Auth\ForgotPasswordController@sendResetLinkEmail')->name('password.email');
 Route::get('password/reset/{token}','Auth\ResetPasswordController@showResetForm')->name('password.reset');
 Route::post('password/reset', 'Auth\ResetPasswordController@reset');
@@ -269,14 +270,3 @@ Route::put('/memo_titulados/', 'TesisController@memorandum_titulados')->name('me
 Route::get('/generar_formulario_inscripcion_tesis/{tesis}','DocumentController@create_formulario_inscripcion');
 //Route::get('/memorandum_revision/{tesis}', 'TesisController@memo_revision')->('tesis.memo_revision');
 
-Route::get('sendmail',function()
-		{
-			$data=array('name'=>'CursoLaravel');
-			Mail::send('emails.email',$data,function($message)
-			{
-				$message->from('leonardo211294@gmail.com');
-				$message->to('leonardo211294@gmail.com')->subject('test Email Curso Laravel');
-			});	
-			return 'Tu email ha sido enviado correctamente';
-
-		});
