@@ -244,14 +244,14 @@ class UsersController extends Controller
 
    public function showLinkRequestForm(Request $request)
     {   
-         dd($request->email);
+         //dd($request->email);
          if($request->email!=null)
             {
 
                     $users=DB::table('users')->where('email','=',$request->email)->get();
                     foreach($users as $user)
                     {
-                        $usuario->name='Javier Perez';
+                        $usuario->name=$user->name;
                         $usuario->email=$user->email;
                     }
             Mail::send('auth.passwords.view_email',$usuario,function($message)
