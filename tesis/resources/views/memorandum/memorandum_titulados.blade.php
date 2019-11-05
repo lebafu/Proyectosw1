@@ -247,7 +247,7 @@
 					<div style="margin-left:900px">
 						<b>Escuela {{$memo->escuela}}</b>
 					</div>
-					<div style="margin-left:0px">{{$iniciales_director_escuela[0]}}{{$iniciales_director_escuela[1]}}{{$iniciales_director_escuela[2]}}/bcsm
+					<div style="margin-left:0px">{{$iniciales_director_escuela[0]}}{{$iniciales_director_escuela[1]}}/bcsm
 				  </div>
 				 </div>
 			</div>

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Bootstrap Example</title>
+  <title>Panel Secretaria</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -65,18 +65,76 @@
             .m-b-md {
                 margin-bottom: 30px;
             }
+
+            .navbar {
+  overflow: hidden;
+  background-color: #000050;
+}
+
+.navbar a {
+  float: left;
+  font-size: 16px;
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+}
+
+.dropdown {
+  float: left;
+  overflow: hidden;
+}
+
+.dropdown .dropbtn {
+  font-size: 16px;  
+  border: none;
+  outline: none;
+  color: white;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.navbar a:hover, .dropdown:hover .dropbtn {
+  background-color: #000020;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  float: none;
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  text-align: left;
+}
+
+.dropdown-content a:hover {
+  background-color: #000020 ;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
         </style>
     </head>
-<nav class="navbar navbar-inverse">
+<nav class="navbar">
   <div class="container-fluid">
     <div class="navbar-header">
       <a class="navbar-brand" href="#">Sistema de Tesis</a>
+      <a href="{{ url('/home') }}">Home</a>
+      <a href="{{url('/tesis_alumno_solicitud')}}">Ver tesis</a>
+      <a href="{{url('/tesis/create')}}">Inscribir Tesis</a>
     </div>
-    <ul class="nav navbar-nav">
-      <li class="active"><a href="{{ url('/home') }}">Home</a></li>
-      <li><a href="{{url('/tesis_alumno_solicitud')}}">Ver tesis</a></li>
-      <li><a href="{{url('/tesis/create')}}">Inscribir Tesis</a></li>
-    </ul>
   </div>
 </nav>
         </div>
