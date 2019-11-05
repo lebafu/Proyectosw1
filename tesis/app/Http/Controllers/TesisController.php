@@ -2060,14 +2060,14 @@ class TesisController extends Controller
 
       public function memo_revision1(Request $request)
       {
-         //dd($request);
         $id=$request->get('id');
         //dd($id);
          $num_memo=$request->get('numero');
          $comision=Comision::find($id);
-         $comision->profesor=mb_strtoupper($comision->profesor1_comision);
-         $profesor_comision=DB::table('grado_academico_profesor_planta')->join('users','grado_academico_profesor_planta.id','=','users.id')->where('users.name','=',$comision->profesor)->get();
+         //dd($comision->profesor1_comision);
+         $profesor_comision=DB::table('grado_academico_profesor_planta')->join('users','grado_academico_profesor_planta.id','=','users.id')->where('users.name','=',$comision->profesor1_comision)->get();
          foreach($profesor_comision as $profe_comision);
+         //dd($profesor_comision);
          $profe_comision->grado_academico=mb_strtoupper($profe_comision->grado_academico);
          $profe_comision->name=mb_strtoupper($profe_comision->name);
          //$profesor_com=DB::table('users')->where('name','=',$comision_profesor)->get();
@@ -2186,8 +2186,8 @@ class TesisController extends Controller
          //dd($coordinador_tesis);
          $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
         $revision->escuela1=mb_strtoupper($revision->escuela);
-        //dd($revision->escuela);
-         return view('memorandum.memorandum_revision1',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','profe_comision'));
+         return view('memorandum.memorandum_revision2',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','profe_comision'));
+        
       }
         
 

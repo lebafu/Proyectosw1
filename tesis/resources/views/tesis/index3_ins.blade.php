@@ -23,6 +23,7 @@
            <th>Area Tesis</th>
           <th>Nombre tesis</th>
           <th>Vinculacion</th>
+          <th>Revision</th>
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
@@ -34,6 +35,11 @@
           <td>{{$tesis->area_tesis}}</td>
           <td>{{$tesis->nombre_tes_res}}</td>
           <td>{{$tesis->tipo_vinculacion}}</td>
+          @if($tesis->constancia_ex!=null)
+           <td><a href="{{url('tesis/create_num_memo'.$tesis->id) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Memo</i></a></td>
+          @else
+          <td>Constancia aun no ha sido subido</td>
+          @endif
           <td>
           <div class="row">
             <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
