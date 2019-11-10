@@ -16,11 +16,13 @@ use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Contracts\Auth\Guard;
 use iio\libmergepdf\Merger;
 use iio\libmergepdf\Pages;
+use ZipArchive;
 use PDFMerger;
 use DB;
 use Auth;
 use Closure;
 use Session;
+
 
 //Las vistas con nombre print e imprimir son vistas para generar informes, desde ahi se hacen las consultas para pasar los datos //
 //a la vista(informes_generar_pdf), que contiene una tabla con las tesis generadas en el intervalo de tiempo de la consulta realizada por el director de tesis, y se genera un boton para cada una de estas opciones, donde al hacer click se abrira una pestaña que contendra el pdf que deseó generar con los resultados de la consulta.//
@@ -2854,37 +2856,102 @@ class TesisController extends Controller
     //dd($director_escuela);
    return view('memorandum.memorandum_titulados',compact('tesis','director_escuela','memo','year','mes_fecha','dia_fecha','num_memo','director_escuela','grado_academico_director_escuela','sexo1','sexo2','fecha','iniciales_director_escuela','hora_presentacion','dia_presentacion','mes_presentacion','year_presentacion','nombre1','nombre2'));
    }
+
+   public function create_fecha_descargar_actas()
+   {
+    $fecha=Carbon::parse(now());
+    $año=$fecha->year;
+    //dd($año); 
+    $mes_dia_inicio="01-01";
+    $mes_dia_final="11-30";
+    $fecha_inicio=$año."-" . $mes_dia_inicio;
+    $fecha_final=$año."-". $mes_dia_final;
+    return view('tesis.create_fecha_descargar_actas',compact('fecha_inicio','fecha_final'));
+   }
+
+   public function getDownload($file){
+        //PDF file is stored under project/public/download/info.pdf
+        return Response::download($file);
 }
 
+   public function descargar_actas(Request $request){
 
-      /*public function plazo_nota_extendida()
-      {
-        $id=Auth::id();
-        $user=User::findorfail($id);
-        if($id==null or $user->tipo_usuario!=2)
+    $fecha_inicio=$request->fecha_inicio;
+    $fecha_final=$request->fecha_fin;
+    $id=Auth::id();
+    $usuario=User::find($id);
+    $profes=DB::table('users')->where('id',$id)->get();
+    foreach($profes as $profe);
+    //dd($profe);
+    $profesor_guia=DB::table('comision')->join('tesis','comision.id','=','tesis.id')->where('id_profesor_guia',$id)->whereNotNull('tesis.acta_ex')->get();
+    //dd($profesor_guia);
+    $profesor1=DB::table('comision')->join('tesis','comision.id','=','tesis.id')->where('comision.profesor1_comision','=',$profe->name)->whereNotNull('tesis.acta_ex')->whereBetween('tesis.fecha_presentacion_tesis',[$fecha_inicio,$fecha_final])->get();
+
+    $profesor2=DB::table('comision')->join('tesis','comision.id','=','tesis.id')->where('comision.profesor2_comision',$profe->name)->whereNotNull('tesis.acta_ex')->whereBetween('tesis.fecha_presentacion_tesis',[$fecha_inicio,$fecha_final])->get();
+    $profesor3=DB::table('comision')->join('tesis','comision.id','=','tesis.id')->where('comision.profesor3_comision',$profe->name)->whereNotNull('tesis.acta_ex')->whereBetween('tesis.fecha_presentacion_tesis',[$fecha_inicio,$fecha_final])->get();
+       
+    $zip=new ZipArchive();
+    $zip_name=time().".zip";
+    $zip->open($zip_name,ZipArchive::CREATE);
+    $file_folder=public_path().'\acta_ex/';
+    $zip->addEmptyDir($file_folder);
+    //dd($profesor_guia);
+
+    foreach($profesor_guia as $profe){
+             //Zipper::make('download_path/report_attachements.zip')->add(public_path().'\acta_ex/', $profe->acta_ex);
+             $zip->addFile($file_folder.$profe->acta_ex);
+
+    }
+  
+
+    //dd($profesor_guia);
+
+    if($profesor_guia!=null)
+    {
+         foreach($profesor_guia as $profe)
         {
-            return('tesis.sinpermiso');
-        }if($user->tipo_usuario==2){
-             $tesistas=DB::table('tesis')->whereNotNull('nota_prorroga')->whereNull('estado5')->orwhereNull('nota_prorroga')->whereNull('estado4')->where('profesor_guia','=',$user->name)->whereNull('fecha_presentacion_tesis')->paginate(7);
-             foreach($tesistas as $tesis)
-             {
-                if($tesis->nota_prorroga==null and $tesis->nota_pendiente!=null and $tesis->estado4==null)
-                {
-                    $tesis->tipo_nota='Pendiente';
-                    $tesis->fecha_venc=$tesis->nota_pendiente;
-                }else{
-                    if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado5==null){
-                        $tesis->tipo_nota='Prorroga';
-                        $tesis->fecha_venc=$tesis->nota_prorroga;
-                    }
-                }
-             }
-             //dd($tesistas);
-            return view('tesis.index_solicitud_nota_extendida',compact('tesistas','user'));
-        }                
+            //dd($profe->acta_ex);
+            $zip->addFile($file_folder.$profe->acta_ex);
+             //Zipper::make('download_path/report_attachements.zip')->add(public_path().'\acta_ex/', $profe->acta_ex);
+        }
+    }
 
+     if($profesor1!=null)
+     {
+            foreach($profesor1 as $profe)
+         {
+            //dd($profe->acta_ex);
+            //Zipper::make('download_path/report_attachements.zip')->add(public_path().'\acta_ex/', $profe->acta_ex);
+             $zip->addFile($file_folder.$profe->acta_ex);
+        }
+    }
 
-      }*/
+    if($profesor2!=null){
+    foreach($profesor2 as $profe)
+            {
+            //Zipper::make('download_path/report_attachements.zip')->add(public_path().'\acta_ex/', $profe->acta_ex);
+            $zip->addFile($file_folder.$profe->acta_ex);
+            }
+    }
+    if($profesor3!=null)
+    {
+     foreach($profesor3 as $profe)
+            {
+            //Zipper::make('download_path/report_attachements.zip')->add(public_path().'\acta_ex/', $profe->acta_ex);
+            $zip->addFile($file_folder.$profe->acta_ex);
+            }
+    }
+     $zip->close();
+ // Creamos las cabezeras que forzaran la descarga del archivo como archivo zip.
+ header("Content-type: application/octet-stream");
+ header("Content-disposition: attachment; filename=miarchivo.zip");
+ // leemos el archivo creado
+ readfile($zip_name);
+ // Por último eliminamos el archivo temporal creado
+ unlink($zip_name);//Destruye el archivo temporal
+}
+}
+
 
     
 

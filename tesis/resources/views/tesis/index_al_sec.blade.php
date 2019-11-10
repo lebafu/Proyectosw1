@@ -64,7 +64,7 @@
                 <td>Faltan pasos por completar.</td>
             @endif
            @if($tesis->constancia_ex!=null and $tesis->acta_ex!=null and $tesis->nota_tesis==null)
-                <td><a class="btn btn-primary" href="{{url('/ingresar_nota_tesis/'.$tesis->id)}}">Ingresar nota</a></td>
+                <td><a class="btn btn-primary" href="{{url('/ingresar_nota_tesis/'.$tesis->id)}}" target="_blank">Ingresar nota</a></td>
             @elseif($tesis->nota_tesis!=null)
             <td>{{$tesis->nota_tesis}}</td>
             @else      

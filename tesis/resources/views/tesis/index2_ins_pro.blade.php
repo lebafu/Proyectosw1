@@ -18,6 +18,7 @@
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
           <th>Fecha Peticion</th>
+          <th>
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
@@ -31,8 +32,6 @@
           <div class="row">
             <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
             <a href="{{url('/tesis_profesor/'.$tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
-         <!-- </div>-->
-          <div class="row">
             <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id)}}" class="btn btn-info"><span class="fas fa-check"></span></a> 
            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
@@ -40,7 +39,6 @@
            {{ csrf_field() }}
            </form>
           </button>
-        </div>
       </td>
         </tr>
         @endif

@@ -84,6 +84,7 @@ body {
   </div> 
       <a href="{{url('/tesis_profesor_comision')}}">Profesor participa como miembro Comision</a>
       <a href="{{url('/create')}}">Consulta de participacion de tesis por fecha</a>
+      <a href="{{url('/tesis/create_fecha_descargar_actas')}}">Descargar actas por fecha</a>
       <a href="{{url('/editar_profesor')}}">Modificar Grado Academico</a>
    <!--Inicio de navbar-->
  <div class="dropdown">
