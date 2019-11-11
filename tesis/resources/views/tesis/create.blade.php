@@ -5,6 +5,8 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+                <div class="alert alert-success", role="alert">Recuerde que si su tesis será realizado en parejas
+                usted debe conocer el nombre de usuario, rut y año ingreso de su compañero, además este debe estar registrado en el sistema</div>
                 <div class="card-header">{{ __('Crear Tesis') }}</div>
 
                 <div class="card-body">
@@ -41,6 +43,52 @@
                         </div>
 
                          <div class="form-group row">
+                            <label for="telefono1" class="col-md-4 col-form-label text-md-right">{{ __('Telefono Alumno') }}</label>
+                            <div class="col-md-6">
+                                <input id="telefono1" type="text" class="form-control" name="telefono1" required>
+                            </div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre completo Alumno2') }}</label>
+
+                             <div class="col-md-6">
+                                <input id="nombre_completo2" type="text" class="form-control @error('nombre_completo2') is-invalid @enderror" name="nombre_completo2" autocomplete="nombre_completo2" autofocus>
+
+                                @error('nombre_completo2')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                         </div>
+
+                
+
+                         <div class="form-group row">
+                            <label for="rut2" class="col-md-4 col-form-label text-md-right">{{ __('Rut Segundo Alumno') }}</label>
+                            <div class="col-md-6">
+                                <input id="rut2" type="text" placeholder="Ej:12.345.678-9" class="form-control" name="rut2" >
+                            </div>
+                        </div>
+
+
+                         <div class="form-group row">
+                            <label for="ano_ingreso2" class="col-md-4 col-form-label text-md-right">{{ __('Año Ingreso') }}</label>
+                            <div class="col-md-6">
+                                <input id="ano_ingreso2" type="text" placeholder="Año ingreso" class="form-control" name="ano_ingreso2" >
+                            </div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="telefono2" class="col-md-4 col-form-label text-md-right">{{ __('Telefono Segundo Alumno') }}</label>
+                            <div class="col-md-6">
+                                <input id="telefono2" type="text" class="form-control" name="telefono2" >
+                            </div>
+                        </div>
+                        
+
+                         <div class="form-group row">
                             <label for="profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Profesor guia') }}</label>
                             <div class="col-md-6">
                                  <select name="profesor_guia" id="profesor_guia" class="form-control" required>
@@ -62,7 +110,6 @@
                             <label for="area_tesis" class="col-md-4 col-form-label text-md-right">{{ __('Area Tesis') }}</label>
                             <div class="col-md-6">
                                 <select name="area_tesis" id="area_tesis" type="text" class="form-control" required="required">
-                                    <option value="{{$area_tesis->area_tesis}}">{{$area_tesis->area_tesis}}</option>-->
                                 @foreach($area_tesis as $area_tes)
                                         @if($area_tes=="BI")
                                          <option value="BI">Inteligencia de negocios</option>
@@ -104,10 +151,22 @@
                         <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Nombre de Vinculacion') }}</label>
                             <div class="col-md-6">
-                              <input id="nombre_vinculacion" type="text" placeholder="nombre_vinculacion" class="form-control" name="nombre_vinculacion" required="required">
-                               </div>
+                            <select name="nombre_vinculacion" id="nombre_vinculacion" class="form-control" required>
+                                    @foreach($empresas as $emp)
+                                    <option value="{{$emp->nombre}}">{{$emp->nombre}}</option>
+                                    @endforeach
+                                     @foreach($comunidads as $comunidad)
+                                    <option value="{{$comunidad->nombre}}">{{$comunidad->nombre}}</option>
+                                    @endforeach
+                                    @foreach($proyectos as $proyecto)
+                                    <option value="{{$proyecto->nombre}}">{{$proyecto->nombre}}</option>
+                                    @endforeach
+                                     @foreach($fcs as $fc)
+                                    <option value="{{$fc->nombre}}">{{$fc->nombre}}</option>
+                                    @endforeach
+                                </select>
+                              </div>
                         </div>
-
                          <div class="form-group row">
                             <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de trabajo') }}</label>
                             <div class="col-md-6">

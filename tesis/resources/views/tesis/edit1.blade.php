@@ -40,6 +40,15 @@
                             </div>
                         </div>
 
+
+                         <div class="form-group row">
+                            <label for="telefono1" class="col-md-4 col-form-label text-md-right">{{ __('Telefono Alumno') }}</label>
+                            <div class="col-md-6">
+                                <input id="telefono1" type="text" class="form-control" value="{{$tes->telefono1}}" name="telefono1" required>
+                            </div>
+                        </div>
+
+
                          <div class="form-group row">
                             <label for="profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Profesor guia') }}</label>
                              <div class="col-md-6">

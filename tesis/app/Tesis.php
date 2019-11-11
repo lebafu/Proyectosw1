@@ -14,9 +14,14 @@ class Tesis extends Model
     //
     protected $fillable = [
     'nombre_completo',
+    'nombre_completo2',
     'rut',
+    'rut2',
     'profesor_guia',
     'ano_ingreso',
+    'ano_ingreso2',
+    'telefono1',
+    'telefono2',
     'carrera',
     'tipo',
     'nombre_vinculacion',

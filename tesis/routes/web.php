@@ -232,6 +232,7 @@ Route::get('/rango_fechas', 'TesisController@rango_fechas')->name('tesis.rango_f
 Route::put('/informes_rangos_fechas/','TesisController@informes_rangos_fechas')->name('tesis.informes_rangos_fechas');
 Route::get('/error_generar_pdf', 'TesisController@error_generar_pdf')->name('tesis.error_generar_pdf');
 Route::get('/error_rut', 'TesisController@error_rut')->name('tesis.error_generar_pdf');
+Route::get('/error_profesor_comision', 'TesisController@update2')->name('tesis.profesor_repetido_comision');
 //NOTAS PENDIENTES Y DE PRORROGAS VENCIDAS
 Route::get('/descargar_pendientes_vencidas','TesisController@imprimir_pend_venc')->name('descargar_pendientes_vencidas');
 Route::get('/descargar_prorrogas_vencidas','TesisController@imprimir_pro_venc')->name('descargar_prorrogas_vencidas');

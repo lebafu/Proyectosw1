@@ -419,6 +419,7 @@ class TesisController extends Controller
         $comunidads=DB::table('comunidad')->get();
         $fcs=DB::table('fondo_concursable')->get();
         $proyectos=DB::table('proyectos')->get();
+        //dd($area_tesis);
         if($tesista==null){
         return view('tesis.create',compact('alumno','profes','area_tesis','empresas','comunidads','fcs','proyectos'));
         }else
@@ -446,7 +447,8 @@ class TesisController extends Controller
             'nombre_completo' => 'required|string',
             'rut' => 'required|string|unique:tesis|min:11|max:12',
             'ano_ingreso' => 'required|integer',
-            'profesor_guia' => 'required|string',
+            'telefono1'=> 'required|string',
+             'profesor_guia' => 'required|string',
             'nombre_tesis' => 'required|string',
             'area_tesis' => 'required|string',
             'carrera' => 'required|string',
@@ -457,21 +459,12 @@ class TesisController extends Controller
             'objetivos' =>'required|string',
             'contribucion' => 'required|string'
         ]);
-
-
-
         $id=Auth::id();
         $user=User::findorfail($id);
         //si usuario es de tipo alumno entonces se actualizara el nombre usuario en user
-
-
-
-
         if($id==null){
             return view('tesis.sinpermiso');
         }
-
-
         /*DB::table('users')->insert([
             'name' => $request->name,
             'email' =>$request->email,
@@ -480,22 +473,19 @@ class TesisController extends Controller
             'rut' =>$request->rut,
         ]);*/
             //dd($request->nombre_completo);
-
-        //En caso de que complete 2 de los 3 campos del segundo alumno tesista
+        //En caso de que complete 3 de los 4 campos del segundo alumno tesista
         //dd($request);
-        if(($request->nombre_completo2==null and $request->rut2!=null and $request->ano_ingreso2!=null)or($request->nombre_completo2!=null and $request->rut2==null and $request->ano_ingreso2!=null)or($request->nombre_completo2!=null and $request->rut2!=null and $request->ano_ingreso2==null)or($request->nombre_completo2!=null and $request->rut2==null and $request->ano_ingreso2==null)or($request->nombre_completo2==null and $request->rut2!=null and $request->ano_ingreso2==null)or $request->nombre_completo2==null and $request->rut2==null and $request->ano_ingreso2!=null)
+
+        if(($request->nombre_completo2==null and $request->rut2!=null and $request->ano_ingreso2!=null and $request->telefono2!=null)or($request->nombre_completo2!=null and $request->rut2==null and $request->ano_ingreso2!=null and $request->telefono2!=null)or($request->nombre_completo2!=null and $request->rut2!=null and $request->ano_ingreso2==null and $request->telefono2!=null)or($request->nombre_completo2!=null and $request->rut2!=null and $request->ano_ingreso2!=null and $request->telefono2==null)or($request->nombre_completo2!=null and $request->rut2==null and $request->ano_ingreso2==null and $request->telefono2!=null)or($request->nombre_completo2==null and $request->rut2!=null and $request->ano_ingreso2==null and $request->telefono2!=null)or($request->nombre_completo2==null and $request->rut2!=null and $request->ano_ingreso2!=null and $request->telefono2==null)or($request->nombre_completo2==null and $request->rut2==null and $request->ano_ingreso2!=null and $request->telefono2!=null)or($request->nombre_completo2==null and $request->rut2==null and $request->ano_ingreso2==null and $request->telefono2!=null)or($request->nombre_completo2==null and $request->rut2==null and $request->ano_ingreso2!=null  and $request->telefono2==null)or($request->nombre_completo2==null and $request->rut2!=null and $request->ano_ingreso2==null and $request->telefono2==null)or($request->nombre_completo2!=null and $request->rut2==null and $request->ano_ingreso2==null and $request->telefono2==null))
         {
         //dd($request->nombre_completo2);
             return view('tesis.error_campos');
-
         }
-
         $rut1=DB::table('tesis')->select('rut')->get();
         $contador=0;
         $buscar_segundo_alumno_user=DB::table('users')->where('name','=',$request->nombre_completo2)->get();
         $buscar_segundo_alumno_tesis=DB::table('tesis')->where('nombre_completo','=',$request->nombre_completo2)->orwhere('nombre_completo2','=',$request->nombre_completo2)->get();
         $users=DB::table('users')->first();
-
         //En caso de que el rut ya exista en la bd, es por que se ingresó mal
         foreach($rut1 as $rut)
         {
@@ -503,27 +493,19 @@ class TesisController extends Controller
                 return view('tesis.error_rut');
             }
         }
-
         //Si el usuario no existe en el registro de usuario entonces no podra registrarse segundo alumno
         //dd($buscar_segundo_alumno_user);
-    
+        
           
           
-
    
-
         //buscar si el alumno ya tiene una tesis creada
         //dd($buscar_segundo_alumno_tesis);
         //dd($buscar_segundo_alumno_tesis->isEmpty());
        
-
-
         $id=Auth::id();
         $user=User::findorfail($id);
-
-
         if($user->tipo_usuario==1 and $request->nombre_completo2!=null and $request->rut2!=null and $request->ano_ingreso2!=null){ 
-
             //dd('buscar_segundo_alumno_user'=> $buscar_segundo_alumno_user);
             //dd($buscar_segundo_alumno_user->isEmpty());
             //dd($buscar_segundo_alumno_user);
@@ -531,11 +513,9 @@ class TesisController extends Controller
                  return view('tesis.usuario_no_existe');
                 //echo 'Si son iguales';
             }
-
             if(($buscar_segundo_alumno_tesis->isEmpty())==false){
             return view('tesis.tesisregistrada');
             }
-
             $user->name=$request->nombre_completo;
             $user->save();
             DB::table('tesis')->insert([
@@ -546,6 +526,8 @@ class TesisController extends Controller
                 'rut2' =>$request->rut2,
                 'ano_ingreso' => $request->ano_ingreso,
                 'ano_ingreso2' => $request->ano_ingreso2,
+                 'telefono1' => $request->telefono1,
+                 'telefono2' => $request->telefono2,
                 'profesor_guia' =>$request->profesor_guia,
                 'nombre_tesis' => $request->nombre_tesis,
                 'area_tesis' => $request->area_tesis,
@@ -558,10 +540,7 @@ class TesisController extends Controller
                 'contribucion'=> $request->contribucion,
             ]);
     }
-
-
         if($user->tipo_usuario==1 and $request->nombre_completo2==null and $request->rut2==null and $request->ano_ingreso2==null){ 
-
             $user->name=$request->nombre_completo;
             $user->save();
             DB::table('tesis')->insert([
@@ -569,6 +548,7 @@ class TesisController extends Controller
                 'nombre_completo' => $request->nombre_completo,
                 'rut' =>$request->rut,
                 'ano_ingreso' => $request->ano_ingreso,
+                'telefono1'=> $request->telefono1,
                 'profesor_guia' =>$request->profesor_guia,
                 'nombre_tesis' => $request->nombre_tesis,
                 'area_tesis' => $request->area_tesis,
@@ -582,44 +562,8 @@ class TesisController extends Controller
             ]);
     }
     return  view('alumnohome');
-        
-        /*if($request->get('tipo_usuario')=='Alumno'){
-            $info_alumno = new Info_alumno;
-            $info_alumno->id= $usuario->id;
-            $info_alumno->ano_ingreso=0;
-            $info_alumno->carrera="";
-            $info_alumno->telefono="";
-            $info_alumno->condicion=0;
-            $info_alumno->save();
 
-            // ahora se ingresa su id en la tabla tesis_alumnos
-
-            $tesis_alumno = new Tesis_alumno;
-
-            $tesis_alumno->id = $usuario->id;
-            
-            $tesis_alumno->nombre_tesis="";
-            $tesis_alumno->descripcion="";
-            $tesis_alumno->objetivos="";
-            $tesis_alumno->contribucion_e="";
-            $tesis_alumno->area_tesis="";
-            $tesis_alumno->save();
-            
-        }
-
-        if($request->get('tipo_usuario')=='Prof_ext'){
-            $prof_ext = new Info_proExt;
-            $prof_ext->id=$usuario->id;
-            $prof_ext->correo_profesor=$usuario->email;
-            $prof_ext->institucion="";
-            $prof_ext->condicion=0;
-            $prof_ext->save();
-            
-
-        }*/
-
-        
-    }
+}
         
 
         //Muestra la informacion de la tesis    
@@ -782,7 +726,7 @@ class TesisController extends Controller
                 $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
                 //$tes->estado1=3;
                 //$tes->update();
-                return view('tesis.edit2',compact('tes','profes','com','area_tesis'));
+                return view('tesis.edit2',compact('tes','profes','com','area_tesis', 'empresas','comunidads','fcs','proyectos'));
             	}elseif($user->tipo_usuario==2 and $tes->estado1==5 and $tes->estado2==null){
             		$tes->estado1=2;
             		$tes->estado2=null;
@@ -1080,10 +1024,14 @@ class TesisController extends Controller
          if($request->get('ano_ingreso2')!=null){
             $tes->ano_ingreso2=$request->get('ano_ingreso2');
         }
+         if($request->get('telefono2')!=null){
+            $tes->telefono2=$request->get('telefono2');
+        }
         $tes->profesor_guia=$request->get('profesor_guia');
         $tes->nombre_tesis=$request->get('nombre_tesis');
         $tes->area_tesis=$request->get('area_tesis');
         $tes->carrera=$request->get('carrera');
+        $tes->telefono1=$request->get('telefono1');
         $tes->tipo_vinculacion=$request->get('tipo_vinculacion');
         $tes->nombre_vinculacion=$request->get('nombre_vinculacion');
         $tes->tipo=$request->get('tipo');
@@ -1121,12 +1069,30 @@ class TesisController extends Controller
             return view('tesis.sinpermiso');
         }
         //return 'tamos';
+
         $idlogin=Auth::id();
         $profe=User::findorfail($idlogin);
         $tes=Tesis::findorfail($id);
+        $profesor1_comision=$request->get('profesor1_comision');
+        $profesor2_comision=$request->get('profesor2_comision');
+        $profesor3_comision=$request->get('profesor3_comision');
+        if($profesor1_comision!=$profesor2_comision and $profesor1_comision!=$profesor3_comision and $profesor2_comision!=$profesor3_comision){
+        if($request->get('nombre_completo2')!=null){
+            $tes->nombre_completo2=$request->get('nombre_completo2');
+        }
+         if($request->get('rut2')!=null){
+            $tes->rut2=$request->get('rut2');
+        }
+         if($request->get('ano_ingreso2')!=null){
+            $tes->ano_ingreso2=$request->get('ano_ingreso2');
+        }
+         if($request->get('telefono2')!=null){
+            $tes->telefono2=$request->get('telefono2');
+        }
         $tes->nombre_completo=$request->get('nombre_completo');
         $tes->rut=$request->get('rut');
         $tes->ano_ingreso=$request->get('ano_ingreso');
+        $tes->telefono1=$request->get('telefono1');
         //En caso de que se ingresen los datos del segundo alumno tesista
         
         $tes->profesor_guia=$request->get('profesor_guia');
@@ -1143,7 +1109,9 @@ class TesisController extends Controller
         $user=User::findorfail($id);
         $user->name=$tes->nombre_completo;
         $user->update();
-
+        }else{
+            return view('tesis.profesor_repetido_comision');
+        }
 
         //$comision=new Comision;
         //$alumno=DB::table('users')->join('tesis','users.name','=',$tes->nombre_completo)->get();
@@ -1201,12 +1169,14 @@ class TesisController extends Controller
         $tes->nombre_completo=$request->get('nombre_completo');
         $tes->rut=$request->get('rut');
         $tes->ano_ingreso=$request->get('ano_ingreso');
+         $tes->telefono1=$request->get('telefono1');
         //En caso de que se ingresen los datos del segundo alumno tesista
         if($tes->nombre_completo2!=null)
         {
             $tes->nombre_completo2=$request->get('nombre_completo2');
             $tes->ano_ingreso2=$request->get('ano_ingreso2');
             $tes->rut2=$request->get('rut2');
+            $tes->telefono2=$request->get('telefono2');
         }
         $tes->profesor_guia=$request->get('profesor_guia');
         $id_profesor=DB::table('users')->where('users.name','=',$tes->profesor_guia)->select('id')->get();

@@ -40,6 +40,14 @@
                             </div>
                         </div>
 
+                          <div class="form-group row">
+                            <label for="telefono1" class="col-md-4 col-form-label text-md-right">{{ __('Telefono Alumno') }}</label>
+                            <div class="col-md-6">
+                                <input id="telefono1" type="text" class="form-control" value="{{$tes->telefono1}}" name="telefono1" required>
+                            </div>
+                        </div>
+
+
                         @if($tes->nombre_completo2!=null)
 
                         <div class="form-group row">
@@ -68,6 +76,13 @@
                             <label for="ano_ingreso2" class="col-md-4 col-form-label text-md-right">{{ __('Ano Ingreso') }}</label>
                             <div class="col-md-6">
                                 <input id="ano_ingreso2" type="text" placeholder="año ingreso" class="form-control" name="ano_ingreso2" value="{{$tes->ano_ingreso2}}" required="required">
+                            </div>
+                        </div>
+
+                             <div class="form-group row">
+                            <label for="telefono2" class="col-md-4 col-form-label text-md-right">{{ __('Telefono Alumno 2') }}</label>
+                            <div class="col-md-6">
+                                <input id="telefono2" type="text" class="form-control" value="{{$tes->telefono2}}" name="telefono2" required>
                             </div>
                         </div>
 
