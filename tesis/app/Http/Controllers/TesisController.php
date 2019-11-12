@@ -1073,10 +1073,12 @@ class TesisController extends Controller
         $idlogin=Auth::id();
         $profe=User::findorfail($idlogin);
         $tes=Tesis::findorfail($id);
+        $profesor_guia=$request->get('profesor_guia');
         $profesor1_comision=$request->get('profesor1_comision');
         $profesor2_comision=$request->get('profesor2_comision');
         $profesor3_comision=$request->get('profesor3_comision');
-        if($profesor1_comision!=$profesor2_comision and $profesor1_comision!=$profesor3_comision and $profesor2_comision!=$profesor3_comision){
+        //Para quee el profesor no sea seleccionado 2 veces en la comision
+        if($profesor1_comision!=$profesor2_comision and $profesor1_comision!=$profesor3_comision and $profesor2_comision!=$profesor3_comision and $profesor1_comision!=$profesor_guia and $profesor2_comision!=$profesor_guia and $profesor3_comision!=$profesor_guia){
         if($request->get('nombre_completo2')!=null){
             $tes->nombre_completo2=$request->get('nombre_completo2');
         }
@@ -1166,6 +1168,11 @@ class TesisController extends Controller
 
         $idlogin=Auth::id();
         $tes=Tesis::findorfail($id);
+        $profesor1_comision=$request->get('profesor1_comision');
+        $profesor2_comision=$request->get('profesor2_comision');
+        $profesor3_comision=$request->get('profesor3_comision');
+        //Para que el profesor no sea seleccionado 2 veces en la comision
+        if($profesor1_comision!=$profesor2_comision and $profesor1_comision!=$profesor3_comision and $profesor2_comision!=$profesor3_comision and $profesor1_comision!=$profesor_guia and $profesor2_comision!=$profesor_guia and $profesor3_comision!=$profesor_guia){
         $tes->nombre_completo=$request->get('nombre_completo');
         $tes->rut=$request->get('rut');
         $tes->ano_ingreso=$request->get('ano_ingreso');
@@ -1200,12 +1207,10 @@ class TesisController extends Controller
         $user=User::findorfail($id);
         $user->name=$tes->nombre_completo;
         $user->update();
-
-        //$comision=new Comision;
-        //$alumno=DB::table('users')->join('tesis','users.name','=',$tes->nombre_completo)->get();
-        //dd($alumno);
-        //$comision =new Comision;;
-        //$comision->id_profesor_guia=$profe->id;
+        }else{
+            return view('tesis.profesor_repetido_comision');
+        }
+      ;
         
         DB::table('comision')->where('id','=', $id)->delete();
       
