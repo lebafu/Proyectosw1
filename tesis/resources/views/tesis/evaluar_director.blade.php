@@ -35,6 +35,53 @@
                         </div>
 
                          <div class="form-group row">
+                            <label for="telefono1" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
+                            <div class="col-md-6">
+                                <input id="telefono1" type="text" class="form-control" name="telefono1" value="{{$tes->telefono1}}"required="required" disabled>
+                            </div>
+                        </div>
+
+
+                          @if($tes->nombre_completo2!=null)
+
+                        <div class="form-group row">
+                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Segundo Alumno') }}</label>
+
+                            <div class="col-md-6">
+                                <input id="nombre_completo2" type="text" class="form-control @error('nombre_completo2') is-invalid @enderror" name="nombre_completo2" value="{{ $tes->nombre_completo2}}" required autocomplete="nombre_completo2" autofocus disabled>
+
+                                @error('nombre_completo2')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
+                            </div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="rut2" class="col-md-4 col-form-label text-md-right">{{ __('Rut Segundo Alumno') }}</label>
+                            <div class="col-md-6">
+                                <input id="rut2" type="text" placeholder="rut2" class="form-control" name="rut" value="{{$tes->rut2}}"required="required" disabled>
+                            </div>
+                        </div>
+
+
+                         <div class="form-group row">
+                            <label for="ano_ingreso2" class="col-md-4 col-form-label text-md-right">{{ __('Ano Ingreso') }}</label>
+                            <div class="col-md-6">
+                                <input id="ano_ingreso2" type="text" placeholder="año ingreso" class="form-control" name="ano_ingreso2" value="{{$tes->ano_ingreso2}}" required="required" disabled>
+                            </div>
+                        </div>
+
+                           <div class="form-group row">
+                            <label for="telefono2" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
+                            <div class="col-md-6">
+                                <input id="telefono2" type="text" class="form-control" name="telefono2" value="{{$tes->telefono2}}"required="required" disabled>
+                            </div>
+                        </div>
+
+                      @endif
+                         <div class="form-group row">
                             <label for="profesor_guia" class="col-md-4 col-form-label text-md-right">{{ __('Profesor guia') }}</label>
                                 <div class="col-md-6">
                                 <input id="profesor_guia" type="text" placeholder="profesor_guia" class="form-control" name="profesor_guia" value="{{$tes->profesor_guia}}" required="required" disabled>

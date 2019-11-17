@@ -6,7 +6,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="alert alert-success", role="alert">Recuerde que si su tesis será realizado en parejas
-                usted debe conocer el nombre de usuario, rut y año ingreso de su compañero, además este debe estar registrado en el sistema</div>
+                usted debe conocer el nombre de usuario, rut,año ingreso y telefono de su compañero, además este debe estar registrado en el sistema</div>
                 <div class="card-header">{{ __('Crear Tesis') }}</div>
 
                 <div class="card-body">

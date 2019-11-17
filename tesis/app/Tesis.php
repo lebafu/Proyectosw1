@@ -44,7 +44,9 @@ class Tesis extends Model
     'publicar',
     'abstract',
     'estado4',
-    'estado5'
+    'estado5',
+    'estado6',
+    'estado7'
     ];
 
      public function scopeNombre_completo($query, $nombre_completo)

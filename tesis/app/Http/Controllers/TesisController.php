@@ -643,7 +643,7 @@ class TesisController extends Controller
         		$tes->nota_pendiente=$request->get('nota_pendiente');
         		$tes->update();
 
-        		return view('welcome');
+        		return view('alumnohome');
         }
 
            public function pedir_nota_prorroga($id)
@@ -677,11 +677,12 @@ class TesisController extends Controller
         		$tes=Tesis::findorfail($id);
         		$tes->nota_prorroga=$request->get('nota_prorroga');
                 $tes->estado5=null;
+                $tes->estado7=null;
         		$tes->update();
         	$user=User::findorfail($id);
         	//dd($user->name);
         	$tesistas=DB::table('tesis');
-        		return view('welcome');
+        		return view('alumnohome');
         }
 
     function noeditartesis(){
@@ -1058,11 +1059,13 @@ class TesisController extends Controller
             'profesor_guia' => 'required|string',
             'nombre_completo' => 'required|string',
             'rut' => 'required|string|min:11|max:12',
+            'telefono1' => 'required|string',
             'ano_ingreso' => 'required|integer',
             'profesor1_comision' => 'required|string',
             'profesor2_comision' => 'required|string',
             'profesor3_comision' =>'string',
         ]);
+        //dd($request);
         $idlogin=Auth::id();
         $user=User::findorfail($id);
         if($idlogin==null){
@@ -1111,10 +1114,11 @@ class TesisController extends Controller
         $user=User::findorfail($id);
         $user->name=$tes->nombre_completo;
         $user->update();
+         //dd($user);
         }else{
             return view('tesis.profesor_repetido_comision');
         }
-
+        //dd($user);
         //$comision=new Comision;
         //$alumno=DB::table('users')->join('tesis','users.name','=',$tes->nombre_completo)->get();
         //dd($alumno);
@@ -1168,6 +1172,7 @@ class TesisController extends Controller
 
         $idlogin=Auth::id();
         $tes=Tesis::findorfail($id);
+        $profesor_guia=$request->get('profesor_guia');
         $profesor1_comision=$request->get('profesor1_comision');
         $profesor2_comision=$request->get('profesor2_comision');
         $profesor3_comision=$request->get('profesor3_comision');
@@ -1956,6 +1961,7 @@ class TesisController extends Controller
             return('tesis.sinpermiso');
         }if($user->tipo_usuario==2){
             $tesistas=DB::table('tesis')->whereNotNull('nota_pendiente')->whereNotNull('nota_prorroga')->whereNull('estado5')->where('profesor_guia','=',$user->name)->paginate(7);
+            //dd($tesistas);
             return view('tesis.index_solicitud_nota_prorroga',compact('tesistas','user'));
         }                
 
@@ -1967,6 +1973,7 @@ class TesisController extends Controller
       public function aceptar_nota_pendiente($id)
       {
         $tesis=Tesis::find($id);
+        //dd($tesis);
         return view('tesis.aceptar_nota_pendiente',compact('tesis'));
 
       }
@@ -2925,10 +2932,84 @@ class TesisController extends Controller
  // Por último eliminamos el archivo temporal creado
  unlink($zip_name);//Destruye el archivo temporal
 }
-}
-
 
     
+     public function index_solicitud_nota_pendiente_director()
+      {
+        $id=Auth::id();
+        $user=User::findorfail($id);
+        //dd($user);
+        if($id==null)
+        {
+            return('tesis.sinpermiso');
+        }
+
+        if($user->tipo_usuario==2){
+             $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado4',1)->whereNull('estado6')->whereNotnull('nota_pendiente')->paginate(7);
+        return view('tesis.index_solicitud_nota_pendiente_director',compact('tesistas','user'));  
+        }
+
+      }
+
+        //VER SOLICITUDES DE NOTA PRORROGA DEL PROFESOR SE PREGUNTA SI EL USUARIO QUE INGRESA A ESTA SESION ES O NO PROFESOR, SI ES ENTONCES LO REDIRECCIONA A LA VISTA CON EL RESPECTIVO LISTADO.
+
+
+        public function index_solicitud_nota_prorroga_director()
+      {
+        $id=Auth::id();
+        $user=User::findorfail($id);
+        if($id==null)
+        {
+            return('tesis.sinpermiso');
+        }if($user->tipo_usuario==2){
+            $tesistas=DB::table('tesis')->whereNotNull('nota_pendiente')->whereNotNull('nota_prorroga')->where('estado5',1)->whereNull('estado7')->paginate(7);
+            return view('tesis.index_solicitud_nota_prorroga_director',compact('tesistas','user'));
+        }                
+
+      }
+
+
+
+
+     public function aceptar_nota_pendiente_director($id)
+      {
+        $tesis=Tesis::find($id);
+        return view('tesis.aceptar_nota_pendiente_director',compact('tesis'));
+
+      }
+
+      //Se acepta la nota prorroga o la modifica el mismo profesor
+       public function aceptar_nota_prorroga_director($id)
+      {
+        $tesis=Tesis::find($id);
+        return view('tesis.aceptar_nota_prorroga_director',compact('tesis'));
+
+      }
+
+
+        public function pendiente_director_update(Request $request,$id)
+      {
+        $tes=Tesis::findorfail($id);
+        $tes->nota_pendiente=$request->nota_pendiente;
+        $tes->estado6=1;
+        $tes->update();
+        return view('profesorhome');        
+
+      }
+
+      public function prorroga_director_update(Request $request,$id)
+      {
+        //dd($request);
+        $tes=Tesis::findorfail($id);
+        $tes->nota_prorroga=$request->nota_prorroga;
+        $tes->estado7=1;
+        $tes->update();
+        return view('profesorhome');
+
+      }
+  
+
+}
 
        
 

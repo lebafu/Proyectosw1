@@ -58,12 +58,12 @@ Route::post('password/reset', 'Auth\ResetPasswordController@reset');
 
 Route::get('/index_solicitud_nota_pendiente', 'TesisController@index_solicitud_nota_pendiente')->name('tesis.index_solicitud_nota_pendiente');
 Route::get('/aceptar_nota_pendiente/{tesis}', 'TesisController@aceptar_nota_pendiente')->name('tesis.aceptar_nota_pendiente');
-Route::put('/actualizarpendiente{tesis}','TesisController@pendiente_update')->name('tesis.pendiente_update');	
+Route::put('/actualizarpendiente/{tesis}','TesisController@pendiente_update')->name('tesis.pendiente_update');	
 Route::get('/index_solicitud_nota_extendida', 'TesisController@plazo_nota_extendida')->name('tesis.index_solicitud_nota_extendida');	
 
 Route::get('/index_solicitud_nota_prorroga', 'TesisController@index_solicitud_nota_prorroga')->name('tesis.index_solicitud_nota_prorroga');
 Route::get('/aceptar_nota_prorroga/{tesis}', 'TesisController@aceptar_nota_prorroga')->name('tesis.aceptar_nota_prorroga');
-Route::put('/actualizarprorroga{tesis}','TesisController@prorroga_update')->name('tesis.prorroga_update');												
+Route::put('/actualizarprorroga/{tesis}','TesisController@prorroga_update')->name('tesis.prorroga_update');												
 
 Route::get('/users', 'UsersController@index')->name('users.index');
 Route::get('/users{users}', 'UsersController@edit')->name('users.edit');
@@ -275,6 +275,13 @@ Route::get('/tesis/create_fecha_descargar_actas','TesisController@create_fecha_d
 Route::post('tesis/descargar_actas_profesor','TesisController@descargar_actas')->name('tesis.descargar_actas');
 
 
+//Nota pendiente y de prorroga aceptada por director de escuela.
 
+Route::get('/index_solicitud_nota_pendiente_director', 'TesisController@index_solicitud_nota_pendiente_director')->name('tesis.index_solicitud_nota_pendiente_director');
+Route::get('/index_solicitud_nota_prorroga_director', 'TesisController@index_solicitud_nota_prorroga_director')->name('tesis.index_solicitud_nota_prorroga_director');
+Route::put('/actualizarpendiente{tesis}','TesisController@pendiente_director_update')->name('tesis.pendiente_director_update');	
+Route::get('/aceptar_nota_pendiente_director/{tesis}', 'TesisController@aceptar_nota_pendiente_director')->name('tesis.aceptar_nota_pendiente_director');
+Route::get('/aceptar_nota_prorroga_director/{tesis}', 'TesisController@aceptar_nota_prorroga_director')->name('tesis.aceptar_nota_prorroga_director');
+Route::put('/actualizarprorroga{tesis}','TesisController@prorroga_director_update')->name('tesis.prorroga_director_update');	
 //Route::get('/memorandum_revision/{tesis}', 'TesisController@memo_revision')->('tesis.memo_revision');
 

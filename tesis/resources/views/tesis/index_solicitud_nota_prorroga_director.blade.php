@@ -25,10 +25,10 @@
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->nota_prorroga}}</td>
+          <td>{{$tesis->nota_prorroga}}}</td>
           <td>
           <div class="row">
-          <td><a href="{{url('/aceptar_nota_prorroga/'.$tesis->id)}}" class="btn btn-info"><span class="fas fa-check"></span></a></td>
+          <td><a href="{{url('/aceptar_nota_prorroga_director/'.$tesis->id)}}" class="btn btn-info"><span class="fas fa-check"></span></a></td>
         </div>
       </td>
         </tr>

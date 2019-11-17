@@ -40,6 +40,14 @@
                             </div>
                         </div>
 
+                         <div class="form-group row">
+                            <label for="telefono1" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
+                            <div class="col-md-6">
+                                <input id="telefono1" type="text" placeholder="12345678" class="form-control" name="telefono1" value="{{$tes->telefono1}}"required="required">
+                            </div>
+                        </div>
+
+
                         <!--En caso de que se deje el nombre completo 2 en nulo significa que la tesis es individual y entonces lo de este if no iría en la vista del profesor -->
                          @if($tes->nombre_completo2!=null)
 
@@ -72,6 +80,14 @@
                             </div>
                         </div>
 
+                         <div class="form-group row">
+                            <label for="telefono2" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
+                            <div class="col-md-6">
+                                <input id="telefono2" type="text" class="form-control" name="telefono2" value="{{$tes->telefono2}}"required="required">
+                            </div>
+                        </div>
+
+
                       @endif
 
 
@@ -100,7 +116,6 @@
                             <label for="area_tesis" class="col-md-4 col-form-label text-md-right">{{ __('Area Tesis') }}</label>
                             <div class="col-md-6">
                                 <select name="area_tesis" id="area_tesis" type="text" class="form-control" required="required">
-                                 <option value="{{$tes->area_tesis}}">{{$tes->area_tesis}}</option>
                                 @foreach($area_tesis as $area_tes)
                                         @if($area_tes=="BI")
                                          <option value="BI">Inteligencia de negocios</option>

@@ -39,8 +39,15 @@
                                 <input id="ano_ingreso" type="text" placeholder="ano_ingreso" class="form-control" name="ano_ingreso" value="{{$tes->ano_ingreso}}" required="required">
                             </div>
                         </div>
+
+                           <div class="form-group row">
+                            <label for="telefono1" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
+                            <div class="col-md-6">
+                                <input id="telefono1" type="text" class="form-control" name="telefono1" value="{{$tes->telefono1}}"required="required">
+                            </div>
+                        </div>
                     <!--En caso de que se deje el nombre completo 2 en nulo significa que la tesis es individual y entonces lo de este if no iría en la vista del director de tesis -->
-    @if($tes->nombre_completo2!=null)
+                        @if($tes->nombre_completo2!=null)
 
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Segundo Alumno') }}</label>
@@ -68,6 +75,13 @@
                             <label for="ano_ingreso2" class="col-md-4 col-form-label text-md-right">{{ __('Ano Ingreso') }}</label>
                             <div class="col-md-6">
                                 <input id="ano_ingreso2" type="text" placeholder="año ingreso" class="form-control" name="ano_ingreso2" value="{{$tes->ano_ingreso2}}" required="required">
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="telefono2" class="col-md-4 col-form-label text-md-right">{{ __('Telefono') }}</label>
+                            <div class="col-md-6">
+                                <input id="telefono2" type="text" class="form-control" name="telefono2" value="{{$tes->telefono2}}"required="required">
                             </div>
                         </div>
 

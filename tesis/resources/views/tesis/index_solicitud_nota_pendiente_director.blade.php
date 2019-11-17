@@ -8,7 +8,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Solicitudes Nota de Prorroga')}}</div>
+        <div class="card-header">{{ __('Solicitudes Nota de Pendiente Director')}}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
@@ -17,7 +17,7 @@
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
-          <th>Fecha Nota Prorroga</th>
+          <th>Fecha Nota Pendiente</th>
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
@@ -25,10 +25,10 @@
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->nota_prorroga}}</td>
+          <td>{{$tesis->nota_pendiente}}</td>
           <td>
           <div class="row">
-          <td><a href="{{url('/aceptar_nota_prorroga/'.$tesis->id)}}" class="btn btn-info"><span class="fas fa-check"></span></a></td>
+          <td><a href="{{url('/aceptar_nota_pendiente_director/'.$tesis->id)}}" class="btn btn-info"><span class="fas fa-check"></span></td>                              
         </div>
       </td>
         </tr>
@@ -38,9 +38,8 @@
      </div>
      </div>
      </div>
-     <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
      <a href="{{ url('/profesorhome') }}" class="btn btn-default">Volver Home</a>
-     <a href="{{url('/index_solicitud_nota_pendiente/')}}">Ir a listado notas de pendiente</a>
+    <a href="{{url('/index_solicitud_nota_prorroga/')}}">Ir a listado notas de prorroga Director</a>
      </div>
 </div>
 
