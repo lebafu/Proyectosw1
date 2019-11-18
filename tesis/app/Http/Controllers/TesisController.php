@@ -2944,9 +2944,11 @@ class TesisController extends Controller
             return('tesis.sinpermiso');
         }
 
-        if($user->tipo_usuario==2){
+        if($user->tipo_usuario==2 and $user->director_escuela==1){
              $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado4',1)->whereNull('estado6')->whereNotnull('nota_pendiente')->paginate(7);
         return view('tesis.index_solicitud_nota_pendiente_director',compact('tesistas','user'));  
+        }else{
+            return view('tesis.sinpermiso');
         }
 
       }
@@ -2961,10 +2963,14 @@ class TesisController extends Controller
         if($id==null)
         {
             return('tesis.sinpermiso');
-        }if($user->tipo_usuario==2){
+        }if($user->tipo_usuario==2 and $user->director_escuela==1){
             $tesistas=DB::table('tesis')->whereNotNull('nota_pendiente')->whereNotNull('nota_prorroga')->where('estado5',1)->whereNull('estado7')->paginate(7);
             return view('tesis.index_solicitud_nota_prorroga_director',compact('tesistas','user'));
-        }                
+        }else{
+
+            return view('tesis.sinpermiso');
+        }
+
 
       }
 
