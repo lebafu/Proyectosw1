@@ -29,10 +29,10 @@
         @foreach ($tesistas as $tesis)
         <tr>
           @if($tesis->nombre_completo==$user->name or $tesis->nombre_completo2)
-          <td>{{$tesis->id}}</td>
+          <td>{{$tesis->id_pk}}</td>
           <td>{{$tesis->nombre_completo}} {{$tesis->nombre_completo2}}    
-            @if($tesis->estado1>=2 and $tesis->estado2==1)  <!--Al alumno le aparecerá la opcion de descargar word de inscripcion solo una vez que el profesor lo envie al director de tesis -->
-            <a href="{{url('/generar_formulario_inscripcion_tesis/'.$tesis->id)}}">Formulario Inscripción</a>
+            @if($tesis->estado1>=2 and $tesis->estado2==1 and ($tesis->nota_tesis==null)) <!--Al alumno le aparecerá la opcion de descargar word de inscripcion solo una vez que el profesor lo envie al director de tesis -->
+            <a href="{{url('/generar_formulario_inscripcion_tesis/'.$tesis->id_pk)}}">Formulario Inscripción</a>
             @endif
           </td>
           <td>{{$tesis->profesor_guia}}</td>
@@ -48,51 +48,51 @@
            @if($tesis->estado1==5)
                 Rechazada
            @endif
-           @if($tesis->nota_pendiente!=null and $tesis->nota_prorroga==null and $tesis->estado6==1 and $tesis->estado7==null)
+           @if($tesis->nota_pendiente!=null and $tesis->nota_prorroga==null and $tesis->estado6==1 and $tesis->estado7==null and ( $tesis->nota_tesis==null))
            <td>{{$tesis->nota_pendiente}}</td>
-           <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nota Prorroga</a></td>
-            <td><a href="{{url('/vista_subir_archivo', $tesis->id)}}">Subir archivo constancia</a><td>
+           <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id_pk)}}">Pedir nota Prorroga</a></td>
+            <td><a href="{{url('/vista_subir_archivo', $tesis->id_pk)}}">Subir archivo constancia</a><td>
            <td></td>
          @endif
-           @if($tesis->nota_pendiente!=null and $tesis->nota_prorroga==null and $tesis->estado6!=1 and $tesis->estado7==null)
+           @if($tesis->nota_pendiente!=null and $tesis->nota_prorroga==null and $tesis->estado6!=1 and $tesis->estado7==null and ($tesis->nota_tesis>=4 or $tesis->nota_tesis==null))
            <td>En espera</td>
-           <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nota Prorroga</a></td>
-            <td><a href="{{url('/vista_subir_archivo', $tesis->id)}}">Subir archivo constancia</a><td>
+           <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id_pk)}}">Pedir nota Prorroga</a></td>
+            <td><a href="{{url('/vista_subir_archivo', $tesis->id_pk)}}">Subir archivo constancia</a><td>
            <td></td>
          @endif
-          @if($tesis->nota_pendiente==null and $tesis->estado1==4 and $tesis->nota_prorroga==null)
+          @if($tesis->nota_pendiente==null and $tesis->estado1==4 and $tesis->nota_prorroga==null and($tesis->nota_tesis==null))
           <td>
-            <a href="{{url('/pedir_nota_pendiente/'.$tesis->id)}}">Pedir nota Pendiente</a>
+            <a href="{{url('/pedir_nota_pendiente/'.$tesis->id_pk)}}">Pedir nota Pendiente</a>
           </td>
           <td> </td>
           <td>
-            <a href="{{url('/vista_subir_archivo', $tesis->id)}}">Subir archivo constancia</a>
+            <a href="{{url('/vista_subir_archivo', $tesis->id_pk)}}">Subir archivo constancia</a>
           </td>
           @endif
           @if($tesis->nota_pendiente==null and $tesis->estado1!=4 and $tesis->nota_prorroga==null)
           <td>  </td>
           <td>  </td>
           @endif
-          @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado6==1 and $tesis->estado7!=1)
+          @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado6==1 and $tesis->estado7!=1 and ( $tesis->nota_tesis==null))
          <td>{{$tesis->nota_pendiente}}</td>
           <td>En espera</td>
-          <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nueva nota de Prorroga</a></td>
-          <td><a href="{{url('/vista_subir_archivo', $tesis->id)}}">Subir archivo constancia</a><td>
+          <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id_pk)}}">Pedir nueva nota de Prorroga</a></td>
+          <td><a href="{{url('/vista_subir_archivo', $tesis->id_pk)}}">Subir archivo constancia</a><td>
           <td></td>
          @endif
-          @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado6==1 and $tesis->estado7==1)
+          @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado6==1 and $tesis->estado7==1 and ( $tesis->nota_tesis==null))
          <td>{{$tesis->nota_pendiente}}</td>
           <td>{{$tesis->nota_prorroga}}</td>
-          <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id)}}">Pedir nueva nota de Prorroga</a></td>
-          <td><a href="{{url('/vista_subir_archivo', $tesis->id)}}">Subir archivo constancia</a><td>
+          <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id_pk)}}">Pedir nueva nota de Prorroga</a></td>
+          <td><a href="{{url('/vista_subir_archivo', $tesis->id_pk)}}">Subir archivo constancia</a><td>
           <td></td>
          @endif
       <td>
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}"  class="btn btn-info"><span class="far fa-eye"></span>
+            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}"  class="btn btn-info"><span class="far fa-eye"></span>
             <br> 
-            <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+            <a href="{{URL::action('TesisController@edit', $tesis->id_pk)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
             <br>
-           <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
+           <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
             
             <br>

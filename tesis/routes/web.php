@@ -142,7 +142,7 @@ Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.t
 //Route::get('/tesis_comunidad', 'TesisController@tesis_comunidad')->name('tesis.comunidad');
 Route::get('/tesis_inscritas_profesor', 'TesisController@index2_ins_pro')->name('tesis.index2_ins_pro');
 Route::get('/tesis_profesor_comision', 'TesisController@profe_comision')->name('tesis.tesis_profesor_comision');
-Route::get('/tesis{tesis}', 'TesisController@edit')->name('tesis.edit');
+Route::get('/tesis{id}', 'TesisController@edit')->name('tesis.edit');
 Route::get('/repositorio_tesis','TesisController@repositorio_tesis')->name('repositorio_tesis');
 Route::get('/mostrar_tesis/{id}', 'TesisController@mostrar_tesis')->name('tesis.show');
 

@@ -23,17 +23,17 @@
         @foreach ($tesistas as $tesis)
         <tr>
           @if($tesis->profesor_guia==$user->name and ($tesis->estado1==4 and $tesis->estado2==1))
-          <td>{{$tesis->id}}</td>
+          <td>{{$tesis->id_pk}}</td>
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}}</td>
           <td>
           <div class="row">
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
-            <a href="{{url('/tesis_profesor/'.$tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
-            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id)}}" class="btn btn-info"><span class="fas fa-check"></span></a> 
-           <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
+            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
+            <a href="{{url('/tesis_profesor/'.$tesis->id_pk)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id_pk)}}" class="btn btn-info"><span class="fas fa-check"></span></a> 
+           <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}

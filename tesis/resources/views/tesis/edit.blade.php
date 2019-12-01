@@ -5,10 +5,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Editar tesis alumno') }}</div>
+                <div class="card-header">{{ __('Editar tesis alumnos') }}</div>
 
                 <div class="card-body">
-                    <form action="{{route('tesis.update', $tes->id)}}" method="POST">
+                    <form action="{{route('tesis.update', $tes->id_pk)}}" method="POST">
                         @csrf
 
                         <div class="form-group row">
@@ -182,6 +182,7 @@
                             <label for="" class="col-md-4 col-form-label text-md-right">{{ __('Tipo de trabajo') }}</label>
                             <div class="col-md-6">
                                 <select name="tipo" id="tipo" type="text" class="form-control" required="required">
+                                <option value="{{$tes->tipo}}">{{$tes->tipo}}</option>
                                 <option value="Tesis"> Tesis </option>
                                  <option value="Memoria">Memoria </option>
                                  </select>

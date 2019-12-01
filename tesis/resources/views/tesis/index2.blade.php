@@ -24,7 +24,7 @@
         @foreach ($tesistas as $tesis)
         <tr>
           @if($tesis->profesor_guia==$user->name and ($tesis->estado1==1 or $tesis->estado1==2 or ($tesis->estado1==3 and $tesis->estado2==1)) or $tesis->estado1==5)
-          <td>{{$tesis->id}}</td>
+          <td>{{$tesis->id_pk}}</td>
           <td>1-{{$tesis->nombre_completo}}  {{$tesis->nombre_completo2}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
@@ -32,11 +32,11 @@
           <td>
 
            <div class="row">
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
-            <a href="{{url('/tesis_profesor/'.$tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
+            <a href="{{url('/tesis_profesor/'.$tesis->id_pk)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
     
-            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id)}}" class="btn btn-info"><span class="fas fa-check"></span></a> 
-           <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
+            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id_pk)}}" class="btn btn-info"><span class="fas fa-check"></span></a> 
+           <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}

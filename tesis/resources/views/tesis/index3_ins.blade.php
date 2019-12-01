@@ -28,7 +28,7 @@
         @foreach ($tesistas as $tesis)
         <tr>
            @if(($tesis->estado1==4 and $tesis->estado2==1))
-          <td>{{$tesis->id}}</td>
+          <td>{{$tesis->id_pk}}</td>
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
