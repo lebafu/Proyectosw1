@@ -35,18 +35,15 @@
           <td>{{$tesis->area_tesis}}</td>
           <td>{{$tesis->nombre_tes_res}}</td>
           <td>{{$tesis->tipo_vinculacion}}</td>
-          @if($tesis->constancia_ex!=null)
+          @if($tesis->constancia_ex!=null and $tesis->nota_tesis!=null)
            <td><a href="{{url('tesis/create_num_memo'.$tesis->id) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Memo</i></a></td>
           @else
           <td>Constancia aun no ha sido subido</td>
           @endif
           <td>
           <div class="row">
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
-            
-               <a href="{{URL::action('TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a> 
-        
-           <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
+            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
+           <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST">
           <button type="submit"  class="btn btn-danger"><span class="fas fa-trash"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}

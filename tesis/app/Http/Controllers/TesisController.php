@@ -836,10 +836,11 @@ class TesisController extends Controller
         if(!Auth::id()){
             return view('tesis.sinpermiso');
         }else{
-
+            //dd($id);
         	$idlogin=Auth::id();
 	        $user=User::findorfail($idlogin);
-	        $tes = Tesis::findorfail($id);
+	        $tesis=DB::table('tesis')->where('id_pk',$id)->get();
+            foreach($tesis as $tes);
 	        $com=Comision::find($id);
             $area_tesis=DB::table('area_tesis')->get();
             $empresas=DB::table('empresas')->get();
@@ -850,7 +851,7 @@ class TesisController extends Controller
             if($user->tipo_usuario==3 && $tes->estado1==2 && $tes->estado2==1 ){           
                 $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
                 $tes->estado1=3;
-                $tes->update();
+                DB::table('tesis')->where('id_pk', $id)->update(['estado1' => 3]);
                 //dd($tes->tipo_vinculacion);
                 return view('tesis.edit3',compact('tes','profes','com','area_tesis','empresas','comunidads','fcs','proyectos'));
             }else{
@@ -867,7 +868,7 @@ class TesisController extends Controller
 }
 
     //vista en caso de que usuario no tenga permiso para acceder a esta.
-    function sinpermiso(){
+    public function sinpermiso(){
 
     return view('tesis.sinpermiso');
         }
@@ -882,10 +883,11 @@ class TesisController extends Controller
             $idlogin=Auth::id();
             $user=User::findorfail($idlogin);
             if($user->tipo_usuario==3){           
-        $tes=Tesis::findorfail($id);
+        $tesis=DB::table('tesis')->where('id_pk',$id)->get();
+        foreach($tesis as $tes);
         $comision=DB::table('comision')->where('id',$id)->first();
         $tes->estado1=3;
-        $tes->update();
+        DB::table('tesis')->where('id_pk', $id)->update(['estado1' => 3]);
                 return view('tesis.evaluar_director',compact('tes','comision'));
             }
 
@@ -1268,15 +1270,16 @@ class TesisController extends Controller
 
         //dd($request);
 
-
+        //dd($id);
         $idlogin=Auth::id();
-        $user=User::findorfail($id);
+        $user=User::findorfail($idlogin);
         if($idlogin==null){
             return view('tesis.sinpermiso');
         }
-
+        //dd($id);
         $idlogin=Auth::id();
-        $tes=Tesis::findorfail($id);
+        $tesis=DB::table('tesis')->where('id_pk',$id)->get();
+        foreach($tesis as $tes);
         $profesor_guia=$request->get('profesor_guia');
         $profesor1_comision=$request->get('profesor1_comision');
         $profesor2_comision=$request->get('profesor2_comision');
@@ -1284,18 +1287,28 @@ class TesisController extends Controller
         //Para que el profesor no sea seleccionado 2 veces en la comision
         if($profesor1_comision!=$profesor2_comision and $profesor1_comision!=$profesor3_comision and $profesor2_comision!=$profesor3_comision and $profesor1_comision!=$profesor_guia and $profesor2_comision!=$profesor_guia and $profesor3_comision!=$profesor_guia){
         $tes->nombre_completo=$request->get('nombre_completo');
+        DB::table('tesis')->where('id_pk', $id)->update(['nombre_completo' => $tes->nombre_completo]);
         $tes->rut=$request->get('rut');
+        DB::table('tesis')->where('id_pk', $id)->update(['rut' => $tes->rut]);
         $tes->ano_ingreso=$request->get('ano_ingreso');
-         $tes->telefono1=$request->get('telefono1');
+        DB::table('tesis')->where('id_pk', $id)->update(['ano_ingreso' => $tes->ano_ingreso]);
+        $tes->telefono1=$request->get('telefono1');
+        DB::table('tesis')->where('id_pk', $id)->update(['telefono1' => $tes->telefono1]);
         //En caso de que se ingresen los datos del segundo alumno tesista
         if($tes->nombre_completo2!=null)
         {
             $tes->nombre_completo2=$request->get('nombre_completo2');
+            DB::table('tesis')->where('id_pk', $id)->update(['nombre_completo2' => $tes->nombre_completo2]);
             $tes->ano_ingreso2=$request->get('ano_ingreso2');
+            DB::table('tesis')->where('id_pk', $id)->update(['ano_ingreso2' => $tes->ano_ingreso2]);
             $tes->rut2=$request->get('rut2');
+            DB::table('tesis')->where('id_pk', $id)->update(['rut2' => $tes->rut2]);
             $tes->telefono2=$request->get('telefono2');
+            DB::table('tesis')->where('id_pk', $id)->update(['telefono2' => $tes->telefono2]);
+
         }
         $tes->profesor_guia=$request->get('profesor_guia');
+        DB::table('tesis')->where('id_pk', $id)->update(['profesor_guia' => $tes->profesor_guia]);
         $id_profesor=DB::table('users')->where('users.name','=',$tes->profesor_guia)->select('id')->get();
         //dd($id_profesor);
         foreach($id_profesor as $id_profe)
@@ -1303,24 +1316,30 @@ class TesisController extends Controller
             $id_profesor_guia=$id_profe->id;
 
         }
+        //dd($id);
         $tes->nombre_tesis=$request->get('nombre_tesis');
+        DB::table('tesis')->where('id_pk', $id)->update(['nombre_tesis' => $tes->nombre_tesis]);
         $tes->area_tesis=$request->get('area_tesis');
+        DB::table('tesis')->where('id_pk', $id)->update(['area_tesis' => $tes->area_tesis]);
         $tes->carrera=$request->get('carrera');
+        DB::table('tesis')->where('id_pk', $id)->update(['carrera' => $tes->carrera]);
         $tes->tipo_vinculacion=$request->get('tipo_vinculacion');
+        DB::table('tesis')->where('id_pk', $id)->update(['tipo_vinculacion' => $tes->tipo_vinculacion]);
         $tes->nombre_vinculacion=$request->get('nombre_vinculacion');
+        DB::table('tesis')->where('id_pk', $id)->update(['nombre_vinculacion' => $tes->nombre_vinculacion]);
         $tes->tipo=$request->get('tipo');
+        DB::table('tesis')->where('id_pk', $id)->update(['tipo' => $tes->tipo]);
         $tes->descripcion=$request->get('descripcion');
+        DB::table('tesis')->where('id_pk', $id)->update(['descripcion' => $tes->descripcion]);
         $tes->objetivos=$request->get('objetivos');
+        DB::table('tesis')->where('id_pk', $id)->update(['objetivos' => $tes->objetivos]);
         $tes->contribucion=$request->get('contribucion');
+        DB::table('tesis')->where('id_pk', $id)->update(['contribucion' => $tes->contribucion]);
         $tes->observacion=$request->get('observacion');
-        $tes->update();
-        $user=User::findorfail($id);
-        $user->name=$tes->nombre_completo;
-        $user->update();
+        DB::table('tesis')->where('id_pk', $id)->update(['observacion' => $tes->observacion]);
         }else{
             return view('tesis.profesor_repetido_comision');
         }
-      ;
         
         DB::table('comision')->where('id','=', $id)->delete();
       
@@ -1515,7 +1534,8 @@ class TesisController extends Controller
         $idlogin=Auth::id();
         //$profe=User::findorfail($idlogin);
         //DB::table('tesis')->where('id','=', $id)->delete();
-        $tes=Tesis::findorfail($id);
+        $tesis=DB::table('tesis')->where('id_pk',$id)->get();
+        foreach($tesis as $tes);
         /*$tes->nombre_completo=$request->get('nombre_completo');
         $tes->rut=$request->get('rut');
         $tes->ano_ingreso=$request->get('ano_ingreso');
@@ -1531,13 +1551,16 @@ class TesisController extends Controller
         $tes->contribucion=$request->get('contribucion');*/
         if(($request->get('estado'))=='Inscribir'){
         $tes->estado1=4;
+        DB::table('tesis')->where('id_pk', $id)->update(['estado1' => $tes->estado1]);
         $tes->estado2=1;
+        DB::table('tesis')->where('id_pk', $id)->update(['estado2' => $tes->estado2]);
         $tes->fecha_inscripcion=date('Y-m-d');
-       $tes->update();
+        DB::table('tesis')->where('id_pk', $id)->update(['fecha_inscripcion' => $tes->fecha_inscripcion]);
    		}elseif(($request->get('estado'))=='Rechazar inscripcion'){
    		$tes->estado1=5;
+        DB::table('tesis')->where('id_pk', $id)->update(['estado1' => $tes->estado1]);
         $tes->estado2=null;
-        $tes->update();
+        DB::table('tesis')->where('id_pk', $id)->update(['estado1' => $tes->estado2]);
    		}
         //$user=User::findorfail($id);
         //$user->name=$tes->nombre_completo;
