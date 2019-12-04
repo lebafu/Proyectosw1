@@ -365,12 +365,34 @@
                             </div>
                         </div>
 
+
+                          <div class="form-group row">
+                            <label for="codigo_postal1" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Postal') }}</label>
+                            <div class="col-md-6">
+                                <input id="codigo_postal1" type="text" placeholder="codigo_postal" class="form-control" name="codigo_postal1" value="{{$com->codigo_postal1}}"required="required">
+                            </div>
+                        </div>
+
+
+                         <div class="form-group row">
+                            <label for="sexo1" class="col-md-4 col-form-label text-md-right">{{ __('Sexo') }}</label>
+                            <div class="col-md-6">
+                                 <select name="sexo1" id="sexo1" type="text" class="form-control" required="required">
+                                <option value="{{$com->sexo1}}">{{$com->sexo1}}</option>
+                                <option value="Masculino">Masculino</option>
+                                 <option value="Femenino">Femenino</option>
+                                 </select>
+                            </div>
+                        </div>
+
+
                         <div class="form-group row">
                             <label for="institucion1" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Primer Profesor externo') }}</label>
                             <div class="col-md-6">
                               <input id="institucion1" type="text" placeholder="Institucion profesor externo" class="form-control" name="institucion1" value="{{ $com->institucion1}}">
                             </div>
                         </div>
+
 
                          <div class="form-group row">
                             <label for="profesor2_externo" class="col-md-4 col-form-label text-md-right">{{ __('Segundo profesor externo') }}</label>
@@ -414,7 +436,24 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="codigo_postal2" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Postal') }}</label>
+                            <div class="col-md-6">
+                                <input id="codigo_postal2" type="text" placeholder="codigo_postal" class="form-control" name="codigo_postal2" value="{{$com->codigo_postal2}}"required="required">
+                            </div>
+                        </div>
 
+
+                         <div class="form-group row">
+                            <label for="sexo2" class="col-md-4 col-form-label text-md-right">{{ __('Sexo') }}</label>
+                            <div class="col-md-6">
+                                 <select name="sexo2" id="sexo2" type="text" class="form-control" required="required">
+                                <option value="{{$com->sexo2}}">{{$com->sexo2}}</option>
+                                <option value="Masculino">Masculino</option>
+                                 <option value="Femenino">Femenino</option>
+                                 </select>
+                            </div>
+                        </div>
 
                          <div class="form-group row">
                                 <label for="observacion" class="col-md-4 col-form-label text-md-right">{{ __('Observacion')}}</label>

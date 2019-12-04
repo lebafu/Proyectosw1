@@ -203,6 +203,19 @@
                         </div>  
 
                          <div class="form-group row">
+                            <label for="sexo1" class="col-md-4 col-form-label text-md-right">{{ __('Sexo') }}</label>
+                            <div class="col-md-6">
+                                 <input id="sexo1" type="text" class="form-control" name="sexo1" value="{{$comision->sexo1}}"disabled ></div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="codigo_postal1" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Postal') }}</label>
+                            <div class="col-md-6">
+                                <input id="codigo_postal1" type="text" placeholder="codigo_postal" class="form-control" name="codigo_postal1" value="{{$comision->codigo_postal1}}" disabled>
+                            </div>
+                        </div>
+
+                         <div class="form-group row">
                             <label for="institucion1" class="col-md-4 col-form-label text-md-right">{{ __('Institucion Primer Profesor externo') }}</label>
                             <div class="col-md-6">
                               <input id="institucion1" type="text" placeholder="Institucion profesor externo" class="form-control"  value="{{$comision->institucion1}}"  disabled>
@@ -222,6 +235,19 @@
                             <label for="correo_profe2_externo" class="col-md-4 col-form-label text-md-right">{{ __('E-mail') }}</label>
                             <div class="col-md-6">
                                  <input id="correo_profe2_externo" type="email" class="form-control" name="correo_profe2_externo" value="{{$comision->correo_profe2_externo}}"  disabled >
+                            </div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="sexo2" class="col-md-4 col-form-label text-md-right">{{ __('Sexo') }}</label>
+                            <div class="col-md-6">
+                                 <input id="sexo2" type="text" class="form-control" name="sexo2" value="{{$comision->sexo2}}"disabled ></div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="codigo_postal2" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Postal') }}</label>
+                            <div class="col-md-6">
+                                <input id="codigo_postal2" type="text" placeholder="codigo_postal" class="form-control" name="codigo_postal2" value="{{$comision->codigo_postal2}}" disabled>
                             </div>
                         </div>
                         

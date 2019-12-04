@@ -20,9 +20,11 @@ class Comision extends Model
     'profesor1_grado_academico',
     'correo_profesor1_externo',
     'institucion1',
+    'sexo1',
     'profe2_externo',
     'profeo2_grado_academico',
    	'correo_profe2_externo',
    	'institucion2',
+    'sexo2',
     ];
 }

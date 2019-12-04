@@ -1246,8 +1246,12 @@ class TesisController extends Controller
             'profe2_externo' => $request->profesor2_externo,
             'profe2_grado_academico' => $request->profe2_grado_academico,
             'institucion1' => $request->institucion1,
+            'sexo1'  => $request->sexo1,
+            'codigo_postal1'=>$request->codigo_postal1,
             'correo_profe2_externo' => $request->correo_profe2_externo,
             'institucion2' => $request->institucion2,
+            'codigo_postal2'=>$request->codigo_postal2,
+            'sexo2' => $request->sexo2,
         ]);
         //dd($request);
         return view('profesorhome');
@@ -1359,6 +1363,10 @@ class TesisController extends Controller
             'institucion1' => $request->institucion1,
             'correo_profe2_externo' => $request->correo_profe2_externo,
             'institucion2' => $request->institucion2,
+            'sexo1' => $request->sexo1,
+            'sexo2' =>$request->sexo2,
+            'codigo_postal1' => $request->codigo_postal1,
+            'codigo_postal2' => $request->codigo_postal2,
         ]);
 
 
@@ -1596,7 +1604,8 @@ class TesisController extends Controller
     public function destroy($id)
     {
         //
-        DB::table('tesis')->where('id', $id)->delete();
+
+        DB::table('tesis')->where('id_pk', $id)->delete();
         return back()->with('status','La tesis ha sido eliminada con exito');
     }
 

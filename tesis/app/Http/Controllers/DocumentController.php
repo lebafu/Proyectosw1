@@ -115,13 +115,15 @@ class DocumentController extends Controller
 
        public function create_formulario_inscripcion($id)
     {
-
       $phpWord = new \PhpOffice\PhpWord\PhpWord();
       $phpWord->setDefaultFontName('Times New Roman');
        $phpWord->addParagraphStyle('parrafo_titulo', array('align' => 'center'));
        $section= $phpWord->addSection();
-       $tesis=Tesis::find($id);
-       $comision=Comision::find($id);
+       //dd($id_pk);
+       $tesista=DB::table('tesis')->where('id_pk',$id)->get();
+       $comision_miembros=DB::table('comision')->where('id',$id)->get();
+       foreach($tesista as $tesis);
+       foreach($comision_miembros as $comision);
        $alumno1=DB::table('users')->where('name','=',$tesis->nombre_completo)->get();
        $alumno2=DB::table('users')->where('name','=',$tesis->nombre_completo2)->get();
        foreach($alumno1 as $al) $email1=$al->email;
@@ -236,6 +238,10 @@ class DocumentController extends Controller
         $section->addTextBreak();
         $section->addTextBreak();
         }
+         if($comision->profesor1_externo==null and $comision->profe2_externo==null){
+        $section->addTextBreak();
+        $section->addTextBreak();
+         }
       $section->addText("FIRMA PROFESOR GUIA                           FIRMA DIRECTOR DE ESCUELA ",array("size"=>11,"bold"=>true,"align"=>"center"));
          $section->addText("FECHA: …......../ …...... / …............-                    FECHA: …......../ …...... / …............-    ",array("size"=>11,"bold"=>false),array("align"=>"left"));
         $section->addText("**********************************************************************************",array("size"=>11,"bold"=>true));
