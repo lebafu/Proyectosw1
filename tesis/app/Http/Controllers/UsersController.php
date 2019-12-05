@@ -136,6 +136,7 @@ class UsersController extends Controller
                 //dd($profesor->id);
         if($request->tipo_usuario==2 or  $request->tipo_usuario==3){
             //Actualizar nombre del profesor en el sistema, en tablas tesis y comision.
+            dd($user->name);
              DB::table('tesis')->where('profesor_guia','=',$nombre_actual)->update(['profesor_guia' => $user->name]);
              DB::table('comision')->where('profesor1_comision','=',$nombre_actual)->update(['profesor1_comision' => $user->name]);
              DB::table('comision')->where('profesor2_comision','=',$nombre_actual)->update(['profesor2_comision' => $user->name]);
