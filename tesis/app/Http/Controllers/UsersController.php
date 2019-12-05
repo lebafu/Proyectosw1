@@ -99,6 +99,7 @@ class UsersController extends Controller
     public function update(Request $request,$id)
     {
         $user=User::findorfail($id);
+        $nombre_actual=$user->name;
         $user->name=$request->get('name');
         $user->email=$request->get('email');
         $user->password=Hash::make($request->get('password'));
@@ -110,9 +111,36 @@ class UsersController extends Controller
         $profes=DB::table('users')->where('email',$email)->get();
         //para transformar consulta en array, que pueda ser recibido por la vista, y saber 
         //a que profesor corresponderá el grado academico a seleccionar
+        if($user->tipo_usuario==1){
+        //Actualizar nombre del alumno en tabla tesis y comision
+        $tesis=DB::table('tesis')->where('nombre_completo','=',$nombre_actual)->get();
+                foreach($tesis as $tes)
+                {
+                 $tes->nombre_completo=$user->name;
+                 DB::table('tesis')->where('nombre_completo','=',$nombre_actual)->update(['nombre_completo' => $tes->nombre_completo]);
+                }
+        $tesis=DB::table('tesis')->where('nombre_completo2','=',$nombre_actual)->get();
+                foreach($tesis as $tes)
+                {
+                 $tes->nombre_completo2=$user->name;
+                  DB::table('tesis')->where('nombre_completo2','=',$nombre_actual)->update(['nombre_completo2' => $tes->nombre_completo2]);
+                }
+        $comision=DB::table('comision')->where('nombre_alumno','=',$nombre_actual)->get();
+                foreach($comision as $com)
+                {
+                    $com->nombre_alumno=$user->name;
+                     DB::table('comision')->where('nombre_alumno','=',$nombre_actual)->update(['nombre_alumno' => $com->nombre_alumno]);
+                }
+        }
         foreach($profes as $profesor);
                 //dd($profesor->id);
         if($request->tipo_usuario==2 or  $request->tipo_usuario==3){
+            //Actualizar nombre del profesor en el sistema, en tablas tesis y comision.
+             DB::table('tesis')->where('profesor_guia','=',$nombre_actual)->update(['profesor_guia' => $user->name]);
+             DB::table('comision')->where('profesor1_comision','=',$nombre_actual)->update(['profesor1_comision' => $user->name]);
+             DB::table('comision')->where('profesor2_comision','=',$nombre_actual)->update(['profesor2_comision' => $user->name]);
+             DB::table('comision')->where('profesor3_comision','=',$nombre_actual)->update(['profesor3_comision' => $user->name]);
+
              return view('grado_academico_create',compact('profesor'));   
         }
         return view('welcome');
@@ -167,6 +195,7 @@ class UsersController extends Controller
     {
         //dd($request);
         $user=User::find($id);
+        $nombre_actual=$user->name;
         $user=User::findorfail($id);
         $user->name=$request->get('name');
         $user->email=$request->get('email');
@@ -176,6 +205,10 @@ class UsersController extends Controller
         $grado_academico=Grado_academico::find($id);
         $grado_academico->grado_academico=$request->get('grado_academico');
         $grado_academico->update();
+        DB::table('tesis')->where('profesor_guia','=',$nombre_actual)->update(['profesor_guia' => $user->name]);
+        DB::table('comision')->where('profesor1_comision','=',$nombre_actual)->update(['profesor1_comision' => $user->name]);
+        DB::table('comision')->where('profesor2_comision','=',$nombre_actual)->update(['profesor2_comision' => $user->name]);
+        DB::table('comision')->where('profesor3_comision','=',$nombre_actual)->update(['profesor3_comision' => $user->name]);
         return view('profesorhome');
     }
 
