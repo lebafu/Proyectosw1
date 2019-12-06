@@ -1615,7 +1615,8 @@ class TesisController extends Controller
 
        $fecha_inicio=$request->fecha_inicio;
        $fecha_final=$request->fecha_final;
-       $tes_empresas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Empresa')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();
+       $tes_empresas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Empresa')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id_pk','tesis.id','tesis.nombre_completo','tesis.nombre_completo2','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion','tesis.nombre_vinculacion')->get();
+       //dd($tes->empresas);
 
 		$html = view('tesis.print', ['tes_empresas' => $tes_empresas])->render();
 
@@ -1627,7 +1628,7 @@ class TesisController extends Controller
 
         $fecha_inicio=$request->fecha_inicio;
        $fecha_final=$request->fecha_final;
-        $tes_proyectos=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Proyecto')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();
+        $tes_proyectos=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Proyecto')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id_pk','tesis.id','tesis.nombre_completo','tesis.nombre_completo2','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion','tesis.nombre_vinculacion')->get();
 
 		$html = view('tesis.printTesisp', ['tes_proyectos' => $tes_proyectos])->render();
 
@@ -1638,7 +1639,7 @@ class TesisController extends Controller
 
         $fecha_inicio=$request->fecha_inicio;
        $fecha_final=$request->fecha_final;
-    	 $tes_comunidad=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Comunidad')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get(); 
+    	 $tes_comunidad=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Comunidad')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id_pk','tesis.id','tesis.nombre_completo','tesis.nombre_completo2','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion','tesis.nombre_vinculacion')->get(); 
 
 		$html = view('tesis.printTesisc', ['tes_comunidad' => $tes_comunidad])->render();
 
@@ -1649,7 +1650,7 @@ class TesisController extends Controller
 
         $fecha_inicio=$request->fecha_inicio;
         $fecha_final=$request->fecha_final;
-    	$tes_fondoconcursable=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Fondo concusable')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id','tesis.nombre_completo','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion')->get();  
+    	$tes_fondoconcursable=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Fondo concusable')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id_pk','tesis.id','tesis.nombre_completo','tesis.nombre_completo2','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion','tesis.nombre_vinculacion')->get();  
 
 		$html = view('tesis.printTesisfc', ['tes_fondoconcursable' => $tes_fondoconcursable])->render();
 

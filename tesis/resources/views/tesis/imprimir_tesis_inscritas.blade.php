@@ -23,9 +23,13 @@
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
-          <td>{{$tesis->id}}</td>
+          <td>{{$tesis->id_pk}}</td>
 
-          <td>{{$tesis->nombre_completo}}</td>
+          @if($tesis->nombre_completo2==null)
+            <td>{{ $tesis->nombre_completo}} </td>
+            @else
+               <td>{{ $tesis->nombre_completo}} y {{$tesis->nombre_completo2}}</td>
+            @endif
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->nombre_tesis}}</td>
