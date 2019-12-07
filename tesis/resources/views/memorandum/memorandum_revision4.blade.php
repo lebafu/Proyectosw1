@@ -125,7 +125,7 @@
 		@if($comision->sexo1=="Masculino")
 		    <h4 style="margin-bottom: 100px; margin-top:30px">Estimado Docente:</h4>
 		@endif	
-		@if($comision->sexo2=="Femenino")
+		@if($comision->sexo1=="Femenino")
 				<h4 style="margin-bottom: 100px; margin-top:30px">Estimada Docente:</h4>
 		@endif
 			</div>

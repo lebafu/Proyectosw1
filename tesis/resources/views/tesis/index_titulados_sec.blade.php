@@ -28,7 +28,7 @@
         </tr>
       @foreach($tesista as $tesis)
         <tr>
-          <td>{{$tesis->id}}</td>
+          <td>{{$tesis->id_pk}}</td>
           <td>{{$tesis->nombre_completo}}----
               @if($tesis->nombre_completo2!=null)
           {{$tesis->nombre_completo2}}
@@ -36,7 +36,7 @@
             </td>
           <td>{{$tesis->profesor_guia}}</td>
 
-          <td><a class="btn btn-primary" href="{{url('/recopilacion_inf/'.$tesis->id)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a>
+          <td><a class="btn btn-primary" href="{{url('/recopilacion_inf/'.$tesis->id_pk)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a>
                @if($tesis->nombre_completo2!=null)
               <a class="btn btn-primary" href="{{url('/recopilacion_inf2/'.$tesis->nombre_completo2)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a>
               @endif

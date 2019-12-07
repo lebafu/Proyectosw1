@@ -1424,10 +1424,10 @@ class TesisController extends Controller
         $recopilacion=Recopilacion_inf::find($id);
         //dd($recopilacion);
         if($recopilacion==null){
-            $al=DB::table('tesis')->join('users','tesis.id','=','users.id')->where('tesis.id','=',$id)->get();
+            $al=DB::table('tesis')->join('users','tesis.id','=','users.id')->where('tesis.id','=',$id)->whereNull('nota_tesis')->get();
             //dd($alumno);
             if($al->isEmpty()){ //Si la consulta anterior es vacia, entonces significa que el alumno que es el segundo alumno relacionado con la tesis, el que subio el archivo y desea completar el documento de recopilacion de inf.
-            $al=DB::table('tesis')->join('users','tesis.nombre_completo2','=','users.nombre_completo')->get();
+            $al=DB::table('tesis')->join('users','tesis.nombre_completo2','=','users.nombre_completo')->whereNull('nota_tesis')->get();
             }
             $fecha_hoy=Carbon::parse(now());
             //$dia_fecha=$fecha_hoy->day; //obtengo dia
@@ -1659,8 +1659,8 @@ class TesisController extends Controller
 
    public function acta_examen($id)
    {
-    $tesis=DB::table('tesis')->join('comision','tesis.id','=','comision.id')->where('tesis.id',$id)->get();
-    //dd($tesis);
+    //dd($id);
+    $tesis=DB::table('tesis')->join('comision','tesis.id','=','comision.id')->where('tesis.id_pk',$id)->get();
    
 
     foreach($tesis as $tes)
@@ -1678,7 +1678,7 @@ class TesisController extends Controller
         $year_fecha=$fecha->year; //obtengo año
         $hora_presentacion_tesis=$fecha->format('H:i'); //obtengo hora y minuto de inicio presentacion
     }
-
+    //dd($tes);
     //consultas para obtener grado academico de los profesores de planta.
     $profesor_guia=DB::table('users')->join('comision','users.id','=','comision.id_profesor_guia')->join('grado_academico_profesor_planta','users.id','=','grado_academico_profesor_planta.id')->where('nombre_alumno','=',$nombre_alumno1)->get();
     $profesor1_com=DB::table('users')->join('comision','users.name','=','comision.profesor1_comision')->join('grado_academico_profesor_planta','users.id','=','grado_academico_profesor_planta.id')->where('nombre_alumno','=',$nombre_alumno1)->get();
@@ -1781,7 +1781,7 @@ class TesisController extends Controller
 
     $id=Auth::id();
     $user=User::find($id);
-    $tesista=DB::table('tesis')->where('estado1','=',4)->where('estado2','=',1)->whereNotNull('nota_tesis')->select('tesis.id','tesis.nombre_completo','tesis.nombre_completo2','tesis.profesor_guia')->paginate(7);
+    $tesista=DB::table('tesis')->where('estado1','=',4)->where('estado2','=',1)->where('nota_tesis','>=',4)->select('tesis.id_pk','tesis.id','tesis.nombre_completo','tesis.nombre_completo2','tesis.profesor_guia')->paginate(7);
     //dd($tesista2);
      if(!Auth::id() or $user->tipo_usuario!=4){  //Para garantizar que no entre usuario sin loguearse//
         return view('tesis.sinpermiso');
@@ -1795,12 +1795,14 @@ class TesisController extends Controller
 
     public function recopilacion_inf($id)
    {
-
-    $user=User::find($id);
-    $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id',$id)->where('tesis.id','=',$user->id)->get();
-    $tesista2=DB::table('users')->join('tesis','users.name','=','tesis.nombre_completo2')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->where('users.id','=',$user->id)->get();
+    //dd($id);
+    $users=DB::table('users')->join('tesis','users.id','=','tesis.id')->where('tesis.id_pk',$id)->get();
+    foreach($users as $user);
+    //dd($user);
+    $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id_pk',$id)->where('tesis.id','=',$user->id)->get();
     //dd($tesis);
-   
+    $tesista2=DB::table('users')->join('tesis','users.name','=','tesis.nombre_completo2')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->where('users.id','=',$user->id)->get();
+    
    return view('tesis.recopilacion_inf',compact('tesis','tesista2'));
    }
 
@@ -1810,7 +1812,7 @@ class TesisController extends Controller
     //$user=User::find($id);
     $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.nombre_completo2','=','users.name')->where('users.name',$nombre_completo2)->where('tesis.nombre_completo2','=',$nombre_completo2)->get();
     $tesista2=DB::table('users')->join('tesis','users.name','=','tesis.nombre_completo2')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->where('users.name','=',$nombre_completo2)->get();
-    //dd($tesis);
+    dd($tesis);
    
    return view('tesis.recopilacion_inf',compact('tesis','tesista2'));
    }
@@ -1819,16 +1821,15 @@ class TesisController extends Controller
    //Una vez que el alumno haya presentado su tesis la secretaria podra insertar la nota de tesis en el sistema
    public function ingresar_nota_tesis($id)
    {
-     $tesis=Tesis::find($id);
+     $tesista=DB::table('tesis')->where('id_pk',$id)->get();
+     foreach($tesista as $tesis);
      return view('tesis.ingresar_nota_tesis',compact('tesis'));  
 
    }
 
    public function update_nota_tesis($id, Request $request)
    {
-        $tes=Tesis::find($id);
-        $tes->nota_tesis=$request->nota_tesis;
-        $tes->update();
+        DB::table('tesis')->where('id_pk', $id)->update(['nota_tesis' => $request->nota_tesis]);
         return view('secretariahome');
    } 
         //Una vez que el alumno haya subido su constancia de examen se le redireccionará a la vista para definir su fecha de 
@@ -1836,7 +1837,8 @@ class TesisController extends Controller
      public function fecha_presentacion($id)
    {
      //dd($id);
-     $tesis=Tesis::find($id);
+     $tesista=DB::table('tesis')->where('id_pk',$id)->get();
+     foreach($tesista as $tesis);
     // dd($tesis);
      //dd($tesis->id);
      return view('tesis.fecha_presentacion',compact('tesis'));  
@@ -1846,12 +1848,12 @@ class TesisController extends Controller
     public function update_fecha_presentacion($id, Request $request)
    {
         //dd($request);
-        $tes=Tesis::find($id);
+        $tesista=DB::table('tesis')->where('id_pk',$id)->get();
+        foreach($tesista as $tesis);
+        //dd($tesis);
         $todas_tesis=DB::table('tesis')->get();
-        $tesis=Tesis::find($id);
-        $tes->fecha_presentacion_tesis=$request->fecha_presentacion_tesis;
-        $tes->update();
-            return view('secretariahome'); 
+        DB::table('tesis')->where('id_pk', $id)->update(['fecha_presentacion_tesis' => $request->fecha_presentacion_tesis]);
+        return view('secretariahome'); 
         //echo gettype($request->fecha_presentacion); 
         /*if(whereTime($request->fecha_presentacion,'=','15:00:00') or (whereTime($request->fecha_presentacion, '=' ,'16:00:00')) or   (whereTime(,$request->fecha_presentacion,'=','17:00:00')) or (whereTime($request->fecha_presentacion,'=','18:00:00')) or  (whereTime($request->fecha_presentacion,'=','19:00:00'))or(whereTime($request->fecha_presentacion,'=','20:00:00')) or (whereTime($request->fecha_presentacion,'=','21:00:00'))) */
         /*$cont=0;
@@ -1913,7 +1915,8 @@ class TesisController extends Controller
         }
         elseif($id!=null)
         {
-            $tes=Tesis::find($id);
+            $tesis=DB::table('tesis')->where('id_pk',$id)->get();
+            foreach($tesis as $tes);
             if($tes->estado1==4 and $tes->estado2==1 and $tes->acta_ex==null){
                     return view('tesis.vista_subir_acta',compact('tes'));
             }
@@ -1958,7 +1961,9 @@ class TesisController extends Controller
     //Para poder visualizar el pdf de acta del alumno y pdf de constancia examen que sube el alumno se uso el paquete PDFMERGE, que permite habiendo creado una carpeta en este caso en public\acta_ex y public\constancia_ex donde se almacenaran estos documentos que se suban al sistema, y se visualizarán desde estas rutas mas tarde.
         public function verPDF($id){
 
-        $tesis = Tesis::find($id);
+        //dd($id);
+        $tesista = DB::table('tesis')->where('id_pk','=',$id)->get();
+        foreach($tesista as $tesis);
         $pathToFile =public_path().'\constancia_ex/'.$tesis->constancia_ex;
         return response()->file($pathToFile);
 
@@ -1966,7 +1971,8 @@ class TesisController extends Controller
 
     public function verPDF_acta($id){
 
-        $tesis = Tesis::find($id);
+        $tesista = DB::table('tesis')->where('id_pk','=',$id)->get();
+        foreach($tesista as $tesis);
         $pathToFile =public_path().'\acta_ex/'.$tesis->acta_ex;
         return response()->file($pathToFile);
 
@@ -2155,8 +2161,10 @@ class TesisController extends Controller
         //dd($id);
         $id_usuario=Auth::id();
         $user=User::find($id_usuario);
-        $tesis=Tesis::find($id);
-        if($user->tipo_usuario==4 or $user->tipo_usuario==3){
+        $tesista = DB::table('tesis')->where('id','=',$id)->whereNull('nota_tesis')->get();
+        foreach($tesista as $tesis);
+        //dd($tesis);
+        if($user->tipo_usuario==4 or $user->tipo_usuario==3 and $tesis->nota_tesis==null){
             return view('tesis.create_num_memo',compact('tesis'));
         }else{
             return view('tesis.sinpermiso');
@@ -2189,8 +2197,10 @@ class TesisController extends Controller
         //dd($id);
          $num_memo=$request->get('numero');
          $comision=Comision::find($id);
+         //dd($comision);
          //dd($comision->profesor1_comision);
          $profesor_comision=DB::table('grado_academico_profesor_planta')->join('users','grado_academico_profesor_planta.id','=','users.id')->where('users.name','=',$comision->profesor1_comision)->get();
+         //dd($profesor_comision);
          foreach($profesor_comision as $profe_comision);
          //dd($profesor_comision);
          $profe_comision->grado_academico=mb_strtoupper($profe_comision->grado_academico);
@@ -2199,7 +2209,8 @@ class TesisController extends Controller
          //dd($comision);
          //$grado_director_tesis=
          //dd($num_memo);
-         $tesis=Tesis::find($id);
+         $tesista = DB::table('tesis')->where('id_pk','=',$id)->whereNull('nota_tesis')->get();
+        foreach($tesista as $tesis);
          $revision=Memorandum::find(1);
          $coordinador_tesis=DB::table('users')->where('tipo_usuario','=',3)->get();
          $fecha=now();
@@ -2333,7 +2344,8 @@ class TesisController extends Controller
          //dd($comision);
          //$grado_director_tesis=
          //dd($num_memo);
-         $tesis=Tesis::find($id);
+        $tesista = DB::table('tesis')->where('id_pk','=',$id)->whereNull('nota_tesis')->get();
+        foreach($tesista as $tesis);
          $revision=Memorandum::find(1);
          $coordinador_tesis=DB::table('users')->where('tipo_usuario','=',3)->get();
          $fecha=now();
@@ -2465,7 +2477,8 @@ class TesisController extends Controller
          //dd($comision);
          //$grado_director_tesis=
          //dd($num_memo);
-         $tesis=Tesis::find($id);
+        $tesista = DB::table('tesis')->where('id_pk','=',$id)->whereNull('nota_tesis')->get();
+        foreach($tesista as $tesis);
          $revision=Memorandum::find(1);
          $coordinador_tesis=DB::table('users')->where('tipo_usuario','=',3)->get();
          $fecha=now();
@@ -2594,7 +2607,8 @@ class TesisController extends Controller
          //dd($comision);
          //$grado_director_tesis=
          //dd($num_memo);
-         $tesis=Tesis::find($id);
+        $tesista = DB::table('tesis')->where('id_pk','=',$id)->get();
+        foreach($tesista as $tesis);
          //dd($tesis);
          $revision=Memorandum::find(1);
          $coordinador_tesis=DB::table('users')->where('tipo_usuario','=',3)->get();
@@ -2725,7 +2739,8 @@ class TesisController extends Controller
          //dd($comision);
          //$grado_director_tesis=
          //dd($num_memo);
-         $tesis=Tesis::find($id);
+         $tesista = DB::table('tesis')->where('id_pk','=',$id)->get();
+         foreach($tesista as $tesis);
          //dd($tesis);
          $revision=Memorandum::find(1);
          $coordinador_tesis=DB::table('users')->where('tipo_usuario','=',3)->get();

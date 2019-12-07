@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Ingrese nota de tesis del alumno') }}</div>
 
                 <div class="card-body">
-                    <form action="{{route('tesis.update_nota_tesis', $tesis->id)}}" method="POST">
+                    <form action="{{route('tesis.update_nota_tesis', $tesis->id_pk)}}" method="POST">
                         @csrf
 
                         <div class="form-group row">

@@ -20,7 +20,7 @@
                 <div class="card-header">{{ __('Ingrese fecha de presentacion') }}</div>
 
                 <div class="card-body">
-                    <form action="{{route('tesis.update_fecha_presentacion', $tesis->id)}}" method="POST">
+                    <form action="{{route('tesis.update_fecha_presentacion', $tesis->id_pk)}}" method="POST">
                         @csrf
 
                         <div class="row">

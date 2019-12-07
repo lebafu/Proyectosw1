@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Crear Numero memorandum') }}</div>
 
                 <div class="card-body">
-                    <form action="{{route('tesis.lista_profes_comision_revision',$tesis->id)}}" method="POST">
+                    <form action="{{route('tesis.lista_profes_comision_revision',$tesis->id_pk)}}" method="POST">
                         @csrf
 
                     <div class="form-group row">
