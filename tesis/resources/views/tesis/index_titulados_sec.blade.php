@@ -38,7 +38,7 @@
 
           <td><a class="btn btn-primary" href="{{url('/recopilacion_inf/'.$tesis->id_pk)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a>
                @if($tesis->nombre_completo2!=null)
-              <a class="btn btn-primary" href="{{url('/recopilacion_inf2/'.$tesis->nombre_completo2)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a>
+              <a class="btn btn-primary" href="{{url('/recopilacion_inf2/'.$tesis->id_pk)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a>
               @endif
           </td>
 
