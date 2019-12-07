@@ -1801,7 +1801,7 @@ class TesisController extends Controller
     //dd($user);
     $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id_pk',$id)->where('tesis.id','=',$user->id)->get();
     //dd($tesis);
-    $tesista2=DB::table('users')->join('tesis','users.name','=','tesis.nombre_completo2')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->where('users.id','=',$user->id)->get();
+
     
    return view('tesis.recopilacion_inf',compact('tesis'));
    }
@@ -1816,9 +1816,8 @@ class TesisController extends Controller
     $nombre_completo2=$dato->nombre_completo2;
     //$nombre_completo2=$datos_alumno2->nombre_completo2;
     $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.nombre_completo2','=','users.name')->where('users.name',$nombre_completo2)->where('tesis.nombre_completo2','=',$nombre_completo2)->where('tesis.id_pk',$id)->get();
-    $tesista2=DB::table('users')->join('tesis','users.name','=','tesis.nombre_completo2')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->where('users.name','=',$nombre_completo2)->get();
     
-   return view('tesis.recopilacion_inf2',compact('tesis','tesista2'));
+   return view('tesis.recopilacion_inf2',compact('tesis'));
    }
 
 
@@ -2867,7 +2866,8 @@ class TesisController extends Controller
         //dd($id_usuario);
         //$user=User::find($id_usuario);
         //dd($id);
-        $tesis=Tesis::find($id);
+        $tesista=DB::table('tesis')->where('tesis.id_pk',$id)->get();
+        foreach($tesista as $tesis);
         //if($user->tipo_usuario==4 or $user->tipo_usuario==3){
             return view('tesis.createnummemotitulados',compact('tesis'));
         //}else{
@@ -2891,7 +2891,8 @@ class TesisController extends Controller
     $user=User::find($id);
      //$tesistas=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id',$id)->where('tesis.id','=',$user->id)->get();
     //foreach($tesistas as $tesis);
-    $tesis=Tesis::find($id);
+    $tesista=DB::table('tesis')->where('id_pk',$id)->get();
+    foreach($tesista as $tesis);
     $users=DB::table('users')->where('director_escuela',1)->get();
     foreach($users as $director_escuela);
     $memos=DB::table('memorandum')->where('nombre_memorandum','=','Titulación')->get();

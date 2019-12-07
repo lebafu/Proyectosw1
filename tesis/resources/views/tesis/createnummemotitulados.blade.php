@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('Crear Numero memorandum') }}</div>
 
                 <div class="card-body">
-                    <form action="{{route('memorandum.memorandum_titulados',$tesis->id)}}" method="POST">
+                    <form action="{{route('memorandum.memorandum_titulados',$tesis->id_pk)}}" method="POST">
                         @csrf
 
                     <div class="form-group row">
@@ -20,7 +20,7 @@
                         </div>
 
                             <div class="col-md-6">
-                                <input id="id_tesis" type="hidden" class="form-control" name="id_tesis" value="{{$tesis->id}}" required autocomplete="numero" required>
+                                <input id="id_tesis" type="hidden" class="form-control" name="id_tesis" value="{{$tesis->id_pk}}" required autocomplete="numero" required>
                             </div>
                         </div>
 
