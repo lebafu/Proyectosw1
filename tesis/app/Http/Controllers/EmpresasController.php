@@ -77,6 +77,7 @@ class EmpresasController extends Controller
         //
         $empresas = DB::table('empresas')->where('id', $id)->first();
         return view('empresas.edit',compact('empresas'));
+
     }
 
     /**
@@ -89,9 +90,19 @@ class EmpresasController extends Controller
     public function update(Request $request,$id)
     {
         //
-        $empresas=Empresa::findorfail($id);
+        $empresas=Empresa::find($id);
+        //dd($empresas);
+        //foreach($empresas as $empresa);
+        //dd($empresas);
+        $nombre_actual=$empresas->nombre;
+        //dd($nombre_actual);
+        $tesis_relacionadas=DB::table('tesis')->where('nombre_vinculacion','=',$nombre_actual)->get();
+        //dd($tesis_relacionadas);
+        //dd($tesis_relacionadas);
         $empresas->nombre=$request->get('nombre');
         $empresas->update();
+        DB::table('tesis')->where('nombre_vinculacion', $nombre_actual)->update(['nombre_vinculacion' => $request->nombre]);
+        
 
         $empresas=DB::table('empresas')->paginate(7);
         return view('empresas.index',compact('empresas'));

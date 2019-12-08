@@ -91,9 +91,11 @@ class FondoConcursableController extends Controller
     {
         //
         $fc=Fondo_concursable::findorfail($id);
+        $nombre_actual=$fc->nombre;
         $fc->nombre=$request->get('nombre');
         $fc->update();
-
+       DB::table('tesis')->where('nombre_vinculacion', $nombre_actual)->update(['nombre_vinculacion' => $request->nombre]);
+        
         $fcs=DB::table('fondo_concursable')->paginate(7);
         return view('fondoconcursable.index',compact('fcs'));
 

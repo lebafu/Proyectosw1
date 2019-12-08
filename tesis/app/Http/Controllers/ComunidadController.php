@@ -92,8 +92,11 @@ class ComunidadController extends Controller
     {
         //
         $comunidad=Comunidad::findorfail($id);
+        $nombre_actual=$comunidad->nombre;
         $comunidad->nombre=$request->get('nombre');
         $comunidad->update();
+        DB::table('tesis')->where('nombre_vinculacion', $nombre_actual)->update(['nombre_vinculacion' => $request->nombre]);
+        
 
        $comunidads=DB::table('comunidad')->paginate(7);
        return view('comunidad.index',compact('comunidads'));

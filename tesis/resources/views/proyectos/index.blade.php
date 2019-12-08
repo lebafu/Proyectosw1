@@ -44,6 +44,7 @@
      <a href="{{URL::action('ProyectosController@create')}}" class="btn btn-primary">Crear Proyectos </a>
      </div>
      </div>
+      <a href="{{ url('/profesorhome')}}" class="btn btn-default">Volver a home</a>
      </div>
 </div>
 

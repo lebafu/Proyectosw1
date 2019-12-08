@@ -93,9 +93,10 @@ class ProyectosController extends Controller
     {
         //
         $proyecto=Proyecto::findorfail($id);
+        $nombre_actual=$proyecto->nombre;
         $proyecto->nombre=$request->get('nombre');
         $proyecto->update();
-
+        DB::table('tesis')->where('nombre_vinculacion', $nombre_actual)->update(['nombre_vinculacion' => $request->nombre]);
         $proyectos=DB::table('proyectos')->paginate(7);
         return view('proyectos.index',compact('proyectos'));
     }

@@ -26,7 +26,7 @@
                                     {{ __('Guardar') }}
                                 </button>
 
-                                <a href="/users" class="btn">{{ __('Cancelar') }}</a>
+                                <a href="/profesorhome" class="btn">{{ __('Cancelar') }}</a>
                                     
                             </div>
 

@@ -42,6 +42,7 @@
      <a href="{{URL::action('FondoConcursableController@create')}}" class="btn btn-primary">Crear Fondo Concursable</a>
      </div>
      </div>
+      <a href="{{ url('/profesorhome')}}" class="btn btn-default">Volver a home</a>
      </div>
 </div>
 
