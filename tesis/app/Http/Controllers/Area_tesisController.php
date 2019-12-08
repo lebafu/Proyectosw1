@@ -55,9 +55,11 @@ class Area_tesisController extends Controller
     {
         //dd($id);
         $area_tesis=Area_tesis::findorfail($id);
+        $nombre_actual_area_tesis=$area_tesis->area_tesis;
         $area_tesis->area_tesis=$request->area_tesis;
         $area_tesis->update();
-        return view('welcome');
+
+        return view('adminhome');
     }
 
     public function destroy($id)

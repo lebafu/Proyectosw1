@@ -32,11 +32,15 @@
     <table class="table table-bordered">
         @foreach($tesis as $tes)
         <tr>
-           <p><a href="{{url('/mostrar_tesis/' .$tes->id)}}">{{$tes->titulo}}</a></p>
+           <p><a href="{{url('/mostrar_tesis/' .$tes->id_pk)}}">{{$tes->titulo}}</a></p>
+           @if($tes->nombre_completo2==null)
            <p>{{$tes->nombre_completo}}</p>
+           @elseif($tes->nombre_completo2!=null)
+           <p>{{$tes->nombre_completo}} y {{$tes->nombre_completo2}}</p>
            <p align="justify">{{$tes->abstract_res}}</p>
+           @endif
            @if($tes->publicar==1)
-           <p><a href="{{ route('verPDF', ['id' => $tes->id]) }}" target="_blank" class="btn btn-primary"><span class="fa fa-print"></span>Descargar PDF</a></p>  <!--Al añadir target="_blank", permite que se habra una pestaña nueva con la ruta especificada -->
+           <p><a href="{{ route('verPDF', ['id' => $tes->id_pk]) }}" target="_blank" class="btn btn-primary"><span class="fa fa-print"></span>Descargar PDF</a></p>  <!--Al añadir target="_blank", permite que se habra una pestaña nueva con la ruta especificada -->
            @endif
         </tr>
         @endforeach

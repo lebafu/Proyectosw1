@@ -38,12 +38,12 @@ class TesisController extends Controller
         $nombre_completo=$request->get('nombre_completo');
         $nombre_tesis=$request->get('nombre_tesis');
         $abstract=$request->get('abstract');
-         $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())->paginate(7);
-        
+         $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())->where('nota_tesis','>=',4)->paginate(7);
+        //dd($tesis);
         if($nombre_completo==null and $nombre_tesis==null and $abstract==null)
         {
-            $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())
-            ->paginate(7);
+            $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())->where('nota_tesis','>=',4)->paginate(7);
+            //dd($tesis);
             foreach($tesis as $tes)
             {
                 $var_titulo=$tes->nombre_tesis;
@@ -62,7 +62,7 @@ class TesisController extends Controller
                 $var=$tes->abstract;
                 $tes->abstract_res=Str::limit($var,309);
             }
-               $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())
+               $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())->where('nota_tesis','>=',4)
                 ->where('nombre_tesis','like',"%$nombre_tesis%")
                 ->where('abstract','like',"%$abstract%")->paginate(7);
              return view('tesis.repositorio_tesis',compact('tesis'));
@@ -85,8 +85,7 @@ class TesisController extends Controller
                             if($nombre_completo==null and $nombre_tesis!=null and $abstract!=null)
                             {
                                  $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())
-                                 
-                                 ->where('nombre_tesis','like',"%$nombre_tesis%")
+                                  ->where('nombre_tesis','like',"%$nombre_tesis%")->where('nota_tesis','>=',4)
                                  ->where('abstract','like',"%$abstract%")
                                  ->paginate(7);
                                 foreach($tesis as $tes)
@@ -101,8 +100,7 @@ class TesisController extends Controller
                                 if($nombre_completo!=null and $nombre_tesis==null and $abstract==null)
                                 {
                                      $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())
-                                     
-                                    ->where('nombre_completo','like',"%$nombre_completo%")
+                                     ->where('nombre_completo','like',"%$nombre_completo%")->where('nota_tesis','>=',4)
                                     ->paginate(7);
                                     //dd($request);
                                     //dd($tesis);
@@ -118,7 +116,7 @@ class TesisController extends Controller
                                     if($nombre_completo==null and $nombre_tesis!=null and $abstract==null)
                                     {
                                          $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())
-                                         
+                                         ->where('nota_tesis','>=',4)
                                          ->where('nombre_tesis','like',"%$nombre_tesis%")->paginate(7);
                                          //dd($tesis);
                                              foreach($tesis as $tes)
@@ -133,7 +131,7 @@ class TesisController extends Controller
                                         if($nombre_completo!=null and $nombre_tesis!=null and $abstract==null)
                                         {
                                         $tesis=DB::table('tesis')->where('fecha_presentacion_tesis','<',now())
-                                        
+                                        ->where('nota_tesis','>=',4)
                                          ->where('nombre_completo','like',"%$nombre_completo%")
                                          ->where('nombre_tesis','like',"%$nombre_tesis%")->paginate(7);
                                         }
@@ -177,7 +175,7 @@ class TesisController extends Controller
         {
         //$tesis=DB::table('tesis')->where('id', $id)->first();
 
-        $tes=DB::table('tesis')->where('id',$id)->first();
+        $tes=DB::table('tesis')->where('id_pk',$id)->first();
         //dd($com);
             return view('tesis.mostrar_tesis',compact('tes'));
         }
