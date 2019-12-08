@@ -54,11 +54,14 @@ class Area_tesisController extends Controller
      public function update(Request $request,$id)
     {
         //dd($id);
+        //dd($request);
         $area_tesis=Area_tesis::findorfail($id);
+        //dd($area_tesis);
         $nombre_actual_area_tesis=$area_tesis->area_tesis;
+        //dd($nombre_actual_area_tesis);
         $area_tesis->area_tesis=$request->area_tesis;
         $area_tesis->update();
-
+        DB::table('tesis')->where('area_tesis', $nombre_actual_area_tesis)->update(['area_tesis' => $request->area_tesis]);
         return view('adminhome');
     }
 
