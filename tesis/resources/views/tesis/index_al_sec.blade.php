@@ -43,7 +43,7 @@
            <td>{{$tesis->tipo}}</td>
             @if($tesis->constancia_ex!=null)
            <td><a href="{{ route('verPDF', ['id' => $tesis->id_pk]) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Ver</i></a></td>
-           <td><a href="{{url('tesis/create_num_memo'.$tesis->id) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Memo</i></a></td>
+           <td><a href="{{url('tesis/create_num_memo'.$tesis->id_pk) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Memo</i></a></td>
            <td><a href="{{url('/fecha_presentacion/'.$tesis->id_pk)}}" class="btn btn-primary">Presentacion
            </a></td>
            @else

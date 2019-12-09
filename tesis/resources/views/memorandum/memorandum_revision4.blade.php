@@ -92,6 +92,7 @@
 								@endif		
 								{{$tesis->nombre_completo}}				
 						@endif
+						<div align="left" style="margin-left:0px">
 						@if($tesis->nombre_completo2!=null)
 								@if($sexo2=="Masculino")
 								y del Sr.
@@ -99,7 +100,7 @@
 								@if($sexo2=="Femenino")
 								y de la	Srta.
 								@endif
-								{{$tesis->nombre_completo2}}	
+								{{$tesis->nombre_completo2}}.
 						@endif
 						 </div>
 				</div>

@@ -2162,10 +2162,11 @@ class TesisController extends Controller
         //dd($id);
         $id_usuario=Auth::id();
         $user=User::find($id_usuario);
-        $tesista = DB::table('tesis')->where('id','=',$id)->whereNull('nota_tesis')->get();
+        $tesista = DB::table('tesis')->where('id_pk','=',$id)->get();
+        //dd($tesista);
         foreach($tesista as $tesis);
-        //dd($tesis);
-        if($user->tipo_usuario==4 or $user->tipo_usuario==3 and $tesis->nota_tesis==null){
+        //$tesis->nota_tesis==null
+        if($user->tipo_usuario==4 or $user->tipo_usuario==3){
             return view('tesis.create_num_memo',compact('tesis'));
         }else{
             return view('tesis.sinpermiso');
@@ -2210,8 +2211,10 @@ class TesisController extends Controller
          //dd($comision);
          //$grado_director_tesis=
          //dd($num_memo);
-         $tesista = DB::table('tesis')->where('id_pk','=',$id)->whereNull('nota_tesis')->get();
+         $tesista = DB::table('tesis')->where('id_pk','=',$id)->get();
+         //dd($tesista);
         foreach($tesista as $tesis);
+        //dd($tesis);
          $revision=Memorandum::find(1);
          $coordinador_tesis=DB::table('users')->where('tipo_usuario','=',3)->get();
          $fecha=now();
@@ -2278,6 +2281,7 @@ class TesisController extends Controller
         $sexo_profe_guia=$profe->sexo;
     }
     $nombre_coordinador=mb_strtoupper($nombre_coordinador);
+    //dd($nombre_coordinador);
     $profesor_guia=Grado_academico::find($id_profesor_guia);
     $alumno1=DB::table('users')->where('name','=',$tesis->nombre_completo)->get();
     $alumno2=DB::table('users')->where('name','=',$tesis->nombre_completo2)->get();
@@ -2323,7 +2327,7 @@ class TesisController extends Controller
          //dd($coordinador_tesis);
          $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
         $revision->escuela1=mb_strtoupper($revision->escuela);
-         return view('memorandum.memorandum_revision2',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','profe_comision'));
+         return view('memorandum.memorandum_revision1',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','profe_comision'));
         
       }
         
@@ -2345,7 +2349,7 @@ class TesisController extends Controller
          //dd($comision);
          //$grado_director_tesis=
          //dd($num_memo);
-        $tesista = DB::table('tesis')->where('id_pk','=',$id)->whereNull('nota_tesis')->get();
+        $tesista = DB::table('tesis')->where('id_pk','=',$id)->get();
         foreach($tesista as $tesis);
          $revision=Memorandum::find(1);
          $coordinador_tesis=DB::table('users')->where('tipo_usuario','=',3)->get();
@@ -2478,7 +2482,7 @@ class TesisController extends Controller
          //dd($comision);
          //$grado_director_tesis=
          //dd($num_memo);
-        $tesista = DB::table('tesis')->where('id_pk','=',$id)->whereNull('nota_tesis')->get();
+        $tesista = DB::table('tesis')->where('id_pk','=',$id)->get();
         foreach($tesista as $tesis);
          $revision=Memorandum::find(1);
          $coordinador_tesis=DB::table('users')->where('tipo_usuario','=',3)->get();

@@ -144,7 +144,7 @@ Route::get('/tesis_inscritas_profesor', 'TesisController@index2_ins_pro')->name(
 Route::get('/tesis_profesor_comision', 'TesisController@profe_comision')->name('tesis.tesis_profesor_comision');
 Route::get('/tesis{id}', 'TesisController@edit')->name('tesis.edit');
 Route::get('/repositorio_tesis','TesisController@repositorio_tesis')->name('repositorio_tesis');
-Route::get('/mostrar_tesis/{id}', 'TesisController@mostrar_tesis')->name('tesis.show');
+Route::get('/mostrar_tesis/{id_pk}', 'TesisController@mostrar_tesis')->name('tesis.show');
 
 Route::get('/pedir_nota_pendiente/{tesis}', 'TesisController@pedir_nota_pendiente')->name('tesis.pedir_nota_pendiente');
 Route::put('/nota_pendiente_ingresada/{tesis}','TesisController@save_nota_pendiente')->name('tesis.save_nota_pendiente');
