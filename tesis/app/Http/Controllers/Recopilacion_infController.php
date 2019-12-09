@@ -52,7 +52,7 @@ class Recopilacion_infController extends Controller
             {
        
             DB::table('recopilacion_inf_titulados')->insert([
-                'id' => $id,
+                'id' => $request->id_pk,
                 'fecha_nac' => $request->fecha_nac,
                 'titulo' => $request->titulo,
                 'telefono_celular' =>$request->celular,
@@ -70,7 +70,7 @@ class Recopilacion_infController extends Controller
             {
 
                 DB::table('recopilacion_inf_titulados')->insert([
-                'id' => $id,
+                'id' => $request->id_pk,
                 'fecha_nac' => $request->fecha_nac,
                 'titulo' => $request->titulo,
                 'telefono_celular' =>$request->celular,
@@ -93,7 +93,49 @@ class Recopilacion_infController extends Controller
        return view('alumnohome');
     }
 
+
+     public function edit($id)
+        {
+            //$user = DB::table('users')->where('id', $id)->first();
+            //return view('users.edit',compact('user'));
+                $idlogin=Auth::id();
+                $user=User::findorfail($idlogin);
+                //dd($user);
+                $tesis = DB::table('tesis')->where('id_pk',$id)->get();
+                $recopilaciones=DB::table('recopilacion_inf_titulados')->where('id',$id)->get();
+                foreach($tesis as $tes);
+                foreach($recopilaciones as $recopilacion);
+                //dd($recopilacion);
+            if(!Auth::id()){
+                return view('tesis.sinpermiso');
+            }elseif($user->tipo_usuario==1 and $tes->estado1==4 and $tes->estado2==1){
+                return view('recopilacion.recopilacion_edit',compact('tes','recopilacion'));
+
+            }
+        }
+
+
 	
+    public function update(Request $request, $id)
+    {
+        $recopilaciones=DB::table('recopilacion_inf_titulados')->where('id',$id)->get();
+        foreach($recopilaciones as $recopilacion);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['fecha_nac' =>  $request->fecha_nac]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['titulo' =>  $request->titulo]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['telefono_celular' =>  $request->telefono_celular]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['telefono_fijo' =>  $request->telefono_fijo]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['facebook' =>  $request->facebook]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['direccion_actual' =>  $request->direccion_actual]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['ano_egreso' =>  $request->ano_egreso]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['fecha_nac2' =>  $request->fecha_nac2]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['titulo2' =>  $request->titulo2]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['telefono_celular2' =>  $request->telefono_celular2]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['telefono_fijo2' =>  $request->telefono_fijo2]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['facebook2' =>  $request->facebook2]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['direccion_actual2' =>  $request->direccion_actual2]);
+        DB::table('recopilacion_inf_titulados')->where('id',$id)->update(['ano_egreso2' =>  $request->ano_egreso2]);
+      return view('alumnohome');
 
     }
 
+}

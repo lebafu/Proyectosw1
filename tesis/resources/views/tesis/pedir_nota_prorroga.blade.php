@@ -14,7 +14,7 @@
                 <div class="card-header">{{ __('Ingrese su nota de prorroga') }}</div>
 
                 <div class="card-body">
-                    <form action="{{route('tesis.save_nota_prorroga', $tes->id)}}" method="POST">
+                    <form action="{{route('tesis.save_nota_prorroga', $tes->id_pk)}}" method="POST">
                         @csrf
 
 

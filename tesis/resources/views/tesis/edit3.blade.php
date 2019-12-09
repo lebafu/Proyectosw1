@@ -369,7 +369,7 @@
                           <div class="form-group row">
                             <label for="codigo_postal1" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Postal') }}</label>
                             <div class="col-md-6">
-                                <input id="codigo_postal1" type="text" placeholder="codigo_postal" class="form-control" name="codigo_postal1" value="{{$com->codigo_postal1}}"required="required">
+                                <input id="codigo_postal1" type="text" placeholder="codigo_postal" class="form-control" name="codigo_postal1" value="{{$com->codigo_postal1}}">
                             </div>
                         </div>
 
@@ -439,7 +439,7 @@
                         <div class="form-group row">
                             <label for="codigo_postal2" class="col-md-4 col-form-label text-md-right">{{ __('Codigo Postal') }}</label>
                             <div class="col-md-6">
-                                <input id="codigo_postal2" type="text" placeholder="codigo_postal" class="form-control" name="codigo_postal2" value="{{$com->codigo_postal2}}"required="required">
+                                <input id="codigo_postal2" type="text" placeholder="codigo_postal" class="form-control" name="codigo_postal2" value="{{$com->codigo_postal2}}">
                             </div>
                         </div>
 

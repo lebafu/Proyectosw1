@@ -15,6 +15,10 @@
                         @csrf
 
                         @foreach($al as $alumno)
+
+                                <input id="id_pk" type="hidden" class="form-control" name="id_pk" value="{{$alumno->id_pk}}">
+                         
+
                         <div class="form-group row">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre completo') }}</label>
 
@@ -61,7 +65,7 @@
                         <div class="form-group row">
                             <label for="celular" class="col-md-4 col-form-label text-md-right">{{ __('N°Celular') }}</label>
                             <div class="col-md-6">
-                               <input id="celular" type="text" class="form-control" name="celular" required="required">
+                               <input id="telefono_celular" type="text" class="form-control" name="telefono_celular" required="required">
                             </div>
                         </div>
 
@@ -157,7 +161,7 @@
                         <div class="form-group row">
                             <label for="celular2" class="col-md-4 col-form-label text-md-right">{{ __('N°Celular') }}</label>
                             <div class="col-md-6">
-                               <input id="celular2" type="text" class="form-control" name="celular2" required="required">
+                               <input id="telefono_celular2" type="text" class="form-control" name="telefono_celular2" required="required">
                             </div>
                         </div>
 
@@ -220,7 +224,7 @@
                                     {{ __('Guardar') }}
                                 </button>
 
-                                <a href="/recopilacion_informacion" class="btn">{{ __('Cancelar') }}</a>
+                                <a href="/alumnohome" class="btn">{{ __('Cancelar') }}</a>
                                     
                             </div>
 

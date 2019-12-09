@@ -232,6 +232,7 @@ Route::get('/rango_fechas', 'TesisController@rango_fechas')->name('tesis.rango_f
 Route::put('/informes_rangos_fechas/','TesisController@informes_rangos_fechas')->name('tesis.informes_rangos_fechas');
 Route::get('/error_generar_pdf', 'TesisController@error_generar_pdf')->name('tesis.error_generar_pdf');
 Route::get('/error_rut', 'TesisController@error_rut')->name('tesis.error_generar_pdf');
+Route::get('/tesis_aprobada', 'TesisController@tesis_aprobada')->name('tesis.tesis_aprobada');
 Route::get('/error_profesor_comision', 'TesisController@update2')->name('tesis.profesor_repetido_comision');
 //NOTAS PENDIENTES Y DE PRORROGAS VENCIDAS
 Route::get('/descargar_pendientes_vencidas','TesisController@imprimir_pend_venc')->name('descargar_pendientes_vencidas');
@@ -285,3 +286,6 @@ Route::get('/aceptar_nota_prorroga_director/{tesis}', 'TesisController@aceptar_n
 Route::put('/actualizarprorroga{tesis}','TesisController@prorroga_director_update')->name('tesis.prorroga_director_update');	
 //Route::get('/memorandum_revision/{tesis}', 'TesisController@memo_revision')->('tesis.memo_revision');
 
+//Editar recopilacion de informacion
+Route::get('/recopilacion{id}', 'Recopilacion_infController@edit')->name('recopilacion.recopilacion_edit');
+Route::put('/actualizarrecopilacion_inf{recopilacion}','Recopilacion_infController@update')->name('recopilacion.update');

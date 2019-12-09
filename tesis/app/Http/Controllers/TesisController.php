@@ -411,7 +411,19 @@ class TesisController extends Controller
         $id=Auth::id();
         $alumno=User::findorfail($id);
         $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
-        $tesista=Tesis::find($id);
+        //Si el segundo alumno inscrito en la tesis quiere inscribir el ahora la tesis, entonces para ello deberá tener nota inferior a 4.
+          $tesistas=DB::table('tesis')->where('nombre_completo',$alumno->name)->orwhere('nombre_completo2',$alumno->name)->get();
+          //dd($tesistas);
+          foreach($tesistas as $tesista)
+          {
+            if($tesista->nota_tesis>=4)
+            {
+                 return view('tesis.tesis_aprobada');
+            }
+            if($tesista->nota_tesis==null){
+                return view('tesis.tesisregistrada');
+        }
+        }
         $area_tesis=DB::table('area_tesis')->get();
         $empresas=DB::table('empresas')->get();
         $comunidads=DB::table('comunidad')->get();
@@ -419,12 +431,15 @@ class TesisController extends Controller
         $proyectos=DB::table('proyectos')->get();
         //dd($area_tesis);
         //dd($nota_tesis);
-        if($tesista==null or $tesista->nota_tesis==null or $tesista->nota_tesis<4){
+        if($tesista==null or $tesista->nota_tesis<4){
         return view('tesis.create',compact('alumno','profes','area_tesis','empresas','comunidads','fcs','proyectos'));
-        }else
-        {
-            return view('tesis.tesisregistrada');
         }
+    }
+
+    public function tesis_aprobada()
+    {
+
+        return view('tesis.tesis_aprobada');
     }
 
     public function error_rut()
@@ -481,8 +496,8 @@ class TesisController extends Controller
         //dd($request->nombre_completo2);
             return view('tesis.error_campos');
         }
-        $rut1=DB::table('tesis')->select('rut')->get();
-        $rut2=DB::table('tesis')->select('rut2')->get();
+        $rut1=DB::table('tesis')->get();
+        $rut2=DB::table('tesis')->get();
         $contador=0;
         $buscar_segundo_alumno_user=DB::table('users')->where('name','=',$request->nombre_completo2)->get();
         $buscar_segundo_alumno_tesis=DB::table('tesis')->where('nombre_completo','=',$request->nombre_completo2)->orwhere('nombre_completo2','=',$request->nombre_completo2)->get();
@@ -513,6 +528,7 @@ class TesisController extends Controller
             }
 
                //En caso de que el rut ya exista en la bd.
+        //dd($rut1);
         foreach($rut1 as $rut)
         {
             if(($rut->rut==$request->rut2 and $tesista2->nota_tesis>4) or ($rut->rut==$request->rut2 and $tesista2->nota_tesis==null)){
@@ -638,7 +654,7 @@ class TesisController extends Controller
                 $fcs=DB::table('fondo_concursable')->get();
                  $proyectos=DB::table('proyectos')->get();
             if(!Auth::id()){
-                return view('sinpermiso');
+                return view('tesis.sinpermiso');
             }elseif($user->tipo_usuario==1 and $tes->estado1==1 and $tes->estado2==null){
                
                 //$tes->estado1=2;
@@ -663,9 +679,12 @@ class TesisController extends Controller
         {
             //$user = DB::table('users')->where('id', $id)->first();
             //return view('users.edit',compact('user'));
+                //dd($id);
                 $idlogin=Auth::id();
                 $user=User::findorfail($idlogin);
-                $tes = Tesis::findorfail($id);
+                $tesis=DB::table('tesis')->where('id_pk',$id)->get();
+                foreach($tesis as $tes);
+                //dd($tes);
                 //$profes=DB::table('users')->where('tipo_usuario','=',2)->get();
             
 
@@ -698,11 +717,12 @@ class TesisController extends Controller
             //return view('users.edit',compact('user'));
                 $idlogin=Auth::id();
                 $user=User::findorfail($idlogin);
-                $tes = Tesis::findorfail($id);
+                $tesis=DB::table('tesis')->where('id_pk',$id)->get();
+                foreach($tesis as $tes);
+                //dd($tes);
                 //$profes=DB::table('users')->where('tipo_usuario','=',2)->get();
-            $user=User::findorfail($id);
+            $user=User::findorfail($idlogin);
         	//dd($user->name);
-        	$tesistas=DB::table('tesis');
 
             if(!Auth::id()){
                 return view('tesis.sinpermiso');
@@ -720,14 +740,14 @@ class TesisController extends Controller
           public function save_nota_prorroga(Request $request, $id)
         {
 
-        		$tes=Tesis::findorfail($id);
-        		$tes->nota_prorroga=$request->get('nota_prorroga');
-                $tes->estado5=null;
-                $tes->estado7=null;
-        		$tes->update();
-        	$user=User::findorfail($id);
+        		$tesis=DB::table('tesis')->where('id_pk',$id)->get();
+                foreach($tesis as $tes);
+                DB::table('tesis')->where('id_pk',$id)->update(['nota_prorroga' => $request->nota_prorroga]);
+        		//$tes->nota_prorroga=$request->get('nota_prorroga');
+                 DB::table('tesis')->where('id_pk',$id)->update(['estado5' => null]);
+                 DB::table('tesis')->where('id_pk',$id)->update(['estado7' => null]);
         	//dd($user->name);
-        	$tesistas=DB::table('tesis');
+        	//$tesistas=DB::table('tesis');
         		return view('alumnohome');
         }
 
@@ -1407,22 +1427,27 @@ class TesisController extends Controller
 
         //dd($request);
         //dd($request->abstract);
-        $tesis=Tesis::find($id);
+        $tesista=DB::table('tesis')->where('id_pk',$id)->get();
+        foreach($tesista as $tesis);
+        //dd($tesis);
         if($request->hasFile('constancia_ex')){
          $file = $request->file('constancia_ex');
         $name = time().$file->getClientOriginalName();
         $file->move(public_path().'\constancia_ex/', $name);
-        $tesis->constancia_ex=$name;
+        DB::table('tesis')->where('id_pk',$id)->update(['constancia_ex' =>  $name]);
+        DB::table('tesis')->where('id_pk',$id)->update(['publicar' => $request->publicar]);
+        DB::table('tesis')->where('id_pk',$id)->update(['abstract' => $request->abstract]);
+        /*$tesis->constancia_ex=$name;
         $tesis->publicar=$request->publicar;
         $tesis->abstract=$request->abstract;
-        $tesis->update();
+        $tesis->update();*/
         //dd($tes);
         //($request->file('constancia_ex')->store('public'));
                    //almacenar el archivo pdf/doc subido al sistem
         $recopilacion=Recopilacion_inf::find($id);
         //dd($recopilacion);
         if($recopilacion==null){
-            $al=DB::table('tesis')->join('users','tesis.id','=','users.id')->where('tesis.id','=',$id)->whereNull('nota_tesis')->get();
+            $al=DB::table('tesis')->join('users','tesis.id','=','users.id')->where('tesis.id_pk','=',$id)->whereNull('nota_tesis')->get();
             //dd($alumno);
             if($al->isEmpty()){ //Si la consulta anterior es vacia, entonces significa que el alumno que es el segundo alumno relacionado con la tesis, el que subio el archivo y desea completar el documento de recopilacion de inf.
             $al=DB::table('tesis')->join('users','tesis.nombre_completo2','=','users.nombre_completo')->whereNull('nota_tesis')->get();
@@ -1658,11 +1683,12 @@ class TesisController extends Controller
    public function acta_examen($id)
    {
     //dd($id);
-    $tesis=DB::table('tesis')->join('comision','tesis.id','=','comision.id')->where('tesis.id_pk',$id)->get();
+    $tesis=DB::table('tesis')->join('comision','tesis.id_pk','=','comision.id')->where('tesis.id_pk',$id)->get();
    
 
     foreach($tesis as $tes)
     {
+        //dd($tes);
         $nombre_alumno1=($tes->nombre_completo);//stropper para colocar en mayuscula el nombre del o los alumnos de la tesis o memoria.
         $nombre_alumno2=($tes->nombre_completo2);
         //para obtener campos necesario de la tupla de la base de datos, el dia, mes, año y la hora, usando carbon
@@ -1676,6 +1702,7 @@ class TesisController extends Controller
         $year_fecha=$fecha->year; //obtengo año
         $hora_presentacion_tesis=$fecha->format('H:i'); //obtengo hora y minuto de inicio presentacion
     }
+    //dd($tes->nombre_completo);
     //dd($tes);
     //consultas para obtener grado academico de los profesores de planta.
     $profesor_guia=DB::table('users')->join('comision','users.id','=','comision.id_profesor_guia')->join('grado_academico_profesor_planta','users.id','=','grado_academico_profesor_planta.id')->where('nombre_alumno','=',$nombre_alumno1)->get();
@@ -2120,7 +2147,8 @@ class TesisController extends Controller
       //Se acepta la nota pendiente o la modifica el mismo profesor
       public function aceptar_nota_pendiente($id)
       {
-        $tesis=Tesis::find($id);
+        $tesistas=DB::table('tesis')->where('id_pk',$id)->get();
+        foreach($tesistas as $tesis);
         //dd($tesis);
         return view('tesis.aceptar_nota_pendiente',compact('tesis'));
 
@@ -2129,7 +2157,8 @@ class TesisController extends Controller
       //Se acepta la nota prorroga o la modifica el mismo profesor
        public function aceptar_nota_prorroga($id)
       {
-        $tesis=Tesis::find($id);
+        $tesistas=DB::table('tesis')->where('id_pk',$id)->get();
+        foreach($tesistas as $tesis);
         return view('tesis.aceptar_nota_prorroga',compact('tesis'));
 
       }
@@ -3142,7 +3171,8 @@ class TesisController extends Controller
 
      public function aceptar_nota_pendiente_director($id)
       {
-        $tesis=Tesis::find($id);
+        $tesistas=DB::table('tesis')->where('id_pk',$id)->get();
+        foreach($tesistas as $tesis);
         return view('tesis.aceptar_nota_pendiente_director',compact('tesis'));
 
       }
@@ -3150,7 +3180,8 @@ class TesisController extends Controller
       //Se acepta la nota prorroga o la modifica el mismo profesor
        public function aceptar_nota_prorroga_director($id)
       {
-        $tesis=Tesis::find($id);
+        $tesistas=DB::table('tesis')->where('id_pk',$id)->get();
+        foreach($tesistas as $tesis);
         return view('tesis.aceptar_nota_prorroga_director',compact('tesis'));
 
       }

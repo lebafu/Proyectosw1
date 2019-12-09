@@ -12,7 +12,7 @@
                 <div class="card-header">{{ __('Subir archivo constancia examen de titulo') }}</div>
 
                 <div class="card-body">
-                    <form action="{{route('tesis.update_archivo_ex', $tes->id)}}" method="POST" 
+                    <form action="{{route('tesis.update_archivo_ex', $tes->id_pk)}}" method="POST" 
                         enctype="multipart/form-data">
 
                         @csrf

@@ -21,14 +21,14 @@
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
-          <td>{{$tesis->id}}</td>
+          <td>{{$tesis->id_pk}}</td>
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->nota_pendiente}}</td>
           <td>
           <div class="row">
-          <td><a href="{{url('/aceptar_nota_pendiente/'.$tesis->id)}}" class="btn btn-info"><span class="fas fa-check"></span></td>                              
+          <td><a href="{{url('/aceptar_nota_pendiente/'.$tesis->id_pk)}}" class="btn btn-info"><span class="fas fa-check"></span></td>                              
         </div>
       </td>
         </tr>

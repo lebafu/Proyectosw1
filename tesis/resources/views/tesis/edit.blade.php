@@ -157,23 +157,18 @@
                             <div class="col-md-6">
                             <select name="nombre_vinculacion" id="nombre_vinculacion" class="form-control" required>
                               <option value="{{$tes->nombre_vinculacion}}">{{$tes->nombre_vinculacion}}</option>
-                                  @if($tes->tipo_vinculacion=="Empresa")
-                                    @foreach($empresas as $emp)
+                                  @foreach($empresas as $emp)
                                     <option value="{{$emp->nombre}}">{{$emp->nombre}}</option>
                                     @endforeach
-                                  @elseif($tes->tipo_vinculacion=="Comunidad")
                                      @foreach($comunidads as $comunidad)
                                     <option value="{{$comunidad->nombre}}">{{$comunidad->nombre}}</option>
                                     @endforeach
-                                  @elseif($tes->tipo_vinculacion=="Proyecto")
                                     @foreach($proyectos as $proyecto)
                                     <option value="{{$proyecto->nombre}}">{{$proyecto->nombre}}</option>
                                     @endforeach
-                                  @else
                                      @foreach($fcs as $fc)
                                     <option value="{{$fc->nombre}}">{{$fc->nombre}}</option>
                                     @endforeach
-                                  @endif
                                 </select>
                               </div>
                         </div>
@@ -229,7 +224,7 @@
                                     {{ __('Guardar') }}
                                 </button>
 
-                                <a href="/home" class="btn">{{ __('Cancelar') }}</a>
+                                <a href="/alumnohome" class="btn">{{ __('Cancelar') }}</a>
                                     
                             </div>
 
