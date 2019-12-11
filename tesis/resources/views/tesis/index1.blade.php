@@ -48,9 +48,6 @@
            @if($tesis->estado1==5)
                 Rechazada
            @endif
-           @if($tesis->constancia_ex!=null and $tesis->nota_tesis==null)
-           <a href="{{URL::action('Recopilacion_infController@edit', $tesis->id_pk)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
-          @endif
            @if($tesis->nota_pendiente!=null and $tesis->nota_prorroga==null and $tesis->estado6==1 and $tesis->estado7==null and ( $tesis->nota_tesis==null))
            <td>{{$tesis->nota_pendiente}}</td>
            <td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id_pk)}}">Pedir nota Prorroga</a></td>
@@ -110,6 +107,9 @@
      </table>
      </div>
      </div>
+       @if($tesis->constancia_ex!=null and $tesis->nota_tesis==null)
+           <a href="{{URL::action('Recopilacion_infController@edit', $tesis->id_pk)}}" class="btn btn-primary">Editar recopilacion de informacion<span class="far fa-edit"></span></a>
+             @endif
      </div>
      </div>
      <a href="{{ url('/profesorhome')}}" class="btn btn-default">Volver a home</a>

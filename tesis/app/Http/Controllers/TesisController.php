@@ -414,6 +414,7 @@ class TesisController extends Controller
         //Si el segundo alumno inscrito en la tesis quiere inscribir el ahora la tesis, entonces para ello deberá tener nota inferior a 4.
           $tesistas=DB::table('tesis')->where('nombre_completo',$alumno->name)->orwhere('nombre_completo2',$alumno->name)->get();
           //dd($tesistas);
+          $j=0;
           foreach($tesistas as $tesista)
           {
             if($tesista->nota_tesis>=4)
@@ -1824,7 +1825,7 @@ class TesisController extends Controller
     $users=DB::table('users')->join('tesis','users.id','=','tesis.id')->where('tesis.id_pk',$id)->get();
     foreach($users as $user);
     //dd($user);
-    $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id_pk',$id)->where('tesis.id','=',$user->id)->get();
+    $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id_pk','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id_pk',$id)->where('tesis.id','=',$user->id)->get();
     //dd($tesis);
 
     
@@ -1840,7 +1841,7 @@ class TesisController extends Controller
     foreach($datos as $dato);
     $nombre_completo2=$dato->nombre_completo2;
     //$nombre_completo2=$datos_alumno2->nombre_completo2;
-    $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.nombre_completo2','=','users.name')->where('users.name',$nombre_completo2)->where('tesis.nombre_completo2','=',$nombre_completo2)->where('tesis.id_pk',$id)->get();
+    $tesis=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id_pk','=','recopilacion_inf_titulados.id')->join('users','tesis.nombre_completo2','=','users.name')->where('users.name',$nombre_completo2)->where('tesis.nombre_completo2','=',$nombre_completo2)->where('tesis.id_pk',$id)->get();
     
    return view('tesis.recopilacion_inf2',compact('tesis'));
    }
@@ -2971,7 +2972,7 @@ class TesisController extends Controller
      break;
     }
 
-
+    $largo_mayusculas_director_escuela=0;
     $nombre_director_escuela=$director_escuela->name;
     $iniciales_director_escuela=array();
      for($i=0;$i<strlen($nombre_director_escuela);$i++)
@@ -2979,9 +2980,11 @@ class TesisController extends Controller
             if(($nombre_director_escuela[$i]=="A" or $nombre_director_escuela[$i]=="B" or $nombre_director_escuela[$i]=="C" or $nombre_director_escuela[$i]=="D" or $nombre_director_escuela[$i]=="E" or $nombre_director_escuela[$i]=="F" or $nombre_director_escuela[$i]=="G" or $nombre_director_escuela[$i]=="H" or $nombre_director_escuela[$i]=="I" or $nombre_director_escuela[$i]=="J" or $nombre_director_escuela[$i]=="K" or $nombre_director_escuela[$i]=="L" or $nombre_director_escuela[$i]=="M" or $nombre_director_escuela[$i]=="N" or $nombre_director_escuela[$i]=="Ñ" or $nombre_director_escuela[$i]=="O" or $nombre_director_escuela[$i]=="P" or $nombre_director_escuela[$i]=="Q" or $nombre_director_escuela[$i]=="R" or $nombre_director_escuela[$i]=="S" or $nombre_director_escuela[$i]=="T" or $nombre_director_escuela[$i]=="V" or $nombre_director_escuela[$i]=="W" or $nombre_director_escuela[$i]=="U" or $nombre_director_escuela[$i]=="X" or $nombre_director_escuela[$i]=="Y" or $nombre_director_escuela[$i]=="Z"))
         {
               array_push($iniciales_director_escuela,$nombre_director_escuela[$i]);
-        }
+              $largo_mayusculas_director_escuela=$largo_mayusculas_director_escuela+1;
+        }     
     }
-
+    //dd($largo_mayusculas_director_escuela);
+    $j=0;
         switch($mes_fecha)
     {
      case 1: $mes_fecha="Enero";
@@ -3028,7 +3031,7 @@ class TesisController extends Controller
     }
      $director_escuela->name=mb_strtoupper($director_escuela->name);//Poner en mayuscula nombre director escuela.
     //dd($director_escuela);
-   return view('memorandum.memorandum_titulados',compact('tesis','director_escuela','memo','year','mes_fecha','dia_fecha','num_memo','director_escuela','grado_academico_director_escuela','sexo1','sexo2','fecha','iniciales_director_escuela','hora_presentacion','dia_presentacion','mes_presentacion','year_presentacion','nombre1','nombre2'));
+   return view('memorandum.memorandum_titulados',compact('tesis','director_escuela','memo','year','mes_fecha','dia_fecha','num_memo','director_escuela','grado_academico_director_escuela','sexo1','sexo2','fecha','iniciales_director_escuela','hora_presentacion','dia_presentacion','mes_presentacion','year_presentacion','nombre1','nombre2','largo_mayusculas_director_escuela'));
    }
 
    public function create_fecha_descargar_actas()

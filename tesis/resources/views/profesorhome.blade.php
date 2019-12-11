@@ -86,6 +86,7 @@ body {
       <a href="{{url('/create')}}">Consulta de participacion de tesis por fecha</a>
       <a href="{{url('/tesis/create_fecha_descargar_actas')}}">Descargar actas por fecha</a>
       <a href="{{url('/editar_profesor')}}">Modificar Grado Academico</a>
+     <a href="{{url('/index_tesis_bitacora')}}">Lista Tesis con Bitacora</a>
    <!--Inicio de navbar-->
  <div class="dropdown">
     <button class="dropbtn">Vinculacion

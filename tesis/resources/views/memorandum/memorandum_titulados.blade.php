@@ -82,40 +82,28 @@
 						<b> :</b>
 				</div>
 				<div align="center" style="margin-left: 63px">
-						<div>Envia Acta de titulación 
-						@if($tesis->nombre_completo!=null and $tesis->nombre_completo2==null)
+						<div>Envia acta de titulación
+						@if($tesis->nombre_completo!=null)
 								@if($sexo1=="Masculino")
-									del alumno Sr.
+									del Sr.
 								@endif
 								@if($sexo1=="Femenino")
-									de la alumna Srta.
+									de la Srta.
 								@endif		
 								{{$tesis->nombre_completo}}				
 						@endif
-						@if($tesis->nombre_completo2!=null and $tesis->nombre_completo!=null)
-							de los alumnos
-						@endif
-						 </div>
-				</div>
-			</div>
-			<div class="row">
-				<div align="left" style="margin-left: 190px">
-				@if($tesis->nombre_completo2!=null and $tesis->nombre_completo!=null)
-								@if($sexo1=="Masculino")
-									 Sr.
-								@endif
-								@if($sexo1=="Femenino")
-									Srta.
-								@endif		
-								{{$tesis->nombre_completo}}	
+						<div align="left" style="margin-left:0px">
+						@if($tesis->nombre_completo2!=null)
 								@if($sexo2=="Masculino")
 								y del Sr.
 								@endif
 								@if($sexo2=="Femenino")
 								y de la	Srta.
 								@endif
-								{{$tesis->nombre_completo2}}	
+								{{$tesis->nombre_completo2}}.
 						@endif
+				</div>
+						 </div>
 				</div>
 			</div>
 		</div>
@@ -247,7 +235,8 @@
 					<div style="margin-left:900px">
 						<b>Escuela {{$memo->escuela}}</b>
 					</div>
-					<div style="margin-left:0px">{{$iniciales_director_escuela[0]}}{{$iniciales_director_escuela[1]}}/bcsm
+					<div style="margin-left:0px">{{$iniciales_director_escuela[0]}}{{$iniciales_director_escuela[1]}}
+					/bscm
 				  </div>
 				 </div>
 			</div>

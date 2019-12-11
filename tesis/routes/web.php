@@ -289,3 +289,7 @@ Route::put('/actualizarprorroga{tesis}','TesisController@prorroga_director_updat
 //Editar recopilacion de informacion
 Route::get('/recopilacion{id}', 'Recopilacion_infController@edit')->name('recopilacion.recopilacion_edit');
 Route::put('/actualizarrecopilacion_inf{recopilacion}','Recopilacion_infController@update')->name('recopilacion.update');
+
+//Rutas de bitacora de Tesis//
+Route::get('/index_tesis_bitacora', 'BitacoraController@index')->name('bitacora.index_tesis_bitacora');
+Route::get('/mostrar_bitacora_tesis/{id}', 'BitacoraController@lista_acuerdos_tesis')->name('bitacora.lista_acuerdos_tesis');
