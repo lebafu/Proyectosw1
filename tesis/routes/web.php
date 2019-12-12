@@ -293,3 +293,9 @@ Route::put('/actualizarrecopilacion_inf{recopilacion}','Recopilacion_infControll
 //Rutas de bitacora de Tesis//
 Route::get('/index_tesis_bitacora', 'BitacoraController@index')->name('bitacora.index_tesis_bitacora');
 Route::get('/mostrar_bitacora_tesis/{id}', 'BitacoraController@lista_acuerdos_tesis')->name('bitacora.lista_acuerdos_tesis');
+Route::get('/bitacora_tesis/create{id}', 'BitacoraController@create')->name('bitacora.create');
+Route::post('/bitacora_tesis_store','BitacoraController@store')->name('bitacora.store');
+Route::get('/bitacora_edit{bitacora}', 'BitacoraController@edit')->name('bitacora.edit');
+Route::put('/actualizarbitacora{bitacora}','BitacoraController@update')->name('bitacora.update');
+Route::get('/no_existen_registros_bitacora', 'TesisController@lista_acuerdos_tesis')->name('bitacora.no_existen_registros_bitacora');
+Route::delete('/eliminarcomentariobitacora{bitacora}','BitacoraController@destroy')->name('bitacora.destroy');

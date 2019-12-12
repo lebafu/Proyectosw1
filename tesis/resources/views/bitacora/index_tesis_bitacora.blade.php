@@ -33,10 +33,14 @@
           @endif
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->nombre_tesis}}</td>
-          <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}"  class="btn btn-info"><span class="far fa-eye"></span></td>
+          <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}"  class="btn btn-info"><span class="far fa-eye"></span></a></td>
+          </tr>
         @endforeach
+      </table>
 </div>
-
-   
+</div>
+</div>
+</div>
+</div>
 {!! $tesistas->render() !!}
 @endsection

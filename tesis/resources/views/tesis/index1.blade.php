@@ -98,8 +98,9 @@
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
 
-
+            </button>
            </form>
+
       </td>
         </tr>
         @endif

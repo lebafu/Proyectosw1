@@ -12,7 +12,7 @@
   <div class="row justify-content-center">
     <div class="col-md-12"> <!--Con 12 se ocupa todo el ancho de la pantalla-->
       <div class="card">
-        <div class="card-header">{{ __('Lista de Tesis con bitacora') }}</div>
+        <div class="card-header">{{ __('Bitacora') }}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
@@ -37,10 +37,24 @@
           <td>{{$tesis->created_at}}</td>
           <td>{{$tesis->comentario}}</td>
           <td>{{$tesis->acuerdo}}</td>
+         <td><a href="{{URL::action('BitacoraController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+         <form action="{{ route('bitacora.destroy', $tesis->id)}}" method="POST">
+          <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
+          
+           {{ method_field('DELETE') }}
+           {{ csrf_field() }}
+
+            </button>
+           </form>
+         </td>
         </tr>
         @endforeach
+      </table>
 </div>
-
-   
+</div>
+<td><a href="{{url('/bitacora_tesis/create'.$id)}}"  class="btn btn-info">Crear nuevo comentario</a></td>
+</div>
+</div>
+</div>
 {!! $tesistas->render() !!}
 @endsection
