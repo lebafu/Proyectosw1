@@ -939,6 +939,7 @@ class TesisController extends Controller
             if($user->tipo_usuario==2 and (($tes->estado1==1) or ($tes->estado1==2))){         
         $tes->estado1=2;
         DB::table('tesis')->where('id_pk',$id)->update(['estado1' =>  $tes->estado1]);
+        DB::table('tesis')->where('id_pk',$id)->update(['porcentaje_avance' => 0]);
                 return view('tesis.evaluar',compact('tes','comision'));
             }else{
             	if($user->tipo_usuario==2 and $tes->estado1==5 and $tes->estado2==null){
@@ -948,6 +949,7 @@ class TesisController extends Controller
                     DB::table('tesis')->where('id_pk',$id)->update(['estado2' =>  $tes->estado2]);
             		 $tes->estado3=1;
                      DB::table('tesis')->where('id_pk',$id)->update(['estado3' =>  $tes->estado3]);
+                     DB::table('tesis')->where('id_pk',$id)->update(['porcentaje_avance' => 0]);
             		$profes=DB::table('users')->where('tipo_usuario','=',2)->get();
             	}else{
             	return view('tesis.noeditartesis_profe');
@@ -1272,6 +1274,27 @@ class TesisController extends Controller
             'codigo_postal2'=>$request->codigo_postal2,
             'sexo2' => $request->sexo2,
         ]);
+
+       
+       if($tes->estado1==1 and $tes->estado2==null){
+        $fecha=now();
+       DB::table('capitulos')->insert([
+            'id' => $id,
+            'cap1' => $request->cap1,
+            'cap2' => $request->cap2,
+            'cap3' => $request->cap3,
+            'cap4' => $request->cap4,
+            'cap5' => $request->cap5,
+            'cap6' => $request->cap6,
+            'avance_cap1' => 0,
+            'avance_cap2' => 0,
+            'avance_cap3' => 0,
+            'avance_cap4' => 0,
+            'avance_cap5' => 0,
+            'avance_cap6' => 0,
+            'fecha' => $fecha,
+        ]);
+         }
         //dd($request);
         return view('profesorhome');
     }
@@ -1622,7 +1645,6 @@ class TesisController extends Controller
         ]);*/
         return view('directorhome');
     }
-
 
 
     public function destroy($id)

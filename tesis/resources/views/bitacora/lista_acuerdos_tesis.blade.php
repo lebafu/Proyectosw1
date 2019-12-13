@@ -52,7 +52,7 @@
       </table>
 </div>
 </div>
-<td><a href="{{url('/bitacora_tesis/create'.$id)}}"  class="btn btn-info">Crear nuevo comentario</a></td>
+<td><a href="{{url('/bitacora_tesis/create'.$id)}}" class="fas fa-plus"></a></td>
 </div>
 </div>
 </div>

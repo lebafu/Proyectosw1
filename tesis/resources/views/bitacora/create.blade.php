@@ -16,8 +16,7 @@
                             <label for="id_tesis" class="col-md-4 col-form-label text-md-right">{{ __('ID TESIS') }}</label>
                             <div class="col-md-6">-->
                                 <input id="id_tesis" type="hidden" placeholder="Id Tesis" class="form-control" name="id_tesis" value="{{$id}}" required="required">
-                            </div>
-                        </div>
+                          
 
 
                          <div class="form-group row">

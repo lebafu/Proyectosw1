@@ -5,6 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
+              <div class="alert alert-success", role="alert">Si usted ya añadió los nombres de algunos capitulos de tesis,usted podrá editar o los nombres de los capitulos mas tarde, cuando la tesis sea inscrita</div>
                 <div class="card-header">{{ __('Profesor editando tesis de alumno') }}</div>
 
                 <div class="card-body">
@@ -400,9 +401,52 @@
                             </div>
                         </div>
 
+                        <div class="form-group row">
+                            <label for="cap1" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap1 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap1" type="text" rows="10" cols="40" placeholder="Nombre cap1 tesis" class="form-control" name="cap1" required="required">Nombre Capitulo 1 Tesis</textarea>
+                            </div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="cap2" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap2 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap2" type="text" rows="10" cols="40" placeholder="Nombre cap2 tesis" class="form-control" name="cap2" required="required">Nombre Capitulo 2 Tesis</textarea>
+                            </div>
+                        </div>
+
+                         <div class="form-group row">
+                            <label for="cap3" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap3 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap3" type="text" rows="10" cols="40" placeholder="Nombre cap3 tesis" class="form-control" name="cap3"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="cap4" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap4 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap4" type="text" rows="10" cols="40" placeholder="Nombre cap4 tesis" class="form-control" name="cap4"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label for="cap5" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap5 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap5" type="text" rows="10" cols="40" placeholder="Nombre cap5 tesis" class="form-control" name="cap5"></textarea>
+                            </div>
+                        </div>
+
+
+                        <div class="form-group row">
+                            <label for="cap6" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap6 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap6" type="text" rows="10" cols="40" placeholder="Nombre cap6 tesis" class="form-control" name="cap6 tesis"></textarea>
+                            </div>
+                        </div>
                <!--En caso contrario si el profesor ya ha ingresado a los miembros de la comisión y desea editar, se le mostrarán los campos que el haya seleccionado previamente-->
                 @else
-                                <div class="form-group row">
+
+                          <div class="form-group row">
                             <label for="profesor1_comision" class="col-md-4 col-form-label text-md-right">{{ __('Primer profesor comision') }}</label>
                            <div class="col-md-6">
                                  <select name="profesor1_comision" id="profesor1_comision" class="form-control"  required>
@@ -571,7 +615,6 @@
                             </div>
                         </div>
 
-
                 @endif
 
                         @if($tes->estado3==1)
@@ -581,6 +624,8 @@
                              </div>
                         </div>
                         @endif
+
+
 
                          <div class="form-group row mb-0">
                             <div class="col-md-6 offset-md-4">

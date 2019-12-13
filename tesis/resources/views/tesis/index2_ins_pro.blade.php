@@ -40,6 +40,7 @@
            </form>
           </button>
       </td>
+       <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}">Bitacora</span></a></td>
         </tr>
         @endif
         @endforeach

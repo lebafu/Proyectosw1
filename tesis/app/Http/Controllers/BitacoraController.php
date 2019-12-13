@@ -47,11 +47,15 @@ class BitacoraController extends Controller
     $idlogin=Auth::id();
     $users=DB::table('users')->where('id',$idlogin)->get();
     foreach($users as $user);
-    	$tesistas=DB::table('tesis')->where('id_pk',$id)->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->where('tesis.profesor_guia','=',$user->name)->paginate(7);
+    	$tesistas=DB::table('tesis')->where('id_pk',$id)->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->where('tesis.profesor_guia','=',$user->name)->orderby('created_at','desc')->paginate(7);
     	//dd($tesistas->isEmpty());
+    	foreach($tesistas as $tesis);
+
     	//dd($id);
     	//dd($id);
-    	if($tesistas->isEmpty()==true)
+    	$tes=DB::table('tesis')->where('id_pk',$id)->get();
+    	foreach($tes as $t);
+    	if($tesistas->isEmpty()==true and $t->acta_ex!=null)
     	{
     	 return view('bitacora.no_existen_registros_bitacora');
     	}
