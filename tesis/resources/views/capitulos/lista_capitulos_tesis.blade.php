@@ -18,42 +18,42 @@
     <table class="table table-bordered">
       @foreach ($tesistas as $tesis)
         <tr>
-          <th>cap1</th>
-          <th>cap2</th>
+          <th>{{$tesis->cap1}}</th>
+          <th>{{$tesis->cap2}}</th>
            @if($tesis->cap3!=null)
-         <th>cap3</th>
+         <th>{{$tesis->cap3}}</th>
          @endif
           @if($tesis->cap4!=null)
-         <th>cap4</th>
+         <th>{{$tesis->cap4}}</th>
          @endif
          @if($tesis->cap5!=null)
-          <th>cap5</th>
+          <th>{{$tesis->cap5}}</th>
           @endif
           @if($tesis->cap6!=null)
-         <th>cap6</th>
+         <th>{{$tesis->cap6}}</th>
          @endif
          <th>Fecha</th>
         </tr>
       @endforeach
         @foreach ($tesistas as $tesis)
         <tr>
-          <td>{{$tesis->cap1}}</td>
-          <td>{{$tesis->cap2}}</td>
+          <td>{{$tesis->avance_cap1}} %</td>
+          <td>{{$tesis->avance_cap2}} %</td>
           @if($tesis->cap3!=null)
-          <td>{{$tesis->cap3}}</td>
+          <td>{{$tesis->avance_cap3}} %</td>
           @endif
-          @if($tesis->cap4!=null){
-          <td>{{$tesis->cap4}}</td>
+          @if($tesis->cap4!=null)
+          <td>{{$tesis->avance_cap4}} %</td>
           @endif
           @if($tesis->cap5!=null){
-          <td>{{$tesis->cap5}}</td>
+          <td>{{$tesis->avance_cap5}} %</td>
           @endif
           @if($tesis->cap6!=null){
-          <td>{{$tesis->cap6}}</td>
+          <td>{{$tesis->avance_cap6}} %</td>
           @endif
           <td>{{$tesis->fecha}}</td>
             @if($user->tipo_usuario==2)
-         <td><a href="{{URL::action('BitacoraController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+         <td><a href="{{URL::action('Capitulos_TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
          <form action="{{ route('bitacora.destroy', $tesis->id)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
           
@@ -69,9 +69,6 @@
       </table>
 </div>
 </div>
-@if($user->tipo_usuario==2)
-<td><a href="{{url('/capitulos_tesis/create'.$id)}}" class="fas fa-plus"></a></td>
-@endif
 </div>
 </div>
 </div>

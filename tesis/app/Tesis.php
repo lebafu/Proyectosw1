@@ -49,7 +49,7 @@ class Tesis extends Model
     'estado7',
     'codigo_postal1',
     'codigo_postal2',
-    'porcentaje_avance',
+    'avance_general',
     ];
 
      public function scopeNombre_completo($query, $nombre_completo)

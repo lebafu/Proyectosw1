@@ -97,7 +97,7 @@ class Capitulos_TesisController extends Controller
     	foreach($users as $user);
     	if($user->tipo_usuario==2 or $user->tipo_usuario==3)
     	{
-    		return view('capitulo.edit',compact('capitulo','id','avance_general'));
+    		return view('capitulos.edit',compact('capitulo','id','avance_general'));
     	}else{
     		return view('tesis.sinpermiso');
     	}
