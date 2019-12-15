@@ -32,7 +32,8 @@ class BitacoraController extends Controller
     $users=DB::table('users')->where('id',$idlogin)->get();
     foreach($users as $user);
     //dd($users);
-    if($user->tipo_usuario==2){
+    //dd($user);
+    if($user->tipo_usuario==2 or $user->tipo_usuario==3){
       //$tesistas=DB::table('bitacora')->join('tesis','bitacora.id_tesis','=','tesis.id_pk')->where('tesis.profesor_guia','=',$user->name)->paginate(7);
       $tesistas=DB::table('tesis')->where('profesor_guia','=',$user->name)->paginate(7);
       //dd($tesistas);
@@ -43,23 +44,26 @@ class BitacoraController extends Controller
 
     public function lista_acuerdos_tesis($id)
     {
-    //dd($id);
+   //dd($id);
     $idlogin=Auth::id();
     $users=DB::table('users')->where('id',$idlogin)->get();
     foreach($users as $user);
-    	$tesistas=DB::table('tesis')->where('id_pk',$id)->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->where('tesis.profesor_guia','=',$user->name)->orderby('created_at','desc')->paginate(7);
+    	$tesistas=DB::table('tesis')->where('id_pk',$id)->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->orderby('created_at','desc')->paginate(7);
     	//dd($tesistas->isEmpty());
-    	foreach($tesistas as $tesis);
-
+    	foreach($tesistas as $tesis){
+    	$nombre1=$tesis->nombre_completo;
+    	$nombre2=$tesis->nombre_completo2;
+    	$profesor_guia=$tesis->profesor_guia;
     	//dd($id);
     	//dd($id);
+    }
     	$tes=DB::table('tesis')->where('id_pk',$id)->get();
     	foreach($tes as $t);
     	if($tesistas->isEmpty()==true and $t->acta_ex!=null)
     	{
     	 return view('bitacora.no_existen_registros_bitacora');
     	}
-    	return view('bitacora.lista_acuerdos_tesis',compact('tesistas','id'));
+    	return view('bitacora.lista_acuerdos_tesis',compact('tesistas','id','user','nombre1','nombre2','profesor_guia'));
     }
 
     public function create($id)
@@ -71,7 +75,7 @@ class BitacoraController extends Controller
     	foreach($users as $user);
     	if($user->tipo_usuario==2)
     	{
-    		return view('bitacora.create',compact('id'));
+    		return view('capitulos.create',compact('id'));
     	}else{
     		return view('tesis.sinpermiso');
     	}

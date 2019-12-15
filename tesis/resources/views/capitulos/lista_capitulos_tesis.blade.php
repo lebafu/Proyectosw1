@@ -12,31 +12,46 @@
   <div class="row justify-content-center">
     <div class="col-md-12"> <!--Con 12 se ocupa todo el ancho de la pantalla-->
       <div class="card">
-        <div class="card-header">{{ __('Bitacora') }}</div>
+        <div class="card-header">{{ __('Capitulos') }}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
+      @foreach ($tesistas as $tesis)
         <tr>
-          <th>ID</th>
-          <th>Nombre Estudiante</th>
-          <th>Nombre Tesis</th>
-          <th>Fecha</th>
-          <th>Comentario</th>
-         <th>Acuerdo</th>
+          <th>cap1</th>
+          <th>cap2</th>
+           @if($tesis->cap3!=null)
+         <th>cap3</th>
+         @endif
+          @if($tesis->cap4!=null)
+         <th>cap4</th>
+         @endif
+         @if($tesis->cap5!=null)
+          <th>cap5</th>
+          @endif
+          @if($tesis->cap6!=null)
+         <th>cap6</th>
+         @endif
+         <th>Fecha</th>
         </tr>
+      @endforeach
         @foreach ($tesistas as $tesis)
         <tr>
-          <td>{{$tesis->id_tesis}}</td>
-          @if($tesis->nombre_completo2==null)
-          <td>{{$tesis->nombre_completo}} </td>
+          <td>{{$tesis->cap1}}</td>
+          <td>{{$tesis->cap2}}</td>
+          @if($tesis->cap3!=null)
+          <td>{{$tesis->cap3}}</td>
           @endif
-          @if($tesis->nombre_completo2!=null)
-          <td>{{$tesis->nombre_completo}} y {{$tesis->nombre_completo2}}</td>
+          @if($tesis->cap4!=null){
+          <td>{{$tesis->cap4}}</td>
           @endif
-          <td>{{$tesis->nombre_tesis}}</td>
-          <td>{{$tesis->created_at}}</td>
-          <td>{{$tesis->comentario}}</td>
-          <td>{{$tesis->acuerdo}}</td>
+          @if($tesis->cap5!=null){
+          <td>{{$tesis->cap5}}</td>
+          @endif
+          @if($tesis->cap6!=null){
+          <td>{{$tesis->cap6}}</td>
+          @endif
+          <td>{{$tesis->fecha}}</td>
             @if($user->tipo_usuario==2)
          <td><a href="{{URL::action('BitacoraController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
          <form action="{{ route('bitacora.destroy', $tesis->id)}}" method="POST">
@@ -55,7 +70,7 @@
 </div>
 </div>
 @if($user->tipo_usuario==2)
-<td><a href="{{url('/bitacora_tesis/create'.$id)}}" class="fas fa-plus"></a></td>
+<td><a href="{{url('/capitulos_tesis/create'.$id)}}" class="fas fa-plus"></a></td>
 @endif
 </div>
 </div>

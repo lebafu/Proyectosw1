@@ -8,7 +8,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-10">
       <div class="card">
         <div class="card-header">{{ __('Tesis inscritas') }}</div>
           <div class="card-body">
@@ -35,7 +35,7 @@
           <td>{{$tesis->area_tesis}}</td>
           <td>{{$tesis->nombre_tes_res}}</td>
           <td>{{$tesis->tipo_vinculacion}}</td>
-          @if($tesis->constancia_ex!=null and $tesis->nota_tesis!=null)
+          @if($tesis->constancia_ex!=null)
            <td><a href="{{url('tesis/create_num_memo'.$tesis->id) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Memo</i></a></td>
           @else
           <td>Constancia aun no ha sido subido</td>
@@ -50,6 +50,8 @@
            </form>
           </button>
       </td>
+       <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}">Bitacora</span></a></td>
+        <td><a href="{{url('/mostrar_capitulos_tesis/'.$tesis->id_pk)}}">Capitulos</span></a></td>
         </tr>
         @endif
         @endforeach

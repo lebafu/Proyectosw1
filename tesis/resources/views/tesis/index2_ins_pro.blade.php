@@ -41,6 +41,7 @@
           </button>
       </td>
        <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}">Bitacora</span></a></td>
+       <td><a href="{{url('/mostrar_capitulos_tesis/'.$tesis->id_pk)}}">Capitulos</span></a></td>
         </tr>
         @endif
         @endforeach

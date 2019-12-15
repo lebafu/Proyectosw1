@@ -299,3 +299,12 @@ Route::get('/bitacora_edit{bitacora}', 'BitacoraController@edit')->name('bitacor
 Route::put('/actualizarbitacora{bitacora}','BitacoraController@update')->name('bitacora.update');
 Route::get('/no_existen_registros_bitacora', 'TesisController@lista_acuerdos_tesis')->name('bitacora.no_existen_registros_bitacora');
 Route::delete('/eliminarcomentariobitacora{bitacora}','BitacoraController@destroy')->name('bitacora.destroy');
+
+//Rutas de Capitulos de Tesis//
+//Route::get('/index_tesis_bitacora', 'BitacoraController@index')->name('bitacora.index_tesis_bitacora');
+Route::get('/mostrar_capitulos_tesis/{id}', 'Capitulos_TesisController@lista_capitulos_tesis')->name('capitulos.lista_acuerdos_tesis');
+Route::get('/capitulos_tesis/create{id}', 'Capitulos_TesisController@create')->name('capitulos.create');
+Route::post('/capitulos_tesis_store','Capitulos_TesisController@store')->name('capitulos.store');
+Route::get('/capitulos_edit{capitulo}', 'Capitulos_TesisController@edit')->name('capitulos.edit');
+Route::put('/actualizarcapitulos{capitulo}','Capitulos_TesisController@update')->name('capitulos.update');
+Route::get('/no_existen_capitulos', 'TesisController@lista_capitulos_tesis')->name('capitulos.no_existen_capitulos');
