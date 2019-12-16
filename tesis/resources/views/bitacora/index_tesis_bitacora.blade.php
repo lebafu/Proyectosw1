@@ -12,7 +12,7 @@
   <div class="row justify-content-center">
     <div class="col-md-12"> <!--Con 12 se ocupa todo el ancho de la pantalla-->
       <div class="card">
-        <div class="card-header">{{ __('Lista de Tesis con bitacora') }}</div>
+        <div class="card-header">{{ __('Lista de Tesis con bitacora')}}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
@@ -21,6 +21,7 @@
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
           <th>Nombre Tesis</th>
+          <th>Comentarios</th>
         </tr>
         @foreach($tesistas as $tesis)
         <tr>
@@ -33,6 +34,7 @@
           @endif
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->nombre_tesis}}</td>
+          <td>{{$tesis->comentario}}</td>
           <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}"  class="btn btn-info"><span class="far fa-eye"></span></a></td>
           </tr>
         @endforeach

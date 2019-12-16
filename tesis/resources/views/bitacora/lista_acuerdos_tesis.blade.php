@@ -52,6 +52,9 @@
         </tr>
         @endforeach
       </table>
+@if($user->tipo_usuario==3)
+    <td><a href="{{url('/index_tesis_bitacora')}}">Lista de Bitacoras</a></td>
+@endif
 </div>
 </div>
 @if($user->tipo_usuario==2)

@@ -33,11 +33,18 @@ class BitacoraController extends Controller
     foreach($users as $user);
     //dd($users);
     //dd($user);
-    if($user->tipo_usuario==2 or $user->tipo_usuario==3){
+    if($user->tipo_usuario==3){
       //$tesistas=DB::table('bitacora')->join('tesis','bitacora.id_tesis','=','tesis.id_pk')->where('tesis.profesor_guia','=',$user->name)->paginate(7);
-      $tesistas=DB::table('tesis')->where('profesor_guia','=',$user->name)->paginate(7);
+      $tesistas=DB::table('tesis')->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->where('bitacora.created_at')->paginate(7);
+      foreach($tesistas as $tesis)
+      {
+      	$nombre1=$tesis->nombre_completo;
+      	$nombre2=$tesis->nombre_completo2;
+      	$profe_guia=$tesis->profesor_guia;
+
+      }
       //dd($tesistas);
-      return view('bitacora.index_tesis_bitacora',compact('tesistas'));
+      return view('bitacora.index_tesis_bitacora',compact('tesistas','nombre1','nombre2','profe_guia'));
      }
      return view('tesis.sinpermiso');
     }
