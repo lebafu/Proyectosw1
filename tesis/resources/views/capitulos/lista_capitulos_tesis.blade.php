@@ -33,6 +33,7 @@
          <th>{{$tesis->cap6}}</th>
          @endif
          <th>Fecha</th>
+         <th><a href="{{URL::action('Capitulos_TesisController@edit_nombres', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a></th>
         </tr>
       @endforeach
         @foreach ($tesistas as $tesis)
@@ -53,15 +54,15 @@
           @endif
           <td>{{$tesis->fecha}}</td>
             @if($user->tipo_usuario==2)
-         <td><a href="{{URL::action('Capitulos_TesisController@edit', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
-         <form action="{{ route('bitacora.destroy', $tesis->id)}}" method="POST">
+         <td><a href="{{URL::action('Capitulos_TesisController@edit_avances', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+         <!--<form action="{{ route('bitacora.destroy', $tesis->id)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
           
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
 
             </button>
-           </form>
+           </form>-->
          </td>
          @endif
         </tr>

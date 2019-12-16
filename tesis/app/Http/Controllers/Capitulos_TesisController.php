@@ -80,7 +80,7 @@ class Capitulos_TesisController extends Controller
     	return view('capitulos.lista_capitulos_tesis',compact('tesistas','id','user','nombre1','nombre2','profesor_guia'));
     }
 
-    public function edit($id)
+    public function edit_nombres($id)
         {
        	//dd($id);
       	$idlogin=Auth::id();
@@ -95,27 +95,73 @@ class Capitulos_TesisController extends Controller
     	foreach($capitulos as $capitulo);
     	//dd($bitacora);
     	foreach($users as $user);
-    	if($user->tipo_usuario==2 or $user->tipo_usuario==3)
+    	if($user->tipo_usuario==2)
     	{
-    		return view('capitulos.edit',compact('capitulo','id','avance_general'));
+    		return view('capitulos.edit_nombres',compact('capitulo','id','avance_general','tes'));
     	}else{
     		return view('tesis.sinpermiso');
     	}
     }
+
+      public function edit_avances($id)
+        {
+        //dd($id);
+        $idlogin=Auth::id();
+        $users=DB::table('users')->where('id',$idlogin)->get();
+        //dd($id);
+        $capitulos=DB::table('capitulos')->where('id',$id)->get();
+        $tesis=DB::table('tesis')->where('id_pk',$id)->get();
+        foreach($tesis as $tes)
+        {
+         $avance_general=$tes->avance_general;
+        }
+        foreach($capitulos as $capitulo);
+        //dd($bitacora);
+        foreach($users as $user);
+        if($user->tipo_usuario==2)
+        {
+            return view('capitulos.edit_avances',compact('capitulo','id','avance_general','tes'));
+        }else{
+            return view('tesis.sinpermiso');
+        }
+    }
    				
 
         //Recibe los datos de tesis insertados por el alumno en un inicio.
-    public function update(Request $request,$id)
+    public function update_nombres(Request $request,$id)
     {
         //estado2==0 es que ha sido rechazado por director de tesis
         //dd($request);
         //dd($id_pk);
+        //dd($request);
         DB::table('capitulos')->where('id',$id)->update(['cap1' =>  $request->cap1]);
         DB::table('capitulos')->where('id',$id)->update(['cap2' =>  $request->cap2]);
         DB::table('capitulos')->where('id',$id)->update(['cap3' =>  $request->cap3]);
         DB::table('capitulos')->where('id',$id)->update(['cap4' =>  $request->cap4]);
         DB::table('capitulos')->where('id',$id)->update(['cap5' =>  $request->cap5]);
         DB::table('capitulos')->where('id',$id)->update(['cap6' =>  $request->cap6]);
+      /*  DB::table('capitulos')->where('id',$id)->update(['avance_cap1' =>  $request->avance_cap1]);
+        DB::table('capitulos')->where('id',$id)->update(['avance_cap2' =>  $request->avance_cap2]);
+        DB::table('capitulos')->where('id',$id)->update(['avance_cap3' =>  $request->avance_cap3]);
+        DB::table('capitulos')->where('id',$id)->update(['avance_cap4' =>  $request->avance_cap4]);
+        DB::table('capitulos')->where('id',$id)->update(['avance_cap5' =>  $request->avance_cap5]);
+        DB::table('capitulos')->where('id',$id)->update(['avance_cap6' =>  $request->avance_cap6]);
+        DB::table('capitulos')->where('id',$id)->update(['avance_cap6' =>  $request->avance_cap6]);
+        DB::table('tesis')->where('id_pk',$id)->update(['avance_general' =>  $request->avance_general]);*/
+       return view('profesorhome');
+    }
+
+     public function update_avances(Request $request,$id)
+    {
+        //estado2==0 es que ha sido rechazado por director de tesis
+        //dd($request);
+        //dd($id_pk);
+        /*DB::table('capitulos')->where('id',$id)->update(['cap1' =>  $request->cap1]);
+        DB::table('capitulos')->where('id',$id)->update(['cap2' =>  $request->cap2]);
+        DB::table('capitulos')->where('id',$id)->update(['cap3' =>  $request->cap3]);
+        DB::table('capitulos')->where('id',$id)->update(['cap4' =>  $request->cap4]);
+        DB::table('capitulos')->where('id',$id)->update(['cap5' =>  $request->cap5]);
+        DB::table('capitulos')->where('id',$id)->update(['cap6' =>  $request->cap6]);*/
         DB::table('capitulos')->where('id',$id)->update(['avance_cap1' =>  $request->avance_cap1]);
         DB::table('capitulos')->where('id',$id)->update(['avance_cap2' =>  $request->avance_cap2]);
         DB::table('capitulos')->where('id',$id)->update(['avance_cap3' =>  $request->avance_cap3]);
