@@ -6,7 +6,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-10">
       <div class="card">
         <div class="card-header">{{ __('Tesis inscritas a profesor')}}</div>
           <div class="card-body">
@@ -15,7 +15,7 @@
         <tr>
           <th>ID</th>
           <th>Nombre Estudiante</th>
-          <th>Profesor Guia</th>
+          <th>% avance</th>
           <th>Tipo Trabajo</th>
           <th>Fecha Peticion</th>
           <th>
@@ -25,7 +25,7 @@
           @if($tesis->profesor_guia==$user->name and ($tesis->estado1==4 and $tesis->estado2==1))
           <td>{{$tesis->id_pk}}</td>
           <td>{{$tesis->nombre_completo}}</td>
-          <td>{{$tesis->profesor_guia}}</td>
+          <td>{{$tesis->avance_general}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}}</td>
           <td>
@@ -40,8 +40,8 @@
            </form>
           </button>
       </td>
-       <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}">Bitacora</span></a></td>
-       <td><a href="{{url('/mostrar_capitulos_tesis/'.$tesis->id_pk)}}">Capitulos</span></a></td>
+       <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}">Bitacora</span></a>
+       <a href="{{url('/mostrar_capitulos_tesis/'.$tesis->id_pk)}}">Capitulos</span></a></td>
         </tr>
         @endif
         @endforeach

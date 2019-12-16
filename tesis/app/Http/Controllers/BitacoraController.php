@@ -63,7 +63,7 @@ class BitacoraController extends Controller
     	{
     	 return view('bitacora.no_existen_registros_bitacora');
     	}
-    	return view('bitacora.lista_acuerdos_tesis',compact('tesistas','id','user','nombre1','nombre2','profesor_guia'));
+    	return view('bitacora.lista_acuerdos_tesis',compact('tesistas','id','user'));
     }
 
     public function create($id)
@@ -75,7 +75,7 @@ class BitacoraController extends Controller
     	foreach($users as $user);
     	if($user->tipo_usuario==2)
     	{
-    		return view('capitulos.create',compact('id'));
+    		return view('bitacora.create',compact('id'));
     	}else{
     		return view('tesis.sinpermiso');
     	}

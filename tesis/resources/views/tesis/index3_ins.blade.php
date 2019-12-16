@@ -8,7 +8,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-10">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">{{ __('Tesis inscritas') }}</div>
           <div class="card-body">
@@ -19,6 +19,7 @@
           <th>ID</th>
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
+          <th>% avance</th>
           <th>Tipo Trabajo</th>
            <th>Area Tesis</th>
           <th>Nombre tesis</th>
@@ -31,6 +32,7 @@
           <td>{{$tesis->id_pk}}</td>
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
+          <td>{{$tesis->avance_general}}</td>
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->area_tesis}}</td>
           <td>{{$tesis->nombre_tes_res}}</td>
@@ -50,8 +52,8 @@
            </form>
           </button>
       </td>
-       <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}">Bitacora</span></a></td>
-        <td><a href="{{url('/mostrar_capitulos_tesis/'.$tesis->id_pk)}}">Capitulos</span></a></td>
+       <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}">Bitacora</span></a>
+       <a href="{{url('/mostrar_capitulos_tesis/'.$tesis->id_pk)}}">Capitulos</span></a></td>
         </tr>
         @endif
         @endforeach

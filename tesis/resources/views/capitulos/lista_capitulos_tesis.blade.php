@@ -33,7 +33,9 @@
          <th>{{$tesis->cap6}}</th>
          @endif
          <th>Fecha</th>
+         @if($user->tipo_usuario==2)
          <th><a href="{{URL::action('Capitulos_TesisController@edit_nombres', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a></th>
+         @endif
         </tr>
       @endforeach
         @foreach ($tesistas as $tesis)
