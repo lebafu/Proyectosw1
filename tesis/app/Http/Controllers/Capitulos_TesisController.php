@@ -10,9 +10,19 @@ class Capitulos_TesisController extends Controller
 {
  
 
-    public function create()
+    public function create($id)
     {
-      return view('bitacora.create');
+        $idlogin=Auth::id();
+        $users=DB::table('users')->where('id',$idlogin)->get();
+        //dd($id);
+        foreach($users as $user);
+        $tesis=DB::table('capitulos')->where('id','=',$id)->get();
+        foreach($tesis as $tes);
+        if($user->tipo_usuario==2 and $tesis->isEmpty()==true){
+      return view('capitulos.create',compact('id'));
+  }else{
+     return view('tesis.sinpermiso');
+  }
     }
 
      public function store(Request $request)
@@ -33,7 +43,7 @@ class Capitulos_TesisController extends Controller
 
         $fecha=now();
        DB::table('capitulos')->insert([
-            'id' => $id,
+            'id' => $request->id_tesis,
             'cap1' => $request->cap1,
             'cap2' => $request->cap2,
             'cap3' => $request->cap3,
@@ -62,13 +72,6 @@ class Capitulos_TesisController extends Controller
     foreach($users as $user);
     	$tesistas=DB::table('tesis')->where('id_pk',$id)->join('capitulos','tesis.id_pk','=','capitulos.id')->orderby('fecha','desc')->paginate(7);
     	//dd($tesistas->isEmpty());
-        foreach($tesistas as $tesis){
-        $nombre1=$tesis->nombre_completo;
-        $nombre2=$tesis->nombre_completo2;
-        $profesor_guia=$tesis->profesor_guia;
-        //dd($id);
-        //dd($id);
-        }
     	//dd($id);
     	//dd($id);
     	$tes=DB::table('tesis')->where('id_pk',$id)->get();
@@ -77,7 +80,7 @@ class Capitulos_TesisController extends Controller
     	{
     	 return view('capitulos.no_existen_capitulos');
     	}
-    	return view('capitulos.lista_capitulos_tesis',compact('tesistas','id','user','nombre1','nombre2','profesor_guia'));
+    	return view('capitulos.lista_capitulos_tesis',compact('tesistas','id','user'));
     }
 
     public function edit_nombres($id)

@@ -22,26 +22,27 @@
                          <div class="form-group row">
                                 <label for="comentario" class="col-md-4 col-form-label text-md-right">{{ __('comentario') }}</label>
                                  <div class="col-md-6">
-                                <textarea name="comentario" type="text" rows="10" cols="40" class="form-control" required="required" >Escriba aqui el comentario</textarea>
+                                <textarea name="comentario" type="text" rows="10" cols="40" class="form-control" required="required" value="{{No hay comentarios}}" disabled>No hay Comentarios</textarea>
                              </div>
                         </div>
 
 
                          <div class="form-group row">
                                 <label for="acuerdo" class="col-md-4 col-form-label text-md-right">{{ __('acuerdo') }}</label><div class="col-md-6">
-                                <textarea name="acuerdo" type="text" rows="10" cols="40" class="form-control" required="required" >Escriba aqui el acuerdo</textarea>
+                                <textarea name="acuerdo" type="text" rows="10" cols="40" class="form-control" required="required" value="{{No hay acuerdos}}" disabled>No hay acuerdos</textarea>
                              </div>
                         </div>
                 
-                        <div class="form-group row">
+                         <div class="form-group row">
                                 <label for="reunion" class="col-md-4 col-form-label text-md-right">{{ __('Reunion') }}</label><div class="col-md-6">
                                  <select name="reunion" id="reunion" class="form-control" required>
                                     <option value=1>Permanente:Al menos una vez cada 2 semanas></option>
                                     <option value=2>Parcial:Al menos una vez al mes</option>
-                                    <option value=3>No hay reunion: Ni siquiera una vez al mes</option>
+                                    <option value=3>No se reunion: Ni siquiera una vez al mes</option>
                                 </select>
                             </div>
                         </div>
+                          
 
                          
                          <div class="form-group row mb-0">

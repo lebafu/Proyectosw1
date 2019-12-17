@@ -18,6 +18,7 @@
     <table class="table table-bordered">
         <tr>
           <th>ID</th>
+          <th>Reunion</th>
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
           <th>Nombre Tesis</th>
@@ -27,6 +28,13 @@
         <tr>
           @if($tesis->actual==1)
           <td>{{$tesis->id_pk}}</td>
+          @if($tesis->reunion==1)
+          <td>Permanente</td>
+          @elseif($tesis->reunion==2)
+          <td>Parcial</td>
+          @else
+          <td>No hay reunión</td>
+          @endif
           @if($tesis->nombre_completo2==null)
           <td>{{$tesis->nombre_completo}} </td>
           @endif

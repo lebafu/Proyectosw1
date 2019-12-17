@@ -60,6 +60,9 @@
 @if($user->tipo_usuario==2)
 <td><a href="{{url('/bitacora_tesis/create'.$id)}}" class="fas fa-plus"></a></td>
 @endif
+@if($user->tipo_usuario==2)
+<td><a href="{{url('/bitacora_tesis/no_hay_acuerdo'.$id)}}" class="fas fa-plus">No hay acuerdo(fila automatica)</a></td>
+@endif
 </div>
 </div>
 </div>

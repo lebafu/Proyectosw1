@@ -122,6 +122,7 @@ class BitacoraController extends Controller
 
     public function store(Request $request)
     {
+    	//dd($request);
         $request->validate([
             'id_tesis' => 'required|integer',
             'comentario' => 'required|string',
@@ -142,6 +143,7 @@ class BitacoraController extends Controller
             'acuerdo' =>$request->acuerdo,
         ]);
 
+       	DB::table('tesis')->where('id_pk','=',$request->id_tesis)->update(['reunion'=> $request->reunion]);
        	return view('profesorhome');
       }
 
@@ -186,6 +188,22 @@ class BitacoraController extends Controller
 
         DB::table('bitacora')->where('id', $id)->delete();
         return back()->with('status','El comentario ha sido eliminada de la bitacora');
+    }
+
+    public function no_hay_acuerdo($id)
+    {
+
+    	//dd($id);
+    	$idlogin=Auth::id();
+    	$users=DB::table('users')->where('id',$idlogin)->get();
+    	//dd($id);
+    	foreach($users as $user);
+    	if($user->tipo_usuario==2)
+    	{
+    		return view('bitacora.no_hay_acuerdo',compact('id'));
+    	}else{
+    		return view('tesis.sinpermiso');
+    	}
     }
 
 }

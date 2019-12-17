@@ -72,6 +72,9 @@
       </table>
 </div>
 </div>
+@if($user->tipo_usuario==2)
+<td><a href="{{url('/capitulos_tesis/create'.$id)}}" class="fas fa-plus"></a></td>
+@endif
 </div>
 </div>
 </div>
