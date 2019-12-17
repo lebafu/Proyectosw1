@@ -14,4 +14,5 @@ class Bitacora extends Model
     'id_tesis',
     'comentario',
     'acuerdo',
+    'actual'
 }

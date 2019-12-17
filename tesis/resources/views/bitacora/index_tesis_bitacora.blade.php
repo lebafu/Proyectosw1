@@ -25,6 +25,7 @@
         </tr>
         @foreach($tesistas as $tesis)
         <tr>
+          @if($tesis->actual==1)
           <td>{{$tesis->id_pk}}</td>
           @if($tesis->nombre_completo2==null)
           <td>{{$tesis->nombre_completo}} </td>
@@ -37,6 +38,7 @@
           <td>{{$tesis->comentario}}</td>
           <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}"  class="btn btn-info"><span class="far fa-eye"></span></a></td>
           </tr>
+          @endif
         @endforeach
       </table>
 </div>
@@ -44,5 +46,4 @@
 </div>
 </div>
 </div>
-{!! $tesistas->render() !!}
 @endsection

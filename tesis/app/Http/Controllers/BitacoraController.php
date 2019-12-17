@@ -29,22 +29,53 @@ class BitacoraController extends Controller
     public function index()
     {
     $idlogin=Auth::id();
+    //Conozco el usuario que ha iniciado sesion junto con su tipo de usuario.
     $users=DB::table('users')->where('id',$idlogin)->get();
     foreach($users as $user);
-    //dd($users);
-    //dd($user);
+    //Se guarda en este arreglo los ids de las tesis que son distintas entre si.
+    $ids_tesis=DB::table('bitacora')->select('id_tesis')->orderby('created_at','desc')->distinct()->get();
+    //dd($ids_tesis);
+    $i=0;
+    $ids_tes=array();
+    foreach($ids_tesis as $id_tesis){
+    	 array_push($ids_tes,$id_tesis->id_tesis);
+   		 $i=$i+1;
+	}
+	//print_r($ids_tes[0]);
+	//El valor de i permite conocer cuantos ids de tesis diferentes existe en la tabla bitacoras.
+	//dd($i);
+      //dd($ids_tesis);
+	//Si el tipo de usuario es coordinador de tesis podrá ver esta lista de bitacoras con el ultimo comentario referente a la tesis
     if($user->tipo_usuario==3){
-      //$tesistas=DB::table('bitacora')->join('tesis','bitacora.id_tesis','=','tesis.id_pk')->where('tesis.profesor_guia','=',$user->name)->paginate(7);
-      $tesistas=DB::table('tesis')->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->where('bitacora.created_at')->paginate(7);
-      foreach($tesistas as $tesis)
-      {
-      	$nombre1=$tesis->nombre_completo;
-      	$nombre2=$tesis->nombre_completo2;
-      	$profe_guia=$tesis->profesor_guia;
+    //Se hace un join o union entre la tabla bitacora y tesis donde la primary key de la tabla tesis sea igual al id_tesis en la tabla bitacora
+    	//se ordena desde el acuerdo de tesis mas actual ingresado, al mas antiguo//
+      $tesistas=DB::table('tesis')->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->orderby('created_at','desc')->get();
+     //dd($tesistas);
+      $j=0;
+      $ids_bitacora=array();
+  	  while($j<$i)
+  	  {	
 
-      }
+  	  	$bitacora=DB::table('tesis')->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->orderby('created_at','desc')->where('bitacora.id_tesis','=',$ids_tes[$j])->first();
+  	  	//dd($bitacoras);
+  	  		array_push($ids_bitacora,$bitacora->id);
+  	  	
+  	  	$j=$j+1;
+  	  }
+  	  //dd($ids_bitacora);
+  	  $k=0;
+  	  while($k<$i){
+  	  	foreach($tesistas as $tesis){
+  	  		if($ids_bitacora[$k]==$tesis->id){
+  	  			 DB::table('bitacora')->where('id',$ids_bitacora[$k])->update(['actual' => 1]);
+
+  	  }
+  	  }
+  	  $k=$k+1;
+  	}
+      //dd($j);
       //dd($tesistas);
-      return view('bitacora.index_tesis_bitacora',compact('tesistas','nombre1','nombre2','profe_guia'));
+      return view('bitacora.index_tesis_bitacora',compact('tesistas'));
      }
      return view('tesis.sinpermiso');
     }
