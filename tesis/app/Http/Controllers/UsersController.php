@@ -43,7 +43,6 @@ class UsersController extends Controller
             'email' => 'required|string',
             'password' => 'required|string',
             'tipo_usuario' => 'required|integer',
- 
         ]);
 
         /*DB::table('users')->insert([
@@ -53,13 +52,16 @@ class UsersController extends Controller
             'tipo_usuario' => $request->tipo_usuario,
             'rut' =>$request->rut,
         ]);*/
-
+      //dd($request);
+        $ultimo_id=DB::table('users')->max('id');
+        //dd($ultimo_id);
        DB::table('users')->insert([
+            'id' => $ultimo_id+1,
             'name' => $request->name,
             'email' =>$request->email,
             'password' => Hash::make($request->password),
             'tipo_usuario' =>$request->tipo_usuario,
-            'sexo' =>$request->sexo
+            'sexo' =>$request->sexo,
         ]);
 
         $email=$request->get('email');
@@ -136,7 +138,7 @@ class UsersController extends Controller
                 //dd($profesor->id);
         if($request->tipo_usuario==2 or  $request->tipo_usuario==3){
             //Actualizar nombre del profesor en el sistema, en tablas tesis y comision.
-            dd($user->name);
+            //dd($user->name);
              DB::table('tesis')->where('profesor_guia','=',$nombre_actual)->update(['profesor_guia' => $user->name]);
              DB::table('comision')->where('profesor1_comision','=',$nombre_actual)->update(['profesor1_comision' => $user->name]);
              DB::table('comision')->where('profesor2_comision','=',$nombre_actual)->update(['profesor2_comision' => $user->name]);

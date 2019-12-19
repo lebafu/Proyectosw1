@@ -133,7 +133,7 @@
       <a class="navbar-brand" href="#">Sistema de Tesis</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="{{ url('/home') }}">Home</a></li>
+      <li><a href="{{ url('/home') }}">Home</a></li>
       <li><a href="{{url('/users') }}">Lista de usuarios</a></li>
       <li><a href="{{url('users/create')}}">Crear Usuario</a></li>
      <li><a href="{{url('/area_tesis')}}">Areas de Tesis</a></li> 

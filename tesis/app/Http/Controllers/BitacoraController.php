@@ -12,7 +12,9 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Str;
+use Illuminate\Support\Arr; //Para usar arreglos de laravel;
 use Barryvdh\DomPDF\Facade as PDF;
 use Illuminate\Contracts\Auth\Guard;
 use iio\libmergepdf\Merger;
@@ -122,11 +124,13 @@ class BitacoraController extends Controller
 
     public function store(Request $request)
     {
+    	
     	//dd($request);
         $request->validate([
             'id_tesis' => 'required|integer',
             'comentario' => 'required|string',
             'acuerdo' => 'required|string',
+            'reunion' => 'required|integer',
         ]);
 
         /*DB::table('users')->insert([
@@ -144,6 +148,69 @@ class BitacoraController extends Controller
         ]);
 
        	DB::table('tesis')->where('id_pk','=',$request->id_tesis)->update(['reunion'=> $request->reunion]);
+
+       $data=array();
+       $ids_coordinadores=array();
+       $coordinadors=DB::table('users')->where('tipo_usuario','=',3)->get();
+       //dd($coordinadors);
+       $i=0;
+     		foreach($coordinadors as $coordinador)
+     		{
+     		  //dd($coordinador->id);       
+     		  array_push($ids_coordinadores,$coordinador->id);
+     		  $i=$i+1;
+     		}
+     	//dd($i);
+     		//dd($ids_coordinadores);
+       $tesistas=DB::table('tesis')->where('id_pk','=',$request->id_tesis)->get(); //Se obtienen datos de tabla tesis para la vista del email
+       foreach($tesistas as $tesis);
+       //dd($tesis->profesor_guia);
+       $alumno1=DB::table('users')->where('name',$tesis->nombre_completo)->get();
+       //dd($alumno1);
+       foreach($alumno1 as $al1);
+       if($tesis->nombre_completo2!=null)
+       {
+       	$alumno2=DB::table('users')->where('name',$tesis->nombre_completo2)->get();
+       	foreach($alumno2 as $al2);
+       }
+     	//dd($request->reunion);
+     	//dd($coordinador->email);
+       if($request->reunion==3)
+       {
+       	$j=0;
+       	   //dd($coordinador);
+       	  if($tesis->nombre_completo2==null){
+       	    $data=(['nombre_coordinador'=> $coordinador->name, 'nombre_completo' => $tesis->nombre_completo,'rut'=> $tesis->rut, 'email_alumno1'=> $al1->email,'profesor_guia' => $tesis->profesor_guia,'nombre_tesis' => $tesis->nombre_tesis, 'nombre_completo2'=>null, 'tipo_trabajo' => $tesis->tipo]);
+       	   /* for($j=0;$j<$i;$j=$j+1){
+       	    	$coordinador=DB::table('users')->where('id','=',$ids_coordinadores[$j])->first();
+       	    	array_push($data,$coordinador->name);
+       	    }*/
+       	   }
+
+       	  if($tesis->nombre_completo2!=null)
+       	  {
+       	  	//dd($tesis->profesor_guia);
+       	  	 $data=(['nombre_coordinador'=> $coordinador->name, 'nombre_completo' => $tesis->nombre_completo,'rut'=> $tesis->rut, 'email_alumno1'=> $al1->email,'nombre_completo2'=> $tesis->nombre_completo2,'rut2'=> $tesis->rut2,'email_alumno2'=> $al2->email, 'profesor_guia' => $tesis->profesor_guia,'nombre_tesis' => $tesis->nombre_tesis, 'tipo_trabajo' => $tesis->tipo]);
+       	  	 /*for($j=0;$j<$i;$j=$j+1){
+       	    	$coordinador=DB::table('users')->where('id','=',$ids_coordinadores[$j])->first();
+       	    	array_push($data,$coordinador);
+       	    }*/
+
+       	  }
+
+       	  //$email_coordinador=$coordinador->email;
+       	  //dd($data);
+          Mail::send('bitacora.notificacion_coordinador',$data, function($message)
+          {
+          	$coordinadors=DB::table('users')->where('tipo_usuario','=',3)->get();
+       //dd($coordinadors);
+     		foreach($coordinadors as $coordinador){
+          	$message->from('leonardo211294@gmail.com');
+          	$message->to($coordinador->email)->subject('Estado de Alerta: No hay reunion');
+          }
+          });
+
+       }
        	return view('profesorhome');
       }
 

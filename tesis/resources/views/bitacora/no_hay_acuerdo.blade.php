@@ -19,20 +19,36 @@
                           
 
 
-                         <div class="form-group row">
+            
+
+                            <!--Para efectos de vista-->
+                        <div class="form-group row">
                                 <label for="comentario" class="col-md-4 col-form-label text-md-right">{{ __('comentario') }}</label>
                                  <div class="col-md-6">
-                                <textarea name="comentario" type="text" rows="10" cols="40" class="form-control" required="required" value="{{No hay comentarios}}" disabled>No hay Comentarios</textarea>
+                                <textarea name="comentario" type="text" rows="10" cols="40" class="form-control" required="required" disabled >No hay comentarios</textarea>
                              </div>
                         </div>
 
 
-                         <div class="form-group row">
-                                <label for="acuerdo" class="col-md-4 col-form-label text-md-right">{{ __('acuerdo') }}</label><div class="col-md-6">
-                                <textarea name="acuerdo" type="text" rows="10" cols="40" class="form-control" required="required" value="{{No hay acuerdos}}" disabled>No hay acuerdos</textarea>
+                            <!--Para enviar información de no hay comentarios al controlador BitacoraControllerr-->
+                            <div class="col-md-6">
+                                <textarea name="comentario" type="hide" style="display:none;">No hay comentarios</textarea>
                              </div>
-                        </div>
                 
+                                <!--Para efectos de vista-->
+                              <div class="form-group row">
+                                <label for="acuerdo" class="col-md-4 col-form-label text-md-right">{{ __('acuerdo') }}</label><div class="col-md-6">
+                                <textarea name="acuerdo" type="text" rows="10" cols="40" class="form-control" required="required" disabled>No hay acuerdos</textarea>
+                             </div>
+                        </div>
+
+                                <!--Para enviar información de no hay acuerdos al controlador BitacoraControllerr-->
+                         <div class="col-md-6">
+                                <textarea name="acuerdo" type="hide" style="display:none;">No hay acuerdos</textarea>
+                             </div>
+                
+
+
                          <div class="form-group row">
                                 <label for="reunion" class="col-md-4 col-form-label text-md-right">{{ __('Reunion') }}</label><div class="col-md-6">
                                  <select name="reunion" id="reunion" class="form-control" required>
