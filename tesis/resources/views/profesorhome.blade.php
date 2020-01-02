@@ -78,14 +78,15 @@ body {
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
-      <a href="{{url('/tesis_profesor')}}">Tesis En espera</a>
-      <a href="{{url('/tesis_inscritas_profesor')}}">Tesis inscritas</a>
+      <a href="{{url('/tesis_profesor')}}">Espera</a>
+      <a href="{{url('/tesis_inscritas_profesor')}}">Inscritas</a>
+      <a href="{{url('/tesis_profesor_comision')}}">Comision</a>
+      <a href="{{url('/create')}}">Informes</a>
+      <a href="{{url('/tesis/create_fecha_descargar_actas')}}">Actas</a>
     </div>
   </div> 
-      <a href="{{url('/tesis_profesor_comision')}}">Profesor participa como miembro Comision</a>
-      <a href="{{url('/create')}}">Consulta de participacion de tesis por fecha</a>
-      <a href="{{url('/tesis/create_fecha_descargar_actas')}}">Descargar actas por fecha</a>
-      <a href="{{url('/editar_profesor')}}">Modificar Grado Academico</a>
+  <!--Descomentar linea de abaajo para permitir que profesor pueda realizar modificación de grado academico-->
+      <!--<a href="{{url('/editar_profesor')}}">Modificar Grado Academico</a>-->
      <a href="{{url('/index_tesis_bitacora')}}">Lista Tesis con Bitacora</a>
    <!--Inicio de navbar-->
  <div class="dropdown">
@@ -100,7 +101,7 @@ body {
     </div>
   </div> 
   <div class="dropdown">
-    <button class="dropbtn">Solicitudes Notas Profesor
+    <button class="dropbtn">Sols Notas Profesor
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">
@@ -110,7 +111,7 @@ body {
     </div>
   </div> 
   <div class="dropdown">
-    <button class="dropbtn">Solicitudes Notas Director
+    <button class="dropbtn">Sols Notas Director
       <i class="fa fa-caret-down"></i>
     </button>
     <div class="dropdown-content">

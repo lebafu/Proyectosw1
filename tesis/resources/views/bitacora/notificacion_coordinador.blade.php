@@ -24,7 +24,7 @@
 <b>Email:</b>
 <p>{{$email_alumno2}}</p>
 @endif
-Ya que no ha habido contacto conversaciones de avance de {{$tipo_trabajo}} en más de un mes
+Ya que no ha habido conversaciones de avance de {{$tipo_trabajo}} en más de un mes
 
 </div>
 </div>
