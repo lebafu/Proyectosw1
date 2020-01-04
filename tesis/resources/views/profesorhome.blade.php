@@ -87,7 +87,6 @@ body {
   </div> 
   <!--Descomentar linea de abaajo para permitir que profesor pueda realizar modificación de grado academico-->
       <!--<a href="{{url('/editar_profesor')}}">Modificar Grado Academico</a>-->
-     <a href="{{url('/index_tesis_bitacora')}}">Lista Tesis con Bitacora</a>
    <!--Inicio de navbar-->
  <div class="dropdown">
     <button class="dropbtn">Vinculacion
