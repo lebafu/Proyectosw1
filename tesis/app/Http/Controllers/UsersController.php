@@ -160,7 +160,7 @@ class UsersController extends Controller
     }
 
     /**/
-
+    //Se almacena el grado academico dee profesor
     public function save_profe_grado_academico(Request $request,$id)
     {
      //dd($request->get('grado_academico'));
