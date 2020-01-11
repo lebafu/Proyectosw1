@@ -3,15 +3,16 @@
 
 
 @section('content')
-
+<head>
+  <title>TESIS CON NOTAS PRORROGAS VENCIDAS SIN INTERVALOS</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
 
 
 <div class="container">
-  <div class="row justify-content-center">
-    <div class="col-md-8">
-      <div class="card">
-        <div class="card-header">{{ __('Filtro de notas prorrogas vencidas') }}</div>
-          <div class="card-body">
+ <h4 align="center" style="margin-bottom: 40px; margin-top: 30px">Notas prorrogas vencidas sin intervalos</h4>
+    <th>A dia de hoy</th>
 
     <table class="table table-bordered">
         <tr>
