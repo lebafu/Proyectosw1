@@ -234,9 +234,11 @@ Route::get('/error_generar_pdf', 'TesisController@error_generar_pdf')->name('tes
 Route::get('/error_rut', 'TesisController@error_rut')->name('tesis.error_generar_pdf');
 Route::get('/tesis_aprobada', 'TesisController@tesis_aprobada')->name('tesis.tesis_aprobada');
 Route::get('/error_profesor_comision', 'TesisController@update2')->name('tesis.profesor_repetido_comision');
-//NOTAS PENDIENTES Y DE PRORROGAS VENCIDAS
+//NOTAS PENDIENTES Y DE PRORROGAS VENCIDAS FUERA DEL INTERVALO
 Route::get('/descargar_pendientes_vencidas','TesisController@imprimir_pend_venc')->name('descargar_pendientes_vencidas');
 Route::get('/descargar_prorrogas_vencidas','TesisController@imprimir_pro_venc')->name('descargar_prorrogas_vencidas');
+
+
 Route::get('/descargar_pend_pro_vencidas','TesisController@imprimir_pend_pro_venc')->name('descargar_pend_pro_vencidas');
 Route::get('/tesis_filtro_fecha_profesor', 'TesisController@filtro_tesis_fecha')->name('tesis_filtro_fecha_profesor');
 

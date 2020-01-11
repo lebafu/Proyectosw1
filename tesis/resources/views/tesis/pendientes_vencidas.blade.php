@@ -21,7 +21,7 @@
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
-          <th>Fecha Peticion</th>
+          <th>Vinculacion</th>
           <th>Nota Pendiente</th>
         </tr>
         @foreach ($notas_pendientes_vencidas as $tesis)
@@ -30,7 +30,7 @@
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->fecha_peticion}}}</td>
+          <td>{{$tesis->nombre_vinculacion}}}</td>
           <td>{{$tesis->nota_pendiente}}</td>
           <td>
 
