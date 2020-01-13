@@ -35,6 +35,7 @@ class BitacoraController extends Controller
     $users=DB::table('users')->where('id',$idlogin)->get();
     foreach($users as $user);
     //Se guarda en este arreglo los ids de las tesis que son distintas entre si.
+     //DB::table('bitacora')->update(['actual'=> null]);
     $ids_tesis=DB::table('bitacora')->select('id_tesis')->orderby('created_at','desc')->distinct()->get();
     //dd($ids_tesis);
     $i=0;
@@ -77,6 +78,7 @@ class BitacoraController extends Controller
   	}
       //dd($j);
       //dd($tesistas);
+    //dd($tesistas);
       return view('bitacora.index_tesis_bitacora',compact('tesistas'));
      }
      return view('tesis.sinpermiso');
@@ -205,7 +207,7 @@ class BitacoraController extends Controller
           	$coordinadors=DB::table('users')->where('tipo_usuario','=',3)->get();
        //dd($coordinadors);
      		foreach($coordinadors as $coordinador){
-          	$message->from('leonardo211294@gmail.com');
+          	$message->from('leonardo211294@gmail.com');//Aqui debe ir correo del director de Tesis
           	$message->to($coordinador->email)->subject('Estado de Alerta: No hay reunion');
           }
           });

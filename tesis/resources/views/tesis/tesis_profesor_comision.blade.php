@@ -8,7 +8,7 @@
   <div class="row justify-content-center">
     <div class="col-md-8">
       <div class="card">
-        <div class="card-header">{{ __('Tesis inscritas a profesor')}}</div>
+        <div class="card-header">{{ __('Tesis a las que usted pertenece como miembro de comisión')}}</div>
           <div class="card-body">
 
     <table class="table table-bordered">
