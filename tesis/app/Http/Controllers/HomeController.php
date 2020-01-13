@@ -32,6 +32,7 @@ class HomeController extends Controller
        
         $users=DB::table('users')->paginate(7);
         $tipo = $this->auth->user()->tipo_usuario;
+        $var_director_escuela = $this->auth->user()->director_escuela;
         $id=$this->auth->user()->id;
 
         $profesor_existe_en_grad_academico=DB::table('grado_academico_profesor_planta')->where('id',$id)->get();
@@ -59,8 +60,14 @@ class HomeController extends Controller
                 //dd($profesor_tiene_grad_academico_asignado->isEmpty());
                 return view('grado_academico_create',compact('id'));
             }else{
-               return view('profesorhome'); 
+                if($tipo==2 and $var_director_escuela==0){
+               return view('profesorhome');
+               }else{
+                if($tipo==2 and $var_director_escuela==1){
+                    return view('director_escuelahome');
+               } 
             }
+        }
             case 3:
             return view('directorhome');
             case 4: 
