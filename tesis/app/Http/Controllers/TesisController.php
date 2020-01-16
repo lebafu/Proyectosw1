@@ -384,7 +384,7 @@ class TesisController extends Controller
     {
         $id=Auth::id();
         if($id==null){
-            return('welcome');
+            return('tesis.sinpermiso');
         }
         $user=User::findorfail($id);
         //dd($user);
