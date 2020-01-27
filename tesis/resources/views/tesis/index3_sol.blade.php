@@ -4,7 +4,10 @@
 
 @section('content')
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
+<!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">-->
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
 <div class="container">
   <div class="row justify-content-center">
@@ -36,7 +39,7 @@
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}</td>
           <td>
-          <div class="row">
+         <!-- <div class="row">
             <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
 
             <a href="{{URL::action('TesisController@edit3', $tesis->id_pk)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
@@ -47,7 +50,22 @@
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
-          </button>
+          </button>-->
+            <div class="row">
+            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><i class="material-icons">remove_red_eye
+</i></a>
+
+            <a href="{{URL::action('TesisController@edit3', $tesis->id_pk)}}" class="btn btn-primary"><i class="material-icons">create
+</i></a>
+             <a href="{{url('/tesis_director_evaluar/'.$tesis->id_pk)}}" class="btn btn-info"><i class="material-icons">done
+</i></a> 
+            
+           <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
+          <button type="submit"  class="btn btn-danger"><i class="material-icons">delete_outline</i>
+           {{ method_field('DELETE') }}
+           {{ csrf_field() }}
+           </form>
+          </button> 
         </div>
       </td>
         </tr>

@@ -24,10 +24,10 @@
 	@if($user->tipo_usuario==1)
 	<p>Alumno</p>
 	@endif
-	@if($user->tipo_usuario==2 $user->director_escuela==0)
+	@if($user->tipo_usuario==2 and $user->director_escuela==0)
 	<p>Profesor</p>
 	@endif
-	@if($user->tipo_usuario==2 $user->director_escuela==1)
+	@if($user->tipo_usuario==2  and $user->director_escuela==1)
 	<p>Director de Escuela</p>
 	@endif
 	@if($user->tipo_usuario==3)

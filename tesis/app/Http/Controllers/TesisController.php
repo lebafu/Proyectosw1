@@ -2193,8 +2193,14 @@ class TesisController extends Controller
         $tes->nota_pendiente=$request->nota_pendiente;
         $tes->estado4=1;
         $tes->update();
+        $idprofe=Auth::id();
+        $users=DB::table('users')->where('id',$idprofe)->get();
+        foreach($users as $user);
+        if($user->director_escuela==0){
         return view('profesorhome');        
-
+        }else{
+            return view('director_escuelahome'); 
+        }
       }
 
       public function prorroga_update(Request $request,$id)
@@ -2204,7 +2210,14 @@ class TesisController extends Controller
         $tes->nota_prorroga=$request->nota_prorroga;
         $tes->estado5=1;
         $tes->update();
-        return view('profesorhome');
+         $idprofe=Auth::id();
+        $users=DB::table('users')->where('id',$idprofe)->get();
+        foreach($users as $user);
+        if($user->director_escuela==0){
+        return view('profesorhome');        
+        }else{
+            return view('director_escuelahome'); 
+        }
 
       }
 
@@ -3218,7 +3231,7 @@ class TesisController extends Controller
         $tes->nota_pendiente=$request->nota_pendiente;
         $tes->estado6=1;
         $tes->update();
-        return view('profesorhome');        
+        return view('director_escuelahome');        
 
       }
 
@@ -3229,7 +3242,7 @@ class TesisController extends Controller
         $tes->nota_prorroga=$request->nota_prorroga;
         $tes->estado7=1;
         $tes->update();
-        return view('profesorhome');
+        return view('director_escuelahome');
 
       }
   

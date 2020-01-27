@@ -4,13 +4,16 @@
 
 @section('content')
 
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
 
+<!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">-->
+
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-12"> <!--Con 12 se ocupa todo el ancho de la pantalla-->
+    <div class="col-md-12"> <!--Con 12 se ocupa todo el ancho de la pantalla a lo ancho-->
       <div class="card">
         <div class="card-header">{{ __('Tesis del alumno') }}</div>
           <div class="card-body">
@@ -87,12 +90,27 @@
           <td></td>
          @endif
       <td>
-            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}"  class="btn btn-info"><span class="far fa-eye"></span>
+         <!--  <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}"  class="btn btn-info"><span class="far fa-eye"></span>
             <br> 
-            <a href="{{URL::action('TesisController@edit', $tesis->id_pk)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+            <a href="{{URL::action('TesisController@edit', $tesis->id_pk)}}" class="btn btn-primary"><span class="fas fa-edit"></span></a>
             <br>
            <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
+            
+            <br>
+           {{ method_field('DELETE') }}
+           {{ csrf_field() }}
+
+            </button>
+           </form>-->
+
+           <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}"  class="btn btn-info"><i class="material-icons">remove_red_eye
+</i>
+            <br> 
+            <a href="{{URL::action('TesisController@edit', $tesis->id_pk)}}" class="btn btn-primary"><i class="material-icons">create</i></a>
+            <br>
+           <form action="{{route('tesis.destroy', $tesis->id_pk)}}" method="POST">
+          <button type="submit" class="btn btn-danger"><i class="material-icons">delete_outline</i>
             
             <br>
            {{ method_field('DELETE') }}
