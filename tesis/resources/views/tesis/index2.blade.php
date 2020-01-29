@@ -3,14 +3,14 @@
 
 
 @section('content')
-<!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+<!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">-->
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-12">
       <div class="card">
         <div class="card-header">{{ __('Solicitudes de tesis')}}</div>
           <div class="card-body">
@@ -19,34 +19,39 @@
         <tr>
           <th>ID</th>
           <th>Nombre Estudiante</th>
-          <th>Profesor Guia</th>
-          <th>Tipo Trabajo</th>
+          <!--<th>Profesor Guia</th>-->
+          <th>Tipo</th>
           <th>Fecha Peticion</th>
+          <th>Acción</th>
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
           @if($tesis->profesor_guia==$user->name and ($tesis->estado1==1 or $tesis->estado1==2 or ($tesis->estado1==3 and $tesis->estado2==1)) or $tesis->estado1==5)
           <td>{{$tesis->id_pk}}</td>
-          <td>1-{{$tesis->nombre_completo}}  {{$tesis->nombre_completo2}}</td>
-          <td>{{$tesis->profesor_guia}}</td>
+          @if($tesis->nombre_completo2!=null)
+          <td>{{$tesis->nombre_completo}} y {{$tesis->nombre_completo2}}</td>
+          @else
+            <td>{{$tesis->nombre_completo}}</td>
+          @endif
+          <!--<td>{{$tesis->profesor_guia}}</td>-->
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}</td>
           <td>
-
-         <!--  <div class="row">
-            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
-            <a href="{{url('/tesis_profesor/'.$tesis->id_pk)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+              <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST" class="form-inline">
+         <div class="row">
+            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px"><span class="far fa-eye  fa-xs" style="float:left;margin-left:-8px"></span></a>
+            <a href="{{url('/tesis_profesor/'.$tesis->id_pk)}}" class="btn btn-primary" style="width:25px; height:25px"><span class="far fa-edit fa-xs" style="float:left;margin-left:-8px"></span></a>
     
-            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id_pk)}}" class="btn btn-info"><span class="fas fa-check"></span></a> 
-           <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST">
-          <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
+            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px"><span class="fas fa-check fa-xs" style="float:left;margin-left:-8px"></span></a> 
+           
+          <button type="submit" class="btn btn-danger"><span class="fas fa-trash" style="float:left;margin-left:-8px"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
           </button>
-        </div>-->
+        </div>
 
-          <div class="row">
+          <!--<div class="row">
             <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><i class="material-icons">remove_red_eye
 </i></a>
             <a href="{{url('/tesis_profesor/'.$tesis->id_pk)}}" class="btn btn-primary"><i class="material-icons">create</i></a>
@@ -58,7 +63,7 @@
            {{ csrf_field() }}
            </form>
           </button>
-        </div>
+        </div>-->
       </td>
         </tr>
         @endif
@@ -68,7 +73,12 @@
      </div>
      </div>
      </div>
-     <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
+     @if($user->director_escuela==1)
+     <a href="/director_escuelahome" class="btn btn-default">Volver a home</a>
+     @endif
+     @if($user->director_escuela==0)
+     <a href="/profesorhome" class="btn btn-default">Volver a home</a>
+     @endif
      </div>
 </div>
 

@@ -28,6 +28,8 @@
 	<p>{{$tesis->profesor_guia}}</p>
 	<b>Carrera</b>
 	<p>{{$tesis->carrera}}</p>
+	<b>Fecha Peticion</b>
+	<p>{{$tesis->fecha_peticion}}</p>
 	<b>Tipo de trabajo</b>
 	<p>{{$tesis->tipo}}</p>
 	<b>Nombre vinculación</b>
@@ -90,6 +92,8 @@
 	<p>{{$tesis->carrera}}</p>
 	<b>Tipo trabajo</b>
 	<p>{{$tesis->tipo}}</p>
+	<b>Fecha Peticion</b>
+	<p>{{$tesis->fecha_peticion}}</p>
 	<b>Nombre Vinculación</b>
 	<p>{{$tesis->nombre_vinculacion}}</p>
 	<b>Tipo de Vinculación</b>

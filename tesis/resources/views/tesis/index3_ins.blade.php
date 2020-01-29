@@ -20,12 +20,12 @@
         <tr>
          
           <th>ID</th>
-          <th>Nombre Estudiante</th>
+          <th>Estudiante(s)</th>
           <th>Profesor Guia</th>
           <th>% avance</th>
-          <th>Tipo Trabajo</th>
+          <th>Tipo</th>
            <th>Area Tesis</th>
-          <th>Nombre tesis</th>
+          <th>Tesis</th>
           <th>Vinculacion</th>
           <th>Revision</th>
         </tr>
@@ -41,21 +41,21 @@
           <td>{{$tesis->nombre_tes_res}}</td>
           <td>{{$tesis->tipo_vinculacion}}</td>
           @if($tesis->constancia_ex!=null)
-           <td><a href="{{url('tesis/create_num_memo'.$tesis->id) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Memo</i></a></td>
+           <td><a href="{{url('tesis/create_num_memo'.$tesis->id) }}" class="btn btn-simple btn-primary btn-icon edit">Memo</a></td>
           @else
-          <td>Constancia aun no ha sido subido</td>
+          <td></td>
           @endif
           <td>
-          <!--<div class="row">
+          <div class="row">
             <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
            <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST">
           <button type="submit"  class="btn btn-danger"><span class="fas fa-trash"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
-          </button>-->
+          </button>
 
-           <div class="row">
+          <!-- <div class="row">
             <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><i class="material-icons">remove_red_eye
 </i></a>
            <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST">
@@ -63,7 +63,7 @@
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
-          </button>
+          </button>-->
       </td>
        <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}">Bitacora</span></a>
        <a href="{{url('/mostrar_capitulos_tesis/'.$tesis->id_pk)}}">Capitulos</span></a></td>
