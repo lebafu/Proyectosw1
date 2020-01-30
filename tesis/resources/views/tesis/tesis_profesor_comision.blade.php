@@ -6,7 +6,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-8">
+    <div class="col-md-10">
       <div class="card">
         <div class="card-header">{{ __('Tesis a las que usted pertenece como miembro de comisión')}}</div>
           <div class="card-body">
@@ -25,10 +25,10 @@
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->fecha_peticion}}}</td>
+          <td>{{$tesis->fecha_peticion}}</td>
           <td>
           <div class="row">
-            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
+            <a href="{{url('/tesismostrar/'.$tesis->id)}}" class="btn btn-info" style="width:25px;height:25px"><span class="far fa-eye fa-sm" style="float:left;margin-left:-8px"></span></a>
          
           </button>
         </div>

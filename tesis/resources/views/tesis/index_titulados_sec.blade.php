@@ -36,13 +36,13 @@
             </td>
           <td>{{$tesis->profesor_guia}}</td>
 
-          <td><a class="btn btn-primary" href="{{url('/recopilacion_inf/'.$tesis->id_pk)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a>
+          <td><a class="btn btn-primary btn-sm" href="{{url('/recopilacion_inf/'.$tesis->id_pk)}}" id="descargaPDF" ><span class="fa fa-print fa-sm"> </span></a>
                @if($tesis->nombre_completo2!=null)
-              <a class="btn btn-primary" href="{{url('/recopilacion_inf2/'.$tesis->id_pk)}}" id="descargaPDF" ><span class="fa fa-print"> </span></a>
+              <a class="btn btn-primary btn-sm" href="{{url('/recopilacion_inf2/'.$tesis->id_pk)}}" id="descargaPDF" ><span class="fa fa-print fa-sm"> </span></a>
               @endif
           </td>
 
-           <td><a href="{{url('tesis/createnummemotitulados'.$tesis->id_pk)}}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Memo titulo</i></a></td>
+           <td><a href="{{url('tesis/createnummemotitulados'.$tesis->id_pk)}}" class="btn btn-simple btn-primary btn-sm">Memo titulo</a></td>
       @endforeach
      </table>
      </div>

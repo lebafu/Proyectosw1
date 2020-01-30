@@ -34,7 +34,7 @@
          @endif
          <th>Fecha</th>
          @if($user->tipo_usuario==2)
-         <th><a href="{{URL::action('Capitulos_TesisController@edit_nombres', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a></th>
+         <th><a href="{{URL::action('Capitulos_TesisController@edit_nombres', $tesis->id)}}" class="btn btn-primary btn-sm"><span class="far fa-edit fa-sm"></span></a></th>
          @endif
         </tr>
       @endforeach
@@ -56,7 +56,7 @@
           @endif
           <td>{{$tesis->fecha}}</td>
             @if($user->tipo_usuario==2)
-         <td><a href="{{URL::action('Capitulos_TesisController@edit_avances', $tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+         <td><a href="{{URL::action('Capitulos_TesisController@edit_avances', $tesis->id)}}" class="btn btn-primary btn-sm"><span class="far fa-edit fa-sm"></span></a>
          <!--<form action="{{ route('bitacora.destroy', $tesis->id)}}" method="POST">
           <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
           

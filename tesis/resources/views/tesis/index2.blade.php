@@ -37,14 +37,16 @@
           <td>{{$tesis->tipo}}</td>
           <td>{{$tesis->fecha_peticion}}</td>
           <td>
-              <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST" class="form-inline">
+              
          <div class="row">
-            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px"><span class="far fa-eye  fa-xs" style="float:left;margin-left:-8px"></span></a>
-            <a href="{{url('/tesis_profesor/'.$tesis->id_pk)}}" class="btn btn-primary" style="width:25px; height:25px"><span class="far fa-edit fa-xs" style="float:left;margin-left:-8px"></span></a>
-    
-            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px"><span class="fas fa-check fa-xs" style="float:left;margin-left:-8px"></span></a> 
-           
-          <button type="submit" class="btn btn-danger"><span class="fas fa-trash" style="float:left;margin-left:-8px"></span>
+          <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST" class="form-inline">
+            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px;margin:1px"><span class="far fa-eye  fa-xs" style="float:left;margin-left:-8px"></span></a>
+            <br>
+            <a href="{{url('/tesis_profesor/'.$tesis->id_pk)}}" class="btn btn-primary" style="width:25px; height:25px;margin:1px"><span class="far fa-edit fa-xs" style="float:left;margin-left:-8px"></span></a>
+            <br>
+            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px;margin:1px"><span class="fas fa-check fa-xs" style="float:left;margin-left:-8px"></span></a> 
+           <br>
+          <button type="submit" class="btn btn-danger" style="width:25px; height:25px;margin:1px"><span class="fas fa-trash" style="float:left;margin-left:-8px"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>

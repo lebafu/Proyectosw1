@@ -36,18 +36,14 @@
           <td>{{$tesis->tipo}}</td>
           <!--<td>{{$tesis->fecha_peticion}}}</td>-->
           <td>
-         <div class="row">
+         <div class="row" >
              <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST" class="form-inline">
-
-            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px"><span class="far fa-eye fa-xs" style="float:left;margin-left:-8px"></span></a>
-            <a href="{{url('/tesis_profesor/'.$tesis->id_pk)}}" class="btn btn-primary" style="width:25px; height:25px"><span class="far fa-edit fa-xs" style="float:left;margin-left:-8px"></span></a>
-            <a href="{{url('/tesis_profesor_evaluar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px"><span class="fas fa-check fa-xs" style="float:left;margin-left:-8px"></span></a>
-             <button type="submit" class="btn btn-danger btn-sm" style="width:25px; height:25px"><span class="fas fa-trash fa-xs" style="float:left;margin-left:-8px"></span>
-           {{ method_field('DELETE') }}
-           {{ csrf_field() }}
-         </button>
+            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px;margin:1px"><span class="far fa-eye fa-xs" style="float:left;margin-left:-8px"></span></a>
+            <a href="{{url('/tesis_profesor/'.$tesis->id_pk)}}" class="btn btn-primary" style="width:25px; height:25px;margin:1px"><span class="far fa-edit fa-xs" style="float:left;margin-left:-8px"></span></a>
+            <!--<a href="{{url('/tesis_profesor_evaluar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px"><span class="fas fa-check fa-xs" style="float:left;margin-left:-8px"></span></a>--><button type="submit" class="btn btn-danger btn-sm" style="width:25px; height:25px"><span class="fas fa-trash fa-xs" style="float:left;margin-left:-8px;margin:1px"></span>{{ method_field('DELETE') }}{{ csrf_field() }}</button>
            </form>
           </div>
+        </td>
           <!--  <div class="row">
             <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><i class="material-icons">remove_red_eye
           </i></a>
@@ -59,9 +55,8 @@
            {{ csrf_field() }}
            </form>
           </button>-->
-      </td>
-       <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}">Bitacora</span></a>
-       <a href="{{url('/mostrar_capitulos_tesis/'.$tesis->id_pk)}}">Capitulos</span></a></td>
+       <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}">Bitacora</a>
+       <a href="{{url('/mostrar_capitulos_tesis/'.$tesis->id_pk)}}">Caps</a></td>
         </tr>
         @endif
         @endforeach

@@ -25,7 +25,7 @@
         <tr>
          
           <th>ID</th>
-          <th>Nombre Estudiantes</th>
+          <th>Estudiante(s)</th>
           <th>Profesor Guia</th>
           <th>Tipo Trabajo</th>
           <th>Constancia ex</th>
@@ -38,37 +38,41 @@
         @foreach ($tesistas as $tesis)
         <tr>
           <td>{{$tesis->id_pk}}</td>
-          <td>{{$tesis->nombre_completo}} ----{{$tesis->nombre_completo2}}</td>
+          @if($tesis->nombre_completo2!=null)
+          <td>{{$tesis->nombre_completo}} y {{$tesis->nombre_completo2}}</td>
+          @else
+          <td>{{$tesis->nombre_completo}}</td>
+          @endif
           <td>{{$tesis->profesor_guia}}</td>
            <td>{{$tesis->tipo}}</td>
             @if($tesis->constancia_ex!=null)
-           <td><a href="{{ route('verPDF', ['id' => $tesis->id_pk]) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Ver</i></a></td>
-           <td><a href="{{url('tesis/create_num_memo'.$tesis->id_pk) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Memo</i></a></td>
-           <td><a href="{{url('/fecha_presentacion/'.$tesis->id_pk)}}" class="btn btn-primary">Presentacion
+           <td><a href="{{ route('verPDF', ['id' => $tesis->id_pk]) }}" class="btn btn-simple btn-primary btn-sm"><span class="far fa-eye fa-sm"></span></a></a></td>
+           <td><a href="{{url('tesis/create_num_memo'.$tesis->id_pk) }}" class="btn btn-simple btn-primary btn-sm">Memo</a></td>
+           <td><a href="{{url('/fecha_presentacion/'.$tesis->id_pk)}}" class="btn btn-primary btn-sm">Presentación
            </a></td>
            @else
-             <td>Debe subir informe</td>
+             <td></td>
             @endif
             @if($tesis->constancia_ex==null)
-            <td>Operacion no disponible</td>
-            <td>Operacion no disponible</td>
-            <td>Operacion no disponible</td>
+            <td></td>
+            <td></td>
+            <td></td>
             @else
-              <td><a class="btn btn-primary" href="{{url('/acta_examen/'.$tesis->id_pk)}}" id="#descargaPDF" ><span class="fa fa-print"> </span>Acta</a></td>
+              <td><a class="btn btn-primary btn-sm" href="{{url('/acta_examen/'.$tesis->id_pk)}}" id="#descargaPDF" ><span class="fa fa-print"> </span>Acta</a></td>
            @endif
                @if($tesis->acta_ex==null and $tesis->fecha_inscripcion!=null)
-              <td><a class="btn btn-primary" href="{{url('/vista_subir_acta/'.$tesis->id_pk)}}">Subir acta</a></td>
+              <td><a class="btn btn-primary btn-sm" href="{{url('/vista_subir_acta/'.$tesis->id_pk)}}">Subir acta</a></td>
             @elseif($tesis->acta_ex!=null)
-                <td><a href="{{ route('verPDF_acta', ['id' => $tesis->id_pk]) }}" class="btn btn-simple btn-primary btn-icon edit"><i class="material-icons">Ver acta</i></a></td>
+                <td><a href="{{ route('verPDF_acta', ['id' => $tesis->id_pk]) }}" class="btn btn-primary btn-sm"><span class="far fa-eye fa-sm"></span></a></a></td>
                 @else
                 <td>Faltan pasos por completar.</td>
             @endif
            @if($tesis->constancia_ex!=null and $tesis->acta_ex!=null and $tesis->nota_tesis==null)
-                <td><a class="btn btn-primary" href="{{url('/ingresar_nota_tesis/'.$tesis->id_pk)}}" target="_blank">Ingresar nota</a></td>
+                <td><a class="btn btn-primary btn-sm" href="{{url('/ingresar_nota_tesis/'.$tesis->id_pk)}}" target="_blank">Ingresar nota</a></td>
             @elseif($tesis->nota_tesis!=null)
             <td>{{$tesis->nota_tesis}}</td>
             @else      
-              <td>Sin nota aun</td>
+              <td></td>
            @endif
         @endforeach
      </table>

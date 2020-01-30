@@ -17,7 +17,7 @@
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-36"> <!--Con 12 se ocupa todo el ancho de la pantalla a lo ancho-->
+    <div class="col-md-16"> <!--Con 12 se ocupa todo el ancho de la pantalla a lo ancho-->
       <div class="card">
         <div class="card-header">{{ __('Tesis del alumno') }}</div>
           <div class="card-body">
@@ -88,8 +88,8 @@
          @endif
           @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado6==1 and $tesis->estado7==1 and ( $tesis->nota_tesis==null))
           <td>{{$tesis->nota_pendiente}}</td>
-          <td>{{$tesis->nota_prorroga}}<a href="{{url('/pedir_nota_prorroga/'.$tesis->id_pk)}}">Pedir nueva nota</a></td>
-          <td><a href="{{url('/vista_subir_archivo', $tesis->id_pk)}}">Subir constancia</a></td>
+          <td>{{$tesis->nota_prorroga}}<a href="{{url('/pedir_nota_prorroga/'.$tesis->id_pk)}}">Pedir nota</a></td>
+          <td><a href="{{url('/vista_subir_archivo', $tesis->id_pk)}}">Subir const</a></td>
          @endif
          @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado6==1 and $tesis->estado7==1 and ($tesis->nota_tesis!=null))
           <td>{{$tesis->nota_pendiente}}</td>
@@ -97,10 +97,9 @@
          @endif
       <td>
           <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST" class="form-inline">
-        <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}"  class="btn btn-info" style="width:25px; height:25px"><span class="fa fa-eye fa-xs" style="float:left; margin-left:-8px" ></span></a>
-        <a href="{{URL::action('TesisController@edit', $tesis->id_pk)}}" class="btn btn-primary" style="width:25px; height:25px"> <span class="fa fa-edit fa-xs" style="float:left;margin-left:-8px"></span></a>
-         
-          <button type="submit" class="btn btn-danger" style="width:25px; height:25px"> <span class="fa fa-trash fa-xs" style="float:left;margin-left:-8px"></span>
+        <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}"  class="btn btn-info" style="width:25px; height:25px;margin:1px"><span class="fa fa-eye fa-xs" style="float:left; margin-left:-8px" ></span></a>
+        <a href="{{URL::action('TesisController@edit', $tesis->id_pk)}}" class="btn btn-primary" style="width:25px; height:25px;margin:1px"><span class="fa fa-edit fa-xs" style="float:left;margin-left:-8px"></span></a>
+        <button type="submit" class="btn btn-danger" style="width:25px; height:25px"> <span class="fa fa-trash fa-xs" style="float:left;margin-left:-8px"></span>
           {{ method_field('DELETE') }}
            {{ csrf_field() }}
 

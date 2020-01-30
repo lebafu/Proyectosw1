@@ -27,12 +27,10 @@
           <td>{{$area_tesis->id}}</td>
           <td>{{$area_tesis->area_tesis}}</td>
           <td>
-
-            
-            <a href="{{URL::action('Area_tesisController@edit', $area_tesis->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
+               <form action="{{ route('area_tesis.destroy', $area_tesis->id)}}" method="POST" class="form-inline">
+              <a href="{{URL::action('Area_tesisController@edit', $area_tesis->id)}}" class="btn btn-primary" style="width:25px;height:25px;margin:1px"><span class="far fa-edit fa-sm" style="float:left;margin-left:-8px"></span></a>
              <br>
-           <form action="{{ route('area_tesis.destroy', $area_tesis->id)}}" method="POST">
-          <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
+          <button type="submit" class="btn btn-danger" style="width:25px;height:25px"><span class="fas fa-trash fa-sm" style="float:left;margin-left:-8px"></span>
           <br>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
@@ -43,7 +41,7 @@
      </table>
      </div>
      </div>
-     <a href="{{URL::action('Area_tesisController@create')}}" class="btn btn-primary">Crear Area de Tesis</a>
+     <a href="{{URL::action('Area_tesisController@create')}}" class="btn btn-primary btn-sm">Crear Area de Tesis</a>
      
      </div>
      </div>

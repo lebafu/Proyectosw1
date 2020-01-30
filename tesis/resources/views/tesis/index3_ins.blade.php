@@ -9,9 +9,19 @@
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">
 
+   <style>
+        .contenedor-botones {
+            display: block;
+            width: 100%;
+        }
+        .boton-adaptado {
+            width: 50%;
+        }
+    </style>
+
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-12">
+    <div class="col-md-16">
       <div class="card">
         <div class="card-header">{{ __('Tesis inscritas') }}</div>
           <div class="card-body">
@@ -24,37 +34,60 @@
           <th>Profesor Guia</th>
           <th>% avance</th>
           <th>Tipo</th>
-           <th>Area Tesis</th>
-          <th>Tesis</th>
-          <th>Vinculacion</th>
-          <th>Revision</th>
+           <th>Area</th>
+          <!--<th>Tesis</th>-->
+          <th>Vínc</th>
+          <th>Revisión</th>
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
            @if(($tesis->estado1==4 and $tesis->estado2==1))
           <td>{{$tesis->id_pk}}</td>
-          <td>{{$tesis->nombre_completo}}</td>
-          <td>{{$tesis->profesor_guia}}</td>
+          @if($tesis->nombre_completo2!=null)
+          <td>{{$tesis->alumno1_res}} y {{$tesis->alumno2_res}}</td>
+          @else
+          <td>{{$tesis->alumno1_res}}</td>
+          @endif
+          <td>{{$tesis->nombre_profe_res}}</td>
           <td>{{$tesis->avance_general}}</td>
-          <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->area_tesis}}</td>
-          <td>{{$tesis->nombre_tes_res}}</td>
-          <td>{{$tesis->tipo_vinculacion}}</td>
-          @if($tesis->constancia_ex!=null)
-           <td><a href="{{url('tesis/create_num_memo'.$tesis->id) }}" class="btn btn-simple btn-primary btn-icon edit">Memo</a></td>
+          @if($tesis->tipo=="Tesis")
+          <td>T</td>
+          @endif
+          @if($tesis->tipo=="Memoria")
+          <td>M</td>
+          @endif
+          <!--<td>{{$tesis->tipo}}</td>-->
+          <td>{{$tesis->area}}</td>
+          <!--<td>{{$tesis->nombre_tes_res}}</td>-->
+          @if($tesis->tipo_vinculacion=="Empresa")
+          <td>Emp</td>
+          @endif
+          @if($tesis->tipo_vinculacion=="Proyecto")
+          <td>Proy</td>
+          @endif
+          @if($tesis->tipo_vinculacion=="Comunidad")
+          <td>Com</td>
+          @endif
+          @if($tesis->tipo_vinculacion=="Fondo concursable")
+          <td>Fc</td>
+          @endif
+          <!--<td>{{$tesis->tipo_vinculacion}}</td>-->
+          @if($tesis->constancia_ex!=null and $tesis->nota_tesis==null)
+           <td><a href="{{url('tesis/create_num_memo'.$tesis->id_pk) }}" class="btn btn-simple btn-primary">Memo</a></td>
           @else
           <td></td>
           @endif
           <td>
           <div class="row">
-            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
-           <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST">
-          <button type="submit"  class="btn btn-danger"><span class="fas fa-trash"></span>
+            <div class="btn-group" role="group">
+            <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST" class="form-inline">
+            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info boton-adaptado" style="width:25px; height:25px;margin:1px"><span class="far fa-eye fa-sm"  style="float:left;margin-left:-8px"></span></a>
+          <button type="submit"  class="btn btn-danger boton-adaptado" style="width:25px; height:25px;margin:1px"><span class="fas fa-trash fa-sm" style="float:left;margin-left:-8px"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
           </button>
-
+          </form>
           <!-- <div class="row">
             <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><i class="material-icons">remove_red_eye
 </i></a>
@@ -64,9 +97,11 @@
            {{ csrf_field() }}
            </form>
           </button>-->
+        </div>
+      </div>
       </td>
-       <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}">Bitacora</span></a>
-       <a href="{{url('/mostrar_capitulos_tesis/'.$tesis->id_pk)}}">Capitulos</span></a></td>
+       <td><a href="{{url('/mostrar_bitacora_tesis/'.$tesis->id_pk)}}">Bit</span></a>
+       <a href="{{url('/mostrar_capitulos_tesis/'.$tesis->id_pk)}}">Caps</span></a></td>
         </tr>
         @endif
         @endforeach

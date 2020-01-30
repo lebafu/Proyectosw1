@@ -4,14 +4,14 @@
 
 @section('content')
 
-<!--<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">-->
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.0/css/all.css" integrity="sha384-lZN37f5QGtY3VHgisS14W3ExzMWZxybE1SJSEsQp9S+oqd12jhcu+A56Ebc1zFSJ" crossorigin="anonymous">
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+<!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet">-->
 
 <div class="container">
   <div class="row justify-content-center">
-    <div class="col-md-12"> <!--De esta forma se ocupa toda la pantalla -->
+    <div class="col-md-16"> <!--De esta forma se ocupa toda la pantalla -->
       <div class="card">
         <div class="card-header">{{ __('Solicitudes de tesis por aprobar o rechazar') }}</div>
           <div class="card-body">
@@ -19,16 +19,16 @@
     <table class="table table-bordered">
         <tr>
          
-          <th>Rut</th>
-          <th>Nombre Estudiante</th>
+          <th>Id</th>
+          <th>Estudiante(s)</th>
           <th>Profesor Guia</th>
           <th>Area Tesis</th>
-          <th>Tipo Trabajo</th>
-          <th>Fecha Peticion</th>
+          <th>Tipo</th>
+          <!--th>Fecha Peticion</th>-->
         </tr>
         @foreach ($tesistas as $tesis)
         <tr>
-          <td>{{$tesis->rut}}</td>
+          <td>{{$tesis->id}}</td>
           @if($tesis->nombre_completo2==null)
           <td>{{$tesis->nombre_completo}}</td>
           @else
@@ -36,22 +36,29 @@
           @endif
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->area_tesis}}</td>
-          <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->fecha_peticion}}</td>
+          @if($tesis->tipo=="Tesis")
+          <td>T</td>
+          @endif
+           @if($tesis->tipo=="Memoria")
+           <td>M</td>
+          @endif
+          <!--<td>{{$tesis->tipo}}</td>-->
+          <!--<td>{{$tesis->fecha_peticion}}</td>-->
           <td>
-         <!-- <div class="row">
-            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><span class="far fa-eye"></span></a>
+          <div class="row">
+            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST" class="form-inline">
+            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px;margin:1px"><span class="far fa-eye fa-xs" style="float:left;margin-left:-8px"></span></a>
 
-            <a href="{{URL::action('TesisController@edit3', $tesis->id_pk)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
-             <a href="{{url('/tesis_director_evaluar/'.$tesis->id_pk)}}" class="btn btn-info"><span class="fas fa-check"></span></a> 
+            <a href="{{URL::action('TesisController@edit3', $tesis->id_pk)}}" class="btn btn-primary" style="width:25px; height:25px;margin:1px"><span class="far fa-edit fa-xs" style="float:left;margin-left:-8px"></span></a>
+             <a href="{{url('/tesis_director_evaluar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px;margin:1px"><span class="fas fa-check fa-xs" style="float:left;margin-left:-8px"></span></a> 
             
-           <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST">
-          <button type="submit"  class="btn btn-danger"><span class="fas fa-trash"></span>
+           
+          <button type="submit"  class="btn btn-danger" style="width:25px; height:25px"><span class="fas fa-trash fa-xs" style="float:left;margin-left:-8px"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
-          </button>-->
-            <div class="row">
+          </button>
+           <!-- <div class="row">
             <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info"><i class="material-icons">remove_red_eye
 </i></a>
 
@@ -65,7 +72,7 @@
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>
-          </button> 
+          </button> -->
         </div>
       </td>
         </tr>
@@ -79,7 +86,7 @@
      </div>
 </div>
 
-        <div class="col-md-3">
+  <!--      <div class="col-md-3">
                   <div class="form-group" align="center">   
                     <a class="btn btn-primary" href="#" id="descargaPDF"> <span class="fa fa-print"> </span> Descargar PDF</a>
               </div>
@@ -98,7 +105,7 @@
       })
     });
   });
-</script>
+</script>-->
 
 
 {!! $tesistas->render() !!}

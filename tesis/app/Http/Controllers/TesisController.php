@@ -314,7 +314,11 @@ class TesisController extends Controller
         //dd($tesistas);
          foreach($tesistas as $tesis)
         {
+        $tesis->alumno1_res=Str::limit($tesis->nombre_completo,12);
+        $tesis->alumno2_res=Str::limit($tesis->nombre_completo2,12);
         $tesis->nombre_tes_res=Str::limit($tesis->nombre_tesis,30);
+        $tesis->nombre_profe_res=Str::limit($tesis->profesor_guia,8);
+        $tesis->area=Str::limit($tesis->area_tesis,10);
         }
         //dd($tesistas);
         return view('tesis.index3_ins',compact('tesistas','user'));

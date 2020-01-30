@@ -87,6 +87,7 @@ class BitacoraController extends Controller
     public function lista_acuerdos_tesis($id)
     {
    //dd($id);
+    DB::table('bitacora')->update(['actual' => 0]);
     $idlogin=Auth::id();
     $users=DB::table('users')->where('id',$idlogin)->get();
     foreach($users as $user);

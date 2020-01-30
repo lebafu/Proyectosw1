@@ -27,10 +27,10 @@
           <td>{{$proyecto->id}}</td>
           <td>{{$proyecto->nombre}}</td>
           <td>
-            <a href="{{URL::action('ProyectosController@edit', $proyecto->id)}}" class="btn btn-primary"><span class="far fa-edit"></span></a>
-             <br>
-           <form action="{{route('proyectos.destroy', $proyecto->id)}}" method="POST">
-          <button type="submit" class="btn btn-danger"><span class="fas fa-trash"></span>
+            <form action="{{route('proyectos.destroy', $proyecto->id)}}" method="POST" class="form-inline">
+            <a href="{{URL::action('ProyectosController@edit', $proyecto->id)}}" class="btn btn-primary" style="width:25px;height:25px;margin:1px"><span class="far fa-edit fa-sm" style="float:left;margin-left:-8px"></span></a>
+           
+          <button type="submit" class="btn btn-danger"  style="width:25px;height:25px"><span class="fas fa-trash fa-sm" style="float:left;margin-left:-8px"></span>
           <br>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
