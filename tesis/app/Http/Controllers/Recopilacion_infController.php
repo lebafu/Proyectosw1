@@ -104,9 +104,14 @@ class Recopilacion_infController extends Controller
                 $tesis = DB::table('tesis')->where('id_pk',$id)->get();
                 $recopilaciones=DB::table('recopilacion_inf_titulados')->where('id',$id)->get();
                 foreach($tesis as $tes);
+                if($recopilaciones->isEmpty()==false){
                 foreach($recopilaciones as $recopilacion);
+                }else{
+                    $recopilacion=null;
+                }
                 //dd($recopilacion);
-            if(!Auth::id()){
+                //En caso de que un alumno que desee editar su recopilacion de informacion haga click en el boton editar recopilacion de informacion, no podrá hacerlo en caso de que no se haya logueado, no sea un alumno, o simplemente no podrá por que subió su constancia de examen antes de que esta parte del sistema fuese desarrollada.
+            if(!Auth::id()  or $user->tipo_usuario!=1 or $recopilacion==null){
                 return view('tesis.sinpermiso');
             }elseif($user->tipo_usuario==1 and $tes->estado1==4 and $tes->estado2==1){
                 return view('recopilacion.recopilacion_edit',compact('tes','recopilacion'));
