@@ -38,8 +38,10 @@
      </div>
      </div>
      </div>
-     <a href="{{ url('/profesorhome') }}" class="btn btn-default">Volver Home</a>
-    <a href="{{url('/index_solicitud_nota_prorroga/')}}">Ir a listado notas de prorroga Director</a>
+
+    
+     <a href="{{ url('/director_escuelahome') }}" class="btn btn-default">Volver Home</a>
+    <a href="{{url('/index_solicitud_nota_prorroga_director/')}}">Ir a listado notas de prorroga Director</a>
      </div>
 </div>
 

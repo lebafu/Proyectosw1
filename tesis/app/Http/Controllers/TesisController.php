@@ -418,6 +418,18 @@ class TesisController extends Controller
         //Si el segundo alumno inscrito en la tesis quiere inscribir el ahora la tesis, entonces para ello deberá tener nota inferior a 4.
           $tesistas=DB::table('tesis')->where('nombre_completo',$alumno->name)->orwhere('nombre_completo2',$alumno->name)->get();
           //dd($tesistas);
+          $cont=0;
+          foreach($tesistas as $tesista)
+          {
+            if($tesista->nombre_completo==$alumno->name or $tesista->nombre_completo2)
+            {
+                $cont=$cont+1;
+            }
+          }
+          if($cont==3){
+            return view('tesis.hareprobado3veces');
+          }
+
           $j=0;
           foreach($tesistas as $tesista)
           {
@@ -1650,11 +1662,15 @@ class TesisController extends Controller
         return view('directorhome');
     }
 
-
+    //La tesis podrá ser borrada siempre y cuando la fecha de presentacion del alumno no haya sido ya definida.
     public function destroy($id)
-    {
-        //
-
+    {    
+        $idlogin=Auth::id();
+        $tesis=DB::table('tesis')->where('id_pk',$id)->get();
+        foreach($tesis as $tes);
+        if($tes->fecha_presentacion_tesis!=null){
+            return view('tesis.sinpermiso');
+        }
         DB::table('tesis')->where('id_pk', $id)->delete();
         return back()->with('status','La tesis ha sido eliminada con exito');
     }
@@ -2200,11 +2216,8 @@ class TesisController extends Controller
         $idprofe=Auth::id();
         $users=DB::table('users')->where('id',$idprofe)->get();
         foreach($users as $user);
-        if($user->director_escuela==0){
-        return view('profesorhome');        
-        }else{
-            return view('director_escuelahome'); 
-        }
+        $tesistas=DB::table('tesis')->where('profesor_guia','=',$user->name)->whereNotNull('nota_pendiente')->where('estado4','=',null)->paginate(7);
+        return view('tesis.index_solicitud_nota_pendiente',compact('tesistas','user'));
       }
 
       public function prorroga_update(Request $request,$id)
@@ -2217,11 +2230,8 @@ class TesisController extends Controller
          $idprofe=Auth::id();
         $users=DB::table('users')->where('id',$idprofe)->get();
         foreach($users as $user);
-        if($user->director_escuela==0){
-        return view('profesorhome');        
-        }else{
-            return view('director_escuelahome'); 
-        }
+        $tesistas=DB::table('tesis')->where('profesor_guia','=',$user->name)->whereNotNull('nota_prorroga')->where('estado5','=',null)->paginate(7);
+        return view('tesis.index_solicitud_nota_prorroga',compact('tesistas','user'));
 
       }
 
@@ -3187,7 +3197,7 @@ class TesisController extends Controller
 
       }
 
-        //VER SOLICITUDES DE NOTA PRORROGA DEL PROFESOR SE PREGUNTA SI EL USUARIO QUE INGRESA A ESTA SESION ES O NO PROFESOR, SI ES ENTONCES LO REDIRECCIONA A LA VISTA CON EL RESPECTIVO LISTADO.
+        //VER SOLICITUDES DE NOTA PRORROGA DEL PROFESOR y DIRECTOR DE ESCUELA SE PREGUNTA SI EL USUARIO QUE INGRESA A ESTA SESION ES O NO PROFESOR, SI ES ENTONCES LO REDIRECCIONA A LA VISTA CON EL RESPECTIVO LISTADO.
 
 
         public function index_solicitud_nota_prorroga_director()
@@ -3235,7 +3245,11 @@ class TesisController extends Controller
         $tes->nota_pendiente=$request->nota_pendiente;
         $tes->estado6=1;
         $tes->update();
-        return view('director_escuelahome');        
+        $idprofe=Auth::id();
+        $users=DB::table('users')->where('id',$idprofe)->get();
+        foreach($users as $user);
+        $tesistas=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado4',1)->whereNull('estado6')->whereNotnull('nota_pendiente')->paginate(7);
+        return view('tesis.index_solicitud_nota_pendiente_director',compact('tesistas'));        
 
       }
 
@@ -3246,7 +3260,11 @@ class TesisController extends Controller
         $tes->nota_prorroga=$request->nota_prorroga;
         $tes->estado7=1;
         $tes->update();
-        return view('director_escuelahome');
+        $idprofe=Auth::id();
+        $users=DB::table('users')->where('id',$idprofe)->get();
+        foreach($users as $user);
+        $tesistas=DB::table('tesis')->whereNotNull('nota_pendiente')->whereNotNull('nota_prorroga')->where('estado5',1)->whereNull('estado7')->paginate(7);
+        return view('tesis.index_solicitud_nota_prorroga_director',compact('tesistas'));
 
       }
   

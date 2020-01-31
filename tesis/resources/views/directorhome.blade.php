@@ -80,7 +80,7 @@ body {
     </button>
     <div class="dropdown-content">
       <a href="{{url('/tesis_dir_sol')}}">Solicitudes</a>
-      <a href="{{url('/tesis_dir_ins')}}">Tesis Inscritas</a>
+      <a href="{{url('/tesis_dir_ins')}}">Inscritas</a>
     </div>
   </div> 
   <!--Fin de navbar Todos los navbar tienen la misma estructura-->

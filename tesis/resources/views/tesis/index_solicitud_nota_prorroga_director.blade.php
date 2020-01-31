@@ -25,10 +25,10 @@
           <td>{{$tesis->nombre_completo}}</td>
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->nota_prorroga}}}</td>
+          <td>{{$tesis->nota_prorroga}}</td>
           <td>
           <div class="row">
-          <td><a href="{{url('/aceptar_nota_prorroga_director/'.$tesis->id_pk)}}" class="btn btn-info"><span class="fas fa-check"></span></a></td>
+          <td><a href="{{url('/aceptar_nota_prorroga_director/'.$tesis->id_pk)}}" class="btn btn-info fa-sm"><span class="fas fa-check fa-sm"></span></a></td>
         </div>
       </td>
         </tr>
@@ -39,8 +39,8 @@
      </div>
      </div>
      <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
-     <a href="{{ url('/profesorhome') }}" class="btn btn-default">Volver Home</a>
-     <a href="{{url('/index_solicitud_nota_pendiente/')}}">Ir a listado notas de pendiente</a>
+     <a href="{{ url('/director_escuelahome') }}" class="btn btn-default">Volver Home</a>
+     <a href="{{url('/index_solicitud_nota_pendiente_director/')}}">Ir a listado notas de pendiente</a>
      </div>
 </div>
 

@@ -28,7 +28,7 @@
           <td>{{$tesis->nota_pendiente}}</td>
           <td>
           <div class="row">
-          <td><a href="{{url('/aceptar_nota_pendiente/'.$tesis->id_pk)}}" class="btn btn-info"><span class="fas fa-check"></span></td>                              
+          <td><a href="{{url('/aceptar_nota_pendiente/'.$tesis->id_pk)}}" class="btn btn-info btn-sm"><span class="fas fa-check fa-sm"></span></td>                              
         </div>
       </td>
         </tr>
@@ -38,7 +38,12 @@
      </div>
      </div>
      </div>
+     @if($user->director_escuela==0)
      <a href="{{ url('/profesorhome') }}" class="btn btn-default">Volver Home</a>
+     @endif
+     @if($user->director_escuela==1)
+     <a href="{{ url('/director_escuelahome') }}" class="btn btn-default">Volver Home</a>
+     @endif
     <a href="{{url('/index_solicitud_nota_prorroga/')}}">Ir a listado notas de prorroga</a>
      </div>
 </div>

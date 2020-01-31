@@ -48,9 +48,10 @@
 </div>
 
 
-<script>
-    
+<script type="text/javascript">
+    var date =new Date();
     $('#nota_prorroga').datepicker({
+        startDate: date,
         language: 'es',
         format: 'yyyy-mm-dd'
     });

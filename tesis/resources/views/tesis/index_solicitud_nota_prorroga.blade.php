@@ -38,8 +38,12 @@
      </div>
      </div>
      </div>
-     <a href="{{ url()->previous() }}" class="btn btn-default">Volver atras</a>
+     @if($user->director_escuela==0)
      <a href="{{ url('/profesorhome') }}" class="btn btn-default">Volver Home</a>
+     @endif
+     @if($user->director_escuela==1)
+     <a href="{{ url('/director_escuelahome') }}" class="btn btn-default">Volver Home</a>
+     @endif
      <a href="{{url('/index_solicitud_nota_pendiente/')}}">Ir a listado notas de pendiente</a>
      </div>
 </div>

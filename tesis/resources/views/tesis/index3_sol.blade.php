@@ -46,7 +46,7 @@
           <!--<td>{{$tesis->fecha_peticion}}</td>-->
           <td>
           <div class="row">
-            <form action="{{ route('tesis.destroy', $tesis->id)}}" method="POST" class="form-inline">
+            <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST" class="form-inline">
             <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px;margin:1px"><span class="far fa-eye fa-xs" style="float:left;margin-left:-8px"></span></a>
 
             <a href="{{URL::action('TesisController@edit3', $tesis->id_pk)}}" class="btn btn-primary" style="width:25px; height:25px;margin:1px"><span class="far fa-edit fa-xs" style="float:left;margin-left:-8px"></span></a>

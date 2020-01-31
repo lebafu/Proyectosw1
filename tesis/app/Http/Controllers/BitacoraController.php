@@ -94,9 +94,12 @@ class BitacoraController extends Controller
     	$tesistas=DB::table('tesis')->where('id_pk',$id)->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->orderby('created_at','desc')->paginate(7);
     	//dd($tesistas->isEmpty());
     	foreach($tesistas as $tesis){
-    	$nombre1=$tesis->nombre_completo;
-    	$nombre2=$tesis->nombre_completo2;
+    	$tesis->nombre1=Str::limit($tesis->nombre_completo,20);
+    	$tesis->nombre2=Str::limit($tesis->nombre_completo2,20);
     	$profesor_guia=$tesis->profesor_guia;
+      $tesis->created_at_res=Str::limit($tesis->created_at,10);
+      $tesis->acuerdo_res=Str::limit($tesis->acuerdo,12);
+      $tesis->comentario_res=Str::limit($tesis->comentario,12);
     	//dd($id);
     	//dd($id);
     }
@@ -251,6 +254,18 @@ class BitacoraController extends Controller
        return view('profesorhome');
     }
 
+      public function show($id)
+      {
+         $bitacoras=DB::table('bitacora')->where('id',$id)->get();
+         foreach($bitacoras as $bitacora)
+         {
+          $id_tesis=$bitacora->id_tesis;
+         }
+         $tesistas=DB::table('tesis')->where('id_pk',$id_tesis)->get();
+         foreach($tesistas as $tesis);
+
+         return view('bitacora.show',compact('tesis','bitacora'));
+      }
 
        public function destroy($id)
     {

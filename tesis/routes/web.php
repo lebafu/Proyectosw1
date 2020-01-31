@@ -34,6 +34,7 @@ Route::get('/adminhome', 'HomeController@index')->name('adminhome');
 Route::get('/alumnohome', 'HomeController@index')->name('alumnohome');
 Route::get('/profesorhome', 'HomeController@index')->name('profesorhome');
 Route::get('/directorhome', 'HomeController@index')->name('directorhome');
+Route::get('/director_escuelahome', 'HomeController@index')->name('directorescuela_home');
 Route::get('/secretariahome','HomeController@index')->name('secretariahome');
 
 //Profesor editar su propio perfil
@@ -302,6 +303,7 @@ Route::get('/bitacora_edit{bitacora}', 'BitacoraController@edit')->name('bitacor
 Route::put('/actualizarbitacora{bitacora}','BitacoraController@update')->name('bitacora.update');
 Route::get('/no_existen_registros_bitacora', 'TesisController@lista_acuerdos_tesis')->name('bitacora.no_existen_registros_bitacora');
 Route::delete('/eliminarcomentariobitacora{bitacora}','BitacoraController@destroy')->name('bitacora.destroy');
+Route::get('/bitacoramostrar/{id}', 'BitacoraController@show')->name('bitacora.show');
 
 //Rutas de Capitulos de Tesis//
 //Route::get('/index_tesis_bitacora', 'BitacoraController@index')->name('bitacora.index_tesis_bitacora');
