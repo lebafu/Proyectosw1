@@ -27,7 +27,7 @@ class Area_tesisController extends Controller
 
     public function index()
     {
-    $areaT=DB::table('area_tesis')->paginate(7);
+    $areaT=DB::table('area_tesis')->orderby('id')->paginate(7);
     return view('area_tesis.index',compact('areaT'));
     }
 

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Panel Alumno</title>
+  <title>Panel Administrador</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
@@ -144,7 +144,7 @@
         </div>
     <body>
         <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
+           <!-- @if (Route::has('login'))
                 <div class="top-right links">
                     @auth
                     
@@ -156,7 +156,7 @@
                         @endif
                     @endauth
                 </div>
-            @endif
+            @endif-->
 
             <div class="content">
                 <div class="title m-b-md">
