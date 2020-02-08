@@ -232,7 +232,7 @@
 					<div style="margin-left:900px">
 						<b>Escuela {{$revision->escuela}}</b>
 					</div>
-					<div style="margin-left:0px">{{$iniciales_coordinador[0]}}{{$iniciales_coordinador[1]}}{{$iniciales_coordinador[2]}}{{$iniciales_coordinador[3]}}/bcsm
+					<div style="margin-left:0px">{{$iniciales_coordinador[0]}}{{$iniciales_coordinador[1]}}{{$iniciales_coordinador[2]}}{{$iniciales_coordinador[3]}}/{{$iniciales_secretaria[0]}}{{$iniciales_secretaria[1]}}{{$iniciales_secretaria[2]}}{{$iniciales_secretaria[3]}}
 				  </div>
 				 </div>
 			</div>

@@ -2351,6 +2351,18 @@ class TesisController extends Controller
               array_push($iniciales_coordinador,$nombre_coordinador[$i]);
         }
     }
+     $j=0;
+     $secretaria=DB::table('users')->where('tipo_usuario','=',4)->first();
+     //dd($secretaria->name);
+     $nombre_secretaria=$secretaria->name;
+    $iniciales_secretaria=array();
+    for($i=0;$i<strlen($nombre_secretaria);$i++)
+        {
+            if(($nombre_secretaria[$i]=="A" or $nombre_secretaria[$i]=="B" or $nombre_secretaria[$i]=="C" or $nombre_secretaria[$i]=="D" or $nombre_secretaria[$i]=="E" or $nombre_secretaria[$i]=="F" or $nombre_secretaria[$i]=="G" or $nombre_secretaria[$i]=="H" or $nombre_secretaria[$i]=="I" or $nombre_secretaria[$i]=="J" or $nombre_secretaria[$i]=="K" or $nombre_secretaria[$i]=="L" or $nombre_secretaria[$i]=="M" or $nombre_secretaria[$i]=="N" or $nombre_secretaria[$i]=="Ñ" or $nombre_secretaria[$i]=="O" or$nombre_secretaria[$i]=="P" or $nombre_secretaria[$i]=="Q" or $nombre_secretaria[$i]=="R" or $nombre_secretaria[$i]=="S" or $nombre_secretaria[$i]=="T" or $nombre_secretaria[$i]=="V" or $nombre_secretaria[$i]=="W" or $nombre_secretaria[$i]=="U" or $nombre_secretaria[$i]=="X" or $nombre_secretaria[$i]=="Y" or $nombre_secretaria[$i]=="Z"))
+        {
+              array_push($iniciales_secretaria,strtolower($nombre_secretaria[$i]));
+        }
+    }
     //dd($iniciales_coordinador);
 
     foreach($profesor_guia as $profe)
@@ -2406,7 +2418,7 @@ class TesisController extends Controller
          //dd($coordinador_tesis);
          $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
         $revision->escuela1=mb_strtoupper($revision->escuela);
-         return view('memorandum.memorandum_revision1',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','profe_comision'));
+         return view('memorandum.memorandum_revision1',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','iniciales_secretaria','profe_comision'));
         
       }
         
@@ -2487,6 +2499,17 @@ class TesisController extends Controller
               array_push($iniciales_coordinador,$nombre_coordinador[$i]);
         }
     }
+     $secretaria=DB::table('users')->where('tipo_usuario','=',4)->first();
+     //dd($secretaria->name);
+     $nombre_secretaria=$secretaria->name;
+    $iniciales_secretaria=array();
+    for($i=0;$i<strlen($nombre_secretaria);$i++)
+        {
+            if(($nombre_secretaria[$i]=="A" or $nombre_secretaria[$i]=="B" or $nombre_secretaria[$i]=="C" or $nombre_secretaria[$i]=="D" or $nombre_secretaria[$i]=="E" or $nombre_secretaria[$i]=="F" or $nombre_secretaria[$i]=="G" or $nombre_secretaria[$i]=="H" or $nombre_secretaria[$i]=="I" or $nombre_secretaria[$i]=="J" or $nombre_secretaria[$i]=="K" or $nombre_secretaria[$i]=="L" or $nombre_secretaria[$i]=="M" or $nombre_secretaria[$i]=="N" or $nombre_secretaria[$i]=="Ñ" or $nombre_secretaria[$i]=="O" or$nombre_secretaria[$i]=="P" or $nombre_secretaria[$i]=="Q" or $nombre_secretaria[$i]=="R" or $nombre_secretaria[$i]=="S" or $nombre_secretaria[$i]=="T" or $nombre_secretaria[$i]=="V" or $nombre_secretaria[$i]=="W" or $nombre_secretaria[$i]=="U" or $nombre_secretaria[$i]=="X" or $nombre_secretaria[$i]=="Y" or $nombre_secretaria[$i]=="Z"))
+        {
+              array_push($iniciales_secretaria,strtolower($nombre_secretaria[$i]));
+        }
+    }
     //dd($iniciales_coordinador);
 
     foreach($profesor_guia as $profe)
@@ -2541,7 +2564,7 @@ class TesisController extends Controller
          //dd($coordinador_tesis);
          $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
         $revision->escuela1=mb_strtoupper($revision->escuela);
-         return view('memorandum.memorandum_revision2',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','profe_comision'));
+         return view('memorandum.memorandum_revision2',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','iniciales_secretaria','profe_comision'));
       }
 
 
@@ -2620,6 +2643,17 @@ class TesisController extends Controller
               array_push($iniciales_coordinador,$nombre_coordinador[$i]);
         }
     }
+     $secretaria=DB::table('users')->where('tipo_usuario','=',4)->first();
+     //dd($secretaria->name);
+     $nombre_secretaria=$secretaria->name;
+    $iniciales_secretaria=array();
+    for($i=0;$i<strlen($nombre_secretaria);$i++)
+        {
+            if(($nombre_secretaria[$i]=="A" or $nombre_secretaria[$i]=="B" or $nombre_secretaria[$i]=="C" or $nombre_secretaria[$i]=="D" or $nombre_secretaria[$i]=="E" or $nombre_secretaria[$i]=="F" or $nombre_secretaria[$i]=="G" or $nombre_secretaria[$i]=="H" or $nombre_secretaria[$i]=="I" or $nombre_secretaria[$i]=="J" or $nombre_secretaria[$i]=="K" or $nombre_secretaria[$i]=="L" or $nombre_secretaria[$i]=="M" or $nombre_secretaria[$i]=="N" or $nombre_secretaria[$i]=="Ñ" or $nombre_secretaria[$i]=="O" or$nombre_secretaria[$i]=="P" or $nombre_secretaria[$i]=="Q" or $nombre_secretaria[$i]=="R" or $nombre_secretaria[$i]=="S" or $nombre_secretaria[$i]=="T" or $nombre_secretaria[$i]=="V" or $nombre_secretaria[$i]=="W" or $nombre_secretaria[$i]=="U" or $nombre_secretaria[$i]=="X" or $nombre_secretaria[$i]=="Y" or $nombre_secretaria[$i]=="Z"))
+        {
+              array_push($iniciales_secretaria,strtolower($nombre_secretaria[$i]));
+        }
+    }
     //dd($iniciales_coordinador);
 
     foreach($profesor_guia as $profe)
@@ -2674,7 +2708,7 @@ class TesisController extends Controller
          //dd($coordinador_tesis);
          $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
         $revision->escuela1=mb_strtoupper($revision->escuela);
-         return view('memorandum.memorandum_revision3',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','profe_comision'));
+         return view('memorandum.memorandum_revision3',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','iniciales_secretaria','profe_comision'));
       }
 
 
@@ -2751,6 +2785,18 @@ class TesisController extends Controller
               array_push($iniciales_coordinador,$nombre_coordinador[$i]);
         }
     }
+
+     $secretaria=DB::table('users')->where('tipo_usuario','=',4)->first();
+     //dd($secretaria->name);
+     $nombre_secretaria=$secretaria->name;
+    $iniciales_secretaria=array();
+    for($i=0;$i<strlen($nombre_secretaria);$i++)
+        {
+            if(($nombre_secretaria[$i]=="A" or $nombre_secretaria[$i]=="B" or $nombre_secretaria[$i]=="C" or $nombre_secretaria[$i]=="D" or $nombre_secretaria[$i]=="E" or $nombre_secretaria[$i]=="F" or $nombre_secretaria[$i]=="G" or $nombre_secretaria[$i]=="H" or $nombre_secretaria[$i]=="I" or $nombre_secretaria[$i]=="J" or $nombre_secretaria[$i]=="K" or $nombre_secretaria[$i]=="L" or $nombre_secretaria[$i]=="M" or $nombre_secretaria[$i]=="N" or $nombre_secretaria[$i]=="Ñ" or $nombre_secretaria[$i]=="O" or$nombre_secretaria[$i]=="P" or $nombre_secretaria[$i]=="Q" or $nombre_secretaria[$i]=="R" or $nombre_secretaria[$i]=="S" or $nombre_secretaria[$i]=="T" or $nombre_secretaria[$i]=="V" or $nombre_secretaria[$i]=="W" or $nombre_secretaria[$i]=="U" or $nombre_secretaria[$i]=="X" or $nombre_secretaria[$i]=="Y" or $nombre_secretaria[$i]=="Z"))
+        {
+              array_push($iniciales_secretaria,strtolower($nombre_secretaria[$i]));
+        }
+    }
     //dd($iniciales_coordinador);
 
     foreach($profesor_guia as $profe)
@@ -2804,7 +2850,7 @@ class TesisController extends Controller
         //dd($coordinador_tesis);
          $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
         $revision->escuela1=mb_strtoupper($revision->escuela);
-         return view('memorandum.memorandum_revision4',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador'));
+         return view('memorandum.memorandum_revision4',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','iniciales_secretaria'));
       }
 
 
@@ -2884,7 +2930,17 @@ class TesisController extends Controller
         }
     }
     //dd($iniciales_coordinador);
-
+     $secretaria=DB::table('users')->where('tipo_usuario','=',4)->first();
+     //dd($secretaria->name);
+     $nombre_secretaria=$secretaria->name;
+    $iniciales_secretaria=array();
+    for($i=0;$i<strlen($nombre_secretaria);$i++)
+        {
+            if(($nombre_secretaria[$i]=="A" or $nombre_secretaria[$i]=="B" or $nombre_secretaria[$i]=="C" or $nombre_secretaria[$i]=="D" or $nombre_secretaria[$i]=="E" or $nombre_secretaria[$i]=="F" or $nombre_secretaria[$i]=="G" or $nombre_secretaria[$i]=="H" or $nombre_secretaria[$i]=="I" or $nombre_secretaria[$i]=="J" or $nombre_secretaria[$i]=="K" or $nombre_secretaria[$i]=="L" or $nombre_secretaria[$i]=="M" or $nombre_secretaria[$i]=="N" or $nombre_secretaria[$i]=="Ñ" or $nombre_secretaria[$i]=="O" or$nombre_secretaria[$i]=="P" or $nombre_secretaria[$i]=="Q" or $nombre_secretaria[$i]=="R" or $nombre_secretaria[$i]=="S" or $nombre_secretaria[$i]=="T" or $nombre_secretaria[$i]=="V" or $nombre_secretaria[$i]=="W" or $nombre_secretaria[$i]=="U" or $nombre_secretaria[$i]=="X" or $nombre_secretaria[$i]=="Y" or $nombre_secretaria[$i]=="Z"))
+        {
+              array_push($iniciales_secretaria,strtolower($nombre_secretaria[$i]));
+        }
+    }
     foreach($profesor_guia as $profe)
     {   
         $id_profesor_guia=$profe->id;
@@ -2937,7 +2993,7 @@ class TesisController extends Controller
         //dd($coordinador_tesis);
          $revision->nombre_memorandum=mb_strtoupper($revision->nombre_memorandum);
         $revision->escuela1=mb_strtoupper($revision->escuela);
-         return view('memorandum.memorandum_revision5',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador'));
+         return view('memorandum.memorandum_revision5',compact('tesis','comision','revision','num_memo','nombre_coordinador','year','dia_fecha','mes_fecha','sexo1','sexo2','fecha','profesor_guia','sexo_profe_guia','grado_director_tesis','coordinador','iniciales_coordinador','iniciales_secretaria'));
       }
     
       public function create_num_memo_titulados($id)
