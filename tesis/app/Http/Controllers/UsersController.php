@@ -149,7 +149,7 @@ class UsersController extends Controller
         if($request->tipo_usuario==3 or $request->tipo_usuario==4)
         {
         if($request->tipo_usuario==4){
-             dd($request);
+             //dd($request);
           $nombre_secretaria=$request->name;
         $cont_mayusculas_secretaria=0;
         $cont_espacios_secretaria=0;
@@ -164,7 +164,7 @@ class UsersController extends Controller
               $cont_espacios_secretaria=$cont_espacios_secretaria+1;
         }
       }
-      dd($cont_espacios_secretaria);
+      //dd($cont_espacios_secretaria);
       if($cont_espacios_secretaria!=3 or $cont_mayusculas_secretaria!=4)
       {
         return view('tesis.error_cantidad_espacios_mayusculas');

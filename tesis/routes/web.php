@@ -17,7 +17,7 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::get('/dashboard',function()
+/*Route::get('/dashboard',function()
 	{
 		return view('dashboard');
 
@@ -27,14 +27,20 @@ Route::get('/login1',function()
 	{
 		return view('login');
 
-	});
+	});*/
 
 Route::get('/home', 'HomeController@index')->name('home');
+Auth::routes();
 Route::get('/adminhome', 'HomeController@index')->name('adminhome');
+Auth::routes();
 Route::get('/alumnohome', 'HomeController@index')->name('alumnohome');
+Auth::routes();
 Route::get('/profesorhome', 'HomeController@index')->name('profesorhome');
+Auth::routes();
 Route::get('/directorhome', 'HomeController@index')->name('directorhome');
+Auth::routes();
 Route::get('/director_escuelahome', 'HomeController@index')->name('directorescuela_home');
+Auth::routes();
 Route::get('/secretariahome','HomeController@index')->name('secretariahome');
 
 //Profesor editar su propio perfil
@@ -315,3 +321,7 @@ Route::get('/capitulos_edit_avances{capitulo}', 'Capitulos_TesisController@edit_
 Route::put('/actualizarcapitulosnombres{capitulo}','Capitulos_TesisController@update_nombres')->name('capitulos.update_nombres');
 Route::put('/actualizarcapitulosavances{capitulo}','Capitulos_TesisController@update_avances')->name('capitulos.update_avances');
 Route::get('/no_existen_capitulos', 'TesisController@lista_capitulos_tesis')->name('capitulos.no_existen_capitulos');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

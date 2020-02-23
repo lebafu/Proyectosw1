@@ -89,10 +89,7 @@ class HomeController extends Controller
         if($tipo==0){
             return view('adminhome');
         }
-
     }
-
-
      public function alumno(){
         $id=$this->auth->user()->id;
         $users=DB::table('users')->paginate(7);
@@ -100,9 +97,7 @@ class HomeController extends Controller
         if($tipo==1){
             return view('alumnohome');
         }
-
     }
-
     public function profesor(){
         $id=$this->auth->user()->id;
         $users=DB::table('users')->paginate(7);
@@ -110,10 +105,7 @@ class HomeController extends Controller
         if($tipo==2){
             return view('profesorhome');
         }
-
     }
-
-
     public function director(){
         $id=$this->auth->user()->id;
         $users=DB::table('users')->paginate(7);
@@ -121,6 +113,5 @@ class HomeController extends Controller
         if($tipo==3){
             return view('directorhome');
         }
-
     }*/
 }

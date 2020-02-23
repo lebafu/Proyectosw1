@@ -45,6 +45,7 @@
      </table>
      </div>
      </div>
+      <a href="{{ url('/adminhome')}}" class="btn btn-default">Volver a home</a>
      </div>
      </div>
      </div>

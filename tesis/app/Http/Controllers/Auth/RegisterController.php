@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use DB;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -66,13 +67,28 @@ class RegisterController extends Controller
     protected function create(array $data)
     {
         //dd($data);
-        return User::create([
+         $ultimo_id=DB::table('users')->max('id');
+         //dd($ultimo_id);
+         $name=$data['name'];
+         $email=$data['email'];
+         $password=$data['password'];
+         $tipo_usuario=$data['tipo_usuario'];
+         $sexo=$data['sexo'];
+         return User::create([
+            'id' => $ultimo_id+1,
             'name' => $data['name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'tipo_usuario' => $data['tipo_usuario'],
             'sexo' =>$data['sexo'],
         ]);
+        /*return User::create([
+            'name' => $data['name'],
+            'email' => $data['email'],
+            'password' => Hash::make($data['password']),
+            'tipo_usuario' => $data['tipo_usuario'],
+            'sexo' => $data['sexo'],
+        ]);*/
 
         /*if(($request->tipo_usuario)==1)
         {

@@ -387,6 +387,9 @@ class TesisController extends Controller
         public function index1()
     {
         $id=Auth::id();
+        $alumno=User::findorfail($id);
+        $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+        //dd($id);
         if($id==null){
             return('tesis.sinpermiso');
         }
@@ -394,7 +397,39 @@ class TesisController extends Controller
         //dd($user);
         $tesistas=DB::table('tesis')->where('nombre_completo','=',$user->name)->orwhere('nombre_completo2','=',$user->name)->paginate(7);
         //dd($tesistas);
-        return view('tesis.index1',compact('tesistas','user'));
+         $cont=0;
+          foreach($tesistas as $tesista)
+          {
+            if($tesista->nombre_completo==$alumno->name or $tesista->nombre_completo2)
+            {
+                $cont=$cont+1;
+            }
+          }
+          if($cont==3){
+            return view('tesis.hareprobado3veces');
+          }
+
+          $j=0;
+          foreach($tesistas as $tesista);
+        $area_tesis=DB::table('area_tesis')->get();
+        $empresas=DB::table('empresas')->get();
+        $comunidads=DB::table('comunidad')->get();
+        $fcs=DB::table('fondo_concursable')->get();
+        $proyectos=DB::table('proyectos')->get();
+        //dd($area_tesis);
+        //dd($nota_tesis);
+        //dd($tesistas->isEmpty());
+        //En caso de que no hayan tesis inscritas, ocurre que se redirecciona al formulario de inscribir tesis.
+        if($tesistas->isEmpty()==true){
+        return view('tesis.create',compact('alumno','profes','area_tesis','empresas','comunidads','fcs','proyectos'));
+        }else{
+            //dd($tesistas->isEmpty());
+            if($tesistas->isEmpty()==false){
+                //En caso de que si haya tesis inscritas para el alumno logueado, se mostrará la lista con las tesis inscritas de este alumno.
+            return view('tesis.index1',compact('tesistas','user'));
+                }
+        }
+        
 
     }
 
@@ -448,7 +483,7 @@ class TesisController extends Controller
         $proyectos=DB::table('proyectos')->get();
         //dd($area_tesis);
         //dd($nota_tesis);
-        if($tesista==null or $tesista->nota_tesis<4){
+        if($tesistas->isEmpty()==true or $tesista->nota_tesis<4){
         return view('tesis.create',compact('alumno','profes','area_tesis','empresas','comunidads','fcs','proyectos'));
         }
     }
