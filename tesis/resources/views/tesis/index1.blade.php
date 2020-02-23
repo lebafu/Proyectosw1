@@ -84,6 +84,7 @@
           @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado6==1 and $tesis->estado7!=1 and ( $tesis->nota_tesis==null))
          <td>{{$tesis->nota_pendiente}}</td>
           <!--<td><a href="{{url('/pedir_nota_prorroga/'.$tesis->id_pk)}}">Pedir nueva nota de Prorroga</a></td>-->
+          <td>En Espera</td>
           <td><a href="{{url('/vista_subir_archivo', $tesis->id_pk)}}">Subir constancia</a></td>
          @endif
           @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado6==1 and $tesis->estado7==1 and ( $tesis->nota_tesis==null))
@@ -94,11 +95,6 @@
          @if($tesis->nota_prorroga!=null and $tesis->nota_pendiente!=null and $tesis->estado6==1 and $tesis->estado7==1 and ($tesis->nota_tesis!=null))
           <td>{{$tesis->nota_pendiente}}</td>
           <td>{{$tesis->nota_prorroga}}</td>
-          @elseif($tesis->nota_pendiente!=null and $tesis->estado6==1)
-           <td>{{$tesis->nota_pendiente}}</td>
-           @elseif($tesis->nota_prorroga!=null and $tesis->estado7==1)
-            <td></td>
-            <td>{{$tesis->nota_prorroga}}</td>
          @endif
       <td>
           <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST" class="form-inline">

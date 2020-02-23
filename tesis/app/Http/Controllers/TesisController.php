@@ -397,17 +397,6 @@ class TesisController extends Controller
         //dd($user);
         $tesistas=DB::table('tesis')->where('nombre_completo','=',$user->name)->orwhere('nombre_completo2','=',$user->name)->paginate(7);
         //dd($tesistas);
-         $cont=0;
-          foreach($tesistas as $tesista)
-          {
-            if($tesista->nombre_completo==$alumno->name or $tesista->nombre_completo2)
-            {
-                $cont=$cont+1;
-            }
-          }
-          if($cont==3){
-            return view('tesis.hareprobado3veces');
-          }
 
           $j=0;
           foreach($tesistas as $tesista);
@@ -1701,13 +1690,17 @@ class TesisController extends Controller
     public function destroy($id)
     {    
         $idlogin=Auth::id();
+        $users=DB::table('id','=',$idlogin)->get();
+        foreach($users as $user);
         $tesis=DB::table('tesis')->where('id_pk',$id)->get();
         foreach($tesis as $tes);
         if($tes->fecha_presentacion_tesis!=null){
             return view('tesis.sinpermiso');
         }
         DB::table('tesis')->where('id_pk', $id)->delete();
-        return back()->with('status','La tesis ha sido eliminada con exito');
+        if($idlogin==1)return view('alumnohome');
+        if($idlogin==2 and $user->director_escuela==0)return view('profesorhome');
+        if($idlogin==2 and $user->director_escuela==1)return view('director_escuelahome');
     }
 
 

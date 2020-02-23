@@ -22,7 +22,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre completo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{$tes->nombre_completo}}}" required disabled>
+                                <input id="name" type="text" class="form-control" name="name" value="{{$tes->nombre_completo}}" required disabled>
 
                             </div>
                         </div>
@@ -31,7 +31,7 @@
                             <label for="rut" class="col-md-4 col-form-label text-md-right">{{ __('Rut') }}</label>
 
                             <div class="col-md-6">
-                                <input id="rut" type="text" class="form-control" name="rut" value="{{$tes->rut}}}" required autocomplete="rut" autofocus disabled>
+                                <input id="rut" type="text" class="form-control" name="rut" value="{{$tes->rut}}" required autocomplete="rut" autofocus disabled>
 
                             </div>
                         </div>
@@ -118,7 +118,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre completo alumno 2') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{$tes->nombre_completo}}}" required disabled>
+                                <input id="name" type="text" class="form-control" name="name" value="{{$tes->nombre_completo2}}" required disabled>
 
                             </div>
                         </div>
@@ -127,7 +127,7 @@
                             <label for="rut" class="col-md-4 col-form-label text-md-right">{{ __('Rut') }}</label>
 
                             <div class="col-md-6">
-                                <input id="rut" type="text" class="form-control" name="rut" value="{{$tes->rut}}}" required autocomplete="rut" autofocus disabled>
+                                <input id="rut" type="text" class="form-control" name="rut" value="{{$tes->rut2}}}" required autocomplete="rut" autofocus disabled>
 
                             </div>
                         </div>
@@ -135,7 +135,7 @@
                           <div class="form-group row">
                             <label for="fecha_nac" class="col-md-4 col-form-label text-md-right">{{ __('Fecha_nacimiento') }}</label>
                             <div class="col-md-6">
-                                <input id="fecha_nac2" type="date" class="form-control" name="fecha_nac2" value="{{$recopilacion->fecha_nac}}" required>
+                                <input id="fecha_nac2" type="date" class="form-control" name="fecha_nac2" value="{{$recopilacion->fecha_nac2}}" required>
                             </div>
                         </div>
 
