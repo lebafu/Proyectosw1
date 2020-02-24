@@ -64,7 +64,8 @@ class DocumentController extends Controller
     		 //se crea archivo word
         		$phpWord = new \PhpOffice\PhpWord\PhpWord();
         		$section= $phpWord->addSection();
-				$section->addText("Tesis Profesor",array("size"=>22,"bold"=>true,"align"=>"center")); // Agregamos un titulo al documento con tamaño 22 y en negritas
+				$section->addText("Tesis Profesor:",array("size"=>22,"bold"=>true,"align"=>"center")); // Agregamos un titulo al documento con tamaño 22 y en negritas
+        $section->addText($profesor->name, array('borderBottomColor' => '0000FF', 'bgColor' => 'FFFFFF'));
 				$styleTable = array('borderSize' => 6, 'borderColor' => '888888', 'cellMargin' => 40); // el borde de la tabla de 6px, color de borde = #888 , ...
 				$styleFirstRow = array('borderBottomColor' => '0000FF', 'bgColor' => 'FFFFFF');
 				$phpWord->addTableStyle('table1', $styleTable,$styleFirstRow);
