@@ -142,7 +142,7 @@
                                 <select name="tipo_vinculacion" id="tipo_vinculacion" type="text" class="form-control" required="required">
                                 <option value="Empresa"> Empresa </option>
                                  <option value="Proyecto">Proyecto </option>
-                                 <option value="Fondo concusable">Fondo concursable</option>
+                                 <option value="Fondo concursable">Fondo concursable</option>
                                  <option value="Comunidad">Comunidad</option>
                                  </select>
                             </div>

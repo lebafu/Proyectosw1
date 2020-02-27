@@ -9,16 +9,6 @@
 <!--<link href="https://fonts.googleapis.com/icon?family=Material+Icons"
       rel="stylesheet">-->
 
-   <style>
-        .contenedor-botones {
-            display: block;
-            width: 100%;
-        }
-        .boton-adaptado {
-            width: 50%;
-        }
-    </style>
-
 <div class="container">
   <div class="row justify-content-center">
     <div class="col-md-16">
@@ -67,7 +57,7 @@
           @endif
           @if($tesis->tipo_vinculacion=="Comunidad")
           <td>Com</td>
-          @endif
+          @endif                        
           @if($tesis->tipo_vinculacion=="Fondo concursable")
           <td>Fc</td>
           @endif
@@ -81,8 +71,8 @@
           <div class="row">
             <div class="btn-group" role="group">
             <form action="{{ route('tesis.destroy', $tesis->id_pk)}}" method="POST" class="form-inline">
-            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info boton-adaptado" style="width:25px; height:25px;margin:1px"><span class="far fa-eye fa-sm"  style="float:left;margin-left:-8px"></span></a>
-          <button type="submit"  class="btn btn-danger boton-adaptado" style="width:25px; height:25px;margin:1px"><span class="fas fa-trash fa-sm" style="float:left;margin-left:-8px"></span>
+            <a href="{{url('/tesismostrar/'.$tesis->id_pk)}}" class="btn btn-info" style="width:25px; height:25px;margin:1px"><span class="far fa-eye fa-sm"  style="float:left;margin-left:-8px"></span></a>
+          <button type="submit"  class="btn btn-danger" style="width:25px; height:25px;margin:1px"><span class="fas fa-trash fa-sm" style="float:left;margin-left:-8px"></span>
            {{ method_field('DELETE') }}
            {{ csrf_field() }}
            </form>

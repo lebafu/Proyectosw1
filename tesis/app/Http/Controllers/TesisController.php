@@ -1690,7 +1690,7 @@ class TesisController extends Controller
     public function destroy($id)
     {    
         $idlogin=Auth::id();
-        $users=DB::table('id','=',$idlogin)->get();
+        $users=DB::table('users')->where('id','=',$idlogin)->get();
         foreach($users as $user);
         $tesis=DB::table('tesis')->where('id_pk',$id)->get();
         foreach($tesis as $tes);
@@ -1701,6 +1701,7 @@ class TesisController extends Controller
         if($idlogin==1)return view('alumnohome');
         if($idlogin==2 and $user->director_escuela==0)return view('profesorhome');
         if($idlogin==2 and $user->director_escuela==1)return view('director_escuelahome');
+        if($idlogin==3) return view('directorhome');
     }
 
 

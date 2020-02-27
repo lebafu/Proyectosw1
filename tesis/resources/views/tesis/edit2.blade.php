@@ -152,7 +152,7 @@
                                 <option value="{{$tes->tipo_vinculacion}}">{{$tes->tipo_vinculacion}}</option>
                                 <option value="Empresa"> Empresa </option>
                                  <option value="Proyecto">Proyecto </option>
-                                 <option value="Fondo concusable">Fondo concursable</option>
+                                 <option value="Fondo concursable">Fondo concursable</option>
                                  <option value="Comunidad">Comunidad</option>
                                  </select>
                             </div>

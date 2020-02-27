@@ -269,7 +269,7 @@
                         </div>
 
                          <div class="form-group row">
-                               <label for="estado" class="col-md-4 col-form-label text-md-right">{{ __('Observacionr') }}</label>
+                               <label for="estado" class="col-md-4 col-form-label text-md-right">{{ __('Observacion') }}</label>
                                <div class="col-md-6">
                                 <textarea name="observacion" type="text" rows="10" cols="40" class="form-control", value="{{ old('observacion')}}" disabled>{{$tes->observacion}}</textarea>
                              </div>

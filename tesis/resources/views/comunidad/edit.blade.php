@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Crear Comunidad') }}</div>
+                <div class="card-header">{{ __('Edit Comunidad') }}</div>
 
                 <div class="card-body">
                      <form action="{{route('comunidad.update', $comunidad->id)}}" method="POST">
@@ -15,7 +15,7 @@
                             <label for="nombre" class="col-md-4 col-form-label text-md-right">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
-                                <input id="nombre" type="text" class="form-control" name="nombre" required autocomplete="nombre">
+                                <input id="nombre" type="text" class="form-control" name="nombre" required autocomplete="nombre" value="{{$comunidad->nombre}}">
                             </div>
                         </div>
 
