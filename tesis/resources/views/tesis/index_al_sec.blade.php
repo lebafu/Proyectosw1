@@ -60,12 +60,12 @@
             @else
               <td><a class="btn btn-primary btn-sm" href="{{url('/acta_examen/'.$tesis->id_pk)}}" id="#descargaPDF" ><span class="fa fa-print"> </span>Acta</a></td>
            @endif
-               @if($tesis->acta_ex==null and $tesis->fecha_inscripcion!=null)
+               @if($tesis->acta_ex==null and $tesis->fecha_inscripcion!=null and $tesis->constancia_ex!=null)
               <td><a class="btn btn-primary btn-sm" href="{{url('/vista_subir_acta/'.$tesis->id_pk)}}">Subir acta</a></td>
             @elseif($tesis->acta_ex!=null)
                 <td><a href="{{ route('verPDF_acta', ['id' => $tesis->id_pk]) }}" class="btn btn-primary btn-sm"><span class="far fa-eye fa-sm"></span></a></a></td>
                 @else
-                <td>Faltan pasos por completar.</td>
+                <td></td>
             @endif
            @if($tesis->constancia_ex!=null and $tesis->acta_ex!=null and $tesis->nota_tesis==null)
                 <td><a class="btn btn-primary btn-sm" href="{{url('/ingresar_nota_tesis/'.$tesis->id_pk)}}" target="_blank">Ingresar nota</a></td>

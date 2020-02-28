@@ -41,7 +41,7 @@
      </div>
      </div>
      </div>
-     <a href="{{ url('/diretorhome')}}" class="btn btn-default">Volver a home</a>
+     <a href="{{ url('/directorhome')}}" class="btn btn-default">Volver a home</a>
 </div>
 
    {!! $memos->render() !!}
