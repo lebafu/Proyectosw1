@@ -31,7 +31,7 @@
             @endif
           <td>{{$tesis->profesor_guia}}</td>
           <td>{{$tesis->tipo}}</td>
-          <td>{{$tesis->nombre_vinculacion}}}</td>
+          <td>{{$tesis->nombre_vinculacion}}</td>
         </tr>
         @endforeach
      </table>

@@ -1745,7 +1745,7 @@ class TesisController extends Controller
 
         $fecha_inicio=$request->fecha_inicio;
         $fecha_final=$request->fecha_final;
-    	$tes_fondoconcursable=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Fondo concusable')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id_pk','tesis.id','tesis.nombre_completo','tesis.nombre_completo2','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion','tesis.nombre_vinculacion')->get();  
+    	$tes_fondoconcursable=DB::table('tesis')->orderby('fecha_peticion','desc')->where('estado1','=',4)->where('estado2','=',1)->where('tipo_vinculacion','=','Fondo concursable')->whereBetween('fecha_inscripcion',[$fecha_inicio,$fecha_final])->select('tesis.id_pk','tesis.id','tesis.nombre_completo','tesis.nombre_completo2','tesis.profesor_guia','tesis.nombre_tesis','tesis.tipo_vinculacion','tesis.nombre_vinculacion')->get();  
 
 		$html = view('tesis.printTesisfc', ['tes_fondoconcursable' => $tes_fondoconcursable])->render();
 
