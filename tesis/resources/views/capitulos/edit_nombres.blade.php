@@ -84,14 +84,14 @@
                          <div class="form-group row">
                             <label for="cap6" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap6 de Tesis') }}</label>
                             <div class="col-md-6">
-                                <textarea id="cap6" type="text" rows="10" cols="40" placeholder="Nombre cap6 tesis" class="form-control" name="cap5"></textarea>
+                                <textarea id="cap6" type="text" rows="10" cols="40" placeholder="Nombre cap6 tesis" class="form-control" name="cap6"></textarea>
                             </div>
                         </div>
                         @else
                              <div class="form-group row">
                             <label for="cap6" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap6 de Tesis') }}</label>
                             <div class="col-md-6">
-                                <textarea id="cap6" type="text" rows="10" cols="40" placeholder="Nombre cap5 tesis" class="form-control" name="cap5"value="{{$capitulo->cap6}}">{{$capitulo->cap6}}</textarea>
+                                <textarea id="cap6" type="text" rows="10" cols="40" placeholder="Nombre cap5 tesis" class="form-control" name="cap6"value="{{$capitulo->cap6}}">{{$capitulo->cap6}}</textarea>
                             </div>
                         </div>
                         @endif

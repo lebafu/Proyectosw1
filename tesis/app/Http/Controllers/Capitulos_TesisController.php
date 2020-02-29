@@ -137,6 +137,7 @@ class Capitulos_TesisController extends Controller
         //dd($request);
         //dd($id_pk);
         //dd($request);
+        //dd($request->cap5);
         DB::table('capitulos')->where('id',$id)->update(['cap1' =>  $request->cap1]);
         DB::table('capitulos')->where('id',$id)->update(['cap2' =>  $request->cap2]);
         DB::table('capitulos')->where('id',$id)->update(['cap3' =>  $request->cap3]);
