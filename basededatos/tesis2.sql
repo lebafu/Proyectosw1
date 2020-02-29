@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 17-12-2019 a las 09:13:00
+-- Tiempo de generación: 25-02-2020 a las 23:46:28
 -- Versión del servidor: 10.3.16-MariaDB
 -- Versión de PHP: 7.3.6
 
@@ -53,7 +53,7 @@ INSERT INTO `area_tesis` (`id`, `area_tesis`) VALUES
 
 CREATE TABLE `bitacora` (
   `id` int(20) UNSIGNED NOT NULL,
-  `id_tesis` int(20) NOT NULL,
+  `id_tesis` bigint(20) UNSIGNED NOT NULL,
   `comentario` text NOT NULL,
   `acuerdo` text NOT NULL,
   `actual` int(11) DEFAULT NULL,
@@ -68,11 +68,27 @@ CREATE TABLE `bitacora` (
 INSERT INTO `bitacora` (`id`, `id_tesis`, `comentario`, `acuerdo`, `actual`, `created_at`, `update_at`) VALUES
 (1, 113, 'El alumno muestra su avance version 1 de aplicacion con documentacion correspondiente blablabbla', 'El alumno se compromete a desarrollar diagramas de casos de uso y matriz de trazabilidad. Para la proxima semana 19 dicuenvre', 0, '2019-12-10 03:00:00', NULL),
 (2, 113, 'El alumno consigue terminar el diagrama de casos de uso, diagrama de clases, y el login de los usuarios.', 'El alumno se compromete a crear la base de datos y añadir 2 tablas nueva para la semana del 26 diciembre.', 0, '2019-12-11 06:12:09', '2019-12-11 06:12:09'),
-(5, 113, 'Revision Roberto Ahumada', 'Avance abcde', 1, '2019-12-12 09:21:34', '2019-12-12 09:21:34'),
+(5, 113, 'Revision Roberto Ahumada', 'Avance abcde', 0, '2019-12-12 09:21:34', '2019-12-12 09:21:34'),
 (6, 109, 'Los alumnos entregan documentacion del programa con informacion de codigo comentado, diagrama de casos dee uso, etc.', 'El alumno se compromete entregar la ultima version del sistema para el 17/12/2019', 0, '2019-12-11 06:00:00', '2019-12-16 00:20:33'),
 (7, 63, 'El alumno se reune por primera vez con el profesor y definen los capitulos de la tesis.', 'El alumno se compromete a realizar el diagrama de casos de uso...para el 19/12/2019', 0, '2019-12-16 23:27:46', '2019-12-16 23:27:46'),
-(8, 63, 'El alumno cumple con los diagramas , se reeunirá en semana de 23/12 con profesor', 'El alumno empezará a generar las primeras tablas de la bd.', 1, '2019-12-16 23:29:21', '2019-12-16 23:29:21'),
-(9, 109, 'Comeentario2', 'Acuerdo2', 1, '2019-12-17 07:39:10', '2019-12-17 07:39:10');
+(8, 63, 'El alumno cumple con los diagramas , se reeunirá en semana de 23/12 con profesor', 'El alumno empezará a generar las primeras tablas de la bd.', 0, '2019-12-16 23:29:21', '2019-12-16 23:29:21'),
+(9, 109, 'Comeentario2', 'Acuerdo2', 0, '2019-12-17 07:39:10', '2019-12-17 07:39:10'),
+(15, 113, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-18 18:08:34', '2019-12-18 18:08:34'),
+(18, 113, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-18 18:22:59', '2019-12-18 18:22:59'),
+(64, 113, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-18 22:21:08', '2019-12-18 22:21:08'),
+(68, 63, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-18 22:35:35', '2019-12-18 22:35:35'),
+(69, 63, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-18 22:37:11', '2019-12-18 22:37:11'),
+(70, 63, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-18 22:41:14', '2019-12-18 22:41:14'),
+(71, 63, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-18 22:42:34', '2019-12-18 22:42:34'),
+(73, 109, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-18 22:48:59', '2019-12-18 22:48:59'),
+(78, 113, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-18 23:04:43', '2019-12-18 23:04:43'),
+(93, 113, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-19 00:17:53', '2019-12-19 00:17:53'),
+(99, 113, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-19 00:29:15', '2019-12-19 00:29:15'),
+(100, 63, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-19 00:47:09', '2019-12-19 00:47:09'),
+(101, 113, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-19 13:49:08', '2019-12-19 13:49:08'),
+(102, 113, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-19 15:10:42', '2019-12-19 15:10:42'),
+(104, 113, 'No hay comentarios', 'No hay acuerdos', 0, '2019-12-19 16:40:22', '2019-12-19 16:40:22'),
+(105, 63, 'Escriba aqui el comentario', 'Escriba aqui el acuerdo', 0, '2020-01-13 01:29:36', '2020-01-13 01:29:36');
 
 -- --------------------------------------------------------
 
@@ -102,8 +118,8 @@ CREATE TABLE `capitulos` (
 --
 
 INSERT INTO `capitulos` (`id`, `cap1`, `cap2`, `cap3`, `cap4`, `cap5`, `cap6`, `avance_cap1`, `avance_cap2`, `avance_cap3`, `avance_cap4`, `avance_cap5`, `avance_cap6`, `fecha`) VALUES
-(63, 'Nombre Capitulo 1 Tesis', 'Nombre Capitulo 2 Tesis', NULL, NULL, NULL, NULL, 0, 0, 0, 0, 0, 0, '2019-12-17 04:37:21'),
-(109, 'Diagrama de casos de uso', 'Diagrama de modelamiento de procesos', 'Versión numero 1 del programa', NULL, NULL, NULL, 10, 20, 20, NULL, NULL, NULL, '2019-12-13 22:59:01');
+(63, 'Introduccion', 'Marco Teorico', 'Desarrollo', NULL, NULL, NULL, 10, 10, 5, NULL, NULL, NULL, '2019-12-17 04:37:21'),
+(109, 'Diagrama de casos de usosss', 'Diagrama de modelamiento de procesos', 'Versión numero 1 del programa', NULL, NULL, NULL, 20, 20, 20, NULL, NULL, NULL, '2019-12-13 22:59:01');
 
 -- --------------------------------------------------------
 
@@ -253,13 +269,15 @@ INSERT INTO `grado_academico_profesor_planta` (`id`, `estado`, `grado_academico`
 (12, 1, 'Dr.'),
 (13, 1, 'Mg.'),
 (14, 1, 'Ing.'),
-(15, 1, 'Dra.'),
+(15, 1, 'Dr.'),
 (17, 1, 'Dr.'),
 (20, 1, 'Dr.'),
 (21, 1, 'Mg.'),
 (96, 1, 'Dra.'),
 (99, 1, 'Mg.'),
-(104, 1, 'Ing.');
+(104, 1, 'Ing.'),
+(110, 1, 'Mg.'),
+(111, 1, 'Mg.');
 
 -- --------------------------------------------------------
 
@@ -336,7 +354,7 @@ INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
 ('mtoranzo@gmail.com', '$2y$10$k.W7h6MvsspkQILyRJLqAe51Xk0vGWWsu1hS1hDSKprDPwy9y8t5K', '2019-10-16 00:41:28'),
 ('leonardob94@hotmail.com', '$2y$10$OSpMQNf7sn2hY8c4pg84iOs8l.XUsIWIwKcC5plg6jCr1kQxJNtRy', '2019-10-12 22:53:56'),
 ('mtoranzo@gmail.com', '$2y$10$k.W7h6MvsspkQILyRJLqAe51Xk0vGWWsu1hS1hDSKprDPwy9y8t5K', '2019-10-16 00:41:28'),
-('leonardo211294@gmail.com', '$2y$10$6ULVIfhlkwsP3jpmw.LJ4ua6lIEQylfSWXkiKijUNYISGAUi.N2Zq', '2019-12-03 00:07:22');
+('leonardo211294@gmail.com', '$2y$10$eCLCMGi/FCt7KjtjyDjnNe/l0dVkVIad4lE7CTIIqz4eru7SioNnS', '2020-01-12 21:46:06');
 
 -- --------------------------------------------------------
 
@@ -355,7 +373,8 @@ CREATE TABLE `proyectos` (
 
 INSERT INTO `proyectos` (`id`, `nombre`) VALUES
 (1, 'Proyecto10'),
-(2, 'Proyecto20');
+(2, 'Proyecto20'),
+(3, 'Proyecto30');
 
 -- --------------------------------------------------------
 
@@ -395,7 +414,7 @@ INSERT INTO `recopilacion_inf_titulados` (`id`, `fecha_nac`, `titulo`, `telefono
 (45, '1992-07-02', 'Ingeniero', '71283228', '32982376', 'Fernando Olmos', 'San javier 6723', '2019-06-12', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
 (47, '1993-07-22', 'Ingeniero', '71283933', '26785411', 'Miguel Cancino', 'Talca 27 1/2 sur 155', '2019-07-20', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
 (49, '1994-05-28', 'Ingeniero', '71283222', '78232345', 'Jose Valdes', 'San javier 7362', '2019-11-21', NULL, NULL, NULL, NULL, 1, NULL, NULL, NULL),
-(113, '1993-02-08', 'Ingeniero', '75802274', '78237292', 'Alfonso Bilocopetiuc', 'Constitucion 3509', '2018-12-09', '1993-02-08', 'Ingeniero', '76583407', '245678', 1, 'John Faundez', 'Constitucion 2191', '2019-10-07');
+(113, '1993-02-08', 'Ingeniero', '75802274', '78237292', 'Alfonso Bilocopetiuc', 'Constitucion 3509', '2019-10-07', '1993-02-08', 'Ingeniero', '76583407', '245678', 1, 'John Faundez', 'Constitucion 2191', '2019-12-09');
 
 -- --------------------------------------------------------
 
@@ -456,11 +475,11 @@ INSERT INTO `tesis` (`id_pk`, `id`, `nombre_completo`, `nombre_completo2`, `rut`
 (16, 16, 'Rodrigo Chavez', NULL, '18.063.911-8', NULL, '12345678', NULL, 'Aplicacion movil', 'Ingenieria de Software', 2014, NULL, 'Paulo Gonzalez', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'Contribucion1,Contribucion2', 'Descripcion1Descripcion2', 'Ayudar a la comunidad', 'Empresa', 'Tutelkan', NULL, 1, NULL, NULL, '2019-07-16 03:56:45', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
 (18, 18, 'Camilo Gonzalo Cavieres Perez', NULL, '18.738.562-9', NULL, '12345678', NULL, 'Aplicacion en Ionix para ed fisica', 'Ingenieria de Software', 2013, NULL, 'Marco Toranzo Cespedes', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'Se espera ser un apoyo para la carrera de de ed. fisica en la Universidad.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Empresa', 'Ed fisica.', 'Nombre incompleto', 4, 1, NULL, '2019-07-18 06:43:00', '2019-10-25', 1, '2019-10-27', 1, 1, NULL, '2019-07-21', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
 (19, 19, 'Gonzalo Ignacio Paredes Valenzuela', NULL, '17.345.456-3', NULL, '12345678', NULL, 'Sistema de inventario UCM', 'Ingenieria de Software', 2012, NULL, 'Marco Toranzo Cespedes', 'Ingenieria Civil Informatica', 'Tesis', 'Se espera apoyar la automatizacion de un sistema de la universidad, y agilizar procesos.', 'Descripcion1, Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'Departamento de informatica UCM', NULL, 4, 1, NULL, '2019-07-19 19:11:32', NULL, NULL, '2019-10-24', NULL, NULL, NULL, '2019-07-28', '6kJevUClPeZ06vTKSelIPZAvdNPBhgehShMazLeW.pdf', 'presenta en algunos pasajes de esta obra viene a demostrar, como han cambiado las relaciones humanas y jurídicas con el advenimiento de la informática y de las telecomunicaciones. Sin pretender sentar bases sólidas, esta investigación pretende despertar el...', 1, '2019-09-03 16:00:00', 'TdIvKakaANdcnRINpzvLETmCxlCkqQlm67qN12fe.pdf', 0, NULL, 6.5),
-(22, 22, 'Felipe Nicolas Tapia Nuñez', NULL, '18.732.564-7', NULL, '12345678', NULL, 'Estudio de Patrones de venas de la mano', 'IA', 2013, NULL, 'Ricardo Barrientos', 'Ingenieria Civil Informatica', 'Tesis', 'Permitir ahorrar recursos en el reconocimiento unico de la poblacion, que actualmente se hace por huella dactilar.', 'El alumno deberá ayudar a generar en el reconocimiento de patrones de las venas de la mano.', 'Generar un modelo que permite el reconocimiento de las venas de la mano.', 'Fondo concusable', 'Coniciiiit', NULL, 4, 1, NULL, '2019-07-19 23:14:28', '2019-08-21', 1, '2019-12-19', 1, NULL, NULL, '2019-07-23', '1571110545d-separation (1).pdf', 'Copie aqui su abstract o resumen.', NULL, '2019-10-15 15:00:00', '157111431622.pdf', 0, NULL, 7),
-(23, 23, 'Rosa Karina Gonzalez Gutierrez', NULL, '18.923.457-4', NULL, '12345678', NULL, 'Analisis de sentimientos aplicando una taxonomia de encuestas', 'Inteligencia de negocios', 2013, NULL, 'Angelica Urrutia', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2 Descripcion3', 'Objetivo1, Objetivo2', 'Comunidad', 'Jardin Infantil', 'Escribe aquí su observacion', 4, 1, 1, '2019-07-20 23:38:34', '2019-07-19', NULL, '2019-08-20', NULL, NULL, NULL, '2019-07-21', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(22, 22, 'Felipe Nicolas Tapia Nuñez', NULL, '18.732.564-7', NULL, '12345678', NULL, 'Estudio de Patrones de venas de la mano', 'IA', 2013, NULL, 'Ricardo Barrientos', 'Ingenieria Civil Informatica', 'Tesis', 'Permitir ahorrar recursos en el reconocimiento unico de la poblacion, que actualmente se hace por huella dactilar.', 'El alumno deberá ayudar a generar en el reconocimiento de patrones de las venas de la mano.', 'Generar un modelo que permite el reconocimiento de las venas de la mano.', 'Fondo concusable', 'Coniciiiit', NULL, 4, 1, NULL, '2019-07-19 23:14:28', '2019-08-21', 1, '2019-12-19', 1, 1, 1, '2019-07-23', '1571110545d-separation (1).pdf', 'Copie aqui su abstract o resumen.', NULL, '2019-10-15 15:00:00', '157111431622.pdf', 0, NULL, 7),
+(23, 23, 'Rosa Karina Gonzalez Gutierrez', NULL, '18.923.457-4', NULL, '12345678', NULL, 'Analisis de sentimientos aplicando una taxonomia de encuestas', 'Inteligencia de negocios', 2013, NULL, 'Angelica Urrutia', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2 Descripcion3', 'Objetivo1, Objetivo2', 'Comunidad', 'Jardin Infantil', 'Escribe aquí su observacion', 4, 1, 1, '2019-07-20 23:38:34', '2019-07-25', 1, '2019-09-20', 1, 1, 1, '2019-07-21', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
 (31, 31, 'Daniel Alarcon Chambles', NULL, '18.123.456-9', NULL, '12345678', NULL, 'Desarrollo modelo de optimización en java', 'Ingenieria de Software', 2013, NULL, 'Wladimir Soto', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2', 'objetivo1 objetivo2', 'Proyecto', 'UTALCA-UCM', 'Sin observacion', 4, 1, NULL, '2019-07-26 08:22:02', '2019-10-18', 1, NULL, NULL, NULL, NULL, '2019-07-29', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
 (32, 32, 'Jhon Michael Faundez Miño', 'Alfonso Bilocopetiuc Parra', '18.574.262-8', '18.674.261-3', '12345678', '12345678', 'Tesis100', 'Ingenieria de Software', 2013, 2013, 'Marco Toranzo Cespedes', 'Ingenieria Civil Informatica', 'Memoria', 'Escriba aqui los objetivos', 'Descripcion1 Descripcion2, esta tesis espera ser un aporte para la carrera de pedagogia en educación fisica, tanto de sus profesores, como de sus alumnos.', 'Escriba aqui los objetivos', 'Empresa', 'Empresa02', 'Escribe aquí su observacion', 4, 1, NULL, '2019-09-19 01:30:10', NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-01', '157567079549.pdf', 'Copie aqui su abstract o resumen.jksnkjdnaknsdaknaslkndasldnalkansalal', 1, '2019-10-16 20:00:00', '1575675438112.pdf', 0, NULL, 3),
-(34, 34, 'Felipe Garrido Perez', NULL, '19.234.544-6', NULL, '12345678', NULL, 'Desarrollo de algoritmo de limpieza de imagenes', 'Imagenes', 2014, NULL, 'Paulo Gonzalez', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2 Descripcion3', 'Objetivo1, Objetivo2', 'Proyecto', 'Proyecto F2', NULL, 1, NULL, NULL, '2019-07-26 12:03:47', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
+(34, 34, 'Felipe Garrido Perez', NULL, '19.234.544-6', NULL, '12345678', NULL, 'Desarrollo de algoritmo de limpieza de imagenes', 'Imagenes', 2014, NULL, 'Paulo Gonzalez', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2 Descripcion3', 'Objetivo1, Objetivo2', 'Proyecto', 'Proyecto F2', NULL, 1, NULL, NULL, '2019-07-26 12:03:47', NULL, 1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
 (35, 35, 'Nelson Guerra', NULL, '12.345.678-8', NULL, '12345678', NULL, 'Desarrollo aplicacion', 'Imagenes', 2013, NULL, 'Ricardo Barrientos', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2', 'objetivo1 objetivo2', 'Fondo concusable', 'Conycit', NULL, 1, NULL, NULL, '2019-07-26 12:12:29', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
 (36, 36, 'Cesar Poblete', NULL, '12-356.789-4', NULL, '12345678', NULL, 'Aplicando BI sobre datos registro civil', 'Inteligencia de negocios', 2014, NULL, 'Angelica Urrutia', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1 Descripcion2', 'objetivo1 objetivo2', 'Empresa', '3it', NULL, 1, NULL, NULL, '2019-07-26 12:14:48', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
 (37, 37, 'Arturo Fernandez', NULL, '18.889.456-4', NULL, '12345678', NULL, 'Desarrollo Aplicacion Movil', 'Ingenieria de Software', 2014, NULL, 'Hugo Araya Carrasco', 'Ingenieria Civil Informatica', 'Tesis', 'Contribuir a...', 'Descripcion1, Descripcion2', 'Objetivo1, Objetivo2', 'Empresa', 'Tutelkan', NULL, 1, NULL, NULL, '2019-07-26 12:18:18', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
@@ -484,10 +503,11 @@ INSERT INTO `tesis` (`id_pk`, `id`, `nombre_completo`, `nombre_completo2`, `rut`
 (57, 57, 'Jose Lopez', NULL, '18.146.721-k', NULL, '12345678', NULL, 'Tesis 55', 'Inteligencia de negocios', 2012, NULL, 'Hugo Araya Carrasco', 'Ingenieria Civil Informatica', 'Tesis', 'Contribucion1, Contribucion2, Contribucion3', 'La tesis tratara sobre Tesis55', 'Objetivo1, Objetivovo2, Objetivo3, Objetivo4', 'Empresa', 'UCM', NULL, 4, 1, NULL, '2019-09-01 05:14:24', NULL, NULL, NULL, NULL, NULL, NULL, '2019-09-01', '1567381138Evaluacion.pdf', 'Se ha dicho que el Derecho no existe ni es imaginable al margen de su historia. Sin duda, la afirmación precedente, conlleva un reconocimiento del enorme contenido de información que se asocia al Derecho en cada uno de sus ámbitos. La información, en este sentido, significa descripción de algún objeto o suceso.\r\n Para que esta información fluya en forma adecuada y resulte útil, debe organizarse según algún método o sistema, de allí que se debe entender como sistema de información “todo conjunto de elementos diseñado para el soporte, administración y gestión de información” \r\n Información es ante todo un conocimiento y la posibilidad de entregar ese conocimiento a todos los probables usuarios, ella constituye la finalidad esencial de la Ciencia de la Información. Ésta comprende a su vez tres grandes disciplinas: La Documentación, la Informática y las Ciencias de la Comunicación, de las cuales, las dos primeras parecen ser más atingentes al tema abordado en la Separata del CEDI “Informática Jurídica Documental”, en torno a la cual se ha preparado el presente trabajo. La Documentación estudia el establecimiento, investigación, reunión y utilización de documentos, mientras que la Informática estudia el tratamiento automático de la información por medio de computadoras. \r\n Ambas disciplinas, Documentación e Informática abocadas a un objeto particular, la información jurídica, crean la Informática Jurídica Documental, la que como tal, no es una área, ni de la Ciencia de la Información, ni del ámbito de la Ciencia del Derecho. La Informática Jurídica Documental es un \"conjunto de técnicas\", significativas para las computadoras, aplicadas al tratamiento de la información jurídica. \r\n La revolución informática y sus proyecciones socio-económicas se vienen produciendo desde la década del 40, presentando una evolución caracterizada por un continuo crecimiento de su influencia e importancia, tanto en desarrollo tecnológico, mayor capacidad de manejo de datos y rapidez de respuestas, como en amplitud de su ámbito de influencia: se incluyen aquí, materias tan diversas que pueden ir desde la administración financiera hasta las tecnologías de la salud.\r\n Entendiendo la Informática como la ciencia del tratamiento lógico y automático de la información, y considerando que la información puede ir desde el dato científico más complejo hasta la más banal de las actividades, resulta que la Informática tiene un carácter multidisciplinario, ya que se ramifica en sus proyecciones a cualquier disciplina específica. El ámbito del Derecho no se excluye, por supuesto, de lo anterior.\r\n De ahí que al estudio de la concreta aplicación de la Informática al campo del Derecho se le ha denominado como Informática Jurídica.', 1, NULL, NULL, 0, NULL, NULL),
 (58, 58, 'Boris Mora Garrido', NULL, '13.789.672-3', NULL, '12345678', NULL, 'Tesis 56', 'Ingenieria de Software', 2012, NULL, 'Marco Toranzo Cespedes', 'Ingenieria Civil Informatica', 'Tesis', 'Escriba aqui los objetivos', 'Descripcion', 'Escriba aqui los objetivos', 'Proyecto', 'ICI UCM', NULL, 4, 1, NULL, '2019-09-01 06:12:07', NULL, NULL, NULL, NULL, NULL, NULL, '2019-09-01', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
 (61, 61, 'Hugo Gutierrez', 'Hugo Fuentes', '18.321.741-1', NULL, '12345678', NULL, 'Tesis60', 'Ingenieria de Software', 2012, 2011, 'Hugo Araya Carrasco', 'Ingenieria en Ejecucion e Informatica', 'Tesis', 'Escriba aqui los objetivos', 'Descripcion', 'Escriba aqui los objetivos', 'Proyecto', 'Proyecto20', 'Escribe aquí su observacion', 4, 1, NULL, '2019-10-03 21:16:29', NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-09', NULL, NULL, NULL, NULL, NULL, 0, NULL, NULL),
-(63, 63, 'Adolfo Fuentes', NULL, '18.369.470-6', NULL, '12345678', NULL, 'Tesis61', 'Inteligencia de negocios', 2012, NULL, 'Marco Toranzo Cespedes', 'Ingenieria Civil Informatica', 'Tesis', 'Contribución1', 'Descripcion1', 'Objetivos1', 'Empresa', 'Tutelkan', 'Escribe aquí su observacion', 4, 1, NULL, '2019-10-03 22:45:22', NULL, NULL, NULL, NULL, NULL, NULL, '2019-10-03', NULL, NULL, NULL, NULL, NULL, 0, 2, NULL),
-(109, 109, 'Marco Felipe Castillo Gonzalez', 'Leonardo Ignacio Bascuñan Fuentealba', '19.023.679-2', '18.892.820-k', '12345678', '79504911', 'Tesis 101', 'Inteligencia de negocios', 2014, 2013, 'Marco Toranzo Cespedes', 'Ingenieria Civil Informatica', 'Tesis', 'Escriba aqui los objetivos', 'Descripcion', 'Objetivo1 Objetivo2 Objetivo3', 'Empresa', 'Tutelkan', 'Escribe aquí su observacion', 4, 1, NULL, '2019-12-01 01:05:12', NULL, NULL, NULL, NULL, NULL, NULL, '2019-11-12', NULL, NULL, NULL, NULL, NULL, 10, 1, NULL),
+(63, 63, 'Adolfo Fuentes', NULL, '18.369.470-6', NULL, '12345678', NULL, 'Tesis61', 'Inteligencia de negocios', 2012, NULL, 'Marco Toranzo Cespedes', 'Ingenieria Civil Informatica', 'Tesis', 'Contribución1', 'Descripcion1', 'Objetivos1', 'Empresa', 'Tutelkan', 'Escribe aquí su observacion', 4, 1, NULL, '2019-10-03 22:45:22', NULL, NULL, NULL, NULL, NULL, NULL, '2019-10-03', NULL, NULL, NULL, NULL, NULL, 10, 3, NULL),
+(109, 109, 'Marco Felipe Castillo Gonzalez', 'Leonardo Ignacio Bascuñan Fuentealba', '19.023.679-2', '18.892.820-k', '12345678', '79504911', 'Tesis 101', 'Inteligencia de negocios', 2014, 2013, 'Marco Toranzo Cespedes', 'Ingenieria Civil Informatica', 'Tesis', 'Escriba aqui los objetivos', 'Descripcion', 'Objetivo1 Objetivo2 Objetivo3', 'Empresa', 'Tutelkan', 'Escribe aquí su observacion', 4, 1, NULL, '2019-12-01 01:05:12', '2020-01-29', 1, NULL, NULL, NULL, NULL, '2019-11-12', NULL, NULL, NULL, NULL, NULL, 10, 3, NULL),
 (112, 32, 'Jhon Michael Faundez Miño', 'Alfonso Bilocopetiuc Parra', '18.574.262-8', '18.674.261-3', '12345678', '12345678', 'Tesis 100', 'Ingenieria de Software', 2013, 2013, 'Marco Toranzo Cespedes', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'Escriba aqui los objetivos', 'Descripcion', 'Escriba aqui los objetivos', 'Empresa', 'Empresa02', 'Escribe aquí su observacion', 4, 1, NULL, '2019-12-04 00:28:57', NULL, NULL, NULL, NULL, NULL, NULL, '2019-12-04', '157567079549.pdf', 'Copie aqui su abstract o resumen.jksnkjdnaknsdaknaslkndasldnalkansalal', 1, '2019-12-06 20:00:00', '1575675438112.pdf', 0, NULL, 3.5),
-(113, 59, 'Alfonso Bilocopetiuc Parra', 'Jhon Michael Faundez Miño', '18.674.261-3', '18.574.262-8', '12345678', '12345678', 'Tesis 100', 'Ingenieria de Software', 2013, 2013, 'Marco Toranzo Cespedes', 'Ingenieria Civil Informatica', 'Memoria', 'Escriba aqui los objetivos', 'Descripcion', 'Escriba aqui los objetivos', 'Empresa', 'Empresa02', 'Escribe aquí su observacion', 4, 1, NULL, '2019-12-09 04:25:07', '2019-12-23', 1, '2020-01-13', 1, 1, 1, '2019-12-09', '1575878219Bayesian_Reasoning_and.pdf', 'Copie aqui su abstract o resumen.', 1, '2019-12-09 15:00:00', '1575897206113.pdf', 0, 3, NULL);
+(113, 59, 'Alfonso Bilocopetiuc Parra', 'Jhon Michael Faundez Miño', '18.674.261-3', '18.574.262-8', '12345678', '12345678', 'Tesis 100', 'Ingenieria de Software', 2013, 2013, 'Marco Toranzo Cespedes', 'Ingenieria Civil Informatica', 'Memoria', 'Escriba aqui los objetivos', 'Descripcion', 'Escriba aqui los objetivos', 'Empresa', 'Empresa02', 'Escribe aquí su observacion', 4, 1, NULL, '2019-12-09 04:25:07', '2019-12-23', 1, '2020-02-20', NULL, 1, NULL, '2019-12-09', '1575878219Bayesian_Reasoning_and.pdf', 'Copie aqui su abstract o resumen.', 1, '2019-12-09 15:00:00', '1575897206113.pdf', 0, 3, NULL),
+(118, 114, 'Carlos Francisco Sanchez Perez', 'Diego Paulo Palma Caceres', '19.023.675-5', '19.235.678-8', '82345679', '83420256', 'Tesis260', 'Ingenieria de Software', 2015, 2015, 'Hugo Araya Carrasco', 'Ingenieria en Ejecucion e Informatica', 'Memoria', 'Escriba aqui los objetivos', 'Descripcion', 'Escriba aqui los objetivos', 'Empresa', 'Tutelkan', NULL, 1, NULL, NULL, '2020-02-22 21:37:34', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -505,8 +525,8 @@ CREATE TABLE `users` (
   `tipo_usuario` int(11) NOT NULL DEFAULT 0,
   `director_escuela` int(11) DEFAULT 0,
   `remember_token` varchar(100) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
+  `created_at` timestamp NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -516,18 +536,18 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `sexo`, `tipo_usuario`, `director_escuela`, `remember_token`, `created_at`, `updated_at`) VALUES
 (1, 'Admin', 'Admin@admin.com', NULL, '$2y$10$P7Por1l.Ep3mdBZyEvq5OOaTOCePQZw.T0S4Zkj9qF5LFJADxsrue', 'Masculino', 0, 0, NULL, NULL, NULL),
 (3, 'Ivan Raul Merino Gonzalez', 'IvanMer@gmail.com', NULL, '$2y$10$gTj.qdoj79Ef/egiyT4yNuv.ROtmOiI59dIkzVLWnAlPRWGgylQ/G', 'Masculino', 3, 0, NULL, NULL, '2019-10-22 04:15:15'),
-(4, 'Leonardo Ignacio Bascuñan Fuentealba', 'leonardo211294@gmail.com', NULL, '$2y$10$Y7cKXiDp40qQebsAZddN.O9xBDhspNwSMmcJN4XSRGp7NIxYuvczW', 'Masculino', 1, 0, 'lFOeNzArkAXCSYTj4f4lwQIk2CU0LrdARoWYEigjeXJNPlTRyWqnSVMRCTYK', '2019-07-14 23:56:55', '2019-11-29 22:53:13'),
-(7, 'Hugo Araya Carrasco', 'Haraya@gmail.com', NULL, '$2y$10$RXRtEEKqB2TR.qzMm9Fxo..RSyXb7FiYIHumhu2qKwy/IX0grY1/S', 'Masculino', 2, 0, NULL, NULL, '2019-12-05 06:58:53'),
+(4, 'Leonardo Ignacio Bascuñan Fuentealba', 'leonardo211294@gmail.com', NULL, '$2y$10$Y7cKXiDp40qQebsAZddN.O9xBDhspNwSMmcJN4XSRGp7NIxYuvczW', 'Masculino', 1, 0, 'WAdAPAqqUV7tkMcRfoovPR1uQVuzuEOoljFmWexiLBMNpmq7ZnjLcmWkdUfz', '2019-07-14 23:56:55', '2019-11-29 22:53:13'),
+(7, 'Hugo Araya Carrasco', 'Haraya@gmail.com', NULL, '$2y$10$RXRtEEKqB2TR.qzMm9Fxo..RSyXb7FiYIHumhu2qKwy/IX0grY1/S', 'Masculino', 2, NULL, NULL, NULL, '2020-02-07 00:12:27'),
 (8, 'Carlos Andres Cancino Duran', 'CarlosCancino@gmail.com', NULL, '$2y$10$FI0FmorGtaq2VMHczi3RMO9aQNqozX1FNIeDet09n6TMf2.n8cZSK', 'Masculino', 1, 0, NULL, '2019-07-16 04:16:21', '2019-07-16 04:16:21'),
 (9, 'Rafael  Alexis Perez Torres', 'RafaelPerez@gmail.com', NULL, '$2y$10$raKHvuUg4HJKAh6UO2pwXuiVfwzu7F5VTyesjCOvZxNoi3C7tsgJW', 'Masculino', 1, 0, NULL, '2019-07-16 04:18:50', '2019-07-16 04:18:50'),
 (10, 'Oscar Raul Perez Fernandez', 'OscarPerez@gmail.com', NULL, '$2y$10$UHCQuJdxJw8aJTFDi3dL1.zW7F4HcfX35y99g.8iMiZvbPDkUin1.', 'Masculino', 1, 0, NULL, '2019-07-16 04:20:43', '2019-07-16 04:20:43'),
 (11, 'Sergio Hernandez', 'SergioH@gmail.com', NULL, '$2y$10$bGwldwqEeiVRDetxT2ZjNOONUPt/q1n/k86ad4aGkSpOdvMMtxd5q', 'Masculino', 2, 0, NULL, NULL, '2019-10-10 08:15:28'),
-(12, 'Paulo Gonzalez ', 'PauloGonzalez@gmail.com', NULL, '$2y$10$W5PPczjvJ0HYjUnB4OrjOe7FpWju69ieVGaf/k4ZtnTAxxWOBSrM.', 'Masculino', 2, 1, NULL, NULL, '2019-10-11 23:40:31'),
+(12, 'Paulo Gonzalez ', 'PauloGonzalez@gmail.com', NULL, '$2y$10$W5PPczjvJ0HYjUnB4OrjOe7FpWju69ieVGaf/k4ZtnTAxxWOBSrM.', 'Masculino', 2, 1, NULL, NULL, '2020-02-07 00:12:27'),
 (13, 'Wladimir Soto', 'wsoto@hotmail.com', NULL, '$2y$10$HJz7PXN14.qafcKQmEHXoumhvGzLXHK4kGz.YXeDbN6PmTGw1MPoG', 'Masculino', 2, 0, NULL, NULL, '2019-10-10 06:50:22'),
 (14, 'Xaviera Lopez', 'XavieraL@gmail.com', NULL, '$2y$10$Iy8sRhRFOl8EjoHFgjjAKegJzr5RoRKk8ZzIO/I4Zu2s5F4i1z2pC', 'Femenino', 2, 0, NULL, NULL, '2019-10-10 06:50:50'),
 (15, 'Angelica Urrutia', 'AngelicaU@gmail.com', NULL, '$2y$10$UHeuUhqSxgVUMzTRCKgj2ewR3oS8oRGWLK1xwnxm24LKcrAwKdnu.', 'Femenino', 2, 0, NULL, NULL, '2019-10-10 06:56:34'),
 (16, 'Rodrigo Chavez', 'RodrigoC@gmail.com', NULL, '$2y$10$IIMkIRIefVWEIR6u5Saby.szXbs5GmJ6cdumfFnmtgVArUi81R1c6', 'Masculino', 1, 0, NULL, '2019-07-16 07:55:40', '2019-07-17 22:44:22'),
-(17, 'Marco Toranzo Cespedes', 'marcotoranzo@gmail.com', NULL, '$2y$10$F1QBXpq44U7wahnq46xUOeNPD1N9E92pNhb5FKwbhj1BIqnf4QGL.', 'Masculino', 2, 0, 'KR5QVr5py3GOIhhlrSFXdKhhOB7uAtnGm7LbO0LJL7oi7Fw6NZG9ZoRVZtqm', NULL, '2019-12-05 00:07:19'),
+(17, 'Marco Toranzo Cespedes', 'marcotoranzo@gmail.com', NULL, '$2y$10$F1QBXpq44U7wahnq46xUOeNPD1N9E92pNhb5FKwbhj1BIqnf4QGL.', 'Masculino', 2, 0, 'zoiMqaxFmJwtZXqoj8eT84DxpvUCHdaDUQ81Ya15krM8ebuL7cNi1BREICjS', NULL, '2019-12-05 00:07:19'),
 (18, 'Camilo Gonzalo Cavieres Perez', 'CamiloC@gmail.com', NULL, '$2y$10$JUBYY3k28DmGk7b6Yh2blOKlkRuwqFMcL3BieCKGmC1Y3HxS0BU7K', 'Masculino', 1, 0, NULL, '2019-07-16 08:27:48', '2019-12-04 23:55:25'),
 (19, 'Gonzalo Ignacio Paredes Valenzuela', 'GonzaloParedes@gmail.com', NULL, '$2y$10$cqV6yLeBy8YZUIj6i13mFuye2MWyDwAHwa1KnGHFiaATaWVy.EGsu', 'Masculino', 1, 0, NULL, '2019-07-19 23:08:31', '2019-07-19 23:08:31'),
 (20, 'Marco Mora', 'MarcoM@gmail.com', NULL, '$2y$10$TqMJh2XVrNb/EkpZMpepaO0lI2BaTmNUTsx0eSRKBVaVfyBsnfT0.', 'Masculino', 2, 0, NULL, NULL, NULL),
@@ -573,7 +593,11 @@ INSERT INTO `users` (`id`, `name`, `email`, `email_verified_at`, `password`, `se
 (99, 'Javier Torrente', 'JavierTorrente@gmail.com', NULL, '$2y$10$Hs5AMm8JiYGJN0HC532s5OWMBx9OTGR/2B2tjTnUf6tcst77cGB46', 'Masculino', 2, 0, NULL, NULL, NULL),
 (103, 'Paula  Gabriela Torres', 'PaulaT@gmail.com', NULL, '$2y$10$5hcbQjDbSeqxQrmZb3lnTOO8ijhEnl0G1DpouwyrUTYcfugRb9lJu', 'Femenino', 1, 0, NULL, '2019-10-13 23:50:04', '2019-10-13 23:50:04'),
 (104, 'Carlos Perez Valenzuela', 'CarlosPV@gmail.com', NULL, '$2y$10$LMzy3UkuUsbhButV7BvApuJqVJAbBlWwPiLILrzhPg41/ce4IgVWy', 'Masculino', 2, 0, NULL, NULL, '2019-10-13 23:56:37'),
-(109, 'Marco Felipe Castillo Gonzalez', 'MarcoCastillo@gmail.com', NULL, '$2y$10$5kQHBOTWMWw0JppaN/l3M.2XDCoy1rj1RZYrVGFj/fw3BSoqZ/XUO', 'Masculino', 1, 0, NULL, '2019-11-13 01:03:14', '2019-11-13 01:03:14');
+(109, 'Marco Felipe Castillo Gonzalez', 'MarcoCastillo@gmail.com', NULL, '$2y$10$5kQHBOTWMWw0JppaN/l3M.2XDCoy1rj1RZYrVGFj/fw3BSoqZ/XUO', 'Masculino', 1, 0, NULL, '2019-11-13 01:03:14', '2019-11-13 01:03:14'),
+(110, 'Roberto Cesar Ahumada Valenzuela', 'RobertoAh10@gmail.com', NULL, '$2y$10$GkWuU6CIp8mBsC7gIFacN.7xRvNvU6ZZ6k9MGgFZfqu6iZyr9T16S', 'Masculino', 3, 0, NULL, NULL, '2020-02-06 02:56:57'),
+(111, 'Philip Vasquez', 'PhilipV@gmail.com', NULL, '$2y$10$0q.V7NC9w3s5R/g3u17Pu.wF/q012GiNeFgtqUk18KCKK0s2eIxJ.', 'Masculino', 2, 0, NULL, NULL, NULL),
+(113, 'Diego Paulo Palma Caceres', 'DiegoPalma@gmail.com', NULL, '$2y$10$cR1rCpsZ09bJ/Y/ArzMD/.mIguF2LHB5Pe14Dk9QLkCtpnQYn7ySO', 'Masculino', 1, 0, NULL, '2020-02-22 16:57:40', '2020-02-22 16:57:40'),
+(114, 'Carlos Francisco Sanchez Perez', 'CarlosSanchez@gmail.com', NULL, '$2y$10$XMYypf.TWl1ZasxrlWHq9uWSWvKCQWLljXRf1vTET56oifni50b.C', 'Masculino', 1, 0, NULL, '2020-02-22 20:39:32', '2020-02-22 20:39:32');
 
 --
 -- Índices para tablas volcadas
@@ -591,13 +615,16 @@ ALTER TABLE `area_tesis`
 -- Indices de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_tesis` (`id_tesis`),
+  ADD KEY `id_tesis_2` (`id_tesis`);
 
 --
 -- Indices de la tabla `capitulos`
 --
 ALTER TABLE `capitulos`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id` (`id`);
 
 --
 -- Indices de la tabla `comision`
@@ -681,41 +708,59 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT de la tabla `area_tesis`
 --
 ALTER TABLE `area_tesis`
-  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT de la tabla `bitacora`
 --
 ALTER TABLE `bitacora`
-  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` int(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=106;
 
 --
 -- AUTO_INCREMENT de la tabla `comunidad`
 --
 ALTER TABLE `comunidad`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `empresas`
 --
 ALTER TABLE `empresas`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `fondo_concursable`
 --
 ALTER TABLE `fondo_concursable`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `proyectos`
+--
+ALTER TABLE `proyectos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT de la tabla `tesis`
 --
 ALTER TABLE `tesis`
-  MODIFY `id_pk` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id_pk` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=119;
 
 --
 -- Restricciones para tablas volcadas
 --
+
+--
+-- Filtros para la tabla `bitacora`
+--
+ALTER TABLE `bitacora`
+  ADD CONSTRAINT `bitacora_ibfk_1` FOREIGN KEY (`id_tesis`) REFERENCES `tesis` (`id_pk`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `capitulos`
+--
+ALTER TABLE `capitulos`
+  ADD CONSTRAINT `capitulos_ibfk_1` FOREIGN KEY (`id`) REFERENCES `tesis` (`id_pk`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `comision`
