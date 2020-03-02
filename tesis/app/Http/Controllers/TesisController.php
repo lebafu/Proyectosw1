@@ -826,20 +826,29 @@ class TesisController extends Controller
             if($user->tipo_usuario==2 and(($tes->estado1==1 and $tes->estado2==null))){           
                 $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
                 DB::table('tesis')->where('id_pk', $id)->update(['estado1' => 2]);
-                return view('tesis.edit2',compact('tes','profes','com','area_tesis','empresas','comunidads','fcs','proyectos'));
+                $cap=null;
+                return view('tesis.edit2',compact('tes','profes','com','area_tesis','empresas','comunidads','fcs','proyectos','cap'));
             }
             if($user->tipo_usuario==2 and $tes->estado1==2 and $tes->estado2==null)
             {           
             $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
             //$tes->estado1=3;
             //$tes->update();
-           return view('tesis.edit2',compact('tes','profes','com','area_tesis', 'empresas','comunidads','fcs','proyectos'));
+            $caps=DB::table('capitulos')->where('id',$id)->get();
+            if($caps->isEmpty()==true)
+            $cap=null;
+            foreach($caps as $cap);
+            //dd($caps);
+            //dd($cap);
+           return view('tesis.edit2',compact('tes','profes','com','area_tesis', 'empresas','comunidads','fcs','proyectos','cap'));
            }
                 if($user->tipo_usuario==2 and $tes->estado1==2 and $tes->estado2==1){           
                 $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
+                $caps=DB::table('capitulos')->where('id',$id)->get();
+                foreach($caps as $cap);
                 //$tes->estado1=3;
                 //$tes->update();
-                return view('tesis.edit2',compact('tes','profes','com','area_tesis', 'empresas','comunidads','fcs','proyectos'));
+                return view('tesis.edit2',compact('tes','profes','com','area_tesis', 'empresas','comunidads','fcs','proyectos','cap'));
             	}elseif($user->tipo_usuario==2 and $tes->estado1==5 and $tes->estado2==null){
             		//$tes->estado1=2;
                     DB::table('tesis')->where('id_pk', $id)->update(['estado1' => 2]);
@@ -849,7 +858,10 @@ class TesisController extends Controller
                     DB::table('tesis')->where('id_pk', $id)->update(['estado3' => 1]);
             	 	//$tes->update();
             		$profes=DB::table('users')->where('tipo_usuario','=',2)->get();
-                return view('tesis.edit2',compact('tes','profes','com','area_tesis','empresas','comunidads','fcs','proyectos'));
+                    $caps=DB::table('capitulos')->where('id',$id)->get();
+                    foreach($caps as $cap);
+                    dd($cap);
+                return view('tesis.edit2',compact('tes','profes','com','area_tesis','empresas','comunidads','fcs','proyectos','cap'));
                 }else{
             		return view('tesis.noeditartesis_profe');
                 //}
@@ -1280,6 +1292,7 @@ class TesisController extends Controller
         DB::table('tesis')->where('id_pk',$id)->update(['objetivos' =>  $tes->objetivos]);
         $tes->contribucion=$request->get('contribucion');
         DB::table('tesis')->where('id_pk',$id)->update(['contribucion' =>  $tes->contribucion]);
+
         //$tes->update();
          //dd($user);
         }else{
@@ -1315,9 +1328,10 @@ class TesisController extends Controller
             'sexo2' => $request->sexo2,
         ]);
 
-       
-       if($tes->estado1==1 and $tes->estado2==null){
+       DB::table('capitulos')->where('id','=', $id)->delete();
+       if($tes->estado1==2 and $tes->estado2==null){
         $fecha=now();
+        //dd($request->cap1);
        DB::table('capitulos')->insert([
             'id' => $id,
             'cap1' => $request->cap1,
