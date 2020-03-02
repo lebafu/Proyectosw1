@@ -372,7 +372,6 @@ class UsersController extends Controller
 
    public function showLinkRequestForm(Request $request)
     {   
-         //dd($request->email);
          if($request->email!=null)
             {
 
@@ -384,7 +383,8 @@ class UsersController extends Controller
                     }
             Mail::send('auth.passwords.view_email',$usuario,function($message)
                     {
-                        $message->from('leonardo211294@gmail.com');
+                        $message->from('leonardo211294@gmail.com');//Aqui deberia ir el email del administrador
+                        //https://myaccount.google.com/lesssecureapps  colocar Si, para permitir el acceso de la aplicación y poder enviar emails.
                         $message->to($request->email)->subject('test Email Curso Laravel');
                     }); 
         }
