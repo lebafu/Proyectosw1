@@ -74,6 +74,7 @@ class UsersController extends Controller
       }
       //dd($cont_espacios_secretaria);
       //dd($cont_mayusculas_secretaria);
+      //Para garantizar que secretaria tenga 2 nombres y 2 apellidos.
       if($cont_espacios_secretaria!=3 or $cont_mayusculas_secretaria!=4)
       {
         return view('tesis.error_cantidad_espacios_mayusculas');
@@ -94,6 +95,7 @@ class UsersController extends Controller
           $cont_espacios_coordinador=$cont_espacios_coordinador+1;
         }
     }
+    //Para garantizar que coordinar de tesis tenga 2 nombres y 2 apellidos
     if($cont_espacios_coordinador!=3 or $cont_mayusculas_coordinador!=4)
       {
         return view('tesis.error_cantidad_espacios_mayusculas');
@@ -142,7 +144,7 @@ class UsersController extends Controller
             //return $user; 
         }
 
-   
+   //Actualizar usuarios
     public function update(Request $request,$id)
     {
         //dd($request);
@@ -306,7 +308,7 @@ class UsersController extends Controller
         DB::table('comision')->where('profesor3_comision','=',$nombre_actual)->update(['profesor3_comision' => $user->name]);
         return view('profesorhome');
     }
-
+        //Guardar grado academico profesor
       public function store_grado_academico(Request $request)
     {
         //dd($request);
@@ -317,7 +319,7 @@ class UsersController extends Controller
         return view('adminhome');
     }
 
-
+    //Seleccionar director de escuela
     public function definir_director_escuela()
     {
         $id=Auth::id();

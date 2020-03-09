@@ -3067,7 +3067,8 @@ class TesisController extends Controller
     foreach($grado_academico_director_escuela_consulta as $grado_academico_director_escuela);
     $grado_academico_director_escuela->grado_academico=mb_strtoupper($grado_academico_director_escuela->grado_academico);
     $id=$request->get('id_tesis');
-    $num_memo=$request->get('num_memo');
+    $num_memo=$request->numero;
+    //dd($num_memo);
     $user=User::find($id);
      //$tesistas=DB::table('tesis')->join('recopilacion_inf_titulados','tesis.id','=','recopilacion_inf_titulados.id')->join('users','tesis.id','=','users.id')->where('tesis.id',$id)->where('tesis.id','=',$user->id)->get();
     //foreach($tesistas as $tesis);
@@ -3179,7 +3180,8 @@ class TesisController extends Controller
     }
      $director_escuela->name=mb_strtoupper($director_escuela->name);//Poner en mayuscula nombre director escuela.
     //dd($director_escuela);
-   return view('memorandum.memorandum_titulados',compact('tesis','director_escuela','memo','year','mes_fecha','dia_fecha','num_memo','director_escuela','grado_academico_director_escuela','sexo1','sexo2','fecha','iniciales_director_escuela','hora_presentacion','dia_presentacion','mes_presentacion','year_presentacion','nombre1','nombre2','largo_mayusculas_director_escuela'));
+
+   return view('memorandum.memorandum_titulados',compact('tesis','director_escuela','memo','year','mes_fecha','dia_fecha','num_memo','director_escuela','grado_academico_director_escuela','sexo1','sexo2','fecha','iniciales_director_escuela','hora_presentacion','dia_presentacion','mes_presentacion','year_presentacion','nombre1','nombre2','largo_mayusculas_director_escuela','num_memo'));
    }
 
    public function create_fecha_descargar_actas()

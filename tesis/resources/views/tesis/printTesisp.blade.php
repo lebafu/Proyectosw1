@@ -16,7 +16,7 @@
           <th>Nombre Estudiante</th>
           <th>Profesor Guia</th>
           <th>Nombre Tesis</th>
-          <th>Tipo Vinculacion</th>
+          <th>Vinculacion</th>
         </tr>
         @foreach ($tes_proyectos as $tesis)
 	        <tr>
