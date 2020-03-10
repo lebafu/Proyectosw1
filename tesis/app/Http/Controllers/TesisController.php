@@ -245,6 +245,7 @@ class TesisController extends Controller
 
 
 	}*/
+    //Index para los profesores con los alumnos que tienen tesis solicitudes  de tesis con ese profesor
         public function index2()
     {
         $id=Auth::id();
@@ -827,6 +828,7 @@ class TesisController extends Controller
                 $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
                 DB::table('tesis')->where('id_pk', $id)->update(['estado1' => 2]);
                 $cap=null;
+                //dd($cap);
                 return view('tesis.edit2',compact('tes','profes','com','area_tesis','empresas','comunidads','fcs','proyectos','cap'));
             }
             if($user->tipo_usuario==2 and $tes->estado1==2 and $tes->estado2==null)
@@ -900,7 +902,7 @@ class TesisController extends Controller
                         }
     }
 
-   //En caso de que el profesor quiera director entonces ocurre que estado1=3 y ya no podra editar el profesor.
+   //En caso de que el director de tesis edite el formulario entonces ocurre que el profesor en estado1=3 y ya no podra editar el profesor.
 
     public function edit3($id){
         //dd($id);
@@ -991,7 +993,7 @@ class TesisController extends Controller
             if($user->tipo_usuario==2 and (($tes->estado1==1) or ($tes->estado1==2))){         
         $tes->estado1=2;
         DB::table('tesis')->where('id_pk',$id)->update(['estado1' =>  $tes->estado1]);
-        DB::table('tesis')->where('id_pk',$id)->update(['porcentaje_avance' => 0]);
+        DB::table('tesis')->where('id_pk',$id)->update(['avance_general' => 0]);
                 return view('tesis.evaluar',compact('tes','comision'));
             }else{
             	if($user->tipo_usuario==2 and $tes->estado1==5 and $tes->estado2==null){
@@ -1001,7 +1003,7 @@ class TesisController extends Controller
                     DB::table('tesis')->where('id_pk',$id)->update(['estado2' =>  $tes->estado2]);
             		 $tes->estado3=1;
                      DB::table('tesis')->where('id_pk',$id)->update(['estado3' =>  $tes->estado3]);
-                     DB::table('tesis')->where('id_pk',$id)->update(['porcentaje_avance' => 0]);
+                     DB::table('tesis')->where('id_pk',$id)->update(['avance_general' => 0]);
             		$profes=DB::table('users')->where('tipo_usuario','=',2)->get();
             	}else{
             	return view('tesis.noeditartesis_profe');
@@ -1587,11 +1589,13 @@ class TesisController extends Controller
          DB::table('tesis')->where('id_pk',$id)->update(['estado1' =>  $tes->estado1]);
         $tes->estado2=1;
          DB::table('tesis')->where('id_pk',$id)->update(['estado2' =>  $tes->estado2]);
+         DB::table('tesis')->where('id_pk',$id)->update(['estado3' =>  null]);
    		}elseif(($request->get('estado'))=='Rechazar'){
    		$tes->estado1=1;
          DB::table('tesis')->where('id_pk',$id)->update(['estado1' =>  $tes->estado1]);
         $tes->estado2=null;
          DB::table('tesis')->where('id_pk',$id)->update(['estado2' =>  $tes->estado2]);
+         DB::table('tesis')->where('id_pk',$id)->update(['estado3' =>  2]);
    		}
         //$user=User::findorfail($id);
         //$user->name=$tes->nombre_completo;
@@ -1669,7 +1673,7 @@ class TesisController extends Controller
    		$tes->estado1=5;
         DB::table('tesis')->where('id_pk', $id)->update(['estado1' => $tes->estado1]);
         $tes->estado2=null;
-        DB::table('tesis')->where('id_pk', $id)->update(['estado1' => $tes->estado2]);
+        DB::table('tesis')->where('id_pk', $id)->update(['estado2' => $tes->estado2]);
    		}
         //$user=User::findorfail($id);
         //$user->name=$tes->nombre_completo;

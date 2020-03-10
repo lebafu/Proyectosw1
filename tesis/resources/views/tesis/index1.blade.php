@@ -50,14 +50,17 @@
           <td>{{$tesis->tipo}}</td>
           <!--<td>{{$tesis->fecha_peticion}}</td>-->
            <td>
-          @if($tesis->estado1!=4 and $tesis->estado1!=5)
+          @if($tesis->estado1!=4 and $tesis->estado1!=5 and $tesis->estado3!=2)
               En espera
+          @endif
+          @if($tesis->estado1==1 and $tesis->estado2==null and $tesis->estado3==2)
+              Rechazado por profesor
           @endif
           @if($tesis->estado1==4)
               Inscrita
            @endif  
            @if($tesis->estado1==5)
-                Rechazada
+                Rechazada por Coordinador
            @endif
            @if($tesis->nota_pendiente!=null and $tesis->nota_prorroga==null and $tesis->estado6==1 and $tesis->estado7==null and ( $tesis->nota_tesis==null))
            <td>{{$tesis->nota_pendiente}}</td>
