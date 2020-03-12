@@ -171,8 +171,11 @@
 			{{$revision->texto2}}({{$fecha->day}}/{{$fecha->month}}/{{$fecha->year}}){{$revision->texto3}}
 					@if($sexo_profe_guia=="Femenino" and $profesor_guia->grado_academico=="Dr.")
 					Dra.{{$tesis->profesor_guia}}.
-					@else
+					@elseif($sexo_profe_guia=="Masculino" and $profesor_guia->grado_academico=="Dr.")
 					Dr.{{$tesis->profesor_guia}}.
+					@elseif($profesor_guia->grado_academico=="Mg.")
+					Mg.{{$tesis->profesor_guia}}.
+					@elseif($profesor_guia->grado_academico=="Ing.")
 					@endif
 			</h4></p>
 			</div>

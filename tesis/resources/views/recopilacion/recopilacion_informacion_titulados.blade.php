@@ -23,7 +23,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Nombre completo') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control" name="name" value="{{$alumno->name}}}" required disabled>
+                                <input id="name" type="text" class="form-control" name="name" value="{{$alumno->name}}" required disabled>
 
                             </div>
                         </div>
@@ -32,7 +32,7 @@
                             <label for="rut" class="col-md-4 col-form-label text-md-right">{{ __('Rut') }}</label>
 
                             <div class="col-md-6">
-                                <input id="rut" type="text" class="form-control" name="rut" value="{{$alumno->rut}}}" required autocomplete="rut" autofocus disabled>
+                                <input id="rut" type="text" class="form-control" name="rut" value="{{$alumno->rut}}" required autocomplete="rut" autofocus disabled>
 
                             </div>
                         </div>
@@ -65,7 +65,7 @@
                         <div class="form-group row">
                             <label for="celular" class="col-md-4 col-form-label text-md-right">{{ __('N°Celular') }}</label>
                             <div class="col-md-6">
-                               <input id="telefono_celular" type="text" class="form-control" name="telefono_celular" required="required">
+                               <input id="celular" type="text" class="form-control" name="celular" required="required">
                             </div>
                         </div>
 

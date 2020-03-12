@@ -17,7 +17,7 @@
                        <div class="form-group row">
                             <label for="acta_ex" class="col-md-4 col-form-label text-md-right">{{ __('Subir archivo de acta de examen de titulo') }}</label>
                             <div class="col-md-6">
-                                <input id="acta_ex" type="file" class="form-control" name="acta_ex" value="{{$tes->acta_ex}}">
+                                <input id="acta_ex" type="file" class="form-control" name="acta_ex" value="{{$tes->acta_ex}}" required="required">
                             </div>
                         </div>
             @else

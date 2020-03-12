@@ -529,9 +529,9 @@
                         </div>
                         @else 
                         <div class="form-group row">
-                            <label for="cap1" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap6 de Tesis') }}</label>
+                            <label for="cap6" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap6 de Tesis') }}</label>
                             <div class="col-md-6">
-                                <textarea id="cap6" type="text" rows="10" cols="40" placeholder="Nombre cap1 tesis" class="form-control" name="cap6" required="required" value="{{old('cap6')}}">{{$cap->cap6}}</textarea>
+                                <textarea id="cap6" type="text" rows="10" cols="40" placeholder="Nombre cap6 tesis" class="form-control" name="cap6" required="required" value="{{old('cap6')}}">{{$cap->cap6}}</textarea>
                             </div>
                         </div>
                         @endif
@@ -706,6 +706,142 @@
                                 <input id="codigo_postal2" type="text" placeholder="codigo_postal" class="form-control" name="codigo_postal2" value="{{old('codigo_postal2')}}">
                             </div>
                         </div>
+
+                                       @if($cap==null)
+                        <div class="form-group row">
+                            <label for="cap1" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap1 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap1" type="text" rows="10" cols="40" placeholder="Nombre cap1 tesis" class="form-control" name="cap1" required="required">Nombre Capitulo 1 Tesis</textarea>
+                            </div>
+                        </div>
+                        @elseif($cap->cap1==null)
+                        <div class="form-group row">
+                            <label for="cap1" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap1 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap1" type="text" rows="10" cols="40" placeholder="Nombre cap1 tesis" class="form-control" name="cap1" required="required">Nombre Capitulo 1 Tesis</textarea>
+                            </div>
+                        </div>
+                        @else
+                        <div class="form-group row">
+                            <label for="cap1" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap1 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap1" type="text" rows="10" cols="40" placeholder="Nombre cap1 tesis" class="form-control" name="cap1" required="required" value="{{old('cap1')}}">{{$cap->cap1}}</textarea>
+                            </div>
+                        </div>
+                        @endif
+
+                        @if($cap==null)
+                        <div class="form-group row">
+                            <label for="cap2" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap2 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap2" type="text" rows="10" cols="40" placeholder="Nombre cap2 tesis" class="form-control" name="cap2" required="required">Nombre Capitulo 2 Tesis</textarea>
+                            </div>
+                        </div>
+                        @elseif($cap->cap2==null)
+                         <div class="form-group row">
+                            <label for="cap2" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap2 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap2" type="text" rows="10" cols="40" placeholder="Nombre cap2 tesis" class="form-control" name="cap2" required="required">Nombre Capitulo 2 Tesis</textarea>
+                            </div>
+                        </div>
+                        @else
+                        <div class="form-group row">
+                            <label for="cap2" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap2 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap2" type="text" rows="10" cols="40" placeholder="Nombre cap2 tesis" class="form-control" name="cap2" required="required" value="{{old('cap2')}}">{{$cap->cap2}}</textarea>
+                            </div>
+                        </div>
+                        @endif
+                            @if($cap==null)
+                               <div class="form-group row">
+                            <label for="cap3" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap3 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap3" type="text" rows="10" cols="40" placeholder="Nombre cap3 tesis" class="form-control" name="cap3"></textarea>
+                            </div>
+                        </div>
+                           @elseif($cap->cap3==null)
+                         <div class="form-group row">
+                            <label for="cap3" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap3 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap3" type="text" rows="10" cols="40" placeholder="Nombre cap3 tesis" class="form-control" name="cap3"></textarea>
+                            </div>
+                        </div>
+                          @else
+                          <div class="form-group row">
+                            <label for="cap1" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap3 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap3" type="text" rows="10" cols="40" placeholder="Nombre cap3 tesis" class="form-control" name="cap3" required="required" value="{{old('cap3')}}">{{$cap->cap3}}</textarea>
+                            </div>
+                        </div>
+                          @endif
+
+                            @if($cap==null)
+                             <div class="form-group row">
+                            <label for="cap4" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap4 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap4" type="text" rows="10" cols="40" placeholder="Nombre cap4 tesis" class="form-control" name="cap4"></textarea>
+                            </div>
+                        </div>
+                           @elseif($cap->cap4==null)
+                        <div class="form-group row">
+                            <label for="cap4" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap4 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap4" type="text" rows="10" cols="40" placeholder="Nombre cap4 tesis" class="form-control" name="cap4"></textarea>
+                            </div>
+                        </div>
+                          @else
+                          <div class="form-group row">
+                            <label for="cap1" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap4 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap4" type="text" rows="10" cols="40" placeholder="Nombre cap4 tesis" class="form-control" name="cap4" required="required" value="{{old('cap4')}}">{{$cap->cap4}}</textarea>
+                            </div>
+                        </div>
+                          @endif
+                        @if($cap==null)
+                         <div class="form-group row">
+                            <label for="cap5" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap5 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap5" type="text" rows="10" cols="40" placeholder="Nombre cap5 tesis" class="form-control" name="cap5"></textarea>
+                            </div>
+                        </div>
+
+                        @elseif($cap->cap5==null)
+                        <div class="form-group row">
+                            <label for="cap5" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap5 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap5" type="text" rows="10" cols="40" placeholder="Nombre cap5 tesis" class="form-control" name="cap5"></textarea>
+                            </div>
+                        </div>
+                        @else
+                        <div class="form-group row">
+                            <label for="cap1" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap5 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap5" type="text" rows="10" cols="40" placeholder="Nombre cap5 tesis" class="form-control" name="cap5" required="required" value="{{old('cap5')}}">{{$cap->cap5}}</textarea>
+                            </div>
+                        </div>
+                        @endif
+                        @if($cap==null)
+                           <div class="form-group row">
+                            <label for="cap6" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap6 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap6" type="text" rows="10" cols="40" placeholder="Nombre cap6 tesis" class="form-control" name="cap6"></textarea>
+                            </div>
+                        </div>
+                        @elseif($cap->cap6==null)
+                        <div class="form-group row">
+                            <label for="cap6" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap6 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap6" type="text" rows="10" cols="40" placeholder="Nombre cap6 tesis" class="form-control" name="cap6"></textarea>
+                            </div>
+                        </div>
+                        @else 
+                        <div class="form-group row">
+                            <label for="cap6" class="col-md-4 col-form-label text-md-right">{{ __('Nombre Cap6 de Tesis') }}</label>
+                            <div class="col-md-6">
+                                <textarea id="cap6" type="text" rows="10" cols="40" placeholder="Nombre cap6 tesis" class="form-control" name="cap6" required="required" value="{{old('cap6')}}">{{$cap->cap6}}</textarea>
+                            </div>
+                        </div>
+                        @endif
 
                 @endif
 

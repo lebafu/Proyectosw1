@@ -212,6 +212,7 @@
 
                         @if($tes->estado1==1 and $tes->estado2==null and $tes->estado3==1)
                         <div class="form-group row">
+                           <label for="observacion" class="col-md-4 col-form-label text-md-right">{{ __('Observacion') }}</label>
                             <div class="col-md-6">
                                 <textarea name="observacion" type="text" rows="10" cols="40" class="form-control", value="{{ old('observacion')}}" disabled>{{$tes->observacion}}</textarea>
                              </div>

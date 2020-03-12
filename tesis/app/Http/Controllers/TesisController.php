@@ -704,11 +704,10 @@ class TesisController extends Controller
                 return view('tesis.edit',compact('tes','profes','area_tesis','empresas','comunidads','fcs','proyectos'));
                 //return $user;
             }elseif($user->tipo_usuario==1 and$tes->estado1==5 and $tes->estado2==null){
-            $tes->estado1=1;
-            $tes->estado2=null;
-            $tes->estado3=1;
-            $tes->update();
-            return view('tesis.edit',compact('tes','profes','area_tesis')); 
+            DB::table('tesis')->where('id_pk', $id)->update(['estado1' => 1]);
+            DB::table('tesis')->where('id_pk', $id)->update(['estado2' => null]);
+            DB::table('tesis')->where('id_pk', $id)->update(['estado3' => 1]);
+            return view('tesis.edit',compact('tes','profes','area_tesis','empresas','comunidads','fcs','proyectos')); 
             }else{
                 return view('tesis.noeditartesis');
             }
@@ -847,22 +846,25 @@ class TesisController extends Controller
                 if($user->tipo_usuario==2 and $tes->estado1==2 and $tes->estado2==1){           
                 $profes=DB::table('users')->where('tipo_usuario','=',2)->get();
                 $caps=DB::table('capitulos')->where('id',$id)->get();
+                //dd($caps);
                 foreach($caps as $cap);
+                //dd($cap);
                 //$tes->estado1=3;
                 //$tes->update();
                 return view('tesis.edit2',compact('tes','profes','com','area_tesis', 'empresas','comunidads','fcs','proyectos','cap'));
             	}elseif($user->tipo_usuario==2 and $tes->estado1==5 and $tes->estado2==null){
             		//$tes->estado1=2;
-                    DB::table('tesis')->where('id_pk', $id)->update(['estado1' => 2]);
+                   // DB::table('tesis')->where('id_pk', $id)->update(['estado1' => 2]);
             		//$tes->estado2=null;
-                    DB::table('tesis')->where('id_pk', $id)->update(['estado2' => null]);
+                    //DB::table('tesis')->where('id_pk', $id)->update(['estado2' => null]);
             		//$tes->estado3=1;
                     DB::table('tesis')->where('id_pk', $id)->update(['estado3' => 1]);
             	 	//$tes->update();
+                    //dd($tes);
             		$profes=DB::table('users')->where('tipo_usuario','=',2)->get();
                     $caps=DB::table('capitulos')->where('id',$id)->get();
                     foreach($caps as $cap);
-                    dd($cap);
+                    //dd($cap);
                 return view('tesis.edit2',compact('tes','profes','com','area_tesis','empresas','comunidads','fcs','proyectos','cap'));
                 }else{
             		return view('tesis.noeditartesis_profe');
@@ -1674,6 +1676,7 @@ class TesisController extends Controller
         DB::table('tesis')->where('id_pk', $id)->update(['estado1' => $tes->estado1]);
         $tes->estado2=null;
         DB::table('tesis')->where('id_pk', $id)->update(['estado2' => $tes->estado2]);
+        DB::table('tesis')->where('id_pk', $id)->update(['estado3' => 1]);
    		}
         //$user=User::findorfail($id);
         //$user->name=$tes->nombre_completo;
@@ -1716,10 +1719,19 @@ class TesisController extends Controller
             return view('tesis.sinpermiso');
         }
         DB::table('tesis')->where('id_pk', $id)->delete();
-        if($idlogin==1)return view('alumnohome');
-        if($idlogin==2 and $user->director_escuela==0)return view('profesorhome');
-        if($idlogin==2 and $user->director_escuela==1)return view('director_escuelahome');
-        if($idlogin==3) return view('directorhome');
+        if($user->tipo_usuario==1){
+            return view('alumnohome');
+        }
+        if($user->tipo_usuario==2 and $user->director_escuela==0){
+            return view('profesorhome');
+        }
+        if($user->tipo_usuario==2 and $user->director_escuela==1){
+            return view('director_escuelahome');
+        }
+
+        if($user->tipo_usuario==3){ 
+            return view('directorhome');
+        }
     }
 
 
