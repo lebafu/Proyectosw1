@@ -36,6 +36,7 @@ class BitacoraController extends Controller
     foreach($users as $user);
     //Se guarda en este arreglo los ids de las tesis que son distintas entre si.
      //DB::table('bitacora')->update(['actual'=> null]);
+    $tesistas=DB::table('tesis')->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->orderby('created_at','desc')->get();
     $ids_tesis=DB::table('bitacora')->select('id_tesis')->orderby('created_at','desc')->distinct()->get();
     //dd($ids_tesis);
     $i=0;
@@ -50,32 +51,7 @@ class BitacoraController extends Controller
       //dd($ids_tesis);
 	//Si el tipo de usuario es coordinador de tesis podrá ver esta lista de bitacoras con el ultimo comentario referente a la tesis
     if($user->tipo_usuario==3){
-    //Se hace un join o union entre la tabla bitacora y tesis donde la primary key de la tabla tesis sea igual al id_tesis en la tabla bitacora
-    	//se ordena desde el acuerdo de tesis mas actual ingresado, al mas antiguo//
-      $tesistas=DB::table('tesis')->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->orderby('created_at','desc')->get();
-     //dd($tesistas);
-      $j=0;
-      $ids_bitacora=array();
-  	  while($j<$i)
-  	  {	
-
-  	  	$bitacora=DB::table('tesis')->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->orderby('created_at','desc')->where('bitacora.id_tesis','=',$ids_tes[$j])->first();
-  	  	//dd($bitacoras);
-  	  		array_push($ids_bitacora,$bitacora->id);
-  	  	
-  	  	$j=$j+1;
-  	  }
-  	  //dd($ids_bitacora);
-  	  $k=0;
-  	  while($k<$i){
-  	  	foreach($tesistas as $tesis){
-  	  		if($ids_bitacora[$k]==$tesis->id){
-  	  			 DB::table('bitacora')->where('id',$ids_bitacora[$k])->update(['actual' => 1]);
-
-  	  }
-  	  }
-  	  $k=$k+1;
-  	}
+    
       //dd($j);
       //dd($tesistas);
     //dd($tesistas);
@@ -109,6 +85,40 @@ class BitacoraController extends Controller
     	{
     	 return view('bitacora.no_existen_registros_bitacora');
     	}
+      //Se hace un join o union entre la tabla bitacora y tesis donde la primary key de la tabla tesis sea igual al id_tesis en la tabla bitacora
+      //se ordena desde el acuerdo de tesis mas actual ingresado, al mas antiguo//
+      $tesists=DB::table('tesis')->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->orderby('created_at','desc')->get();
+      $ids_tesis=DB::table('bitacora')->select('id_tesis')->orderby('created_at','desc')->distinct()->get();
+    //dd($ids_tesis);
+    $i=0;
+    $ids_tes=array();
+    foreach($ids_tesis as $id_tesis){
+       array_push($ids_tes,$id_tesis->id_tesis);
+       $i=$i+1;
+  }
+     //dd($tesistas);
+      $j=0;
+      $ids_bitacora=array();
+      while($j<$i)
+      { 
+
+        $bitacora=DB::table('tesis')->join('bitacora','tesis.id_pk','=','bitacora.id_tesis')->orderby('created_at','desc')->where('bitacora.id_tesis','=',$ids_tes[$j])->first();
+        //dd($bitacoras);
+          array_push($ids_bitacora,$bitacora->id);
+        
+        $j=$j+1;
+      }
+      //dd($ids_bitacora);
+      $k=0;
+      while($k<$i){
+        foreach($tesists as $tesis){
+          if($ids_bitacora[$k]==$tesis->id){
+             DB::table('bitacora')->where('id',$ids_bitacora[$k])->update(['actual' => 1]);
+
+      }
+      }
+      $k=$k+1;
+    }
     	return view('bitacora.lista_acuerdos_tesis',compact('tesistas','id','user'));
     }
 
