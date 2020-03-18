@@ -124,4 +124,3 @@ class RegisterController extends Controller
 
     }
 }
-© 2020 GitHub, Inc.
