@@ -107,6 +107,7 @@ class RegisterController extends Controller
             'estado1' => 1,
             'estado2' => null,
         ]);
+
             DB::table('comision')->insert([
             'id' => $id,
             'id_profesor_guia' => null,
@@ -124,4 +125,3 @@ class RegisterController extends Controller
 
     }
 }
-© 2020 GitHub, Inc.

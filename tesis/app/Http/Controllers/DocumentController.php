@@ -89,11 +89,14 @@ class DocumentController extends Controller
 					}else{
 						$table1->addCell()->addText("Concluida"); 
 					}
+          //dd($tes->profesor_guia);
+          //dd($profesor->name);
 					if($tes->profesor_guia==$profesor->name)
 					{
 						$table1->addCell()->addText("Profesor Guia"); 
 					}else{
-						if(($tes->profesor1_comision==$profesor->name and $tes->coguia==null) or ($tes->profesor2_comision==$profesor->name or $tes->profesor3_comision==$profesor->name))
+             //dd($tes->profesor2_comision);
+						if(($tes->profesor1_comision==$profesor->name and $tes->coguia==null) or ($tes->profesor2_comision==$profesor->name) or ($tes->profesor3_comision==$profesor->name))
 						{
 						$table1->addCell()->addText("Revisor"); 
 						}
